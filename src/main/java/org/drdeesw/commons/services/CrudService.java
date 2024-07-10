@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import org.drdeesw.commons.dto.pojos.UniquePojo;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
+import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 import org.springframework.util.MultiValueMap;
 
 

@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import org.drdeesw.commons.dto.entities.UniqueEntity;
-import org.drdeesw.commons.dto.pojos.UniquePojo;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
+import org.drdeesw.commons.models.entities.UniqueEntity;
+import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.ComposerCrudService;
 import org.springframework.util.MultiValueMap;
 
@@ -106,7 +106,7 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
 
 
   /* (non-Javadoc)
-   * @see org.drdeesw.commons.services.impl.AbstractJpaCrudServiceImpl#findByQuery(org.drdeesw.commons.dto.queries.JpqlQuery)
+   * @see org.drdeesw.commons.services.impl.AbstractJpaCrudServiceImpl#findByQuery(org.drdeesw.commons.queries.JpqlQuery)
    */
   @Override
   public <Q extends JpqlQuery<P>> QueryResults<P> findByQuery(

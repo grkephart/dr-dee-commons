@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import org.drdeesw.commons.dto.entities.UniqueEntity;
-import org.drdeesw.commons.dto.pojos.UniquePojo;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
-import org.drdeesw.commons.dto.queries.datatables.DataTablesJpqlQuery;
+import org.drdeesw.commons.models.entities.UniqueEntity;
+import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
+import org.drdeesw.commons.queries.datatables.DataTablesJpqlQuery;
 import org.drdeesw.commons.repositories.QueryRepository;
 import org.drdeesw.commons.services.CrudService;
 import org.modelmapper.ModelMapper;
@@ -128,7 +128,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.dto.base.
+   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
   @Override
@@ -145,7 +145,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#delete(org.drdeesw.commons.dto.base.
+   * org.drdeesw.commons.services.CrudService#delete(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
   @Override
@@ -209,7 +209,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#findByQuery(org.drdeesw.commons.dto.
+   * org.drdeesw.commons.services.CrudService#findByQuery(org.drdeesw.commons.models.
    * queries.JpqlQuery)
    */
   public <Q extends JpqlQuery<P>> QueryResults<P> findByQuery(
@@ -331,7 +331,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.dto.base.
+   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
   @Override
@@ -379,7 +379,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.dto.base.
+   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
   @Override
@@ -396,7 +396,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#update(org.drdeesw.commons.dto.base.
+   * org.drdeesw.commons.services.CrudService#update(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
   @Override

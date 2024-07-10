@@ -6,9 +6,9 @@ package org.drdeesw.commons.repositories;
 
 import java.io.Serializable;
 
-import org.drdeesw.commons.dto.base.UniqueObject;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
+import org.drdeesw.commons.models.base.UniqueObject;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 
 
 /**

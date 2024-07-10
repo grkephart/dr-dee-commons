@@ -12,9 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.drdeesw.commons.dto.base.UniqueObject;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
+import org.drdeesw.commons.models.base.UniqueObject;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.repositories.QueryRepository;
 
 

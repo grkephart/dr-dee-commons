@@ -9,9 +9,9 @@ import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.drdeesw.commons.dto.pojos.UniquePojo;
-import org.drdeesw.commons.dto.queries.JpqlQuery;
-import org.drdeesw.commons.dto.queries.QueryResults;
+import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
