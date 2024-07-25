@@ -94,9 +94,10 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
   /**
    * @param obj
    * @return
+   * @throws Exception 
    */
   P save(
-    P obj);
+    P obj) throws Exception;
 
 
   /**
@@ -104,7 +105,7 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
    * @return
    */
   List<P> saveAll(
-    Collection<P> pojos);
+    Collection<P> pojos) throws Exception;
 
 
   /**

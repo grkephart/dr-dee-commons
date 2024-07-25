@@ -15,6 +15,7 @@ import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 
 
 /**
@@ -41,6 +42,18 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
    */
   protected ResponseEntity<P> create(
     P obj)
+  {
+    return ResponseEntity.ok(this.crudService.create(obj));
+  }
+
+
+  /**
+   * @param obj
+   * @return
+   */
+  protected ResponseEntity<P> create(
+    P obj,
+    BindingResult bindingResult)
   {
     return ResponseEntity.ok(this.crudService.create(obj));
   }
