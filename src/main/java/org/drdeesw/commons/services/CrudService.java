@@ -28,10 +28,34 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
     extends BusinessService
 {
   /**
+   * @param pojos
+   * @return
+   */
+  List<P> create(
+    Collection<P> pojos) throws Exception;
+
+
+  /**
    * @param obj
    * @return
    */
   P create(
+    P obj);
+
+
+  /**
+   * @param pojos
+   * @return
+   */
+  List<P> createAndFlush(
+    Collection<P> pojos);
+
+
+  /**
+   * @param obj
+   * @return
+   */
+  P createFlush(
     P obj);
 
 
@@ -89,39 +113,6 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
    */
   Map<ID, P> getMap(
     Set<ID> ids);
-
-
-  /**
-   * @param obj
-   * @return
-   * @throws Exception 
-   */
-  P save(
-    P obj) throws Exception;
-
-
-  /**
-   * @param pojos
-   * @return
-   */
-  List<P> saveAll(
-    Collection<P> pojos) throws Exception;
-
-
-  /**
-   * @param pojos
-   * @return
-   */
-  List<P> saveAllAndFlush(
-    Collection<P> pojos);
-
-
-  /**
-   * @param obj
-   * @return
-   */
-  P saveAndFlush(
-    P obj);
 
 
   /**

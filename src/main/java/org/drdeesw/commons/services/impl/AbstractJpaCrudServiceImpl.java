@@ -127,6 +127,21 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   /*
    * (non-Javadoc)
    * 
+   * @see org.drdeesw.commons.services.CrudService#saveAll(java.util.Collection)
+   */
+  @Override
+  public List<P> create(
+    Collection<P> pojos)
+  {
+    List<E> entities = convertPojoToEntity(pojos);
+
+    return convertEntityToPojo(this.repository.saveAll(entities));
+  }
+
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see
    * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
    * UniqueObject)
@@ -138,6 +153,39 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
     E entity = convertPojoToEntity(obj);
 
     return convertEntityToPojo(this.repository.save(entity));
+  }
+
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.drdeesw.commons.services.CrudService#saveAllAndFlush(java.util.
+   * Collection)
+   */
+  @Override
+  public List<P> createAndFlush(
+    Collection<P> pojos)
+  {
+    List<E> entities = convertPojoToEntity(pojos);
+
+    return convertEntityToPojo(this.repository.saveAllAndFlush(entities));
+  }
+
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
+   * UniqueObject)
+   */
+  @Override
+  public P createFlush(
+    P obj)
+  {
+    E entity = convertPojoToEntity(obj);
+
+    return convertEntityToPojo(this.repository.saveAndFlush(entity));
   }
 
 
@@ -283,6 +331,15 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
+   * @return the modelMapper
+   */
+  protected ModelMapper getModelMapper()
+  {
+    return modelMapper;
+  }
+
+
+  /**
    * @param parameterMap
    * @return
    */
@@ -331,71 +388,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * (non-Javadoc)
    * 
    * @see
-   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
-   * UniqueObject)
-   */
-  @Override
-  public P save(
-    P obj)
-  {
-    E entity = convertPojoToEntity(obj);
-
-    return convertEntityToPojo(this.repository.save(entity));
-  }
-
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.drdeesw.commons.services.CrudService#saveAll(java.util.Collection)
-   */
-  @Override
-  public List<P> saveAll(
-    Collection<P> pojos)
-  {
-    List<E> entities = convertPojoToEntity(pojos);
-
-    return convertEntityToPojo(this.repository.saveAll(entities));
-  }
-
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.drdeesw.commons.services.CrudService#saveAllAndFlush(java.util.
-   * Collection)
-   */
-  @Override
-  public List<P> saveAllAndFlush(
-    Collection<P> pojos)
-  {
-    List<E> entities = convertPojoToEntity(pojos);
-
-    return convertEntityToPojo(this.repository.saveAllAndFlush(entities));
-  }
-
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * org.drdeesw.commons.services.CrudService#create(org.drdeesw.commons.models.base.
-   * UniqueObject)
-   */
-  @Override
-  public P saveAndFlush(
-    P obj)
-  {
-    E entity = convertPojoToEntity(obj);
-
-    return convertEntityToPojo(this.repository.saveAndFlush(entity));
-  }
-
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
    * org.drdeesw.commons.services.CrudService#update(org.drdeesw.commons.models.base.
    * UniqueObject)
    */
@@ -417,15 +409,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
     E entity)
   {
     return convertEntityToPojo(this.repository.save(entity));
-  }
-
-
-  /**
-   * @return the modelMapper
-   */
-  protected ModelMapper getModelMapper()
-  {
-    return modelMapper;
   }
 
 }
