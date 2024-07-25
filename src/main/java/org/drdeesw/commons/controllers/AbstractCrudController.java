@@ -60,12 +60,7 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
   {
     if (bindingResult.hasErrors())
     {
-      Map<String, String> errors = new HashMap<>();
-
-      bindingResult.getFieldErrors()
-          .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
-
-      return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+      return handleBindingResultErrors(bindingResult);
     }
     else
     {
@@ -84,6 +79,17 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
     this.crudService.delete(obj);
 
     return ResponseEntity.ok(obj);
+  }
+
+
+  /**
+   * @param id
+   * @return
+   */
+  protected ResponseEntity<Optional<P>> findById(
+    ID id)
+  {
+    return ResponseEntity.ok(this.crudService.findById(id));
   }
 
 
@@ -122,21 +128,26 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
    * @param id
    * @return
    */
-  protected ResponseEntity<Optional<P>> findById(
-    ID id)
-  {
-    return ResponseEntity.ok(this.crudService.findById(id));
-  }
-
-
-  /**
-   * @param id
-   * @return
-   */
   protected ResponseEntity<P> get(
     ID id)
   {
     return ResponseEntity.ok(this.crudService.get(id));
+  }
+
+
+  /**
+   * @param bindingResult
+   * @return
+   */
+  private ResponseEntity<?> handleBindingResultErrors(
+    BindingResult bindingResult)
+  {
+    Map<String, String> errors = new HashMap<>();
+
+    bindingResult.getFieldErrors()
+        .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
 
 
@@ -171,12 +182,7 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
   {
     if (bindingResult.hasErrors())
     {
-      Map<String, String> errors = new HashMap<>();
-
-      bindingResult.getFieldErrors()
-          .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
-
-      return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+      return handleBindingResultErrors(bindingResult);
     }
     else
     {
