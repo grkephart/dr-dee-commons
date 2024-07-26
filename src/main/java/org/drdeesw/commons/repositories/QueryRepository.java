@@ -19,7 +19,7 @@ public interface QueryRepository<T extends UniqueObject<ID>, ID extends Serializ
 {
   /**
    * Remember to add this to @EnableJpaRepositories(basePackages = { "org.drdeesw.commons.repositories", ...})
-   * 
+   *
    * @param query
    * @return
    * @throws Exception
