@@ -38,9 +38,10 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
   /**
    * @param obj
    * @return
+   * @throws Exception 
    */
   P create(
-    P obj);
+    P obj) throws Exception;
 
 
   /**

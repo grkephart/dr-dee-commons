@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.drdeesw.commons.models.entities.UniqueEntity;
 import org.drdeesw.commons.models.pojos.UniquePojo;
@@ -148,7 +150,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    */
   @Override
   public P create(
-    P obj)
+    P obj) throws Exception
   {
     E entity = convertPojoToEntity(obj);
 
@@ -269,6 +271,18 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
+  /**
+   * @param query
+   * @return
+   * @throws Exception
+   */
+  public QueryResults<E> findEntities(
+    JpqlQuery<E> query)
+  {
+    return this.queryRepository.findByQuery(query);
+  }
+
+
   /*
    * (non-Javadoc)
    * 
@@ -384,6 +398,46 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
+  /**
+   * Used when importing many objects, some of them which might already exist 
+   * in the system and need updating.
+   * 
+   * @param all
+   * @param pojoKeyMapper
+   * @param entityKeyMapper
+   * @param fieldName
+   * @throws Exception
+   */
+  public void saveOrUpdateAll(
+    List<P> all,
+    Function<P, ? extends Object> pojoKeyMapper,
+    Function<E, ? extends Object> entityKeyMapper,
+    String fieldName) throws Exception
+  {
+    if (isNotEmpty(all))
+    {
+      Map<Object, P> pojoMap = all.stream()
+          .collect(Collectors.toMap(pojoKeyMapper, Function.identity()));
+      JpqlQuery<E> query = new JpqlQuery<E>(this.entityClass)//
+          .in(fieldName, pojoMap.keySet());
+      QueryResults<E> existingEntities = findEntities(query);
+      Collection<P> newPojos;
+
+      existingEntities.forEach(e -> {
+        Object key = entityKeyMapper.apply(e);
+        P pojo = pojoMap.get(key);
+
+        updateEntity(e, pojo);
+        pojoMap.remove(key);
+      });
+      this.repository.saveAll(existingEntities);
+
+      newPojos = pojoMap.values();
+      this.repository.saveAll(convertPojoToEntity(newPojos));
+    }
+  }
+
+
   /*
    * (non-Javadoc)
    * 
@@ -411,4 +465,14 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
     return convertEntityToPojo(this.repository.save(entity));
   }
 
+
+  /**
+   * Update the entity's properties using the pojo's properties.
+   * 
+   * @param entity
+   * @param pojo
+   */
+  protected abstract void updateEntity(
+    E entity,
+    P pojo);
 }
