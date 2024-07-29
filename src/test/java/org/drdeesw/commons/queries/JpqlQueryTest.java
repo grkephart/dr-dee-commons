@@ -4,7 +4,6 @@
 package org.drdeesw.commons.queries;
 
 
-import org.drdeesw.commons.queries.JpqlQuery;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
