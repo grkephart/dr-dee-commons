@@ -46,7 +46,14 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
   protected ResponseEntity<P> create(
     P obj)
   {
-    return ResponseEntity.ok(this.crudService.create(obj));
+    try
+    {
+      return ResponseEntity.ok(this.crudService.create(obj));
+    }
+    catch (Exception e)
+    {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
   }
 
 
@@ -64,7 +71,7 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
     }
     else
     {
-      return ResponseEntity.ok(this.crudService.create(obj));
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
 
