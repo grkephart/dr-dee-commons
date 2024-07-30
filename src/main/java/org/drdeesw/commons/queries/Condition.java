@@ -5,8 +5,10 @@ package org.drdeesw.commons.queries;
 
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 
 
 /**
@@ -213,13 +215,14 @@ public class Condition
   }
 
   private Condition[] conditions;
+
   private String      fieldName;
+
   private Operator    operator;
   private boolean     ref;
   private Query<?>    subquery;
   private Object      value;
   private Object      value2;
-
   /**
    * @param conditions
    * @param operator
@@ -336,6 +339,27 @@ public class Condition
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Condition other = (Condition)obj;
+    return Arrays.equals(conditions, other.conditions) && Objects.equals(fieldName, other.fieldName)
+           && Objects.equals(operator, other.operator) && ref == other.ref
+           && Objects.equals(subquery, other.subquery) && Objects.equals(value, other.value)
+           && Objects.equals(value2, other.value2);
+  }
+
+
   /**
    * @return the conditions
    */
@@ -387,6 +411,20 @@ public class Condition
   public Object getValue2()
   {
     return value2;
+  }
+
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + Arrays.hashCode(conditions);
+    result = prime * result + Objects.hash(fieldName, operator, ref, subquery, value, value2);
+    return result;
   }
 
 

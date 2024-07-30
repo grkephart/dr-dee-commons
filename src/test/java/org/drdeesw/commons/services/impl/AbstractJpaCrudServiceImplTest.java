@@ -6,11 +6,20 @@ package org.drdeesw.commons.services.impl;
 
 import static org.junit.Assert.fail;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.drdeesw.commons.models.SomeEntity;
 import org.drdeesw.commons.models.SomePojo;
+import org.drdeesw.commons.queries.JpqlQuery;
+import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.repositories.SomeRepository;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -19,27 +28,30 @@ import org.mockito.Mockito;
  */
 public class AbstractJpaCrudServiceImplTest
 {
+  private static final String NAME = "tivti";
+  private static final String DESCRIPTION = "tw4 df i5lg4yg k5 kt5h";
+  private static final Long ID = Long.valueOf(635);
   private TestableAbstractJpaCrudServiceImpl objectUnderTest;
   private SomeRepository                     repository;
 
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception
   {
     this.repository = Mockito.mock(SomeRepository.class);
 
     this.objectUnderTest = new TestableAbstractJpaCrudServiceImpl();
 
-    this.objectUnderTest.init(repository);
+    this.objectUnderTest.init(this.repository);
   }
 
 
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception
   {
   }
@@ -60,16 +72,28 @@ public class AbstractJpaCrudServiceImplTest
    * @throws Exception 
    */
   @Test
-  public void testCreateP() throws Exception
+  public void testCreate() throws Exception
   {
     SomePojo pojo = new SomePojo();
+    SomeEntity entity = new SomeEntity();
 
     // Arrange
+    
+    entity.setId(ID);
+    entity.setName(NAME);
+    entity.setDescription(DESCRIPTION);
+    Mockito.when(this.repository.save(Mockito.any(SomeEntity.class))).thenReturn(entity);
 
     // Act
-    SomePojo newPojo = this.objectUnderTest.create(pojo);
+    SomePojo actual = this.objectUnderTest.create(pojo);
 
     // Assert
+    
+    Mockito.verify(this.repository).save(Mockito.any(SomeEntity.class));
+
+    Assert.assertEquals(ID, actual.getId());
+    Assert.assertEquals(NAME, actual.getName()); // TODO
+    Assert.assertEquals(DESCRIPTION, actual.getDescription());
   }
 
 
@@ -149,7 +173,25 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testGetID()
   {
-    fail("Not yet implemented");
+    SomeEntity entity = new SomeEntity();
+
+    // Arrange
+    
+    entity.setId(ID);
+    entity.setName(NAME);
+    entity.setDescription(DESCRIPTION);
+    Mockito.when(this.repository.getReferenceById(ID)).thenReturn(entity);
+
+    // Act
+    SomePojo actual = this.objectUnderTest.get(ID);
+
+    // Assert
+    
+    Mockito.verify(this.repository).getReferenceById(ID);
+
+    Assert.assertEquals(ID, actual.getId());
+    Assert.assertEquals(NAME, actual.getName()); // TODO
+    Assert.assertEquals(DESCRIPTION, actual.getDescription());
   }
 
 
@@ -159,7 +201,34 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testGetSetOfID()
   {
-    fail("Not yet implemented");
+    SomeEntity entity = new SomeEntity();
+    Set<Long> ids = new HashSet<>(Collections.singleton(ID));
+    SomePojo actual;
+    JpqlQuery<SomeEntity> query = new JpqlQuery<SomeEntity>(SomeEntity.class)//
+        .in("id", ids);
+    SomeEntity[] expected = new SomeEntity[] {entity};
+    QueryResults<SomeEntity> queryResults = new QueryResults<SomeEntity>(expected);
+
+    // Arrange
+    
+    entity.setId(ID);
+    entity.setName(NAME);
+    entity.setDescription(DESCRIPTION);
+    
+    Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
+
+    // Act
+    QueryResults<SomePojo> actuals = this.objectUnderTest.get(ids);
+
+    // Assert
+    
+    Mockito.verify(this.repository).findByQuery(query);
+
+    Assert.assertEquals(ids.size(), actuals.getSize());
+    actual = actuals.get(0);
+    Assert.assertEquals(ID, actual.getId());
+    Assert.assertEquals(DESCRIPTION, actual.getDescription());
+    Assert.assertEquals(NAME, actual.getName()); // TODO
   }
 
 
@@ -169,7 +238,34 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testGetMap()
   {
-    fail("Not yet implemented");
+    SomeEntity entity = new SomeEntity();
+    Set<Long> ids = new HashSet<>(Collections.singleton(ID));
+    SomePojo actual;
+    JpqlQuery<SomeEntity> query = new JpqlQuery<SomeEntity>(SomeEntity.class)//
+        .in("id", ids);
+    SomeEntity[] expected = new SomeEntity[] {entity};
+    QueryResults<SomeEntity> queryResults = new QueryResults<SomeEntity>(expected);
+
+    // Arrange
+    
+    entity.setId(ID);
+    entity.setName(NAME);
+    entity.setDescription(DESCRIPTION);
+    
+    Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
+
+    // Act
+    Map<Long, SomePojo> actuals = this.objectUnderTest.getMap(ids);
+
+    // Assert
+    
+    Mockito.verify(this.repository).findByQuery(query);
+
+    Assert.assertEquals(ids.size(), actuals.entrySet().size());
+    actual = actuals.get(ID);
+    Assert.assertEquals(ID, actual.getId());
+    Assert.assertEquals(DESCRIPTION, actual.getDescription());
+    Assert.assertEquals(NAME, actual.getName()); // TODO
   }
 
 

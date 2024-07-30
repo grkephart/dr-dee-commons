@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -120,7 +121,8 @@ public class Query<T>
       boolean added = addMandatoryCondition(propertyName, operator, value, false);
 
       if (!added)
-        throw new RuntimeException("mandatory condition not added: " + propertyName + " = " + value);
+        throw new RuntimeException(
+            "mandatory condition not added: " + propertyName + " = " + value);
     }
 
     return cast();
@@ -212,6 +214,30 @@ public class Query<T>
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Query other = (Query)obj;
+    return Objects.equals(alias, other.alias) && caseInsensitive == other.caseInsensitive
+           && Objects.equals(clazz, other.clazz) && Objects.equals(conditions, other.conditions)
+           && Objects.equals(mandatoryConditions, other.mandatoryConditions) && match == other.match
+           && Objects.equals(maxResults, other.maxResults)
+           && Objects.equals(orderings, other.orderings)
+           && Objects.equals(performCount, other.performCount)
+           && Objects.equals(start, other.start);
+  }
+
+
   /**
    * @param string
    * @param string2
@@ -225,6 +251,7 @@ public class Query<T>
 
     return cast();
   }
+
 
   /**
    * @param propertyName
@@ -366,6 +393,7 @@ public class Query<T>
     return this.start == null ? defValue : this.start;
   }
 
+
   /**
    * @param string
    * @param string2
@@ -380,6 +408,18 @@ public class Query<T>
     return cast();
   }
 
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash(alias, caseInsensitive, clazz, conditions, mandatoryConditions, match,
+      maxResults, orderings, performCount, start);
+  }
+
+
   /**
    * @return
    */
@@ -387,7 +427,6 @@ public class Query<T>
   {
     return !this.mandatoryConditions.isEmpty();
   }
-
 
 
   /**
@@ -403,6 +442,7 @@ public class Query<T>
 
     return cast();
   }
+
 
   /**
    * @param string

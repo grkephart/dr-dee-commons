@@ -3,7 +3,11 @@
  */
 package org.drdeesw.commons.queries;
 
+
+import java.util.Objects;
+
 import org.drdeesw.commons.models.base.DataTransferObject;
+
 
 /**
  * @author gary_kephart
@@ -12,9 +16,8 @@ import org.drdeesw.commons.models.base.DataTransferObject;
 public class Ordering implements DataTransferObject
 {
   private static final long serialVersionUID = 4169694001533857765L;
-  private String            name;
   private boolean           ascending;
-
+  private String            name;
 
   public Ordering()
   {
@@ -34,6 +37,24 @@ public class Ordering implements DataTransferObject
   }
 
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Ordering other = (Ordering)obj;
+    return ascending == other.ascending && Objects.equals(name, other.name);
+  }
+
+
   /**
    * @return the name
    */
@@ -43,13 +64,13 @@ public class Ordering implements DataTransferObject
   }
 
 
-  /**
-   * @param name the name to set
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
    */
-  public void setName(
-    String name)
+  @Override
+  public int hashCode()
   {
-    this.name = name;
+    return Objects.hash(ascending, name);
   }
 
 
@@ -69,6 +90,16 @@ public class Ordering implements DataTransferObject
     boolean ascending)
   {
     this.ascending = ascending;
+  }
+
+
+  /**
+   * @param name the name to set
+   */
+  public void setName(
+    String name)
+  {
+    this.name = name;
   }
 
 
