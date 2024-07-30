@@ -23,6 +23,7 @@ import org.drdeesw.commons.queries.datatables.DataTablesJpqlQuery;
 import org.drdeesw.commons.repositories.QueryRepository;
 import org.drdeesw.commons.services.CrudService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.MultiValueMap;
 
@@ -52,6 +53,11 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
     this.entityClass = entityClass;
     this.modelMapper = new ModelMapper();
     this.pojoClass = pojoClass;
+
+    // This solves "name" not being copied from entity to pojo
+    this.modelMapper.getConfiguration()//
+        .setFieldMatchingEnabled(true)//
+        .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
 
 
@@ -182,7 +188,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * UniqueObject)
    */
   @Override
-  public P createFlush(
+  public P createAndFlush(
     P obj)
   {
     E entity = convertPojoToEntity(obj);

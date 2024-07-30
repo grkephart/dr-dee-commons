@@ -56,7 +56,7 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
    * @param obj
    * @return
    */
-  P createFlush(
+  P createAndFlush(
     P obj);
 
 

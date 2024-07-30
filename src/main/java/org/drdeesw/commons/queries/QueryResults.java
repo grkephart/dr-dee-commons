@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.drdeesw.commons.queries.datatables.DataTablesJpqlQuery;
 
@@ -22,6 +23,19 @@ public class QueryResults<T> implements Iterable<T>
   private Query<T> query;
   private List<T>  records;
   private int      totalRecords;
+
+  /**
+   * @param draw
+   * @param totalRecords
+   */
+  public QueryResults(Integer draw, int size, int totalRecords)
+  {
+    this.draw = draw;
+    this.records = new ArrayList<T>(size);
+    this.query = null;
+    this.totalRecords = totalRecords;
+  }
+
 
   /**
    * @param draw
@@ -120,24 +134,30 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param draw
-   * @param totalRecords
-   */
-  public QueryResults(Integer draw, int size, int totalRecords)
-  {
-    this.draw = draw;
-    this.records = new ArrayList<T>(size);
-    this.query = null;
-    this.totalRecords = totalRecords;
-  }
-
-  /**
    * @param obj
    */
-  public void add(T obj)
+  public void add(
+    T obj)
   {
     this.records.add(obj);
   }
+
+
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    QueryResults other = (QueryResults)obj;
+    return Objects.equals(draw, other.draw) && Objects.equals(query, other.query)
+           && Objects.equals(records, other.records) && totalRecords == other.totalRecords;
+  }
+
 
   /**
    * @param index
@@ -200,6 +220,13 @@ public class QueryResults<T> implements Iterable<T>
   public int getTotalRecords()
   {
     return totalRecords;
+  }
+
+
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash(draw, query, records, totalRecords);
   }
 
 

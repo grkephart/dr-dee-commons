@@ -24,11 +24,11 @@ import org.hibernate.annotations.GenericGenerator;
  * @author gary_kephart
  *
  */
+@SuppressWarnings("serial")
 @MappedSuperclass
 @Access(value = AccessType.FIELD)
 public abstract class AbstractUniqueEntity<ID extends Serializable> implements UniqueEntity<ID>
 {
-  private static final long serialVersionUID = 3882181757154157592L;
   @Id
   @GenericGenerator(name = "native", strategy = "native")
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

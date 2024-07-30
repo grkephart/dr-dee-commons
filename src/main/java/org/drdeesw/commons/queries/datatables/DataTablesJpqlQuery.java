@@ -7,6 +7,7 @@ package org.drdeesw.commons.queries.datatables;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.drdeesw.commons.queries.Condition;
 import org.drdeesw.commons.queries.JpqlQuery;
@@ -32,15 +33,6 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
     super(clazz, Match.MATCH_ANY);
   }
 
-  /**
-   * 
-   * @param clazz
-   * @param match
-   */
-  public DataTablesJpqlQuery(Class<T> clazz, Match match)
-  {
-    super(clazz, match);
-  }
 
   /**
    * Defaults to MATCH_ANY.
@@ -160,6 +152,17 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 
 
   /**
+   * 
+   * @param clazz
+   * @param match
+   */
+  public DataTablesJpqlQuery(Class<T> clazz, Match match)
+  {
+    super(clazz, match);
+  }
+
+
+  /**
    * @param clazz
    * @param allRequestParams
    */
@@ -174,9 +177,25 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
    * @param allRequestParams
    * @param match
    */
-  public DataTablesJpqlQuery(Class<T> clazz, MultiValueMap<String, String> allRequestParams, Match match)
+  public DataTablesJpqlQuery(Class<T> clazz, MultiValueMap<String, String> allRequestParams,
+                             Match match)
   {
     this(clazz, DataTablesParamUtility.getParamModel(allRequestParams), match);
+  }
+
+
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    DataTablesJpqlQuery other = (DataTablesJpqlQuery)obj;
+    return Objects.equals(draw, other.draw);
   }
 
 
@@ -186,5 +205,15 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
   public Integer getDraw()
   {
     return draw;
+  }
+
+
+  @Override
+  public int hashCode()
+  {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + Objects.hash(draw);
+    return result;
   }
 }

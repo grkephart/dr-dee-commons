@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -87,6 +88,21 @@ public class JpqlQuery<T> extends Query<T>
   {
     super(entityClass, that);
     this.df = that.getDf();
+  }
+
+
+  @Override
+  public boolean equals(
+    Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    JpqlQuery other = (JpqlQuery)obj;
+    return Objects.equals(df, other.df);
   }
 
 
@@ -229,6 +245,16 @@ public class JpqlQuery<T> extends Query<T>
     }
 
     return buffer.toString();
+  }
+
+
+  @Override
+  public int hashCode()
+  {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + Objects.hash(df);
+    return result;
   }
 
 
