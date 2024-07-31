@@ -4,10 +4,10 @@
 package org.drdeesw.commons.queries;
 
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -37,7 +37,7 @@ public class JpqlQueryTest
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception
   {
   }
@@ -46,7 +46,7 @@ public class JpqlQueryTest
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception
   {
   }
