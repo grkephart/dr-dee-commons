@@ -35,10 +35,11 @@ public abstract class Oauth2SecurityConfiguration
   private static final String   CLIENT_SECRET       = ".client-secret";
   private static final String   CLIENTS_KEY         = "security.oauth2.client.registration.clients";
   protected static final String COINBASE_CLIENT     = "coinbase";
+  private static final String   ETRADE_CLIENT       = "etrade";
   protected static final String FACEBOOK_CLIENT     = "facebook";
-  protected static final Object GITHUB_CLIENT       = "github";
+  protected static final String GITHUB_CLIENT       = "github";
   protected static final String GOOGLE_CLIENT       = "google";
-  protected static final Object OKTA_CLIENT         = "okta";
+  protected static final String OKTA_CLIENT         = "okta";
   @Autowired
   private Environment           env;
 
@@ -98,6 +99,17 @@ public abstract class Oauth2SecurityConfiguration
     HttpServletRequest request)
   {
     return null; // TODO
+  }
+
+
+  /**
+   * @param client
+   * @return
+   */
+  protected ClientRegistration getCustomClientRegistration(
+    String client)
+  {
+    return null;
   }
 
 
@@ -169,20 +181,16 @@ public abstract class Oauth2SecurityConfiguration
           .scope(clientScopes)//
           .build();
     }
+    else if (client.equals(ETRADE_CLIENT))
+    {
+      return UncommonOAuth2Provider.ETRADE.getBuilder(client)//
+          .clientId(clientId)//
+          .clientSecret(clientSecret)//
+          .scope(clientScopes)//
+          .build();
+    }
     else
-      return getCustomClientRegistration(
-        client);
-  }
-
-
-  /**
-   * @param client
-   * @return
-   */
-  protected ClientRegistration getCustomClientRegistration(
-    String client)
-  {
-    return null;
+      return getCustomClientRegistration(client);
   }
 
 

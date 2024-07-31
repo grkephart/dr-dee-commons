@@ -7,7 +7,7 @@ package org.drdeesw.commons.models.security;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 
-import org.drdeesw.commons.models.pojos.AbstractLongUniquePojo;
+import org.drdeesw.commons.models.pojos.AbstractNamedLongUniquePojo;
 import org.hibernate.annotations.Formula;
 
 
@@ -18,11 +18,9 @@ import org.hibernate.annotations.Formula;
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractLongUniquePojo
-    implements User
+public class UserPojo extends AbstractNamedLongUniquePojo implements User
 {
   private boolean enabled;
-  private String  name;
   private String  roleNames;
   private String  username;
 
@@ -48,8 +46,8 @@ public class UserPojo extends AbstractLongUniquePojo
    */
   public UserPojo(String name, String username)
   {
+    super(name);
     this.username = username;
-    this.name = name;
   }
 
 
@@ -62,9 +60,9 @@ public class UserPojo extends AbstractLongUniquePojo
    */
   public UserPojo(String name, String username, boolean enabled)
   {
+    super(name);
     this.enabled = enabled;
     this.username = username;
-    this.name = name;
   }
 
 
@@ -72,7 +70,6 @@ public class UserPojo extends AbstractLongUniquePojo
   {
     super(that);
     this.enabled = that.isEnabled();
-    this.name = that.getName();
     this.roleNames = that.getRoleNames();
     this.username = that.getUsername();
   }
@@ -82,15 +79,6 @@ public class UserPojo extends AbstractLongUniquePojo
   public Long getId()
   {
     return super.getId();
-  }
-
-
-  /**
-   * @return the name
-   */
-  public String getName()
-  {
-    return name;
   }
 
 
@@ -131,16 +119,6 @@ public class UserPojo extends AbstractLongUniquePojo
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  /**
-   * @param name the name to set
-   */
-  public void setName(
-    String name)
-  {
-    this.name = name;
   }
 
 

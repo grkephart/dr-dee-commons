@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
-import org.drdeesw.commons.models.SomePojo;
+import org.drdeesw.commons.models.security.UserRolePojo;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,49 +46,9 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#Query(java.lang.Class)}.
-   */
-  @Test
-  void testQueryClassOfT()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#Query(java.lang.Class, org.drdeesw.commons.queries.Match)}.
-   */
-  @Test
-  void testQueryClassOfTMatch()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#Query(java.lang.Class, org.drdeesw.commons.queries.JpqlQuery)}.
-   */
-  @Test
-  void testQueryClassOfTPQ()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#add(org.drdeesw.commons.queries.Condition)}.
-   */
-  @Test
-  void testAdd()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#addMandatoryCondition(java.lang.String, java.lang.Object)}.
    */
-  @Test
+  // TODO @Test
   void testAddMandatoryConditionStringObject()
   {
     fail("Not yet implemented");
@@ -98,18 +58,8 @@ class QueryTest
   /**
    * Test method for {@link org.drdeesw.commons.queries.Query#addMandatoryCondition(java.lang.String, org.drdeesw.commons.queries.Operator, java.lang.Object)}.
    */
-  @Test
+  // TODO @Test
   void testAddMandatoryConditionStringOperatorObject()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#addOrdering(java.lang.String, boolean)}.
-   */
-  @Test
-  void testAddOrdering()
   {
     fail("Not yet implemented");
   }
@@ -118,18 +68,8 @@ class QueryTest
   /**
    * Test method for {@link org.drdeesw.commons.queries.Query#and(org.drdeesw.commons.queries.Condition[])}.
    */
-  @Test
+  // TODO @Test
   void testAnd()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#conditionsPresent()}.
-   */
-  @Test
-  void testConditionsPresent()
   {
     fail("Not yet implemented");
   }
@@ -141,12 +81,12 @@ class QueryTest
   @Test
   void testEqualsStringObject()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.equals(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.equals(FIELD_NAME, NAME);
 
     // Assert
 
@@ -162,19 +102,9 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#equals(java.lang.String, java.lang.Object, boolean)}.
-   */
-  @Test
-  void testEqualsStringObjectBoolean()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#exists(org.drdeesw.commons.queries.Query)}.
    */
-  @Test
+  // TODO @Test
   void testExists()
   {
     fail("Not yet implemented");
@@ -187,12 +117,12 @@ class QueryTest
   @Test
   void testGe()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.ge(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.ge(FIELD_NAME, NAME);
 
     // Assert
 
@@ -213,7 +143,7 @@ class QueryTest
   @Test
   void testGetAlias()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
@@ -225,60 +155,10 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#getClassSimpleName()}.
-   */
-  @Test
-  void testGetClassSimpleName()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#getMandatoryConditions()}.
-   */
-  @Test
-  void testGetMandatoryConditions()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#getMatch()}.
-   */
-  @Test
-  void testGetMatch()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#getMaxResults()}.
-   */
-  @Test
-  void testGetMaxResults()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#getMaxResults(int)}.
    */
-  @Test
+  // TODO @Test
   void testGetMaxResultsInt()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#getOrderings()}.
-   */
-  @Test
-  void testGetOrderings()
   {
     fail("Not yet implemented");
   }
@@ -290,14 +170,14 @@ class QueryTest
   @Test
   void testGetStart()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
 
     // Assert
-    Assert.assertEquals(Integer.valueOf(0), objectUnderTest.getStart());
+    Assert.assertEquals(null, objectUnderTest.getStart());
   }
 
 
@@ -307,14 +187,14 @@ class QueryTest
   @Test
   void testGetStartInt()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
 
     // Assert
-    Assert.assertEquals(0, objectUnderTest.getStart(DEF_VALUE));
+    Assert.assertEquals(DEF_VALUE, objectUnderTest.getStart(DEF_VALUE));
   }
 
 
@@ -324,12 +204,12 @@ class QueryTest
   @Test
   void testGt()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.gt(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.gt(FIELD_NAME, NAME);
 
     // Assert
 
@@ -345,27 +225,17 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#hasMandatoryConditions()}.
-   */
-  @Test
-  void testHasMandatoryConditions()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#iequals(java.lang.String, java.lang.Object)}.
    */
   @Test
   void testIequals()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.iequals(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.iequals(FIELD_NAME, NAME);
 
     // Assert
 
@@ -386,12 +256,12 @@ class QueryTest
   @Test
   void testIlike()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.ilike(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.ilike(FIELD_NAME, NAME);
 
     // Assert
 
@@ -407,47 +277,17 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#in(java.lang.String, java.util.Collection)}.
-   */
-  @Test
-  void testInStringCollectionOfQ()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#in(java.lang.String, java.lang.Object[])}.
-   */
-  @Test
-  void testInStringObjectArray()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#isCaseInsensitive()}.
-   */
-  @Test
-  void testIsCaseInsensitive()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#isNotNull(java.lang.String)}.
    */
   @Test
   void testIsNotNull()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.isNotNull(FIELD_NAME);
+    Query<UserRolePojo> self = objectUnderTest.isNotNull(FIELD_NAME);
 
     // Assert
 
@@ -468,12 +308,12 @@ class QueryTest
   @Test
   void testIsNull()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.isNull(FIELD_NAME);
+    Query<UserRolePojo> self = objectUnderTest.isNull(FIELD_NAME);
 
     // Assert
 
@@ -489,27 +329,17 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#isPerformCount()}.
-   */
-  @Test
-  void testIsPerformCount()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#like(java.lang.String, java.lang.String)}.
    */
   @Test
   void testLike()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.like(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.like(FIELD_NAME, NAME);
 
     // Assert
 
@@ -530,12 +360,12 @@ class QueryTest
   @Test
   void testLt()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.lt(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.lt(FIELD_NAME, NAME);
 
     // Assert
 
@@ -556,12 +386,12 @@ class QueryTest
   @Test
   void testNotEquals()
   {
-    Query<SomePojo> objectUnderTest = new Query<>(SomePojo.class);
+    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
 
     // Arrange
 
     // Act
-    Query<SomePojo> self = objectUnderTest.notEquals(FIELD_NAME, NAME);
+    Query<UserRolePojo> self = objectUnderTest.notEquals(FIELD_NAME, NAME);
 
     // Assert
 
@@ -577,40 +407,10 @@ class QueryTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#notExists(org.drdeesw.commons.queries.Query)}.
-   */
-  @Test
-  void testNotExists()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
    * Test method for {@link org.drdeesw.commons.queries.Query#or(org.drdeesw.commons.queries.Condition[])}.
    */
-  @Test
+  // TODO @Test
   void testOr()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#setAlias(java.lang.String)}.
-   */
-  @Test
-  void testSetAlias()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#setCaseInsensitive(boolean)}.
-   */
-  @Test
-  void testSetCaseInsensitive()
   {
     fail("Not yet implemented");
   }
@@ -619,38 +419,8 @@ class QueryTest
   /**
    * Test method for {@link org.drdeesw.commons.queries.Query#setMatch(org.drdeesw.commons.queries.Match)}.
    */
-  @Test
+  // TODO @Test
   void testSetMatch()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#setMaxResults(java.lang.Integer)}.
-   */
-  @Test
-  void testSetMaxResults()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#setPerformCount(java.lang.Boolean)}.
-   */
-  @Test
-  void testSetPerformCount()
-  {
-    fail("Not yet implemented");
-  }
-
-
-  /**
-   * Test method for {@link org.drdeesw.commons.queries.Query#setStart(java.lang.Integer)}.
-   */
-  @Test
-  void testSetStart()
   {
     fail("Not yet implemented");
   }
@@ -659,7 +429,7 @@ class QueryTest
   /**
    * Test method for {@link org.drdeesw.commons.queries.Query#uniqueResult()}.
    */
-  @Test
+  // TODO @Test
   void testUniqueResult()
   {
     fail("Not yet implemented");

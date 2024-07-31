@@ -8,11 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.drdeesw.commons.queries.datatables.DataTablesJpqlQuery;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.MultiValueMapAdapter;
 
@@ -63,7 +62,7 @@ public class DataTablesJpqlQueryTest
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception
   {
   }
@@ -72,7 +71,7 @@ public class DataTablesJpqlQueryTest
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception
   {
   }

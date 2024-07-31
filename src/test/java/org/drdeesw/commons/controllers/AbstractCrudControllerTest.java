@@ -3,10 +3,11 @@
  */
 package org.drdeesw.commons.controllers;
 
+
 import java.util.Collections;
 import java.util.Optional;
 
-import org.drdeesw.commons.models.SomePojo;
+import org.drdeesw.commons.models.security.UserRolePojo;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;
@@ -22,20 +23,17 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ObjectError;
+
 
 /**
  * 
  */
 class AbstractCrudControllerTest
 {
-  private static final Long ID = Long.valueOf(677);
-  private TestableAbstractCrudController objectUnderTest;
-  private CrudService<SomePojo, Long> service;
-  
-  
+  private static final Long               ID = Long.valueOf(677);
+  private TestableAbstractCrudController  objectUnderTest;
+  private CrudService<UserRolePojo, Long> service;
+
   /**
    * @throws java.lang.Exception
    */
@@ -44,9 +42,9 @@ class AbstractCrudControllerTest
   void setUp() throws Exception
   {
     this.service = Mockito.mock(CrudService.class);
-    
+
     this.objectUnderTest = new TestableAbstractCrudController();
-    
+
     this.objectUnderTest.init(this.service);
   }
 
@@ -67,19 +65,19 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePWithSuccess() throws Exception
   {
-    SomePojo pojo = new SomePojo();
-    
+    UserRolePojo pojo = new UserRolePojo();
+
     // Arrange
-    
+
     Mockito.when(this.service.create(pojo)).thenReturn(pojo);
-  
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.create(pojo);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service).create(pojo);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -92,20 +90,20 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePWithException() throws Exception
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     Exception ex = new Exception();
-    
+
     // Arrange
-    
+
     Mockito.when(this.service.create(pojo)).thenThrow(ex);
-  
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.create(pojo);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service).create(pojo);
-    
+
     Assert.assertEquals(HttpStatus.BAD_REQUEST, actual.getStatusCode());
     Assert.assertEquals(null, actual.getBody());
   }
@@ -118,20 +116,20 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithSuccess() throws Exception
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
-   
+
     // Arrange
-    
+
     Mockito.when(this.service.create(pojo)).thenReturn(pojo);
-   
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.create(pojo, bindingResult);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service).create(pojo);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -144,24 +142,25 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithException() throws Exception
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
     Exception ex = new Exception();
 
     // Arrange
-    
+
     Mockito.when(this.service.create(pojo)).thenThrow(ex);
-   
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.create(pojo, bindingResult);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service).create(pojo);
-    
+
     Assert.assertEquals(HttpStatus.BAD_REQUEST, actual.getStatusCode());
     Assert.assertEquals(null, actual.getBody());
   }
+
 
   /**
    * Test method for {@link org.drdeesw.commons.controllers.AbstractCrudController#create(org.drdeesw.commons.models.pojos.UniquePojo, org.springframework.validation.BindingResult)}.
@@ -170,20 +169,20 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithBindingException() throws Exception
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 
     // Arrange
-    
-    bindingResult.addError(new ObjectError("",""));
-   
+
+    bindingResult.addError(new ObjectError("", ""));
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.create(pojo, bindingResult);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service, Mockito.never()).create(pojo);
-    
+
     Assert.assertEquals(HttpStatus.BAD_REQUEST, actual.getStatusCode());
     //Assert.assertEquals(null, actual.getBody());
   }
@@ -195,17 +194,17 @@ class AbstractCrudControllerTest
   @Test
   void testDelete()
   {
-    SomePojo pojo = new SomePojo();
-    
+    UserRolePojo pojo = new UserRolePojo();
+
     // Arrange
-  
+
     // Act
-    ResponseEntity<SomePojo> actual = this.objectUnderTest.delete(pojo);
-    
+    ResponseEntity<UserRolePojo> actual = this.objectUnderTest.delete(pojo);
+
     // Assert
-    
+
     Mockito.verify(this.service).delete(pojo);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -217,19 +216,19 @@ class AbstractCrudControllerTest
   @Test
   void testFindByIdWithFound()
   {
-    SomePojo pojo = new SomePojo();
-  
+    UserRolePojo pojo = new UserRolePojo();
+
     // Arrange
-    
+
     Mockito.when(this.service.findById(ID)).thenReturn(Optional.of(pojo));
-   
+
     // Act
-    ResponseEntity<Optional<SomePojo>> actual = this.objectUnderTest.findById(ID);
-    
+    ResponseEntity<Optional<UserRolePojo>> actual = this.objectUnderTest.findById(ID);
+
     // Assert
-    
+
     Mockito.verify(this.service).findById(ID);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody().get());
   }
@@ -241,18 +240,18 @@ class AbstractCrudControllerTest
   @Test
   void testFindByIdWithNotFound()
   {
-  
+
     // Arrange
-    
+
     Mockito.when(this.service.findById(ID)).thenReturn(Optional.empty());
-   
+
     // Act
-    ResponseEntity<Optional<SomePojo>> actual = this.objectUnderTest.findById(ID);
-    
+    ResponseEntity<Optional<UserRolePojo>> actual = this.objectUnderTest.findById(ID);
+
     // Assert
-    
+
     Mockito.verify(this.service).findById(ID);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(true, actual.getBody().isEmpty());
   }
@@ -264,24 +263,23 @@ class AbstractCrudControllerTest
   @Test
   void testFindByQueryMultiValueMapOfStringStringWithSuccess()
   {
-    SomePojo pojo = new SomePojo();
-    QueryResults<SomePojo> expected = new QueryResults<>(Collections.singletonList(pojo));
+    UserRolePojo pojo = new UserRolePojo();
+    QueryResults<UserRolePojo> expected = new QueryResults<>(Collections.singletonList(pojo));
     MultiValueMap<String, String> parameterMap = new HttpHeaders();
-  
+
     // Arrange
-    
+
     Mockito.when(this.service.findByQuery(parameterMap)).thenReturn(expected);
-   
+
     // Act
-    QueryResults<SomePojo> actual = this.objectUnderTest.findByQuery(parameterMap);
-    
+    QueryResults<UserRolePojo> actual = this.objectUnderTest.findByQuery(parameterMap);
+
     // Assert
-    
+
     Mockito.verify(this.service).findByQuery(parameterMap);
-    
+
     Assert.assertEquals(pojo, actual.get(0));
   }
-
 
 
   /**
@@ -290,21 +288,21 @@ class AbstractCrudControllerTest
   @Test
   void testFindByQueryQ()
   {
-    SomePojo pojo = new SomePojo();
-    JpqlQuery<SomePojo> query = new JpqlQuery<SomePojo>(SomePojo.class);
-    QueryResults<SomePojo> expected = new QueryResults<>(Collections.singletonList(pojo));
-  
+    UserRolePojo pojo = new UserRolePojo();
+    JpqlQuery<UserRolePojo> query = new JpqlQuery<UserRolePojo>(UserRolePojo.class);
+    QueryResults<UserRolePojo> expected = new QueryResults<>(Collections.singletonList(pojo));
+
     // Arrange
-    
+
     Mockito.when(this.service.findByQuery(query)).thenReturn(expected);
-   
+
     // Act
-    QueryResults<SomePojo> actual = this.objectUnderTest.findByQuery(query);
-    
+    QueryResults<UserRolePojo> actual = this.objectUnderTest.findByQuery(query);
+
     // Assert
-    
+
     Mockito.verify(this.service).findByQuery(query);
-    
+
     Assert.assertEquals(pojo, actual.get(0));
   }
 
@@ -315,19 +313,19 @@ class AbstractCrudControllerTest
   @Test
   void testGet()
   {
-    SomePojo pojo = new SomePojo();
-  
+    UserRolePojo pojo = new UserRolePojo();
+
     // Arrange
-    
+
     Mockito.when(this.service.get(ID)).thenReturn(pojo);
-   
+
     // Act
-    ResponseEntity<SomePojo> actual = this.objectUnderTest.get(ID);
-    
+    ResponseEntity<UserRolePojo> actual = this.objectUnderTest.get(ID);
+
     // Assert
-    
+
     Mockito.verify(this.service).get(ID);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -339,19 +337,19 @@ class AbstractCrudControllerTest
   @Test
   void testUpdateP()
   {
-    SomePojo pojo = new SomePojo();
-    
+    UserRolePojo pojo = new UserRolePojo();
+
     // Arrange
-    
+
     Mockito.when(this.service.update(pojo)).thenReturn(pojo);
-  
+
     // Act
-    ResponseEntity<SomePojo> actual = this.objectUnderTest.update(pojo);
-    
+    ResponseEntity<UserRolePojo> actual = this.objectUnderTest.update(pojo);
+
     // Assert
-    
+
     Mockito.verify(this.service).update(pojo);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -363,20 +361,20 @@ class AbstractCrudControllerTest
   @Test
   void testUpdatePBindingResultWithSuccess()
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
-   
+
     // Arrange
-    
+
     Mockito.when(this.service.update(pojo)).thenReturn(pojo);
-   
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.update(pojo, bindingResult);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service).update(pojo);
-    
+
     Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
     Assert.assertEquals(pojo, actual.getBody());
   }
@@ -388,21 +386,21 @@ class AbstractCrudControllerTest
   @Test
   void testUpdatePBindingResultWithBindingException()
   {
-    SomePojo pojo = new SomePojo();
+    UserRolePojo pojo = new UserRolePojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
-   
+
     // Arrange
-    
+
     Mockito.when(this.service.update(pojo)).thenReturn(pojo);
-    bindingResult.addError(new ObjectError("",""));
-   
+    bindingResult.addError(new ObjectError("", ""));
+
     // Act
     ResponseEntity<?> actual = this.objectUnderTest.update(pojo, bindingResult);
-    
+
     // Assert
-    
+
     Mockito.verify(this.service, Mockito.never()).update(pojo);
-    
+
     Assert.assertEquals(HttpStatus.BAD_REQUEST, actual.getStatusCode());
     //Assert.assertEquals(pojo, actual.getBody());
   }

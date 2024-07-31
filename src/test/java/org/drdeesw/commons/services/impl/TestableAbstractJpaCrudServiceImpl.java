@@ -1,22 +1,22 @@
 package org.drdeesw.commons.services.impl;
 
-import org.drdeesw.commons.models.SomeEntity;
-import org.drdeesw.commons.models.SomePojo;
+import org.drdeesw.commons.models.security.UserEntity;
+import org.drdeesw.commons.models.security.UserPojo;
 
 public class TestableAbstractJpaCrudServiceImpl
-    extends AbstractJpaCrudServiceImpl<SomePojo, SomeEntity, Long>
+    extends AbstractJpaCrudServiceImpl<UserPojo, UserEntity, Long>
 {
 
   public TestableAbstractJpaCrudServiceImpl()
   {
-    super(SomePojo.class, SomeEntity.class);
+    super(UserPojo.class, UserEntity.class);
   }
 
 
   @Override
   protected void updateEntity(
-    SomeEntity entity,
-    SomePojo pojo)
+    UserEntity entity,
+    UserPojo pojo)
   {
   }
 

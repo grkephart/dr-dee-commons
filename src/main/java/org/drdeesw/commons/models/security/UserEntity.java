@@ -9,7 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.models.entities.AbstractNamedLongUniqueEntity;
 import org.hibernate.annotations.Formula;
 
 
@@ -22,12 +22,10 @@ import org.hibernate.annotations.Formula;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class UserEntity extends AbstractLongUniqueEntity implements User
+public class UserEntity extends AbstractNamedLongUniqueEntity implements User
 {
   @Column(name = "enabled")
   private boolean enabled;
-  @Column(name = "name")
-  private String  name;
   private String  roleNames;
   @Column(name = "username")
   private String  username;
@@ -54,9 +52,9 @@ public class UserEntity extends AbstractLongUniqueEntity implements User
    */
   public UserEntity(String name, String username)
   {
+    super(name);
     this.username = username;
-    this.name = name;
-  }
+   }
 
 
   /**
@@ -68,9 +66,9 @@ public class UserEntity extends AbstractLongUniqueEntity implements User
    */
   public UserEntity(String name, String username, boolean enabled)
   {
+    super(name);
     this.enabled = enabled;
     this.username = username;
-    this.name = name;
   }
 
 
@@ -81,7 +79,6 @@ public class UserEntity extends AbstractLongUniqueEntity implements User
   {
     super(that);
     this.enabled = that.isEnabled();
-    this.name = that.getName();
     this.roleNames = that.getRoleNames();
     this.username = that.getUsername();
 
@@ -92,15 +89,6 @@ public class UserEntity extends AbstractLongUniqueEntity implements User
   public Long getId()
   {
     return super.getId();
-  }
-
-
-  /**
-   * @return the name
-   */
-  public String getName()
-  {
-    return name;
   }
 
 
@@ -141,16 +129,6 @@ public class UserEntity extends AbstractLongUniqueEntity implements User
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  /**
-   * @param name the name to set
-   */
-  public void setName(
-    String name)
-  {
-    this.name = name;
   }
 
 

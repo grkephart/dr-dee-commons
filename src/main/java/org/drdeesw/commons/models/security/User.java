@@ -4,7 +4,7 @@
 package org.drdeesw.commons.models.security;
 
 
-import org.drdeesw.commons.models.base.LongUniqueObject;
+import org.drdeesw.commons.models.base.NamedLongUniqueObject;
 
 
 /**
@@ -13,17 +13,11 @@ import org.drdeesw.commons.models.base.LongUniqueObject;
  * @author gary_kephart
  *
  */
-public interface User extends LongUniqueObject
+public interface User extends NamedLongUniqueObject
 {
 
   @Override
   public Long getId();
-
-
-  /**
-   * @return the name
-   */
-  public String getName();
 
 
   /**
@@ -37,7 +31,6 @@ public interface User extends LongUniqueObject
    * @return
    */
   public String getUsername();
-
 
 
   /**
@@ -54,13 +47,6 @@ public interface User extends LongUniqueObject
 
 
   /**
-   * @param name the name to set
-   */
-  public void setName(
-    String name);
-
-
-  /**
    * @param roleNames the roleNames to set
    */
   public void setRoleNames(
@@ -69,6 +55,5 @@ public interface User extends LongUniqueObject
 
   public void setUsername(
     String email);
-
 
 }

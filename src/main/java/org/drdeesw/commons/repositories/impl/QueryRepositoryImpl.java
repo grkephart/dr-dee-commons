@@ -29,6 +29,26 @@ public class QueryRepositoryImpl<T extends UniqueObject<ID>, ID extends Serializ
   private EntityManager em;
 
   /**
+   * 
+   */
+  public QueryRepositoryImpl()
+  {
+
+  }
+
+
+  /**
+   * Unit testing.
+   * 
+   * @param em
+   */
+  public QueryRepositoryImpl(EntityManager em)
+  {
+    this.em = em;
+  }
+
+
+  /**
    *
    */
   @Override
