@@ -12,12 +12,4 @@ public class TestableAbstractJpaCrudServiceImpl
     super(UserPojo.class, UserEntity.class);
   }
 
-
-  @Override
-  protected void updateEntity(
-    UserEntity entity,
-    UserPojo pojo)
-  {
-  }
-
 }

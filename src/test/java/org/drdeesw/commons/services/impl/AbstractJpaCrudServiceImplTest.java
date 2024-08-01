@@ -37,9 +37,10 @@ import org.springframework.util.MultiValueMap;
  */
 public class AbstractJpaCrudServiceImplTest
 {
-  private static final String                USERNAME = "tw4 df i5lg4yg k5 kt5h";
+  private static final String                USERNAME = "old username";
   private static final Long                  ID   = Long.valueOf(635);
   private static final String                NAME = "tivti";
+  private static final String NEW_USERNAME = "new username";
   private TestableAbstractJpaCrudServiceImpl objectUnderTest;
   private UserEntityRepository           repository;
 
@@ -568,21 +569,21 @@ public class AbstractJpaCrudServiceImplTest
 
 
   /**
-   * Test method for {@link org.drdeesw.commons.services.impl.AbstractJpaCrudServiceImpl#saveOrUpdateAll(java.util.List, java.util.function.Function, java.util.function.Function, java.lang.String)}.
+   * Test method for {@link org.drdeesw.commons.services.impl.AbstractJpaCrudServiceImpl#createOrUpdateAll(java.util.List, java.util.function.Function, java.util.function.Function, java.lang.String)}.
    * @throws Exception 
    */
   @Test
-  public void testSaveOrUpdateAll() throws Exception
+  public void testCreateOrUpdateAllWithAllExisting() throws Exception
   {
     UserPojo pojo = new UserPojo();
     UserEntity entity = new UserEntity();
     List<UserPojo> all = new ArrayList<>(Collections.singletonList(pojo));
     Function<UserPojo, Long> pojoKeyMapper = UserPojo::getId;
     Function<UserEntity, Long> entityKeyMapper = UserEntity::getId;
-    String fieldName = "id";
+    String idFieldName = "id";
     Set<Long> keySet = Sets.newSet(ID);
     JpqlQuery<UserEntity> query = new JpqlQuery<UserEntity>(UserEntity.class)//
-        .in(fieldName, keySet);
+        .in(idFieldName, keySet);
     QueryResults<UserEntity> existingEntities = new QueryResults<UserEntity>(
         Collections.singletonList(entity));
 
@@ -590,7 +591,7 @@ public class AbstractJpaCrudServiceImplTest
 
     pojo.setId(ID);
     pojo.setName(NAME);
-    pojo.setUsername(USERNAME);
+    pojo.setUsername(NEW_USERNAME);
 
     entity.setId(ID);
     entity.setName(NAME);
@@ -599,13 +600,17 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findByQuery(query)).thenReturn(existingEntities);
 
     // Act
-    this.objectUnderTest.saveOrUpdateAll(all, pojoKeyMapper, entityKeyMapper, fieldName);
+    this.objectUnderTest.createOrUpdateAll(all, pojoKeyMapper, entityKeyMapper, idFieldName);
 
     // Assert
 
     //Mockito.verify(this.repository).findByQuery(query);
     Mockito.verify(this.repository).saveAll(existingEntities);
 
+    UserEntity updatedEntity = existingEntities.get(0);
+    Assert.assertEquals(ID, updatedEntity.getId());
+    Assert.assertEquals(NAME, updatedEntity.getName());
+    Assert.assertEquals(NEW_USERNAME, updatedEntity.getUsername());
   }
 
 

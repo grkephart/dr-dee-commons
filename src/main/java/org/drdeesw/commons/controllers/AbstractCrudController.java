@@ -17,6 +17,7 @@ import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.HeadersBuilder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 
@@ -101,10 +102,12 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
    * @param id
    * @return
    */
-  protected ResponseEntity<Optional<P>> findById(
+  protected ResponseEntity<?> findById(
     ID id)
   {
-    return ResponseEntity.ok(this.crudService.findById(id));
+    return this.crudService.findById(id)//
+        .map(ResponseEntity::ok)//
+        .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
 

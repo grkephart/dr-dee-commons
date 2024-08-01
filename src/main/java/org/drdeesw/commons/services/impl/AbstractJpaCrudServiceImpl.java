@@ -197,6 +197,52 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
+  /**
+   * Used when importing many objects, some of them which might already exist 
+   * in the system and need updating.
+   * 
+   * This method first creates a map of POJOs by their key.
+   * It queries the existing entities based on the provided keys.
+   * It updates existing entities with the corresponding POJOs and removes the updated POJOs from the map.
+   * It then saves all updated entities.
+   * Any remaining POJOs in the map are new and need to be saved as new entities.
+   * 
+   * @param allPojos POJOs that have been fetched/updated from an outside source
+   * @param pojoKeyMapper maps to the getId() method of pojos
+   * @param entityKeyMapper maps to the getId() method of entities
+   * @param idFieldName the name of the field for the ID property. Usually "id".
+   * @throws Exception
+   */
+  public void createOrUpdateAll(
+    List<P> allPojos,
+    Function<P, ? extends Object> pojoKeyMapper,
+    Function<E, ? extends Object> entityKeyMapper,
+    String idFieldName) throws Exception
+  {
+    if (isNotEmpty(allPojos))
+    {
+      Map<Object, P> pojoMap = allPojos.stream()
+          .collect(Collectors.toMap(pojoKeyMapper, Function.identity()));
+      JpqlQuery<E> query = new JpqlQuery<E>(this.entityClass)//
+          .in(idFieldName, pojoMap.keySet());
+      QueryResults<E> existingEntities = findEntities(query);
+      Collection<P> newPojos;
+
+      existingEntities.forEach(entity -> {
+        Object key = entityKeyMapper.apply(entity);
+        P pojo = pojoMap.get(key);
+
+        updateEntity(entity, pojo);
+        pojoMap.remove(key);
+      });
+      this.repository.saveAll(existingEntities);
+
+      newPojos = pojoMap.values();
+      this.repository.saveAll(convertPojoToEntity(newPojos));
+    }
+  }
+
+
   /*
    * (non-Javadoc)
    * 
@@ -237,10 +283,11 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   public Optional<P> findById(
     ID id)
   {
-    Optional<E> optEntity = this.repository.findById(id);
-
-    return optEntity.isPresent() ? Optional.of(convertEntityToPojo(optEntity.get()))
-                                 : Optional.empty();
+    return this.repository.findById(id).map(entity -> {
+      return convertEntityToPojo(entity);
+    }).or(() -> {
+      return Optional.empty();
+    });
   }
 
 
@@ -404,46 +451,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
-  /**
-   * Used when importing many objects, some of them which might already exist 
-   * in the system and need updating.
-   * 
-   * @param all
-   * @param pojoKeyMapper
-   * @param entityKeyMapper
-   * @param fieldName
-   * @throws Exception
-   */
-  public void saveOrUpdateAll(
-    List<P> all,
-    Function<P, ? extends Object> pojoKeyMapper,
-    Function<E, ? extends Object> entityKeyMapper,
-    String fieldName) throws Exception
-  {
-    if (isNotEmpty(all))
-    {
-      Map<Object, P> pojoMap = all.stream()
-          .collect(Collectors.toMap(pojoKeyMapper, Function.identity()));
-      JpqlQuery<E> query = new JpqlQuery<E>(this.entityClass)//
-          .in(fieldName, pojoMap.keySet());
-      QueryResults<E> existingEntities = findEntities(query);
-      Collection<P> newPojos;
-
-      existingEntities.forEach(e -> {
-        Object key = entityKeyMapper.apply(e);
-        P pojo = pojoMap.get(key);
-
-        updateEntity(e, pojo);
-        pojoMap.remove(key);
-      });
-      this.repository.saveAll(existingEntities);
-
-      newPojos = pojoMap.values();
-      this.repository.saveAll(convertPojoToEntity(newPojos));
-    }
-  }
-
-
   /*
    * This is used for the REST CRUD Update action.
    * 
@@ -475,13 +482,16 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * Update the entity's properties using the pojo's properties.
+   * Update the existing entity's properties using the pojo's properties.
    * Used in saveOrUpdateAll() when we're updating some entities and creating others.
    * 
    * @param entity
    * @param pojo
    */
-  protected abstract void updateEntity(
+  protected void updateEntity(
     E entity,
-    P pojo);
+    P pojo)
+  {
+    this.modelMapper.map(pojo, entity);
+  }
 }

@@ -216,21 +216,22 @@ class AbstractCrudControllerTest
   @Test
   void testFindByIdWithFound()
   {
-    UserRolePojo pojo = new UserRolePojo();
+    UserRolePojo expected = new UserRolePojo();
 
     // Arrange
 
-    Mockito.when(this.service.findById(ID)).thenReturn(Optional.of(pojo));
+    Mockito.when(this.service.findById(ID)).thenReturn(Optional.of(expected));
 
     // Act
-    ResponseEntity<Optional<UserRolePojo>> actual = this.objectUnderTest.findById(ID);
+    ResponseEntity<?> response = this.objectUnderTest.findById(ID);
 
     // Assert
 
     Mockito.verify(this.service).findById(ID);
 
-    Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
-    Assert.assertEquals(pojo, actual.getBody().get());
+    Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    UserRolePojo actual = (UserRolePojo)response.getBody();
+    Assert.assertEquals(expected, actual);
   }
 
 
@@ -246,14 +247,15 @@ class AbstractCrudControllerTest
     Mockito.when(this.service.findById(ID)).thenReturn(Optional.empty());
 
     // Act
-    ResponseEntity<Optional<UserRolePojo>> actual = this.objectUnderTest.findById(ID);
+    ResponseEntity<?> actual = this.objectUnderTest.findById(ID);
 
     // Assert
 
     Mockito.verify(this.service).findById(ID);
 
-    Assert.assertEquals(HttpStatus.OK, actual.getStatusCode());
-    Assert.assertEquals(true, actual.getBody().isEmpty());
+    Assert.assertEquals(HttpStatus.NOT_FOUND, actual.getStatusCode());
+    Object body = actual.getBody();
+    Assert.assertEquals(null, body);
   }
 
 
