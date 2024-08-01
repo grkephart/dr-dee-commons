@@ -6,8 +6,10 @@ package org.drdeesw.commons.models.security;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.drdeesw.commons.models.entities.AbstractNamedLongUniqueEntity;
 import org.hibernate.annotations.Formula;
@@ -20,7 +22,9 @@ import org.hibernate.annotations.Formula;
  *
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
+@Entity
+@Table(name = "users")
+@AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @Access(AccessType.FIELD)
 public class UserEntity extends AbstractNamedLongUniqueEntity implements User
 {

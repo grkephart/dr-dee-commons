@@ -6,8 +6,10 @@ package org.drdeesw.commons.models.security;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
 
@@ -19,7 +21,9 @@ import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
  *
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
+@Entity
+@Table(name = "user_roles")
+@AttributeOverride(name = "id", column = @Column(name = "user_role_id"))
 @Access(AccessType.FIELD)
 public class UserRoleEntity extends AbstractLongUniqueEntity implements UserRole
 {
