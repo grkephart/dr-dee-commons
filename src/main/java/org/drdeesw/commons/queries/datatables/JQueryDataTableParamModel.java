@@ -25,7 +25,7 @@ public class JQueryDataTableParamModel implements Serializable
   private boolean[]           columnOrderables;
   private boolean[]           columnSearchable;
   private boolean[]           columnSearchRegex;
-  private String[]            columnSearchValues;
+  private String[]            columnSearchValues; // Search value to apply to this specific column.
   private Integer             draw;
   private Integer             length;
   private int[]               orderColumns;
@@ -138,6 +138,33 @@ public class JQueryDataTableParamModel implements Serializable
   public boolean[] getColumnSearchRegex()
   {
     return columnSearchRegex;
+  }
+
+
+  /**
+   * @param data
+   * @return
+   */
+  public String getColumnSearchValue(
+    String data)
+  {
+    String value = null;
+
+    for (int x = 0; x < this.columnSearchValues.length; x++)
+    {
+      if (data.equals(this.columnSearchValues[x]))
+      {
+        if (this.columnSearchable[x])
+        {
+          if (this.searchValue != null && this.searchValue.length() > 0)
+            value = this.searchValue;
+          else if (this.columnSearchValues[x] != null && this.columnSearchValues[x].length() > 0)
+            value = this.columnSearchValues[x];
+        }
+      }
+    }
+
+    return value;
   }
 
 

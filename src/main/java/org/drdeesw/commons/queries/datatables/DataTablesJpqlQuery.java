@@ -62,7 +62,7 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
     boolean[] columnOrderables = model.getColumnOrderables();
     int[] orderColumns = model.getOrderColumns();
     boolean[] orderDirs = model.getOrderDirs();
-    String[] columnSearchValues = model.getColumnSearchValues();
+    String[] columnSearchValues = model.getColumnSearchValues(); // Search value to apply to this specific column.
     boolean searchValueExists = searchValue != null && searchValue.length() > 0;
     boolean columnSearchValuesExist = columnSearchValues != null && columnSearchValues.length > 0;
 

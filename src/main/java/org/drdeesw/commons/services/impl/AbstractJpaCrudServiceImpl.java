@@ -445,7 +445,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /*
-   * (non-Javadoc)
+   * This is used for the REST CRUD Update action.
    * 
    * @see
    * org.drdeesw.commons.services.CrudService#update(org.drdeesw.commons.models.base.
@@ -462,6 +462,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
+   * This is only used to update a Reaction, so expect this to disappear.
+   * 
    * @param entity
    * @return
    */
@@ -474,6 +476,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
   /**
    * Update the entity's properties using the pojo's properties.
+   * Used in saveOrUpdateAll() when we're updating some entities and creating others.
    * 
    * @param entity
    * @param pojo
