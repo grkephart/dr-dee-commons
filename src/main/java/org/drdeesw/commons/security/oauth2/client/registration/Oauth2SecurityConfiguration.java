@@ -107,7 +107,10 @@ public abstract class Oauth2SecurityConfiguration
    * @return
    */
   protected ClientRegistration getCustomClientRegistration(
-    String client)
+    String client,
+    String clientId,
+    String clientSecret,
+    String[] clientScopes)
   {
     return null;
   }
@@ -190,7 +193,7 @@ public abstract class Oauth2SecurityConfiguration
           .build();
     }
     else
-      return getCustomClientRegistration(client);
+      return getCustomClientRegistration(client, clientId, clientSecret, clientScopes);
   }
 
 
