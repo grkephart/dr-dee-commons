@@ -117,6 +117,27 @@ public abstract class Oauth2SecurityConfiguration
 
 
   /**
+   * Returns the principal ID of the user.
+   * 
+   * @return the principal ID of the user
+   */
+  public String getPrincipalId()
+  {
+    String principalId = null;
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication.isAuthenticated() && authentication instanceof OAuth2AuthenticationToken)
+    {
+      OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken)authentication;
+
+      principalId = oauthToken.getPrincipal().getAttribute("id");
+    }
+
+    return principalId;
+  }
+
+
+  /**
    * Returns the bearer token with "Bearer " prefixed.
    * 
    * @return the bearer token with "Bearer " prefixed
