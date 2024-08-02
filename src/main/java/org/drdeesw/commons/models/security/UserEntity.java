@@ -8,8 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.models.entities.AbstractNamedLongUniqueEntity;
 import org.hibernate.annotations.Formula;
@@ -22,11 +21,10 @@ import org.hibernate.annotations.Formula;
  *
  */
 @SuppressWarnings("serial")
-@Entity
-@Table(name = "users")
+@MappedSuperclass
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @Access(AccessType.FIELD)
-public class UserEntity extends AbstractNamedLongUniqueEntity implements User
+public abstract class UserEntity extends AbstractNamedLongUniqueEntity implements User
 {
   @Column(name = "enabled")
   private boolean enabled;
@@ -37,12 +35,12 @@ public class UserEntity extends AbstractNamedLongUniqueEntity implements User
   /**
    * Hibernate
    */
-  public UserEntity()
+  protected UserEntity()
   {
   }
 
 
-  public UserEntity(Long id)
+  protected UserEntity(Long id)
   {
     super(id);
   }
@@ -86,6 +84,15 @@ public class UserEntity extends AbstractNamedLongUniqueEntity implements User
     this.roleNames = that.getRoleNames();
     this.username = that.getUsername();
 
+  }
+
+
+  /**
+   * @param name
+   */
+  public UserEntity(String name)
+  {
+    super(name);
   }
 
 

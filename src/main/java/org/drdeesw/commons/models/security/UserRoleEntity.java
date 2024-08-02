@@ -8,8 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
 
@@ -21,11 +20,10 @@ import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
  *
  */
 @SuppressWarnings("serial")
-@Entity
-@Table(name = "user_roles")
+@MappedSuperclass
 @AttributeOverride(name = "id", column = @Column(name = "user_role_id"))
 @Access(AccessType.FIELD)
-public class UserRoleEntity extends AbstractLongUniqueEntity implements UserRole
+public abstract class UserRoleEntity extends AbstractLongUniqueEntity implements UserRole
 {
   @Column(name = "group_id")
   private Long   roleId;
@@ -37,8 +35,14 @@ public class UserRoleEntity extends AbstractLongUniqueEntity implements UserRole
   /**
    * Hibernate
    */
-  public UserRoleEntity()
+  protected UserRoleEntity()
   {
+  }
+
+
+  protected UserRoleEntity(Long id)
+  {
+    super(id);
   }
 
 
