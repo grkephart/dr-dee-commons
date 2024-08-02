@@ -327,7 +327,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   /**
    * @param query
    * @return
-   * @throws Exception
    */
   public QueryResults<E> findEntities(
     JpqlQuery<E> query)
