@@ -83,7 +83,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   protected P convertEntityToPojo(
     E entity)
   {
-    return this.modelMapper.map(entity, this.pojoClass);
+    return entity == null ? null : this.modelMapper.map(entity, this.pojoClass);
   }
 
 
