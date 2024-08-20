@@ -13,12 +13,12 @@ import org.drdeesw.commons.services.CrudService;
 /**
  *  
  */
-public abstract class AbstractCrudWebServiceImpl<P extends UniquePojo<ID>, ID extends Serializable>
+public abstract class AbstractWebCrudServiceImpl<P extends UniquePojo<ID>, ID extends Serializable>
     extends AbstractService implements CrudService<P, ID>
 {
   private Class<P> pojoClass;
 
-  protected AbstractCrudWebServiceImpl(Class<P> pojoClass)
+  protected AbstractWebCrudServiceImpl(Class<P> pojoClass)
   {
     this.pojoClass = pojoClass;
   }
