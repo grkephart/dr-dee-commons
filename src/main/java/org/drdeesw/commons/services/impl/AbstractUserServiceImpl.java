@@ -15,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 
  */
-public abstract class AbstractUserServiceImpl<P extends UserPojo, E extends UserEntity>
+public abstract class AbstractUserServiceImpl<P extends UserPojo, E extends UserEntity, UR extends UserRepository<E>>
     extends AbstractJpaCrudServiceImpl<P, E, Long> implements UserService<P>
 {
 
   @Autowired
-  private UserRepository<E>           repository;
+  private UR                          repository;
 
   @Autowired
   private Oauth2SecurityConfiguration securityConfiguration;
