@@ -7,7 +7,6 @@ package org.drdeesw.commons.controllers;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +16,6 @@ import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.HeadersBuilder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 
