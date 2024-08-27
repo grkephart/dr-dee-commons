@@ -24,6 +24,7 @@ import org.drdeesw.commons.repositories.QueryRepository;
 import org.drdeesw.commons.services.CrudService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.MultiValueMap;
 
@@ -57,7 +58,21 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
     // This solves "name" not being copied from entity to pojo
     this.modelMapper.getConfiguration()//
         .setFieldMatchingEnabled(true)//
+        .setMatchingStrategy(MatchingStrategies.STRICT)//)
         .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
+    
+    customizeModelMapper(this.modelMapper);
+  }
+
+
+  /**
+   * Allows subclasses to customize the ModelMapper.
+   * 
+   * @param modelMapper
+   */
+  protected void customizeModelMapper(
+    ModelMapper modelMapper)
+  {
   }
 
 
