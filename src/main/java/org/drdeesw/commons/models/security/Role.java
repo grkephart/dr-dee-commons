@@ -5,6 +5,8 @@ import org.drdeesw.commons.models.base.NamedUniqueObject;
 
 
 /**
+ * A role is an authority with a ROLE_ prefix. 
+ * So a role called ADMIN is the same as an authority called ROLE_ADMIN.
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gary_kephart

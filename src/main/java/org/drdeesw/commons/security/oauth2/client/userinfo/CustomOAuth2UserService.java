@@ -39,13 +39,14 @@ import org.springframework.web.client.UnknownContentTypeException;
 
 /**
  * This is a copy of DefaultOAuth2UserService but using .get("data") to get userAttributes.
+ * As happens with Coinbase, for example.
  */
 @Service
-public class CoinbaseOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>
+public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>
 {
+  private static final String                                          INVALID_USER_INFO_RESPONSE_ERROR_CODE  = "invalid_user_info_response";
   private static final String                                          MISSING_USER_INFO_URI_ERROR_CODE       = "missing_user_info_uri";
   private static final String                                          MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE = "missing_user_name_attribute";
-  private static final String                                          INVALID_USER_INFO_RESPONSE_ERROR_CODE  = "invalid_user_info_response";
   private static final ParameterizedTypeReference<Map<String, Object>> PARAMETERIZED_RESPONSE_TYPE            = new ParameterizedTypeReference<Map<String, Object>>()
                                                                                                               {
                                                                                                               };
@@ -53,71 +54,13 @@ public class CoinbaseOAuth2UserService implements OAuth2UserService<OAuth2UserRe
   private Converter<OAuth2UserRequest, RequestEntity<?>>               requestEntityConverter                 = new OAuth2UserRequestEntityConverter();
   private RestOperations                                               restOperations;
   @Value("${trusted-client-ids}")
-  private String[] trustedClientIds;
+  private String[]                                                     trustedClientIds;
 
-  public CoinbaseOAuth2UserService()
+  public CustomOAuth2UserService()
   {
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
     this.restOperations = restTemplate;
-  }
-
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public OAuth2User loadUser(
-    OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
-  {
-    Assert.notNull(userRequest, "userRequest cannot be null");
-
-    if (!StringUtils.hasText(
-      userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri()))
-    {
-      OAuth2Error oauth2Error = new OAuth2Error(
-          MISSING_USER_INFO_URI_ERROR_CODE,
-          "Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: "
-                                            + userRequest.getClientRegistration()
-                                                .getRegistrationId(),
-          null);
-      throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
-    }
-
-    String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
-        .getUserInfoEndpoint().getUserNameAttributeName();
-
-    if (!StringUtils.hasText(userNameAttributeName))
-    {
-      OAuth2Error oauth2Error = new OAuth2Error(
-          MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE,
-          "Missing required \"user name\" attribute name in UserInfoEndpoint for Client Registration: "
-                                                  + userRequest.getClientRegistration()
-                                                      .getRegistrationId(),
-          null);
-      throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
-    }
-
-    RequestEntity<?> request = this.requestEntityConverter.convert(userRequest);
-    ResponseEntity<Map<String, Object>> response = getResponse(userRequest, request);
-    Map<String, Object> dataAttributes = response.getBody();
-    Map<String, Object> userAttributes = (Map<String, Object>)dataAttributes.get("data"); // unchecked
-    Set<GrantedAuthority> authorities = new LinkedHashSet<>();
-
-    authorities.add(new OAuth2UserAuthority(userAttributes));
-
-    OAuth2AccessToken token = userRequest.getAccessToken();
-    String clientId = userRequest.getClientRegistration().getClientId();
-
-    for (String authority : token.getScopes())
-    {
-      authorities.add(new SimpleGrantedAuthority("SCOPE_" + authority));
-    }
-
-    if (Arrays.asList(this.trustedClientIds).contains(clientId))
-    {
-      authorities.add(new SimpleGrantedAuthority("ROLE_INVESTOR"));
-    }
-    
-    return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
   }
 
 
@@ -173,6 +116,81 @@ public class CoinbaseOAuth2UserService implements OAuth2UserService<OAuth2UserRe
           null);
       throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
     }
+  }
+
+
+  /**
+   * @param response
+   * @return
+   */
+  @SuppressWarnings("unchecked")
+  private Map<String, Object> getUserAttributes(
+    ResponseEntity<Map<String, Object>> response)
+  {
+    Map<String, Object> userAttributes = response.getBody();
+
+    if (userAttributes.containsKey("data") && userAttributes.get("data") instanceof Map)
+    {
+      userAttributes = (Map<String, Object>)userAttributes.get("data"); // unchecked
+    }
+
+    return userAttributes;
+  }
+
+
+  @Override
+  public OAuth2User loadUser(
+    OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
+  {
+    Assert.notNull(userRequest, "userRequest cannot be null");
+
+    if (!StringUtils.hasText(
+      userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri()))
+    {
+      OAuth2Error oauth2Error = new OAuth2Error(
+          MISSING_USER_INFO_URI_ERROR_CODE,
+          "Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: "
+                                            + userRequest.getClientRegistration()
+                                                .getRegistrationId(),
+          null);
+      throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
+    }
+
+    String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
+        .getUserInfoEndpoint().getUserNameAttributeName();
+
+    if (!StringUtils.hasText(userNameAttributeName))
+    {
+      OAuth2Error oauth2Error = new OAuth2Error(
+          MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE,
+          "Missing required \"user name\" attribute name in UserInfoEndpoint for Client Registration: "
+                                                  + userRequest.getClientRegistration()
+                                                      .getRegistrationId(),
+          null);
+      throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
+    }
+
+    RequestEntity<?> request = this.requestEntityConverter.convert(userRequest);
+    ResponseEntity<Map<String, Object>> response = getResponse(userRequest, request);
+    Map<String, Object> userAttributes = getUserAttributes(response);
+    Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+
+    authorities.add(new OAuth2UserAuthority(userAttributes));
+
+    OAuth2AccessToken token = userRequest.getAccessToken();
+    String clientId = userRequest.getClientRegistration().getClientId();
+
+    for (String authority : token.getScopes())
+    {
+      authorities.add(new SimpleGrantedAuthority("SCOPE_" + authority));
+    }
+
+    if (this.trustedClientIds != null && Arrays.asList(this.trustedClientIds).contains(clientId))
+    {
+      authorities.add(new SimpleGrantedAuthority("ROLE_INVESTOR"));
+    }
+
+    return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
   }
 
 
