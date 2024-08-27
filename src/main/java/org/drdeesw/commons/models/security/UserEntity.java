@@ -26,9 +26,20 @@ import org.hibernate.annotations.Formula;
 @Access(AccessType.FIELD)
 public abstract class UserEntity extends AbstractNamedLongUniqueEntity implements User
 {
+  /**
+   * true if the user is enabled
+   */
   @Column(name = "enabled")
   private boolean enabled;
+  
+  /**
+   * Comma-delimited set of role names
+   */
   private String  roleNames;
+  
+  /**
+   * perhaps the email address
+   */
   @Column(name = "username")
   private String  username;
 
@@ -49,8 +60,8 @@ public abstract class UserEntity extends AbstractNamedLongUniqueEntity implement
   /**
    * For testing.
    * 
-   * @param name
-   * @param email
+   * @param name the user's name, like "Gary Kephart"
+   * @param username perhaps the email address
    */
   public UserEntity(String name, String username)
   {
