@@ -1,10 +1,11 @@
 /**
  * 
  */
-package org.drdeesw.commons.models.security;
+package org.drdeesw.commons.models.security.pojos;
 
 
-import org.drdeesw.commons.models.pojos.AbstractLongUniquePojo;
+import org.drdeesw.commons.models.base.pojos.AbstractLongUniquePojo;
+import org.drdeesw.commons.models.security.GroupMember;
 
 
 /**

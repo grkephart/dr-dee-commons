@@ -4,8 +4,8 @@
 package org.drdeesw.commons.services.impl;
 
 
-import org.drdeesw.commons.models.security.UserEntity;
-import org.drdeesw.commons.models.security.UserPojo;
+import org.drdeesw.commons.models.security.entities.UserEntity;
+import org.drdeesw.commons.models.security.pojos.UserPojo;
 import org.drdeesw.commons.repositories.UserRepository;
 import org.drdeesw.commons.security.oauth2.client.registration.Oauth2SecurityConfiguration;
 import org.drdeesw.commons.services.UserService;

@@ -1,4 +1,4 @@
-package org.drdeesw.commons.models.pojos;
+package org.drdeesw.commons.models.base.pojos;
 
 
 import java.io.Serializable;

@@ -7,7 +7,7 @@ package org.drdeesw.commons.controllers;
 import java.util.Collections;
 import java.util.Optional;
 
-import org.drdeesw.commons.models.security.GroupMemberPojo;
+import org.drdeesw.commons.models.security.pojos.GroupMemberPojo;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;

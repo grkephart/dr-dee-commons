@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.models.security;
+package org.drdeesw.commons.models.security.entities;
 
 
 import javax.persistence.Access;
@@ -9,7 +9,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.models.base.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.models.security.GroupMember;
 
 
 /**

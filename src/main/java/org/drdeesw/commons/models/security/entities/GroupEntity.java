@@ -1,4 +1,4 @@
-package org.drdeesw.commons.models.security;
+package org.drdeesw.commons.models.security.entities;
 
 
 import javax.persistence.Access;
@@ -7,7 +7,8 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.models.entities.AbstractNamedUniqueEntity;
+import org.drdeesw.commons.models.base.entities.AbstractNamedUniqueEntity;
+import org.drdeesw.commons.models.security.Group;
 
 
 /**

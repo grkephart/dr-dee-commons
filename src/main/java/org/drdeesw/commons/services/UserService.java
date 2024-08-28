@@ -3,7 +3,7 @@
  */
 package org.drdeesw.commons.services;
 
-import org.drdeesw.commons.models.security.UserPojo;
+import org.drdeesw.commons.models.security.pojos.UserPojo;
 
 /**
  * 

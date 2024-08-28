@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.drdeesw.commons.models.TestUserEntity;
-import org.drdeesw.commons.models.security.UserPojo;
+import org.drdeesw.commons.models.security.pojos.UserPojo;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.queries.datatables.DataTablesJpqlQuery;

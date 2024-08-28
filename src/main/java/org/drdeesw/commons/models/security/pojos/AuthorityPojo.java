@@ -1,7 +1,8 @@
-package org.drdeesw.commons.models.security;
+package org.drdeesw.commons.models.security.pojos;
 
 
-import org.drdeesw.commons.models.pojos.AbstractNamedUniquePojo;
+import org.drdeesw.commons.models.base.pojos.AbstractNamedUniquePojo;
+import org.drdeesw.commons.models.security.Authority;
 
 
 /**

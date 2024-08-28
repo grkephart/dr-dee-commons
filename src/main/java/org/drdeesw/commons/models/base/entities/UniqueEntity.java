@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.drdeesw.commons.models.entities;
+package org.drdeesw.commons.models.base.entities;
 
 
 import java.io.Serializable;

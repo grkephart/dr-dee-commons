@@ -3,7 +3,7 @@
  */
 package org.drdeesw.commons.controllers;
 
-import org.drdeesw.commons.models.security.GroupMemberPojo;
+import org.drdeesw.commons.models.security.pojos.GroupMemberPojo;
 
 /**
  * 

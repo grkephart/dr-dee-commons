@@ -1,12 +1,12 @@
 /**
  * 
  */
-package org.drdeesw.commons.models.entities;
+package org.drdeesw.commons.models.base.entities;
 
 
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.models.base.StringUniqueObject;
+import org.drdeesw.commons.models.base.LongUniqueObject;
 
 
 /**
@@ -14,8 +14,8 @@ import org.drdeesw.commons.models.base.StringUniqueObject;
  *
  */
 @MappedSuperclass
-public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<String>
-    implements StringUniqueObject
+public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long>
+    implements LongUniqueObject
 {
   private static final long serialVersionUID = -9190810275366831598L;
 
@@ -23,7 +23,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
   /**
    * Hibernate
    */
-  protected AbstractStringUniqueEntity()
+  protected AbstractLongUniqueEntity()
   {
   }
 
@@ -31,7 +31,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
   /**
    * @param that
    */
-  protected AbstractStringUniqueEntity(StringUniqueObject that)
+  protected AbstractLongUniqueEntity(LongUniqueObject that)
   {
     super(that);
   }
@@ -40,7 +40,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
   /**
    * @param id
    */
-  protected AbstractStringUniqueEntity(String id)
+  protected AbstractLongUniqueEntity(Long id)
   {
     super(id);
   }
@@ -50,7 +50,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
    * @param that
    */
   public void update(
-    AbstractStringUniqueEntity that)
+    AbstractLongUniqueEntity that)
   {
     super.update(that);
   }

@@ -6,7 +6,7 @@ package org.drdeesw.commons.services;
 
 import java.io.Serializable;
 
-import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.models.base.pojos.UniquePojo;
 
 
 /**

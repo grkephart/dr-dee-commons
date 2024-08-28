@@ -3,7 +3,7 @@
  */
 package org.drdeesw.commons.repositories;
 
-import org.drdeesw.commons.models.security.UserEntity;
+import org.drdeesw.commons.models.security.entities.UserEntity;
 
 /**
  * This must be used to extend an actual concrete JPA repository. Example:

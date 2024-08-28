@@ -10,7 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.drdeesw.commons.models.security.GroupMemberEntity;
+import org.drdeesw.commons.models.security.entities.GroupMemberEntity;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.junit.Assert;

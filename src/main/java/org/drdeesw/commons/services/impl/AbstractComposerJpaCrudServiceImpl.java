@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import org.drdeesw.commons.models.entities.UniqueEntity;
-import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.models.base.entities.UniqueEntity;
+import org.drdeesw.commons.models.base.pojos.UniquePojo;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.ComposerCrudService;

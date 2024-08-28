@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.drdeesw.commons.models.pojos.UniquePojo;
+import org.drdeesw.commons.models.base.pojos.UniquePojo;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.drdeesw.commons.services.CrudService;

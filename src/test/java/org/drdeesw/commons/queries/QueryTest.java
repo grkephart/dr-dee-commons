@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
-import org.drdeesw.commons.models.security.GroupMemberPojo;
+import org.drdeesw.commons.models.security.pojos.GroupMemberPojo;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
