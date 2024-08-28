@@ -4,11 +4,7 @@
 package org.drdeesw.commons.models.security;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-
 import org.drdeesw.commons.models.pojos.AbstractNamedLongUniquePojo;
-import org.hibernate.annotations.Formula;
 
 
 /**
@@ -85,8 +81,6 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
   /**
    * @return the roleNames
    */
-  @Access(AccessType.PROPERTY)
-  @Formula("(SELECT GROUP_CONCAT(gm.group_name) FROM group_members_v gm WHERE gm.user_id = user_id)")
   public String getRoleNames()
   {
     return roleNames;
