@@ -10,7 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.drdeesw.commons.models.security.UserRoleEntity;
+import org.drdeesw.commons.models.security.GroupMemberEntity;
 import org.drdeesw.commons.queries.JpqlQuery;
 import org.drdeesw.commons.queries.QueryResults;
 import org.junit.Assert;
@@ -28,7 +28,7 @@ class QueryRepositoryImplTest
   private static final Object                   NAME = "fhdrjrkj";
   private static final Long TOTAL_RECORDS = Long.valueOf(237899);
   private static final Long NO_RECORDS = Long.valueOf(0);
-  private QueryRepositoryImpl<UserRoleEntity, Long> objectUnderTest;
+  private QueryRepositoryImpl<GroupMemberEntity, Long> objectUnderTest;
   private EntityManager                         em;
 
   /**
@@ -39,7 +39,7 @@ class QueryRepositoryImplTest
   {
     this.em = Mockito.mock(EntityManager.class);
 
-    this.objectUnderTest = new QueryRepositoryImpl<UserRoleEntity, Long>(this.em);
+    this.objectUnderTest = new QueryRepositoryImpl<GroupMemberEntity, Long>(this.em);
   }
 
 
@@ -58,14 +58,14 @@ class QueryRepositoryImplTest
   @Test
   void testFindByQueryWithRecords()
   {
-    JpqlQuery<UserRoleEntity> query = new JpqlQuery<>(UserRoleEntity.class)//
+    JpqlQuery<GroupMemberEntity> query = new JpqlQuery<>(GroupMemberEntity.class)//
         .setPerformCount(true)//
         .setStart(0)//
         .setMaxResults(10)//
         .equals("name", NAME);
     Query cq = Mockito.mock(Query.class);
     Query q = Mockito.mock(Query.class);
-    List<UserRoleEntity> resultList = new ArrayList<UserRoleEntity>();
+    List<GroupMemberEntity> resultList = new ArrayList<GroupMemberEntity>();
 
     // Arrange
     
@@ -77,7 +77,7 @@ class QueryRepositoryImplTest
     Mockito.when(q.setMaxResults(Mockito.anyInt())).thenReturn(q);
 
     // Act
-    QueryResults<UserRoleEntity> queryResults = this.objectUnderTest.findByQuery(query);
+    QueryResults<GroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
 
     // Assert
     
@@ -100,14 +100,14 @@ class QueryRepositoryImplTest
   @Test
   void testFindByQueryWithNoRecords()
   {
-    JpqlQuery<UserRoleEntity> query = new JpqlQuery<>(UserRoleEntity.class)//
+    JpqlQuery<GroupMemberEntity> query = new JpqlQuery<>(GroupMemberEntity.class)//
         .setPerformCount(true)//
         .setStart(0)//
         .setMaxResults(10)//
         .equals("name", NAME);
     Query cq = Mockito.mock(Query.class);
     Query q = Mockito.mock(Query.class);
-    List<UserRoleEntity> resultList = new ArrayList<UserRoleEntity>();
+    List<GroupMemberEntity> resultList = new ArrayList<GroupMemberEntity>();
 
     // Arrange
     
@@ -119,7 +119,7 @@ class QueryRepositoryImplTest
     Mockito.when(q.setMaxResults(Mockito.anyInt())).thenReturn(q);
 
     // Act
-    QueryResults<UserRoleEntity> queryResults = this.objectUnderTest.findByQuery(query);
+    QueryResults<GroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
 
     // Assert
     

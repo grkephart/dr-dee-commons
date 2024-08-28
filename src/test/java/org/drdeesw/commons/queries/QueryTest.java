@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
-import org.drdeesw.commons.models.security.UserRolePojo;
+import org.drdeesw.commons.models.security.GroupMemberPojo;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -81,12 +81,12 @@ class QueryTest
   @Test
   void testEqualsStringObject()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.equals(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.equals(FIELD_NAME, NAME);
 
     // Assert
 
@@ -117,12 +117,12 @@ class QueryTest
   @Test
   void testGe()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.ge(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.ge(FIELD_NAME, NAME);
 
     // Assert
 
@@ -143,7 +143,7 @@ class QueryTest
   @Test
   void testGetAlias()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
@@ -170,7 +170,7 @@ class QueryTest
   @Test
   void testGetStart()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
@@ -187,7 +187,7 @@ class QueryTest
   @Test
   void testGetStartInt()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
@@ -204,12 +204,12 @@ class QueryTest
   @Test
   void testGt()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.gt(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.gt(FIELD_NAME, NAME);
 
     // Assert
 
@@ -230,12 +230,12 @@ class QueryTest
   @Test
   void testIequals()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.iequals(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.iequals(FIELD_NAME, NAME);
 
     // Assert
 
@@ -256,12 +256,12 @@ class QueryTest
   @Test
   void testIlike()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.ilike(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.ilike(FIELD_NAME, NAME);
 
     // Assert
 
@@ -282,12 +282,12 @@ class QueryTest
   @Test
   void testIsNotNull()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.isNotNull(FIELD_NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.isNotNull(FIELD_NAME);
 
     // Assert
 
@@ -308,12 +308,12 @@ class QueryTest
   @Test
   void testIsNull()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.isNull(FIELD_NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.isNull(FIELD_NAME);
 
     // Assert
 
@@ -334,12 +334,12 @@ class QueryTest
   @Test
   void testLike()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.like(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.like(FIELD_NAME, NAME);
 
     // Assert
 
@@ -360,12 +360,12 @@ class QueryTest
   @Test
   void testLt()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.lt(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.lt(FIELD_NAME, NAME);
 
     // Assert
 
@@ -386,12 +386,12 @@ class QueryTest
   @Test
   void testNotEquals()
   {
-    Query<UserRolePojo> objectUnderTest = new Query<>(UserRolePojo.class);
+    Query<GroupMemberPojo> objectUnderTest = new Query<>(GroupMemberPojo.class);
 
     // Arrange
 
     // Act
-    Query<UserRolePojo> self = objectUnderTest.notEquals(FIELD_NAME, NAME);
+    Query<GroupMemberPojo> self = objectUnderTest.notEquals(FIELD_NAME, NAME);
 
     // Assert
 

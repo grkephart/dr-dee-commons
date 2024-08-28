@@ -4,7 +4,7 @@
 package org.drdeesw.commons.models.security;
 
 
-import org.drdeesw.commons.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.models.pojos.AbstractLongUniquePojo;
 
 
 /**
@@ -14,10 +14,9 @@ import org.drdeesw.commons.models.pojos.AbstractNamedLongUniquePojo;
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractNamedLongUniquePojo implements User
+public class UserPojo extends AbstractLongUniquePojo implements User
 {
   private boolean enabled;
-  private String  roleNames;
   private String  username;
 
   /**
@@ -40,34 +39,9 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
    * @param name
    * @param email
    */
-  public UserPojo(String name, String username)
+  public UserPojo(String username)
   {
-    super(name);
     this.username = username;
-  }
-
-
-  /**
-   * For when logging in reveals a new user.
-   * 
-   * @param name
-   * @param username
-   * @param enabled
-   */
-  public UserPojo(String name, String username, boolean enabled)
-  {
-    super(name);
-    this.enabled = enabled;
-    this.username = username;
-  }
-
-
-  public UserPojo(UserEntity that)
-  {
-    super(that);
-    this.enabled = that.isEnabled();
-    this.roleNames = that.getRoleNames();
-    this.username = that.getUsername();
   }
 
 
@@ -75,15 +49,6 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
   public Long getId()
   {
     return super.getId();
-  }
-
-
-  /**
-   * @return the roleNames
-   */
-  public String getRoleNames()
-  {
-    return roleNames;
   }
 
 
@@ -113,16 +78,6 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  /**
-   * @param roleNames the roleNames to set
-   */
-  public void setRoleNames(
-    String roleNames)
-  {
-    this.roleNames = roleNames;
   }
 
 

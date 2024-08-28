@@ -4,7 +4,7 @@
 package org.drdeesw.commons.models.security;
 
 
-import org.drdeesw.commons.models.base.NamedLongUniqueObject;
+import org.drdeesw.commons.models.base.LongUniqueObject;
 
 
 /**
@@ -13,17 +13,11 @@ import org.drdeesw.commons.models.base.NamedLongUniqueObject;
  * @author gary_kephart
  *
  */
-public interface User extends NamedLongUniqueObject
+public interface User extends LongUniqueObject
 {
 
   @Override
   public Long getId();
-
-
-  /**
-   * @return the roleNames
-   */
-  public String getRoleNames();
 
 
   /**
@@ -46,14 +40,11 @@ public interface User extends NamedLongUniqueObject
     boolean enabled);
 
 
+
   /**
-   * @param roleNames the roleNames to set
+   * @param username
    */
-  public void setRoleNames(
-    String roleNames);
-
-
   public void setUsername(
-    String email);
+    String username);
 
 }

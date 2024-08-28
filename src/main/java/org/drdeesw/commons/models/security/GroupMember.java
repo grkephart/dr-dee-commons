@@ -11,20 +11,14 @@ import org.drdeesw.commons.models.base.LongUniqueObject;
  * @author gkephart
  *
  */
-public interface UserRole extends LongUniqueObject
+public interface GroupMember extends LongUniqueObject
 {
 
 
   /**
-   * @return the role ID
+   * @return the group ID
    */
-  public Long getRoleId();
-
-
-  /**
-   * @return the user ID
-   */
-  public Long getUserId();
+  public Long getGroupId();
 
 
   /**
@@ -34,17 +28,11 @@ public interface UserRole extends LongUniqueObject
 
 
   /**
-   * @param roleId the role ID to set
+   * @param groupId the role ID to set
    */
-  public void setRoleId(
-    Long role);
+  public void setGroupId(
+    Long groupId);
 
-
-  /**
-   * @param userId the user ID to set
-   */
-  public void setUserId(
-    Long userId);
 
 
   /**

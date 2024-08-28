@@ -10,12 +10,12 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.models.entities.AbstractNamedLongUniqueEntity;
-import org.hibernate.annotations.Formula;
+import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
 
 
 /**
  * Structured to work with JdbcUserDetailsManager.
+ * This is an abstract class so that subclasses can define the schema and table names.
  * 
  * @author gary_kephart
  *
@@ -24,19 +24,14 @@ import org.hibernate.annotations.Formula;
 @MappedSuperclass
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @Access(AccessType.FIELD)
-public abstract class UserEntity extends AbstractNamedLongUniqueEntity implements User
+public abstract class UserEntity extends AbstractLongUniqueEntity implements User
 {
   /**
    * true if the user is enabled
    */
   @Column(name = "enabled")
   private boolean enabled;
-  
-  /**
-   * Comma-delimited set of role names
-   */
-  private String  roleNames;
-  
+
   /**
    * perhaps the email address
    */
@@ -63,11 +58,10 @@ public abstract class UserEntity extends AbstractNamedLongUniqueEntity implement
    * @param name the user's name, like "Gary Kephart"
    * @param username perhaps the email address
    */
-  public UserEntity(String name, String username)
+  public UserEntity(String username)
   {
-    super(name);
     this.username = username;
-   }
+  }
 
 
   /**
@@ -77,33 +71,10 @@ public abstract class UserEntity extends AbstractNamedLongUniqueEntity implement
    * @param username
    * @param enabled
    */
-  public UserEntity(String name, String username, boolean enabled)
+  public UserEntity(String username, boolean enabled)
   {
-    super(name);
     this.enabled = enabled;
     this.username = username;
-  }
-
-
-  /**
-   * @param that
-   */
-  public UserEntity(UserPojo that)
-  {
-    super(that);
-    this.enabled = that.isEnabled();
-    this.roleNames = that.getRoleNames();
-    this.username = that.getUsername();
-
-  }
-
-
-  /**
-   * @param name
-   */
-  public UserEntity(String name)
-  {
-    super(name);
   }
 
 
@@ -111,17 +82,6 @@ public abstract class UserEntity extends AbstractNamedLongUniqueEntity implement
   public Long getId()
   {
     return super.getId();
-  }
-
-
-  /**
-   * @return the roleNames
-   */
-  @Access(AccessType.PROPERTY)
-  @Formula("(SELECT GROUP_CONCAT(gm.group_name) FROM group_members_v gm WHERE gm.user_id = user_id)")
-  public String getRoleNames()
-  {
-    return roleNames;
   }
 
 
@@ -151,16 +111,6 @@ public abstract class UserEntity extends AbstractNamedLongUniqueEntity implement
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  /**
-   * @param roleNames the roleNames to set
-   */
-  public void setRoleNames(
-    String roleNames)
-  {
-    this.roleNames = roleNames;
   }
 
 

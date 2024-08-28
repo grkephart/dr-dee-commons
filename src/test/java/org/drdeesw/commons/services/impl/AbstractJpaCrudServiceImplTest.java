@@ -83,15 +83,12 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(null);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     queryEntity.setId(null);
-    queryEntity.setName(NAME);
     queryEntity.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.saveAllAndFlush(queryEntities)).thenReturn(entities);
@@ -106,7 +103,6 @@ public class AbstractJpaCrudServiceImplTest
     Assert.assertEquals(1, actuals.size());
     UserPojo actual = actuals.get(0);
     Assert.assertEquals(ID, actual.getId());
-    Assert.assertEquals(NAME, actual.getName());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
 
@@ -123,11 +119,9 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(null);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.saveAndFlush(Mockito.any(TestUserEntity.class)))
@@ -141,7 +135,6 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.verify(this.repository).saveAndFlush(Mockito.any(TestUserEntity.class));
 
     Assert.assertEquals(ID, actual.getId());
-    Assert.assertEquals(NAME, actual.getName());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
 
@@ -162,15 +155,12 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(null);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     queryEntity.setId(null);
-    queryEntity.setName(NAME);
     queryEntity.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.saveAll(queryEntities)).thenReturn(entities);
@@ -185,7 +175,6 @@ public class AbstractJpaCrudServiceImplTest
     Assert.assertEquals(1, actuals.size());
     UserPojo actual = actuals.get(0);
     Assert.assertEquals(ID, actual.getId());
-    Assert.assertEquals(NAME, actual.getName());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
 
@@ -203,11 +192,9 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(null);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.save(Mockito.any(TestUserEntity.class))).thenReturn(entity);
@@ -220,7 +207,6 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.verify(this.repository).save(Mockito.any(TestUserEntity.class));
 
     Assert.assertEquals(ID, actual.getId());
-    Assert.assertEquals(NAME, actual.getName());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
 
@@ -237,11 +223,9 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(ID);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     // Act
@@ -264,7 +248,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findById(ID)).thenReturn(Optional.of(entity));
@@ -279,7 +262,6 @@ public class AbstractJpaCrudServiceImplTest
     Assert.assertEquals(true, actual.isPresent());
     Assert.assertEquals(ID, actual.get().getId());
     Assert.assertEquals(USERNAME, actual.get().getUsername());
-    Assert.assertEquals(NAME, actual.get().getName());
   }
 
 
@@ -320,7 +302,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(query)).thenReturn(entityQueryResults);
@@ -337,7 +318,6 @@ public class AbstractJpaCrudServiceImplTest
 
     Assert.assertEquals(ID, pojo.getId());
     Assert.assertEquals(USERNAME, pojo.getUsername());
-    Assert.assertEquals(NAME, pojo.getName());
   }
 
 
@@ -359,7 +339,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(entityQuery)).thenReturn(queryResults);
@@ -375,7 +354,6 @@ public class AbstractJpaCrudServiceImplTest
     UserPojo actual = actualQueryResults.get(0);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
-    Assert.assertEquals(NAME, actual.getName());
   }
 
 
@@ -393,7 +371,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(entityQuery)).thenReturn(expected);
@@ -420,7 +397,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.getReferenceById(ID)).thenReturn(entity);
@@ -433,7 +409,6 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.verify(this.repository).getReferenceById(ID);
 
     Assert.assertEquals(ID, actual.getId());
-    Assert.assertEquals(NAME, actual.getName());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
 
@@ -455,7 +430,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
@@ -471,7 +445,6 @@ public class AbstractJpaCrudServiceImplTest
     actual = actuals.get(ID);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
-    Assert.assertEquals(NAME, actual.getName());
   }
 
 
@@ -509,7 +482,6 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
@@ -525,7 +497,6 @@ public class AbstractJpaCrudServiceImplTest
     actual = actuals.get(0);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
-    Assert.assertEquals(NAME, actual.getName());
   }
 
 
@@ -590,11 +561,9 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(ID);
-    pojo.setName(NAME);
     pojo.setUsername(NEW_USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
     entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.findByQuery(query)).thenReturn(existingEntities);
@@ -609,7 +578,6 @@ public class AbstractJpaCrudServiceImplTest
 
     TestUserEntity updatedEntity = existingEntities.get(0);
     Assert.assertEquals(ID, updatedEntity.getId());
-    Assert.assertEquals(NAME, updatedEntity.getName());
     Assert.assertEquals(NEW_USERNAME, updatedEntity.getUsername());
   }
 
@@ -626,12 +594,10 @@ public class AbstractJpaCrudServiceImplTest
     // Arrange
 
     pojo.setId(ID);
-    pojo.setName(NAME);
     pojo.setUsername(USERNAME);
 
     entity.setId(ID);
-    entity.setName(NAME);
-   entity.setUsername(USERNAME);
+    entity.setUsername(USERNAME);
 
     Mockito.when(this.repository.save(entity)).thenReturn(entity);
 

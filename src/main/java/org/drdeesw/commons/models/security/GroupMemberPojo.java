@@ -14,35 +14,25 @@ import org.drdeesw.commons.models.pojos.AbstractLongUniquePojo;
  *
  */
 @SuppressWarnings("serial")
-public class UserRolePojo extends AbstractLongUniquePojo implements UserRole
+public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMember
 {
-  private Long   roleId;
-  private Long   userId;
+  private Long   groupId;
   private String username;
 
   /**
    * Hibernate
    */
-  public UserRolePojo()
+  public GroupMemberPojo()
   {
   }
 
 
   /**
-   * @return the roleId
+   * @return the groupId
    */
-  public Long getRoleId()
+  public Long getGroupId()
   {
-    return roleId;
-  }
-
-
-  /**
-   * @return the userId
-   */
-  public Long getUserId()
-  {
-    return userId;
+    return groupId;
   }
 
 
@@ -56,22 +46,12 @@ public class UserRolePojo extends AbstractLongUniquePojo implements UserRole
 
 
   /**
-   * @param roleId the roleId to set
+   * @param groupId the groupId to set
    */
-  public void setRoleId(
-    Long role)
+  public void setGroupId(
+    Long groupId)
   {
-    this.roleId = role;
-  }
-
-
-  /**
-   * @param userId the userId to set
-   */
-  public void setUserId(
-    Long user)
-  {
-    this.userId = user;
+    this.groupId = groupId;
   }
 
 

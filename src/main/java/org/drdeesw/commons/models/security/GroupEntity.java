@@ -12,6 +12,7 @@ import org.drdeesw.commons.models.entities.AbstractNamedUniqueEntity;
 
 /**
  * Structured to work with JdbcUserDetailsManager.
+ * This is an abstract class so that subclasses can define the schema and table names.
  * 
  * @author gary_kephart
  *
@@ -19,20 +20,19 @@ import org.drdeesw.commons.models.entities.AbstractNamedUniqueEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@AttributeOverride(name = "id", column = @Column(name = "role_id"))
 @AttributeOverride(name = "name", column = @Column(name = "group_name"))
-public abstract class RoleEntity extends AbstractNamedUniqueEntity<Long> implements Role
+public abstract class GroupEntity extends AbstractNamedUniqueEntity<Long> implements Group
 {
 
   /**
    * Hibernate
    */
-  protected RoleEntity()
+  protected GroupEntity()
   {
   }
 
 
-  protected RoleEntity(Long id)
+  protected GroupEntity(Long id)
   {
     super(id);
   }

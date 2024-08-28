@@ -46,7 +46,7 @@ public abstract class AbstractUserServiceImpl<P extends UserPojo, E extends User
 
     if (principalId != null)
     {
-      user = convertEntityToPojo(this.repository.findByName(principalId));
+      user = convertEntityToPojo(this.repository.findByUsername(principalId));
     }
 
     return user;

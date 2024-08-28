@@ -13,6 +13,6 @@ import org.drdeesw.commons.models.security.UserEntity;
  */
 public interface UserRepository<E extends UserEntity>
 {
-  E findByName(
-    String principalId);
+  E findByUsername(
+    String username);
 }

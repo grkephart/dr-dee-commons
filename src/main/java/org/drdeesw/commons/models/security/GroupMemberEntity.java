@@ -6,7 +6,6 @@ package org.drdeesw.commons.models.security;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -15,53 +14,43 @@ import org.drdeesw.commons.models.entities.AbstractLongUniqueEntity;
 
 /**
  * Structured to work with JdbcUserDetailsManager.
+ * This is an abstract class so that subclasses can define the schema and table names.
  * 
  * @author gkephart
  *
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@AttributeOverride(name = "id", column = @Column(name = "user_role_id"))
 @Access(AccessType.FIELD)
-public abstract class UserRoleEntity extends AbstractLongUniqueEntity implements UserRole
+public abstract class GroupMemberEntity extends AbstractLongUniqueEntity implements GroupMember
 {
   @Column(name = "group_id")
-  private Long   roleId;
-  @Column(name = "user_id")
-  private Long   userId;
+  private Long   groupId;
   @Column(name = "username")
   private String username;
 
   /**
    * Hibernate
    */
-  protected UserRoleEntity()
+  protected GroupMemberEntity()
   {
   }
 
 
-  protected UserRoleEntity(Long id)
+  protected GroupMemberEntity(Long id)
   {
     super(id);
   }
 
 
   /**
-   * @return the role
+   * @return the groupId
    */
-  public Long getRoleId()
+  public Long getGroupId()
   {
-    return roleId;
+    return groupId;
   }
 
-
-  /**
-   * @return the user
-   */
-  public Long getUserId()
-  {
-    return userId;
-  }
 
 
   /**
@@ -74,21 +63,13 @@ public abstract class UserRoleEntity extends AbstractLongUniqueEntity implements
 
 
   /**
-   * @param roroleIdle the role to set
+   * @param groupId the role to set
    */
-  public void setRoleId(Long roleId)
+  public void setGroupId(Long groupId)
   {
-    this.roleId = roleId;
+    this.groupId = groupId;
   }
 
-
-  /**
-   * @param userId the userId to set
-   */
-  public void setUserId(Long userId)
-  {
-    this.userId = userId;
-  }
 
 
   /**
