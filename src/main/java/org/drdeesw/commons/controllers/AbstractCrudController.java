@@ -84,7 +84,7 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param id
+   * @param obj
    * @return
    */
   protected ResponseEntity<P> delete(
@@ -178,7 +178,7 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param id
+   * @param obj
    * @return
    */
   protected ResponseEntity<P> update(
@@ -189,7 +189,8 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param id
+   * @param obj
+   * @param bindingResult
    * @return
    */
   protected ResponseEntity<?> update(

@@ -47,7 +47,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   private JpaRepository<E, ID>   repository;
 
   /**
-   * @param clazz 
+   * @param pojoClass
+   * @param entityClass
    */
   protected AbstractJpaCrudServiceImpl(Class<P> pojoClass, Class<E> entityClass)
   {

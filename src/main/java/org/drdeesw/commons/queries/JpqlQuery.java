@@ -58,7 +58,7 @@ public class JpqlQuery<T> extends Query<T>
 
   /**
    * @param clazz
-   * @param matchAny
+   * @param match
    */
   public JpqlQuery(Class<T> clazz, Match match)
   {
@@ -68,7 +68,8 @@ public class JpqlQuery<T> extends Query<T>
 
   /**
    * @param clazz
-   * @param matchAny
+   * @param match
+   * @param df
    */
   public JpqlQuery(Class<T> clazz, Match match, DateFormat df)
   {
@@ -80,9 +81,9 @@ public class JpqlQuery<T> extends Query<T>
   /**
    * Converts a POJO query (PQ) of class P to an entity query of type T.
    * 
-   * @param <EQ>
+   * @param <PQ>
    * @param entityClass
-   * @param query
+   * @param that
    */
   public <PQ extends JpqlQuery<?>> JpqlQuery(Class<T> entityClass, PQ that)
   {

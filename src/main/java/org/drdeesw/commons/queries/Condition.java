@@ -261,7 +261,6 @@ public class Condition
    * @param operator
    * @param value
    * @param value2
-   * @param df
    */
   public Condition(String fieldName, Operator operator, Date value, Date value2)
   {
@@ -309,7 +308,7 @@ public class Condition
    * @param fieldName
    * @param operator
    * @param value
-   * @param value2
+   * @param ref
    */
   public Condition(String fieldName, Operator operator, Object value, boolean ref)
   {

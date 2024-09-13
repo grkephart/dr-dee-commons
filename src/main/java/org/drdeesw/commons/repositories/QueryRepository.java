@@ -22,7 +22,6 @@ public interface QueryRepository<T extends UniqueObject<ID>, ID extends Serializ
    *
    * @param query
    * @return
-   * @throws Exception
    */
   <Q extends JpqlQuery<T>> QueryResults<T> findByQuery(Q query);
 }

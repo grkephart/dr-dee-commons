@@ -56,7 +56,6 @@ public abstract class UserEntity extends AbstractLongUniqueEntity implements Use
   /**
    * For testing.
    * 
-   * @param name the user's name, like "Gary Kephart"
    * @param username perhaps the email address
    */
   public UserEntity(String username)
@@ -68,7 +67,6 @@ public abstract class UserEntity extends AbstractLongUniqueEntity implements Use
   /**
    * For when logging in reveals a new user.
    * 
-   * @param name
    * @param username
    * @param enabled
    */

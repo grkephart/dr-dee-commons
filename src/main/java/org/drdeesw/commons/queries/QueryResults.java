@@ -96,7 +96,8 @@ public class QueryResults<T> implements Iterable<T>
 
   /**
    * @param resultList
-   * @param totalRecords
+   * @param size
+   * @param draw
    */
   public QueryResults(List<T> resultList, int size, Integer draw)
   {
@@ -109,6 +110,7 @@ public class QueryResults<T> implements Iterable<T>
   /**
    * @param resultList
    * @param totalRecords
+   * @param query
    */
   public QueryResults(List<T> resultList, int totalRecords, Query<T> query)
   {

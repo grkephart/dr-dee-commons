@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -8,6 +7,7 @@
   <version>1.0.0</version>
   <name>dr-dee-commons</name>
   <description>Common classes for Dr Dee Software projects</description>
+  <url>http://drdeesw.org</url>
 
   <licenses>
     <license>
@@ -32,26 +32,20 @@
   </scm>
 
   <properties>
-    <!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15
-    works fine with it also. -->
+    <!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15 works fine with it also. -->
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
     <java.version>11</java.version>
 
-    <!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or above
-    is also required. - Maven 3.5+ - Servlet 
-      Version 4.0 is supported Spring Boot 3.x supports JDK 17 as its minimum Java
-    version requirement. -->
+    <!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or above is also required. - Maven 3.5+ - Servlet 
+      Version 4.0 is supported Spring Boot 3.x supports JDK 17 as its minimum Java version requirement. -->
     <spring-boot.version>2.7.18</spring-boot.version>
 
-    <!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was published on
-    Mar 14, 2024 Spring Framework 6.0.x is expected 
-      to require at least JDK 17. See:
-    https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
+    <!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was published on Mar 14, 2024 Spring Framework 6.0.x is expected 
+      to require at least JDK 17. See: https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
     <spring.version>5.3.33</spring.version>
 
-    <!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better. Released
-    on 2023-03-03. Spring Data 3.x requires Spring 
+    <!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better. Released on 2023-03-03. Spring Data 3.x requires Spring 
       Framework 6.0.0 or better. -->
     <spring-data.version>2.7.9</spring-data.version>
 
@@ -64,11 +58,10 @@
   </properties>
 
   <dependencies>
-    
+
     <!-- JAVA -->
 
-    <!--
-    https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+    <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
@@ -82,7 +75,7 @@
       <version>2.5</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <!-- HIBERNATE -->
 
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -91,7 +84,7 @@
       <artifactId>hibernate-core</artifactId>
       <version>5.6.15.Final</version>
     </dependency>
-    
+
     <!-- SPRING FRAMEWORK -->
 
     <dependency>
@@ -128,7 +121,7 @@
       <artifactId>spring-security-web</artifactId>
       <version>${spring-security.version}</version>
     </dependency>
-    
+
     <!-- JSON -->
 
     <dependency>
@@ -136,7 +129,7 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.13.1</version>
     </dependency>
-    
+
     <!-- MAPPING -->
 
     <dependency>
@@ -144,7 +137,7 @@
       <artifactId>modelmapper</artifactId>
       <version>3.0.0</version>
     </dependency>
-    
+
     <!-- TESTING -->
 
     <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -186,8 +179,8 @@
       <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
-    
-    
+
+
     <!-- ByteBuddy dependencies -->
     <dependency>
       <groupId>net.bytebuddy</groupId>
@@ -241,6 +234,46 @@
         <configuration>
           <goals>deploy</goals>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.5.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.10.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadoc</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <reportOutputDirectory>${project.build.directory}/classes/</reportOutputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

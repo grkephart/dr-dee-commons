@@ -239,8 +239,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q equals(
@@ -286,8 +286,9 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param <Q>
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q ge(
@@ -395,8 +396,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q gt(
@@ -430,8 +431,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q iequals(
@@ -445,8 +446,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q ilike(
@@ -460,8 +461,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q in(
@@ -475,8 +476,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param values
    * @return
    */
   public <Q extends Query<T>> Q in(
@@ -499,8 +500,7 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
    * @return
    */
   public <Q extends Query<T>> Q isNotNull(
@@ -513,8 +513,7 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
    * @return
    */
   public <Q extends Query<T>> Q isNull(
@@ -536,8 +535,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q like(
@@ -551,8 +550,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q lt(
@@ -566,8 +565,8 @@ public class Query<T>
 
 
   /**
-   * @param string
-   * @param string2
+   * @param fieldName
+   * @param value
    * @return
    */
   public <Q extends Query<T>> Q notEquals(
@@ -594,6 +593,11 @@ public class Query<T>
   }
 
 
+  /**
+   * @param <Q>
+   * @param conditions
+   * @return
+   */
   public <Q extends Query<T>> Q or(
     Condition... conditions)
   {
@@ -636,7 +640,7 @@ public class Query<T>
 
 
   /**
-   * @param length
+   * @param maxResults
    */
   public <Q extends Query<T>> Q setMaxResults(
     Integer maxResults)

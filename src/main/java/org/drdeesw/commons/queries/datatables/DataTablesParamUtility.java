@@ -16,7 +16,7 @@ import org.springframework.util.MultiValueMap;
 
 
 /**
- * @see https://datatables.net/manual/index
+ * @see <a href="https://datatables.net/manual/index">Manual</a>
  * @author gary_kephart
  *
  */

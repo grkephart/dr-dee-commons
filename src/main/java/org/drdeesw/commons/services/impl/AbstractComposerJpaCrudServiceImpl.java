@@ -30,7 +30,8 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
     extends AbstractJpaCrudServiceImpl<P, E, ID> implements ComposerCrudService<P, ID>
 {
   /**
-   * @param clazz
+   * @param pojoClass
+   * @param entityClass
    */
   protected AbstractComposerJpaCrudServiceImpl(Class<P> pojoClass, Class<E> entityClass)
   {
@@ -44,7 +45,6 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
    * 
    * @param values
    * @return
-   * @throws Exception 
    */
   protected abstract Collection<P> compose(
     Collection<P> values);
@@ -52,7 +52,7 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
 
   /**
    * 
-   * @param queryResults
+   * @param pojo
    * @return
    */
   protected abstract P compose(
@@ -62,7 +62,6 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
   /**
    * @param queryResults
    * @return
-   * @throws Exception 
    */
   protected QueryResults<P> compose(
     QueryResults<P> queryResults)

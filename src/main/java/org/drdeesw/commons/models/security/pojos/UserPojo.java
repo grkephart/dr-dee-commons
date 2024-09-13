@@ -37,8 +37,7 @@ public class UserPojo extends AbstractLongUniquePojo implements User
   /**
    * For testing.
    * 
-   * @param name
-   * @param email
+   * @param username
    */
   public UserPojo(String username)
   {
