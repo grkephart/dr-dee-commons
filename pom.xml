@@ -5,9 +5,20 @@
   <groupId>org.drdeesw</groupId>
   <artifactId>dr-dee-commons</artifactId>
   <version>1.0.1</version>
+  <packaging>pom</packaging>
   <name>dr-dee-commons</name>
   <description>Common classes for Dr Dee Software projects</description>
   <url>http://drdeesw.org</url>
+
+  <modules>
+      <module>modules/common</module>
+      <module>modules/crypto</module>
+      <module>modules/measurement</module>
+      <module>modules/scm</module>
+      <module>modules/security</module>
+      <module>modules/serviceproviders</module>
+      <module>modules/webtesting</module>
+  </modules>
 
   <licenses>
     <license>
