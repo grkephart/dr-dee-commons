@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -11,13 +12,13 @@
   <url>http://drdeesw.org</url>
 
   <modules>
-      <module>modules/common</module>
-      <module>modules/crypto</module>
-      <module>modules/measurement</module>
-      <module>modules/scm</module>
-      <module>modules/security</module>
-      <module>modules/serviceproviders</module>
-      <module>modules/webtesting</module>
+    <module>modules/common</module>
+    <module>modules/crypto</module>
+    <module>modules/measurement</module>
+    <module>modules/scm</module>
+    <module>modules/security</module>
+    <module>modules/serviceproviders</module>
+    <module>modules/webtesting</module>
   </modules>
 
   <licenses>
@@ -43,20 +44,26 @@
   </scm>
 
   <properties>
-    <!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15 works fine with it also. -->
+    <!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15
+    works fine with it also. -->
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
     <java.version>11</java.version>
 
-    <!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or above is also required. - Maven 3.5+ - Servlet 
-      Version 4.0 is supported Spring Boot 3.x supports JDK 17 as its minimum Java version requirement. -->
+    <!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or above
+    is also required. - Maven 3.5+ - Servlet 
+      Version 4.0 is supported Spring Boot 3.x supports JDK 17 as its minimum Java
+    version requirement. -->
     <spring-boot.version>2.7.18</spring-boot.version>
 
-    <!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was published on Mar 14, 2024 Spring Framework 6.0.x is expected 
-      to require at least JDK 17. See: https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
+    <!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was published on
+    Mar 14, 2024 Spring Framework 6.0.x is expected 
+      to require at least JDK 17. See:
+    https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
     <spring.version>5.3.33</spring.version>
 
-    <!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better. Released on 2023-03-03. Spring Data 3.x requires Spring 
+    <!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better. Released
+    on 2023-03-03. Spring Data 3.x requires Spring 
       Framework 6.0.0 or better. -->
     <spring-data.version>2.7.9</spring-data.version>
 
@@ -72,7 +79,8 @@
 
     <!-- JAVA -->
 
-    <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+    <!--
+    https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
     <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
@@ -208,6 +216,7 @@
 
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -218,11 +227,13 @@
           </includes>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
       </plugin>
+
       <!-- The following plugin is for publishing to Maven Central Repo -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -238,6 +249,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
@@ -246,6 +258,7 @@
           <goals>deploy</goals>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.sonatype.central</groupId>
         <artifactId>central-publishing-maven-plugin</artifactId>
@@ -255,6 +268,7 @@
           <publishingServerId>central</publishingServerId>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -269,6 +283,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -286,6 +301,44 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
