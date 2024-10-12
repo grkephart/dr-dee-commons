@@ -1,15 +1,17 @@
 /**
  * 
  */
-package org.drdeesw.commons.modules.common.services.impl;
+package main.java.org.drdeesw.commons.modules.security.services.impl;
 
 
-import org.drdeesw.commons.modules.common.repositories.UserRepository;
-import org.drdeesw.commons.modules.common.services.UserService;
-import org.drdeesw.commons.modules.security.models.entities.UserEntity;
-import org.drdeesw.commons.modules.security.models.pojos.UserPojo;
-import org.drdeesw.commons.modules.security.oauth2.client.registration.Oauth2SecurityConfiguration;
+import org.drdeesw.commons.modules.common.services.impl.AbstractJpaCrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import main.java.org.drdeesw.commons.modules.security.models.entities.UserEntity;
+import main.java.org.drdeesw.commons.modules.security.models.pojos.UserPojo;
+import main.java.org.drdeesw.commons.modules.security.oauth2.client.registration.Oauth2SecurityConfiguration;
+import main.java.org.drdeesw.commons.modules.security.repositories.UserRepository;
+import main.java.org.drdeesw.commons.modules.security.services.UserService;
 
 
 /**

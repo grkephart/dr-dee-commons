@@ -1,9 +1,9 @@
 /**
  * 
  */
-package org.drdeesw.commons.modules.common.repositories;
+package main.java.org.drdeesw.commons.modules.security.repositories;
 
-import org.drdeesw.commons.modules.security.models.entities.UserEntity;
+import main.java.org.drdeesw.commons.modules.security.models.entities.UserEntity;
 
 /**
  * This must be used to extend an actual concrete JPA repository. Example:
