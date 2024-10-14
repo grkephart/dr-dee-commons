@@ -1,11 +1,13 @@
 module org.drdeesw.commons.modules.common
 {
+  requires java.persistence;       // for javax.persistence
+  requires java.transaction;       // for javax.transaction
   requires org.apache.commons.logging;
-  requires spring.context;   // for org.springframework.validation
-  requires spring.core;      // for org.springframework.util
-  requires spring.web;       // for org.springframework.http
-  requires java.persistence; // for javax.persistence
-  requires org.hibernate.orm.core;   // for org.hibernate.annotations
+  requires spring.context;         // for org.springframework.validation
+  requires spring.core;            // for org.springframework.util
+  requires spring.web;             // for org.springframework.http
+  requires org.hibernate.orm.core; // for org.hibernate.annotations
+  requires org.modelmapper;        // for org.modelmapper
   
   exports org.drdeesw.commons.modules.common.controllers;
   exports org.drdeesw.commons.modules.common.models;
