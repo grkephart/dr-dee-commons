@@ -296,7 +296,8 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <reportOutputDirectory>${project.build.directory}/classes/</reportOutputDirectory>
+              <outputDirectory>${project.build.directory}/apidocs</outputDirectory>
+              <attach>true</attach>
             </configuration>
           </execution>
         </executions>
