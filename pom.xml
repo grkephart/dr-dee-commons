@@ -1,357 +1,360 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.drdeesw</groupId>
-  <artifactId>dr-dee-commons</artifactId>
-  <version>1.0.1</version>
-  <packaging>pom</packaging>
-  <name>dr-dee-commons</name>
-  <description>Common classes for Dr Dee Software projects</description>
-  <url>http://drdeesw.org</url>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.drdeesw</groupId>
+	<artifactId>dr-dee-commons</artifactId>
+	<version>1.0.1</version>
+	<packaging>pom</packaging>
+	<name>dr-dee-commons</name>
+	<description>Common classes for Dr Dee Software projects</description>
+	<url>http://drdeesw.org</url>
 
-  <modules>
-    <module>modules/common</module>
-    <module>modules/crypto</module>
-    <module>modules/measurement</module>
-    <module>modules/scm</module>
-    <module>modules/security</module>
-    <module>modules/serviceproviders</module>
-    <module>modules/webtesting</module>
-  </modules>
+	<modules>
+		<module>modules/common</module>
+		<module>modules/crypto</module>
+		<module>modules/measurement</module>
+		<module>modules/scm</module>
+		<module>modules/security</module>
+		<module>modules/serviceproviders</module>
+		<module>modules/webtesting</module>
+	</modules>
 
-  <licenses>
-    <license>
-      <name>The Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-  <developers>
-    <developer>
-      <id>gkephart</id>
-      <name>Gary Kephart</name>
-      <email>gary.r.kephart@gmail.com</email>
-    </developer>
-  </developers>
+	<developers>
+		<developer>
+			<id>gkephart</id>
+			<name>Gary Kephart</name>
+			<email>gary.r.kephart@gmail.com</email>
+		</developer>
+	</developers>
 
-  <scm>
-    <connection>scm:git:https://github.com/grkephart/dr-dee-commons.git</connection>
-    <developerConnection>scm:git:git@github.com:grkephart/dr-dee-commons.git</developerConnection>
-    <url>https://github.com/grkephart/dr-dee-commons</url>
-  </scm>
+	<scm>
+		<connection>scm:git:https://github.com/grkephart/dr-dee-commons.git</connection>
+		<developerConnection>scm:git:git@github.com:grkephart/dr-dee-commons.git</developerConnection>
+		<url>https://github.com/grkephart/dr-dee-commons</url>
+	</scm>
 
-  <properties>
-    <!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15
+	<properties>
+		<!-- WildFly 20.x introduced support for JDK 11, but it seems WildFly 15
     works fine with it also. -->
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
-    <java.version>11</java.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<java.version>11</java.version>
 
-    <!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or above
+		<!-- Spring Boot 2.7.18 supports JDK 11. - Spring Framework 5.3.31 or
+		above
     is also required. - Maven 3.5+ - Servlet 
       Version 4.0 is supported Spring Boot 3.x supports JDK 17 as its minimum Java
     version requirement. -->
-    <spring-boot.version>2.7.18</spring-boot.version>
+		<spring-boot.version>2.7.18</spring-boot.version>
 
-    <!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was published on
+		<!-- Spring Framework 5.3.x supports JDK 11. Version 5.3.33 was
+		published on
     Mar 14, 2024 Spring Framework 6.0.x is expected 
       to require at least JDK 17. See:
-    https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
-    <spring.version>5.3.33</spring.version>
+		https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions -->
+		<spring.version>5.3.33</spring.version>
 
-    <!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better. Released
+		<!-- Spring Data 2.7.9 requires Spring Framework 5.3.25 or better.
+		Released
     on 2023-03-03. Spring Data 3.x requires Spring 
       Framework 6.0.0 or better. -->
-    <spring-data.version>2.7.9</spring-data.version>
+		<spring-data.version>2.7.9</spring-data.version>
 
-    <spring-security.version>5.7.11</spring-security.version>
+		<spring-security.version>5.7.11</spring-security.version>
 
-    <junit.version>4.13.2</junit.version>
-    <junit5.version>5.8.2</junit5.version>
-    <htmlunit.version>4.4.0</htmlunit.version>
-    <mockito.version>5.12.0</mockito.version>
-  </properties>
+		<junit.version>4.13.2</junit.version>
+		<junit5.version>5.8.2</junit5.version>
+		<htmlunit.version>4.4.0</htmlunit.version>
+		<mockito.version>5.12.0</mockito.version>
+	</properties>
 
-  <dependencies>
+	<dependencies>
 
-    <!-- JAVA -->
+		<!-- JAVA -->
 
-    <!--
+		<!--
     https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>javax.persistence-api</artifactId>
-      <version>2.2</version>
-    </dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
 
-    <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
-    </dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- HIBERNATE -->
+		<!-- HIBERNATE -->
 
-    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.6.15.Final</version>
-    </dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.6.15.Final</version>
+		</dependency>
 
-    <!-- SPRING FRAMEWORK -->
+		<!-- SPRING FRAMEWORK -->
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
-    <!-- org.springframework.data -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>${spring-data.version}</version>
-    </dependency>
+		<!-- org.springframework.data -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data.version}</version>
+		</dependency>
 
-    <!-- org.springframework.security -->
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-oauth2-client</artifactId>
-      <version>${spring-security.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-config</artifactId>
-      <version>${spring-security.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-web</artifactId>
-      <version>${spring-security.version}</version>
-    </dependency>
+		<!-- org.springframework.security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-client</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
 
-    <!-- JSON -->
+		<!-- JSON -->
 
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.13.1</version>
-    </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.1</version>
+		</dependency>
 
-    <!-- MAPPING -->
+		<!-- MAPPING -->
 
-    <dependency>
-      <groupId>org.modelmapper</groupId>
-      <artifactId>modelmapper</artifactId>
-      <version>3.0.0</version>
-    </dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
-    <!-- TESTING -->
+		<!-- TESTING -->
 
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit5.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit5.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>1.8.2</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.htmlunit/htmlunit -->
-    <dependency>
-      <groupId>org.htmlunit</groupId>
-      <artifactId>htmlunit</artifactId>
-      <version>${htmlunit.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito.version}</version>
-      <scope>test</scope>
-    </dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit5.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit5.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.htmlunit/htmlunit -->
+		<dependency>
+			<groupId>org.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>${htmlunit.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 
-    <!-- ByteBuddy dependencies -->
-    <dependency>
-      <groupId>net.bytebuddy</groupId>
-      <artifactId>byte-buddy</artifactId>
-      <version>1.12.10</version>
-    </dependency>
-    <dependency>
-      <groupId>net.bytebuddy</groupId>
-      <artifactId>byte-buddy-agent</artifactId>
-      <version>1.12.10</version>
-    </dependency>
+		<!-- ByteBuddy dependencies -->
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>1.12.10</version>
+		</dependency>
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy-agent</artifactId>
+			<version>1.12.10</version>
+		</dependency>
 
-  </dependencies>
+	</dependencies>
 
-  <build>
-    <plugins>
+	<build>
+		<plugins>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-        </configuration>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
 
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring-boot.version}</version>
-      </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+			</plugin>
 
-      <!-- The following plugin is for publishing to Maven Central Repo -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+			<!-- The following plugin is for publishing to Maven Central Repo -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.0-M1</version>
-        <configuration>
-          <goals>deploy</goals>
-        </configuration>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
 
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <version>0.5.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>central</publishingServerId>
-        </configuration>
-      </plugin>
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.5.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+				</configuration>
+			</plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.10.0</version>
-        <executions>
-          <execution>
-            <id>attach-javadoc</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/apidocs</outputDirectory>
-              <attach>true</attach>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.10.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/apidocs</outputDirectory>
+							<attach>true</attach>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-    </plugins>
-  </build>
+		</plugins>
+	</build>
 
-  <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
