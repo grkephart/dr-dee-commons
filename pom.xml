@@ -76,6 +76,7 @@
 		<junit5.version>5.8.2</junit5.version>
 		<htmlunit.version>4.4.0</htmlunit.version>
 		<mockito.version>5.12.0</mockito.version>
+		<modelmapper.version>3.2.1</modelmapper.version>
 	</properties>
 
 	<dependencies>
@@ -157,7 +158,7 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>3.0.0</version>
+			<version>${modelmapper.version}</version>
 		</dependency>
 
 		<!-- TESTING -->
@@ -219,6 +220,20 @@
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgs>
+						<arg>--module-path</arg>
+						<arg>${project.build.directory}/dependency</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
