@@ -8,17 +8,17 @@ module org.drdeesw.commons.modules.common
   requires spring.web;             // for org.springframework.http
   requires spring.data.jpa;
   requires org.hibernate.orm.core; // for org.hibernate.annotations
-  requires modelmapper;        // for org.modelmapper
+  requires modelmapper;            // for org.modelmapper
   
-  exports org.drdeesw.commons.modules.common.controllers;
-  exports org.drdeesw.commons.modules.common.models;
-  exports org.drdeesw.commons.modules.common.models.aggregates;
-  exports org.drdeesw.commons.modules.common.models.entities;
-  exports org.drdeesw.commons.modules.common.models.pojos;
-  exports org.drdeesw.commons.modules.common.queries;
-  exports org.drdeesw.commons.modules.common.queries.datatables;
-  exports org.drdeesw.commons.modules.common.repositories;
-  exports org.drdeesw.commons.modules.common.repositories.impl;
-  exports org.drdeesw.commons.modules.common.services;
-  exports org.drdeesw.commons.modules.common.services.impl;
+  exports org.drdeesw.commons.common.controllers;
+  exports org.drdeesw.commons.common.models;
+  exports org.drdeesw.commons.common.models.aggregates;
+  exports org.drdeesw.commons.common.models.entities;
+  exports org.drdeesw.commons.common.models.pojos;
+  exports org.drdeesw.commons.common.queries;
+  exports org.drdeesw.commons.common.queries.datatables;
+  exports org.drdeesw.commons.common.repositories;
+  exports org.drdeesw.commons.common.repositories.impl;
+  exports org.drdeesw.commons.common.services;
+  exports org.drdeesw.commons.common.services.impl;
 }

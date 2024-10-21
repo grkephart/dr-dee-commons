@@ -9,8 +9,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.modules.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.modules.security.models.GroupMember;
+import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.security.models.GroupMember;
 
 
 /**

@@ -12,13 +12,13 @@
 	<url>http://drdeesw.org</url>
 
 	<modules>
-		<module>modules/common</module>
-		<module>modules/crypto</module>
-		<module>modules/measurement</module>
-		<module>modules/scm</module>
-		<module>modules/security</module>
-		<module>modules/serviceproviders</module>
-		<module>modules/webtesting</module>
+		<module>common</module>
+		<module>crypto</module>
+		<module>measurement</module>
+		<module>scm</module>
+		<module>security</module>
+		<module>serviceproviders</module>
+		<module>webtesting</module>
 	</modules>
 
 	<licenses>
@@ -341,7 +341,7 @@
 				</executions>
 			</plugin>
 
-			<plugin>
+<!--			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.2.4</version>
@@ -357,7 +357,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+-->
 		</plugins>
 	</build>
 

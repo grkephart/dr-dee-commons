@@ -6,8 +6,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.modules.common.models.entities.AbstractUniqueEntity;
-import org.drdeesw.commons.modules.security.models.Authority;
+import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
+import org.drdeesw.commons.security.models.Authority;
 
 
 /**

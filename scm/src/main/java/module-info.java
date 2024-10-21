@@ -1,5 +1,5 @@
 module org.drdeesw.commons.modules.scm
 {
-  exports org.drdeesw.commons.modules.scm.models;
-  exports org.drdeesw.commons.modules.scm.models.measurements;
+  exports org.drdeesw.commons.scm.models;
+  exports org.drdeesw.commons.scm.models.measurements;
 }

@@ -3,7 +3,7 @@
  */
 package main.java.org.drdeesw.commons.modules.security.services;
 
-import org.drdeesw.commons.modules.common.services.CrudService;
+import org.drdeesw.commons.common.services.CrudService;
 
 import main.java.org.drdeesw.commons.modules.security.models.pojos.UserPojo;
 

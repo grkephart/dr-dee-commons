@@ -4,7 +4,7 @@
 package org.drdeesw.commons.modules.security.models;
 
 
-import org.drdeesw.commons.modules.common.models.LongUniqueObject;
+import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**

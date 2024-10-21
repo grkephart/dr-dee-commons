@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.drdeesw.commons.modules.security.config.oauth2.client.UncommonOAuth2Provider;
+import org.drdeesw.commons.security.config.oauth2.client.UncommonOAuth2Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;

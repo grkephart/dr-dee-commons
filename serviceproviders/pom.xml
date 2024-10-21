@@ -6,7 +6,7 @@
     <groupId>org.drdeesw</groupId>
     <artifactId>dr-dee-commons</artifactId>
     <version>1.0.1</version>
-    <relativePath>../../pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>serviceproviders</artifactId>
   <packaging>jar</packaging>

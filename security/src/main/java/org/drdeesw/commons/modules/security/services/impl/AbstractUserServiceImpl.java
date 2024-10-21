@@ -4,7 +4,7 @@
 package main.java.org.drdeesw.commons.modules.security.services.impl;
 
 
-import org.drdeesw.commons.modules.common.services.impl.AbstractJpaCrudServiceImpl;
+import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import main.java.org.drdeesw.commons.modules.security.models.entities.UserEntity;

@@ -7,8 +7,8 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.modules.common.models.entities.AbstractNamedUniqueEntity;
-import org.drdeesw.commons.modules.security.models.Group;
+import org.drdeesw.commons.common.models.entities.AbstractNamedUniqueEntity;
+import org.drdeesw.commons.security.models.Group;
 
 
 /**
