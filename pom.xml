@@ -11,16 +11,6 @@
 	<description>Common classes for Dr Dee Software projects</description>
 	<url>http://drdeesw.org</url>
 
-	<modules>
-		<module>common</module>
-		<module>crypto</module>
-		<module>measurement</module>
-		<module>scm</module>
-		<module>security</module>
-		<module>serviceproviders</module>
-		<module>webtesting</module>
-	</modules>
-
 	<licenses>
 		<license>
 			<name>The Apache License, Version 2.0</name>
@@ -321,6 +311,7 @@
 				</executions>
 			</plugin>
 
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -341,7 +332,7 @@
 				</executions>
 			</plugin>
 
-<!--			<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.2.4</version>
