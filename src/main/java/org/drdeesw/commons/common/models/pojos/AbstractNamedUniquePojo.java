@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
 /**
  * @author gary_kephart
  *
- * @param <ID>
+ * @param <ID> the ID class
  */
 public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
     AbstractUniquePojo<ID> implements Comparable<NamedObject>, NamedUniqueObject<ID>

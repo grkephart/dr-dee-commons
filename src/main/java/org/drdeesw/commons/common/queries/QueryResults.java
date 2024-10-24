@@ -25,8 +25,9 @@ public class QueryResults<T> implements Iterable<T>
   private int      totalRecords;
 
   /**
-   * @param draw
-   * @param totalRecords
+   * @param draw the draw
+   * @param size the size
+   * @param totalRecords the totalRecords
    */
   public QueryResults(Integer draw, int size, int totalRecords)
   {
@@ -38,8 +39,8 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param draw
-   * @param values
+   * @param draw the draw
+   * @param values the values
    */
   public QueryResults(Integer draw, List<T> values)
   {
@@ -50,7 +51,8 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param values
+   * @param draw the draw
+   * @param values the values
    */
   public QueryResults(Integer draw, T[] values)
   {
@@ -61,7 +63,9 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param values
+   * @param draw the draw
+   * @param values the values
+   * @param totalRecords the totalRecords
    */
   public QueryResults(Integer draw, T[] values, int totalRecords)
   {
@@ -72,7 +76,7 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param values
+   * @param values the values
    */
   public QueryResults(List<T> values)
   {
@@ -82,8 +86,9 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param resultList
-   * @param totalRecords
+   * @param resultList the resultList
+   * @param totalRecords the totalRecords
+   * @param query the query
    */
   public QueryResults(List<T> resultList, int totalRecords, DataTablesJpqlQuery<T> query)
   {
@@ -95,9 +100,9 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param resultList
-   * @param size
-   * @param draw
+   * @param resultList the resultList
+   * @param size the size
+   * @param draw the draw
    */
   public QueryResults(List<T> resultList, int size, Integer draw)
   {
@@ -108,9 +113,9 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param resultList
-   * @param totalRecords
-   * @param query
+   * @param resultList the resultList   
+   * @param totalRecords the totalRecords
+   * @param query the query 
    */
   public QueryResults(List<T> resultList, int totalRecords, Query<T> query)
   {
@@ -126,7 +131,7 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param values
+   * @param values the values
    */
   public QueryResults(T[] values)
   {
@@ -136,7 +141,7 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param obj
+   * @param obj the obj to add
    */
   public void add(
     T obj)
@@ -162,8 +167,8 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @param index
-   * @return
+   * @param index the index to get
+   * @return the value at the index
    */
   public T get(
     int index)
@@ -202,7 +207,7 @@ public class QueryResults<T> implements Iterable<T>
   /**
    * For DataTables JQuery plugin.
    * 
-   * @return
+   * @return the totalRecords
    */
   public int getRecordsTotal()
   {
@@ -210,6 +215,9 @@ public class QueryResults<T> implements Iterable<T>
   }
 
 
+  /**
+   * @return the size of the records
+   */
   public int getSize()
   {
     return this.records == null ? 0 : this.records.size();
@@ -233,7 +241,7 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @return
+   * @return true if the records is empty
    */
   public boolean isEmpty()
   {
@@ -292,7 +300,7 @@ public class QueryResults<T> implements Iterable<T>
 
 
   /**
-   * @return
+   * @return the one record or null if there are none or more than one
    */
   public T uniqueResult()
   {

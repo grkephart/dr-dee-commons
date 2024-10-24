@@ -23,7 +23,7 @@ public interface ItemMasterUnitConversion extends UnitConversion
   /**
    * Sets the item master for this conversion.
    * 
-   * @param item the item  master
+   * @param itemMaster the item  master
    */
   void setItemMaster(ItemMaster itemMaster);
 }

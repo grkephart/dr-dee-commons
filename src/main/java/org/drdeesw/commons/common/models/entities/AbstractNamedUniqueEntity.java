@@ -15,7 +15,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
 /**
  * @author gary_kephart
  *
- * @param <ID>
+ * @param <ID> the ID class
  */
 @SuppressWarnings("serial")
 @MappedSuperclass

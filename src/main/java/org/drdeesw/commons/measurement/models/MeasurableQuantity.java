@@ -12,6 +12,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * plus a variety of derived quantities and non-SI units, like Count and Currency.
  * 
  * <table border="1">
+ *   <caption>Fundamental and Derived Quantities</caption>
  *   <thead>
  *     <tr><th>Name</th><th>Fundamental/Derived</th><th>Examples</th></tr>
  *   </thead>
@@ -29,8 +30,8 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  *     <tr><td>Density</td><td>Derived from mass and volume</td><td>kilogram per cubic meter, gram per cubic centimeter</td></tr>
  *     <tr><td>Energy</td><td>Derived from mass, length and time</td><td>Joules</td></tr>
  *     <tr><td>Force</td><td>Derived from mass, length, and time</td><td>Newtons</td></tr>
- *     <tr><td>Count</td><td>aka Packaging</td><td>each, dozen, box, case, gross, pair, bundle, pallet</td></tr>
- *     <tr><td>Currency</td><td>Different than Count in that it refers to value rather than quantity</td><td>Dollar, Euro, Quarter</td></tr>
+ *     <tr><td>Count</td><td>aka Packaging</td><td>each, dozen, box, case, gross, pair, bundle, pallet, etc</td></tr>
+ *     <tr><td>Currency</td><td>Different than Count in that it refers to value rather than quantity</td><td>Dollar, Euro, Quarter, etc</td></tr>
  *   </tbody>
  * </table>
  */

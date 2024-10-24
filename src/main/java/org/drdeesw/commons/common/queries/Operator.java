@@ -42,8 +42,8 @@ public class Operator
   private Type                   type;
 
   /**
-   * @param propertyName
-   * @return
+   * @param propertyName the property name to match against a LHS operator
+   * @return the operator that matches the LHS of the property name
    */
   public static Operator byLhs(
     String propertyName)

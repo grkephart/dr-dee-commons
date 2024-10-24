@@ -26,8 +26,8 @@ public class Ordering implements DataTransferObject
 
 
   /**
-   * @param name
-   * @param ascending
+   * @param name the name of the property to order by
+   * @param ascending true for ascending, false for descending
    */
   public Ordering(String name, boolean ascending)
   {

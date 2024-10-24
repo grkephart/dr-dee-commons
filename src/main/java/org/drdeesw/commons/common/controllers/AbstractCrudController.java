@@ -39,8 +39,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param obj
-   * @return
+   * Create a new object.
+   * 
+   * @param obj the object to create
+   * @return the created object
    */
   protected ResponseEntity<P> create(
     P obj)
@@ -57,9 +59,12 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param obj
-   * @return
-   * @throws Exception 
+   * Create a new object if there are no binding errors.
+   * 
+   * @param obj the object to create
+   * @param bindingResult the binding result
+   * @return the created object
+   * @throws Exception if the object cannot be created
    */
   protected ResponseEntity<?> create(
     P obj,
@@ -84,8 +89,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param obj
-   * @return
+   * Delete an object.
+   * 
+   * @param obj the object to delete
+   * @return the deleted object
    */
   protected ResponseEntity<P> delete(
     P obj)
@@ -97,8 +104,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param id
-   * @return
+   * Finds an object by its ID.
+   * 
+   * @param id the ID of the object to find
+   * @return the object
    */
   protected ResponseEntity<?> findById(
     ID id)
@@ -110,8 +119,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param parameterMap
-   * @return
+   * Find objects by a query.
+   * 
+   * @param parameterMap the query parameters
+   * @return the objects
    */
   protected QueryResults<P> findByQuery(
     MultiValueMap<String, String> parameterMap)
@@ -129,9 +140,11 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param <Q>
-   * @param query
-   * @return
+   * Find objects by a query.
+   * 
+   * @param <Q> the query type
+   * @param query the query
+   * @return the objects
    */
   protected <Q extends JpqlQuery<P>> QueryResults<P> findByQuery(
     Q query)
@@ -141,8 +154,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param id
-   * @return
+   * Gets an object by its ID.
+   * 
+   * @param id the ID of the object to get
+   * @return the object
    */
   protected ResponseEntity<P> get(
     ID id)
@@ -152,8 +167,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param bindingResult
-   * @return
+   * Handles binding result errors.
+   * 
+   * @param bindingResult the binding result
+   * @return the response entity
    */
   private ResponseEntity<?> handleBindingResultErrors(
     BindingResult bindingResult)
@@ -168,7 +185,9 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param crudService
+   * Initializes the controller.
+   * 
+   * @param crudService the CRUD service
    */
   protected void init(
     CrudService<P, ID> crudService)
@@ -178,8 +197,10 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param obj
-   * @return
+   * Updates an object.
+   * 
+   * @param obj the object to update
+   * @return the updated object
    */
   protected ResponseEntity<P> update(
     P obj)
@@ -189,9 +210,11 @@ public abstract class AbstractCrudController<P extends UniquePojo<ID>, ID extend
 
 
   /**
-   * @param obj
-   * @param bindingResult
-   * @return
+   * Updates an object if there are no binding errors.
+   * 
+   * @param obj the object to update
+   * @param bindingResult the binding result
+   * @return the updated object
    */
   protected ResponseEntity<?> update(
     P obj,

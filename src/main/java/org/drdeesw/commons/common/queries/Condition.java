@@ -18,8 +18,8 @@ import java.util.Objects;
 public class Condition
 {
   /**
-   * @param conditions
-   * @return
+   * @param conditions the set of conditions to "and" together
+   * @return a new "equals" condition
    */
   public static Condition and(
     Condition[] conditions)
@@ -29,9 +29,9 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against.
+   * @param value that value that the field must equal
+   * @return a new "equals" condition
    */
   public static Condition equals(
     String fieldName,
@@ -42,10 +42,10 @@ public class Condition
 
 
   /**
-   * @param propertyName
-   * @param value
-   * @param isRef
-   * @return
+   * @param propertyName the name of the property to compare against
+   * @param value that value that the field must equal
+   * @param isRef true if the value is a reference
+   * @return a new "equals" condition
    */
   public static Condition equals(
     String propertyName,
@@ -57,8 +57,9 @@ public class Condition
 
 
   /**
-   * @param subquery
-   * @return
+   * Returns a new "exists" condition
+   * @param subquery the subquery to check for existence
+   * @return a new "exists" condition
    */
   public static Condition exists(
     Query<?> subquery)
@@ -68,9 +69,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is greater than or equal to the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "greater than or equal to" condition
    */
   public static Condition ge(
     String fieldName,
@@ -81,9 +84,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is greater than the value.
+   * 
+   * @param fieldName the name of the field to compare against 
+   * @param value the value to compare against
+   * @return a new "greater than" condition
    */
   public static Condition gt(
     String fieldName,
@@ -94,9 +99,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is "ilike" the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "ilike" condition
    */
   public static Condition iequals(
     String fieldName,
@@ -107,9 +114,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is "ilike" the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "ilike condition
    */
   public static Condition ilike(
     String fieldName,
@@ -120,9 +129,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is less than or equal to the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "less than or equal to" condition
    */
   public static Condition in(
     String fieldName,
@@ -133,8 +144,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @return
+   * Returns a condition that checks if the field is not null
+   * 
+   * @param fieldName the name of the field to compare against
+   * @return a new "is not null" condition
    */
   public static Condition isNotNull(
     String fieldName)
@@ -144,8 +157,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @return
+   * Returns a condition that checks if the field is null
+   * 
+   * @param fieldName the name of the field to compare against
+   * @return a new "is null" condition
    */
   public static Condition isNull(
     String fieldName)
@@ -155,9 +170,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is like the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "like" condition
    */
   static Condition like(
     String fieldName,
@@ -168,9 +185,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is less than to the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "less than" condition
    */
   public static Condition lt(
     String fieldName,
@@ -181,9 +200,11 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * Returns a condition that checks if the field is not equal to the value.
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return a new "not equals" condition
    */
   public static Condition notEquals(
     String fieldName,
@@ -194,8 +215,10 @@ public class Condition
 
 
   /**
-   * @param subquery
-   * @return
+   * Returns a condition that checks if the field does not exist in the collection.
+   * 
+   * @param subquery the subquery to check for existence
+   * @return a new "not exists" condition
    */
   public static Condition notExists(
     Query<?> subquery)
@@ -205,8 +228,10 @@ public class Condition
 
 
   /**
-   * @param conditions
-   * @return
+   * Returns a condition that ors together the conditions.
+   * 
+   * @param conditions the set of conditions to "or" together
+   * @return a new "or" condition
    */
   public static Condition or(
     Condition[] conditions)
@@ -215,17 +240,18 @@ public class Condition
   }
 
   private Condition[] conditions;
-
   private String      fieldName;
-
   private Operator    operator;
   private boolean     ref;
   private Query<?>    subquery;
   private Object      value;
   private Object      value2;
+  
+  
   /**
-   * @param conditions
-   * @param operator
+   * @param conditions the set of conditions in the group
+   * 
+   * @param operator the operator to use to combine the conditions
    */
   public Condition(Condition[] conditions, Operator operator)
   {
@@ -244,8 +270,9 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
+   * 
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
    */
   public Condition(String fieldName, Operator operator)
   {
@@ -257,10 +284,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
-   * @param value
-   * @param value2
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
+   * @param value the value to compare against
+   * @param value2 the second value to compare against
    */
   public Condition(String fieldName, Operator operator, Date value, Date value2)
   {
@@ -274,10 +301,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
-   * @param value
-   * @param df
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
+   * @param value the value to compare against
+   * @param df the date format
    */
   public Condition(String fieldName, Operator operator, Date value, DateFormat df)
   {
@@ -290,9 +317,9 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
-   * @param value
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
+   * @param value the value to compare against
    */
   public Condition(String fieldName, Operator operator, Object value)
   {
@@ -305,10 +332,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
-   * @param value
-   * @param ref
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
+   * @param value the value to compare against
+   * @param ref true if the value is a reference
    */
   public Condition(String fieldName, Operator operator, Object value, boolean ref)
   {
@@ -322,10 +349,10 @@ public class Condition
 
 
   /**
-   * @param fieldName
-   * @param operator
-   * @param value
-   * @param value2
+   * @param fieldName the name of the field to compare against
+   * @param operator the operator to use
+   * @param value the value to compare against
+   * @param value2 the second value to compare against
    */
   public Condition(String fieldName, Operator operator, Object value, Object value2)
   {

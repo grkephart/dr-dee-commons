@@ -24,8 +24,8 @@ public class JpqlQuery<T> extends Query<T>
    * Shortcut to creating subclasses of this class.
    * UNTESTED.
    * 
-   * @param <T2>
-   * @param clazz
+   * @param <T2> the entity class type
+   * @param clazz the entity class
    * @return
    */
   @SuppressWarnings("unchecked")
@@ -38,7 +38,7 @@ public class JpqlQuery<T> extends Query<T>
   private DateFormat df;
 
   /**
-   * 
+   * @param clazz the entity class
    */
   public JpqlQuery(Class<T> clazz)
   {
@@ -47,7 +47,8 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * 
+   * @param clazz the entity class
+   * @param df the date format
    */
   public JpqlQuery(Class<T> clazz, DateFormat df)
   {
@@ -57,7 +58,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @param clazz
+   * @param clazz the entity class
    * @param match
    */
   public JpqlQuery(Class<T> clazz, Match match)
@@ -67,7 +68,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @param clazz
+   * @param clazz the entity class
    * @param match
    * @param df
    */
@@ -81,9 +82,9 @@ public class JpqlQuery<T> extends Query<T>
   /**
    * Converts a POJO query (PQ) of class P to an entity query of type T.
    * 
-   * @param <PQ>
-   * @param entityClass
-   * @param that
+   * @param <PQ> the POJO query class type
+   * @param entityClass the entity class
+   * @param that the entity query
    */
   public <PQ extends JpqlQuery<?>> JpqlQuery(Class<T> entityClass, PQ that)
   {
@@ -102,13 +103,15 @@ public class JpqlQuery<T> extends Query<T>
       return false;
     if (getClass() != obj.getClass())
       return false;
-    JpqlQuery other = (JpqlQuery)obj;
+    JpqlQuery<?> other = (JpqlQuery<?>)obj;
     return Objects.equals(df, other.df);
   }
 
 
   /**
-   * @param value3
+   * @param value
+   * @param operator
+   * @param isRef
    * @return
    */
   private String formatValue(
@@ -150,7 +153,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @return
+   * @return the date formatter
    */
   public DateFormat getDf()
   {

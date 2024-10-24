@@ -13,7 +13,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
 /**
  * @author gary_kephart
  *
- * @param <ID>
+ * @param <ID> the ID class
  */
 public interface UniqueEntity<ID extends Serializable> extends UniqueObject<ID>
 {

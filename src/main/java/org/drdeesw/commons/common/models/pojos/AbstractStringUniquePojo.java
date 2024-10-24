@@ -26,7 +26,7 @@ public abstract class AbstractStringUniquePojo extends AbstractUniquePojo<String
 
 
   /**
-   * @param that
+   * @param that 
    */
   protected AbstractStringUniquePojo(StringUniqueObject that)
   {
@@ -35,7 +35,7 @@ public abstract class AbstractStringUniquePojo extends AbstractUniquePojo<String
 
 
   /**
-   * @param id
+   * @param id 
    */
   protected AbstractStringUniquePojo(String id)
   {

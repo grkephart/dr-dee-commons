@@ -12,6 +12,8 @@ import java.util.Objects;
 
 
 /**
+ * A query object that can be used to build JPQL queries.
+ * 
  * @author gkephart
  *
  */
@@ -32,7 +34,7 @@ public class Query<T>
   private Integer              start;
 
   /**
-   * @param clazz
+   * @param clazz the entity class
    */
   public Query(Class<T> clazz)
   {
@@ -41,8 +43,8 @@ public class Query<T>
 
 
   /**
-   * @param clazz
-   * @param match
+   * @param clazz the entity class
+   * @param match the match type
    */
   public Query(Class<T> clazz, Match match)
   {
@@ -58,9 +60,9 @@ public class Query<T>
   /**
    * Converts a POJO query (PQ) of class P to an entity query of type T.
    * 
-   * @param <PQ>
-   * @param entityClass
-   * @param that
+   * @param <PQ> the POJO query class
+   * @param entityClass the entity class
+   * @param that the POJO query
    */
   public <PQ extends JpqlQuery<?>> Query(Class<T> entityClass, PQ that)
   {
@@ -78,9 +80,9 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @param condition
-   * @return
+   * @param <Q> the query type
+   * @param condition the condition to add
+   * @return the query
    */
   public <Q extends Query<T>> Q add(
     Condition condition)
@@ -99,9 +101,9 @@ public class Query<T>
 
 
   /**
-   * @param propertyName
-   * @param value
-   * @return
+   * @param propertyName the name of the property to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q addMandatoryCondition(
     String propertyName,
@@ -130,10 +132,10 @@ public class Query<T>
 
 
   /**
-   * @param propertyName
-   * @param operator
-   * @param value
-   * @return
+   * @param propertyName the name of property to compare against
+   * @param operator the operator to use in the comparison
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q addMandatoryCondition(
     String propertyName,
@@ -150,11 +152,11 @@ public class Query<T>
 
 
   /**
-   * @param propertyName
-   * @param operator
-   * @param value
-   * @param isRef
-   * @return
+   * @param propertyName the name of property to compare against
+   * @param operator the operator to use in the comparison
+   * @param value the value to compare against
+   * @param isRef true if the values is reference
+   * @return the query
    */
   private boolean addMandatoryCondition(
     String propertyName,
@@ -167,8 +169,8 @@ public class Query<T>
 
 
   /**
-   * @param name
-   * @param ascending
+   * @param name the name of property to order against
+   * @param ascending true for ascending or false for descending
    */
   public <Q extends Query<T>> Q addOrdering(
     String name,
@@ -181,9 +183,9 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @param conditions
-   * @return
+   * @param <Q> the class of the query
+   * @param conditions the conditions to and together
+   * @return the query
    */
   public <Q extends Query<T>> Q and(
     Condition... conditions)
@@ -195,8 +197,8 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @return
+   * @param <Q> the query type
+   * @return the query
    */
   @SuppressWarnings("unchecked")
   protected <Q extends Query<T>> Q cast()
@@ -206,7 +208,7 @@ public class Query<T>
 
 
   /**
-   * @return
+   * @return true if there are conditions, false otherwise
    */
   public boolean conditionsPresent()
   {
@@ -227,7 +229,7 @@ public class Query<T>
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Query other = (Query)obj;
+    Query<?> other = (Query<?>)obj;
     return Objects.equals(alias, other.alias) && caseInsensitive == other.caseInsensitive
            && Objects.equals(clazz, other.clazz) && Objects.equals(conditions, other.conditions)
            && Objects.equals(mandatoryConditions, other.mandatoryConditions) && match == other.match
@@ -239,9 +241,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query  
    */
   public <Q extends Query<T>> Q equals(
     String fieldName,
@@ -254,10 +256,10 @@ public class Query<T>
 
 
   /**
-   * @param propertyName
-   * @param value
+   * @param propertyName the name of the property to compare against
+   * @param value the value to compare against
    * @param isRef true if the value is actually a reference to another attribute (e.g. x.a = y.b) versus a literal value
-   * @return
+   * @return the query
    */
   public <Q extends Query<T>> Q equals(
     String propertyName,
@@ -272,8 +274,8 @@ public class Query<T>
 
 
   /**
-   * @param subquery
-   * @return
+   * @param subquery the subquery to check for existence
+   * @return the query
    */
   public <Q extends Query<T>> Q exists(
     Query<?> subquery)
@@ -286,10 +288,10 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @param fieldName
-   * @param value
-   * @return
+   * @param <Q> the query type
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q ge(
     String fieldName,
@@ -385,8 +387,8 @@ public class Query<T>
 
 
   /**
-   * @param defValue
-   * @return
+   * @param defValue the default value
+   * @return the start
    */
   public int getStart(
     int defValue)
@@ -396,9 +398,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q gt(
     String fieldName,
@@ -431,9 +433,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q iequals(
     String fieldName,
@@ -446,9 +448,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q ilike(
     String fieldName,
@@ -461,9 +463,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q in(
     String fieldName,
@@ -476,9 +478,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param values
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param values the values to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q in(
     String fieldName,
@@ -500,8 +502,8 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q isNotNull(
     String fieldName)
@@ -513,8 +515,8 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q isNull(
     String fieldName)
@@ -535,9 +537,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q like(
     String fieldName,
@@ -550,9 +552,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q lt(
     String fieldName,
@@ -565,9 +567,9 @@ public class Query<T>
 
 
   /**
-   * @param fieldName
-   * @param value
-   * @return
+   * @param fieldName the name of the field to compare against
+   * @param value the value to compare against
+   * @return the query
    */
   public <Q extends Query<T>> Q notEquals(
     String fieldName,
@@ -580,8 +582,8 @@ public class Query<T>
 
 
   /**
-   * @param subquery
-   * @return
+   * @param subquery the subquery to check for non-existence
+   * @return the query
    */
   public <Q extends Query<T>> Q notExists(
     Query<?> subquery)
@@ -594,9 +596,9 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @param conditions
-   * @return
+   * @param <Q> the query type
+   * @param conditions the conditions to or together
+   * @return the query
    */
   public <Q extends Query<T>> Q or(
     Condition... conditions)
@@ -609,6 +611,7 @@ public class Query<T>
 
   /**
    * @param alias the alias to set
+   * @return the query
    */
   public <Q extends Query<T>> Q setAlias(
     String alias)
@@ -640,7 +643,8 @@ public class Query<T>
 
 
   /**
-   * @param maxResults
+   * @param maxResults 
+   * @return the query
    */
   public <Q extends Query<T>> Q setMaxResults(
     Integer maxResults)
@@ -652,7 +656,8 @@ public class Query<T>
 
 
   /**
-   * @param performCount
+   * @param performCount true if the count should be performed
+   * @return the query
    */
   public <Q extends Query<T>> Q setPerformCount(
     Boolean performCount)
@@ -664,7 +669,8 @@ public class Query<T>
 
 
   /**
-   * @param start
+   * @param start the start to set
+   * @return the query
    */
   public <Q extends Query<T>> Q setStart(
     Integer start)
@@ -676,8 +682,8 @@ public class Query<T>
 
 
   /**
-   * @param <Q>
-   * @return
+   * @param <Q> the query type
+   * @return the query
    */
   public <Q extends Query<T>> Q uniqueResult()
   {
