@@ -135,6 +135,28 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 
+		<!-- Feign -->
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>3.1.6</version> <!-- Check for the latest version -->
+		</dependency>
+
+<!--		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>11.10</version>
+		</dependency>-->
+
+		<!-- Job scheduling -->
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
 		<!-- JSON -->
 
 		<dependency>
@@ -143,7 +165,7 @@
 			<version>2.13.1</version>
 		</dependency>
 
-		<!-- MAPPING -->
+		<!-- Mapping -->
 
 		<dependency>
 			<groupId>org.modelmapper</groupId>

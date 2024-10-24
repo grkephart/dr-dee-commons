@@ -26,7 +26,7 @@ public interface ServiceProviderAccount<U extends User> extends NamedLongUniqueO
    * 
    * @return the serviceProviderAccountTokenHolder
    */
-  ServiceProviderAccountTokenHolder<U> getServiceProviderAccountTokenHolder();
+  ServiceProviderAccountTokenHolder<U> getTokenHolder();
 
 
   /**
@@ -49,10 +49,10 @@ public interface ServiceProviderAccount<U extends User> extends NamedLongUniqueO
   /**
    * Sets the serviceProviderAccountTokenHolder.
    * 
-   * @param serviceProviderAccountTokenHolder the serviceProviderAccountTokenHolder
+   * @param tokenHolder the serviceProviderAccountTokenHolder
    */
-  void setServiceProviderAccountTokenHolder(
-    ServiceProviderAccountTokenHolder<U> serviceProviderAccountTokenHolder);
+  void setTokenHolder(
+    ServiceProviderAccountTokenHolder<U> tokenHolder);
 
 
   /**
