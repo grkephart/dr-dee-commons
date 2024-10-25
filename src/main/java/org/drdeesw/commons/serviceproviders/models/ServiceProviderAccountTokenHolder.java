@@ -32,6 +32,14 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
 
 
   /**
+   * Returns the serviceProviderAccount.
+   * 
+   * @return the serviceProviderAccount
+   */
+  ServiceProviderAccount<U> getAccount();
+
+
+  /**
    * Returns the refreshToken.
    * 
    * @return the refreshToken
@@ -45,14 +53,6 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
    * @return the refreshToken expiry
    */
   Instant getRefreshTokenExpiry();
-
-
-  /**
-   * Returns the serviceProviderAccount.
-   * 
-   * @return the serviceProviderAccount
-   */
-  ServiceProviderAccount<U> getServiceProviderAccount();
 
 
   /**
@@ -74,6 +74,15 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
 
 
   /**
+   * Sets the serviceProviderAccount.
+   * 
+   * @param account the serviceProviderAccount
+   */
+  void setAccount(
+    ServiceProviderAccount<U> account);
+
+
+  /**
    * Sets the refreshToken.
    * 
    * @param refreshToken the refreshToken
@@ -89,13 +98,4 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
    */
   void setRefreshTokenExpiry(
     Instant refreshTokenExpiry);
-
-
-  /**
-   * Sets the serviceProviderAccount.
-   * 
-   * @param serviceProviderAccount the serviceProviderAccount
-   */
-  void setServiceProviderAccount(
-    ServiceProviderAccount<U> serviceProviderAccount);
 }
