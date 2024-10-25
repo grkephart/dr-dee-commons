@@ -7,7 +7,7 @@ package org.drdeesw.commons.serviceproviders.services.impl;
 import java.time.Instant;
 import java.util.Map;
 
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.services.OAuth2Client;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountService;
@@ -23,7 +23,7 @@ import org.springframework.util.MultiValueMap;
  * 
  */
 @Service
-public class TokenServiceImpl<U extends User> implements TokenService<U>
+public class TokenServiceImpl<U extends UserPojo> implements TokenService<U>
 {
   @Autowired
   private OAuth2Client                  oauth2Client;

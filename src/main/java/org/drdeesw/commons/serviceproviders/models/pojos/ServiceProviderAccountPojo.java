@@ -5,7 +5,7 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
@@ -15,7 +15,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountPojo<U extends User> extends AbstractNamedLongUniquePojo
+public class ServiceProviderAccountPojo<U extends UserPojo> extends AbstractNamedLongUniquePojo
     implements ServiceProviderAccount<U>
 {
   private ServiceProviderPojo                      serviceProvider;

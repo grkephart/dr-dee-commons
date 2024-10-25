@@ -5,10 +5,11 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
@@ -20,11 +21,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @Entity
 @Table(name = "service_provider_accounts")
 @SuppressWarnings("serial")
-public class ServiceProviderAccountEntity<U extends User> extends AbstractNamedLongUniqueEntity
+public class ServiceProviderAccountEntity<U extends UserEntity> extends AbstractNamedLongUniqueEntity
     implements ServiceProviderAccount<U>
 {
+  @ManyToOne
   private ServiceProviderEntity                      serviceProvider;
+  @ManyToOne
   private ServiceProviderAccountTokenHolderEntity<U> tokenHolder;
+  @ManyToOne
   private U                                          user;
 
   @Override
