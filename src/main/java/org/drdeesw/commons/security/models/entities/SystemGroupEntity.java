@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedUniqueEntity;
-import org.drdeesw.commons.security.models.Group;
+import org.drdeesw.commons.security.models.SystemGroup;
 
 
 /**
@@ -22,18 +22,18 @@ import org.drdeesw.commons.security.models.Group;
 @MappedSuperclass
 @Access(AccessType.FIELD)
 @AttributeOverride(name = "name", column = @Column(name = "group_name"))
-public abstract class GroupEntity extends AbstractNamedUniqueEntity<Long> implements Group
+public abstract class SystemGroupEntity extends AbstractNamedUniqueEntity<Long> implements SystemGroup
 {
 
   /**
    * Hibernate
    */
-  protected GroupEntity()
+  protected SystemGroupEntity()
   {
   }
 
 
-  protected GroupEntity(Long id)
+  protected SystemGroupEntity(Long id)
   {
     super(id);
   }

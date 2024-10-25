@@ -11,7 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder.AccountType;
 
 
 /**
@@ -25,7 +26,7 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @Access(AccessType.FIELD)
-public abstract class UserEntity extends AbstractLongUniqueEntity implements User
+public abstract class SystemUserEntity extends AbstractLongUniqueEntity implements SystemUser
 {
   /**
    * true if the user is enabled
@@ -42,12 +43,12 @@ public abstract class UserEntity extends AbstractLongUniqueEntity implements Use
   /**
    * Hibernate
    */
-  protected UserEntity()
+  protected SystemUserEntity()
   {
   }
 
 
-  protected UserEntity(Long id)
+  protected SystemUserEntity(Long id)
   {
     super(id);
   }
@@ -58,7 +59,7 @@ public abstract class UserEntity extends AbstractLongUniqueEntity implements Use
    * 
    * @param username perhaps the email address
    */
-  public UserEntity(String username)
+  public SystemUserEntity(String username)
   {
     this.username = username;
   }
@@ -70,10 +71,17 @@ public abstract class UserEntity extends AbstractLongUniqueEntity implements Use
    * @param username
    * @param enabled
    */
-  public UserEntity(String username, boolean enabled)
+  public SystemUserEntity(String username, boolean enabled)
   {
     this.enabled = enabled;
     this.username = username;
+  }
+
+
+  @Override
+  public AccountType getAccountType()
+  {
+    return AccountType.USER;
   }
 
 

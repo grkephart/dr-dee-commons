@@ -10,18 +10,18 @@ import org.drdeesw.commons.common.models.UniqueObject;
 /**
  * 
  */
-public interface Authority extends UniqueObject<Long>
+public interface SystemGroupAuthority extends UniqueObject<Long>
 {
   /**
-   * @return
+   * @return authority
    */
   String getAuthority();
 
 
   /**
-   * @return
+   * @return groupId
    */
-  String getUsername();
+  Long getSystemGroupId();
 
 
   /**
@@ -32,8 +32,8 @@ public interface Authority extends UniqueObject<Long>
 
 
   /**
-   * @param username
+   * @param systemGroupId
    */
-  void setUsername(
-    String username);
+  void setSystemGroupId(
+    Long systemGroupId);
 }

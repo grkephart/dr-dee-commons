@@ -4,12 +4,12 @@
 package org.drdeesw.commons.common.controllers;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
-import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
+import org.drdeesw.commons.security.models.pojos.SystemGroupMemberPojo;
 
 /**
  * 
  */
-public class TestableAbstractCrudController extends AbstractCrudController<GroupMemberPojo, Long>
+public class TestableAbstractCrudController extends AbstractCrudController<SystemGroupMemberPojo, Long>
 {
 
 }

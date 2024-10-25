@@ -7,13 +7,12 @@ package org.drdeesw.commons.serviceproviders.models;
 import java.time.Instant;
 
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.security.models.User;
 
 
 /**
  * 
  */
-public interface ServiceProviderAccountTokenHolder<U extends User> extends LongUniqueObject
+public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
 {
   /**
    * Returns the accessToken.
@@ -36,7 +35,7 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
    * 
    * @return the serviceProviderAccount
    */
-  ServiceProviderAccount<U> getAccount();
+  ServiceProviderAccount getAccount();
 
 
   /**
@@ -79,7 +78,7 @@ public interface ServiceProviderAccountTokenHolder<U extends User> extends LongU
    * @param account the serviceProviderAccount
    */
   void setAccount(
-    ServiceProviderAccount<U> account);
+    ServiceProviderAccount account);
 
 
   /**

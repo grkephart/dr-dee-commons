@@ -5,7 +5,7 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.SystemUser;
 
 
 /**
@@ -15,7 +15,7 @@ import org.drdeesw.commons.security.models.User;
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractLongUniquePojo implements User
+public class SystemUserPojo extends AbstractLongUniquePojo implements SystemUser
 {
   private boolean enabled;
   private String  username;
@@ -23,12 +23,12 @@ public class UserPojo extends AbstractLongUniquePojo implements User
   /**
    * Hibernate
    */
-  public UserPojo()
+  public SystemUserPojo()
   {
   }
 
 
-  public UserPojo(Long id)
+  public SystemUserPojo(Long id)
   {
     super(id);
   }
@@ -39,9 +39,16 @@ public class UserPojo extends AbstractLongUniquePojo implements User
    * 
    * @param username
    */
-  public UserPojo(String username)
+  public SystemUserPojo(String username)
   {
     this.username = username;
+  }
+
+
+  @Override
+  public AccountType getAccountType()
+  {
+    return AccountType.USER;
   }
 
 

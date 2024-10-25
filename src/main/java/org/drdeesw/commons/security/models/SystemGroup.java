@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  * @author gary_kephart
  *
  */
-public interface Group extends NamedUniqueObject<Long>
+public interface SystemGroup extends NamedUniqueObject<Long>
 {
 
 }

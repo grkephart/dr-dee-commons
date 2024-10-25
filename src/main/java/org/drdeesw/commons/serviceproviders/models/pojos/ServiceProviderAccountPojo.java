@@ -5,9 +5,9 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -15,12 +15,12 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountPojo<U extends UserPojo> extends AbstractNamedLongUniquePojo
-    implements ServiceProviderAccount<U>
+public class ServiceProviderAccountPojo extends AbstractNamedLongUniquePojo
+    implements ServiceProviderAccount
 {
-  private ServiceProviderPojo                      serviceProvider;
-  private ServiceProviderAccountTokenHolderPojo<U> tokenHolder;
-  private U                                        user;
+  private ServiceProviderPojo                   serviceProvider;
+  private ServiceProviderAccountTokenHolderPojo tokenHolder;
+  private ServiceProviderAccountHolder          accountHolder;
 
   /**
    * @return the serviceProvider
@@ -34,18 +34,18 @@ public class ServiceProviderAccountPojo<U extends UserPojo> extends AbstractName
   /**
    * @return the tokenHolder
    */
-  public ServiceProviderAccountTokenHolderPojo<U> getTokenHolder()
+  public ServiceProviderAccountTokenHolderPojo getTokenHolder()
   {
     return tokenHolder;
   }
 
 
   /**
-   * @return the user
+   * @return the accountHolder
    */
-  public U getUser()
+  public ServiceProviderAccountHolder getAccountHolder()
   {
-    return user;
+    return accountHolder;
   }
 
 
@@ -63,19 +63,19 @@ public class ServiceProviderAccountPojo<U extends UserPojo> extends AbstractName
    * @param tokenHolder the tokenHolder to set
    */
   public void setTokenHolder(
-    ServiceProviderAccountTokenHolder<U> tokenHolder)
+    ServiceProviderAccountTokenHolder tokenHolder)
   {
-    this.tokenHolder = (ServiceProviderAccountTokenHolderPojo<U>)tokenHolder;
+    this.tokenHolder = (ServiceProviderAccountTokenHolderPojo)tokenHolder;
   }
 
 
   /**
-   * @param user the user to set
+   * @param accountHolder the accountHolder to set
    */
-  public void setUser(
-    U user)
+  public void setAccountHolder(
+    ServiceProviderAccountHolder accountHolder)
   {
-    this.user = user;
+    this.accountHolder = accountHolder;
   }
 
 }

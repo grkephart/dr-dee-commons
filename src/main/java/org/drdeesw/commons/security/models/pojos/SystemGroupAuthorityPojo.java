@@ -2,7 +2,7 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedUniquePojo;
-import org.drdeesw.commons.security.models.GroupAuthority;
+import org.drdeesw.commons.security.models.SystemGroupAuthority;
 
 
 /**
@@ -12,20 +12,20 @@ import org.drdeesw.commons.security.models.GroupAuthority;
  *
  */
 @SuppressWarnings("serial")
-public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long> implements GroupAuthority
+public class SystemGroupAuthorityPojo extends AbstractNamedUniquePojo<Long> implements SystemGroupAuthority
 {
   private String authority;
-  private Long groupId;
+  private Long systemGroupId;
 
   /**
    * Hibernate
    */
-  protected GroupAuthorityPojo()
+  protected SystemGroupAuthorityPojo()
   {
   }
 
 
-  protected GroupAuthorityPojo(Long id)
+  protected SystemGroupAuthorityPojo(Long id)
   {
     super(id);
   }
@@ -39,9 +39,9 @@ public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long> implements
 
 
   @Override
-  public Long getGroupId()
+  public Long getSystemGroupId()
   {
-    return this.groupId;
+    return this.systemGroupId;
   }
 
 
@@ -54,10 +54,10 @@ public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long> implements
 
 
   @Override
-  public void setGroupId(
-    Long groupId)
+  public void setSystemGroupId(
+    Long systemGroupId)
   {
-    this.groupId = groupId;
+    this.systemGroupId = systemGroupId;
   }
 
 }

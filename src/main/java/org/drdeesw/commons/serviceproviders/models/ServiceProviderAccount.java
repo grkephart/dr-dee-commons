@@ -5,13 +5,12 @@ package org.drdeesw.commons.serviceproviders.models;
 
 
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-import org.drdeesw.commons.security.models.User;
 
 
 /**
  * 
  */
-public interface ServiceProviderAccount<U extends User> extends NamedLongUniqueObject
+public interface ServiceProviderAccount extends NamedLongUniqueObject
 {
   /**
    * Returns the serviceProvider.
@@ -26,15 +25,15 @@ public interface ServiceProviderAccount<U extends User> extends NamedLongUniqueO
    * 
    * @return the serviceProviderAccountTokenHolder
    */
-  ServiceProviderAccountTokenHolder<U> getTokenHolder();
+  ServiceProviderAccountTokenHolder getTokenHolder();
 
 
   /**
-   * Returns the user.
+   * Returns the accountHolder.
    * 
-   * @return the user
+   * @return the accountHolder
    */
-  U getUser();
+  ServiceProviderAccountHolder getAccountHolder();
 
 
   /**
@@ -52,14 +51,14 @@ public interface ServiceProviderAccount<U extends User> extends NamedLongUniqueO
    * @param tokenHolder the serviceProviderAccountTokenHolder
    */
   void setTokenHolder(
-    ServiceProviderAccountTokenHolder<U> tokenHolder);
+    ServiceProviderAccountTokenHolder tokenHolder);
 
 
   /**
-   * Sets the user.
+   * Sets the accountHolder.
    * 
-   * @param user the user to set
+   * @param accountHolder the accountHolder to set
    */
-  void setUser(
-    U user);
+  void setAccountHolder(
+    ServiceProviderAccountHolder accountHolder);
 }

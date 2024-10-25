@@ -1,5 +1,5 @@
 /**
- * Contains the base classes for use with security.
+ * Contains the base classes for use with system security.
  * The classes are structured to work with org.springframework.security.provisioning.JdbcUserDetailsManager.
  * 
  * The SQL for the JdbcUserDetailsManager is in the Javadocs.

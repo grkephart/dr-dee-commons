@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
-import org.drdeesw.commons.security.models.Authority;
+import org.drdeesw.commons.security.models.SystemGroupAuthority;
 
 
 /**
@@ -20,22 +20,22 @@ import org.drdeesw.commons.security.models.Authority;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AuthorityEntity extends AbstractUniqueEntity<Long> implements Authority
+public abstract class SystemGroupAuthorityEntity extends AbstractUniqueEntity<Long> implements SystemGroupAuthority
 {
   @Column(name = "authority")
   private String authority;
-  @Column(name = "username")
-  private String username;
+  @Column(name = "group_id")
+  private Long systemGroupId;
 
   /**
    * Hibernate
    */
-  protected AuthorityEntity()
+  protected SystemGroupAuthorityEntity()
   {
   }
 
 
-  protected AuthorityEntity(Long id)
+  protected SystemGroupAuthorityEntity(Long id)
   {
     super(id);
   }
@@ -49,9 +49,9 @@ public abstract class AuthorityEntity extends AbstractUniqueEntity<Long> impleme
 
 
   @Override
-  public String getUsername()
+  public Long getSystemGroupId()
   {
-    return this.username;
+    return this.systemGroupId;
   }
 
 
@@ -64,10 +64,10 @@ public abstract class AuthorityEntity extends AbstractUniqueEntity<Long> impleme
 
 
   @Override
-  public void setUsername(
-    String username)
+  public void setSystemGroupId(
+    Long systemGroupId)
   {
-    this.username = username;
+    this.systemGroupId = systemGroupId;
   }
 
 }

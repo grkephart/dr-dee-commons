@@ -5,7 +5,7 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.security.models.GroupMember;
+import org.drdeesw.commons.security.models.SystemGroupMember;
 
 
 /**
@@ -15,25 +15,25 @@ import org.drdeesw.commons.security.models.GroupMember;
  *
  */
 @SuppressWarnings("serial")
-public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMember
+public class SystemGroupMemberPojo extends AbstractLongUniquePojo implements SystemGroupMember
 {
-  private Long   groupId;
+  private Long   systemGroupId;
   private String username;
 
   /**
    * Hibernate
    */
-  public GroupMemberPojo()
+  public SystemGroupMemberPojo()
   {
   }
 
 
   /**
-   * @return the groupId
+   * @return the systemGroupId
    */
-  public Long getGroupId()
+  public Long getSystemGroupId()
   {
-    return groupId;
+    return systemGroupId;
   }
 
 
@@ -47,12 +47,12 @@ public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMemb
 
 
   /**
-   * @param groupId the groupId to set
+   * @param systemGroupId the systemGroupId to set
    */
-  public void setGroupId(
-    Long groupId)
+  public void setSystemGroupId(
+    Long systemGroupId)
   {
-    this.groupId = groupId;
+    this.systemGroupId = systemGroupId;
   }
 
 

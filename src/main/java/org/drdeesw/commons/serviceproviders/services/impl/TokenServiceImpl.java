@@ -7,7 +7,6 @@ package org.drdeesw.commons.serviceproviders.services.impl;
 import java.time.Instant;
 import java.util.Map;
 
-import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.services.OAuth2Client;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountService;
@@ -23,22 +22,22 @@ import org.springframework.util.MultiValueMap;
  * 
  */
 @Service
-public class TokenServiceImpl<U extends UserPojo> implements TokenService<U>
+public class TokenServiceImpl implements TokenService
 {
   @Autowired
   private OAuth2Client                  oauth2Client;
 
   @Autowired
-  private ServiceProviderAccountService<U> serviceProviderAccountService;
+  private ServiceProviderAccountService serviceProviderAccountService;
 
   @Override
   public void refreshToken(
-    ServiceProviderAccountPojo<U> account)
+    ServiceProviderAccountPojo account)
   {
     try
     {
       MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-      
+
       params.add("grant_type", "refresh_token");
       params.add("refresh_token", account.getTokenHolder().getRefreshToken());
       params.add("client_id", "your-client-id");

@@ -9,9 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -21,15 +21,15 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @Entity
 @Table(name = "service_provider_accounts")
 @SuppressWarnings("serial")
-public class ServiceProviderAccountEntity<U extends UserEntity> extends AbstractNamedLongUniqueEntity
-    implements ServiceProviderAccount<U>
+public class ServiceProviderAccountEntity extends AbstractNamedLongUniqueEntity
+    implements ServiceProviderAccount
 {
   @ManyToOne
-  private ServiceProviderEntity                      serviceProvider;
+  private ServiceProviderEntity                   serviceProvider;
   @ManyToOne
-  private ServiceProviderAccountTokenHolderEntity<U> tokenHolder;
+  private ServiceProviderAccountTokenHolderEntity tokenHolder;
   @ManyToOne
-  private U                                          user;
+  private ServiceProviderAccountHolder            accountHolder;
 
   @Override
   public ServiceProvider getServiceProvider()
@@ -39,16 +39,16 @@ public class ServiceProviderAccountEntity<U extends UserEntity> extends Abstract
 
 
   @Override
-  public ServiceProviderAccountTokenHolder<U> getTokenHolder()
+  public ServiceProviderAccountTokenHolder getTokenHolder()
   {
     return this.tokenHolder;
   }
 
 
   @Override
-  public U getUser()
+  public ServiceProviderAccountHolder getAccountHolder()
   {
-    return this.user;
+    return this.accountHolder;
   }
 
 
@@ -62,17 +62,17 @@ public class ServiceProviderAccountEntity<U extends UserEntity> extends Abstract
 
   @Override
   public void setTokenHolder(
-    ServiceProviderAccountTokenHolder<U> tokenHolder)
+    ServiceProviderAccountTokenHolder tokenHolder)
   {
-    this.tokenHolder = (ServiceProviderAccountTokenHolderEntity<U>)tokenHolder;
+    this.tokenHolder = (ServiceProviderAccountTokenHolderEntity)tokenHolder;
   }
 
 
   @Override
-  public void setUser(
-    U user)
+  public void setAccountHolder(
+    ServiceProviderAccountHolder accountHolder)
   {
-    this.user = user;
+    this.accountHolder = accountHolder;
   }
 
 }

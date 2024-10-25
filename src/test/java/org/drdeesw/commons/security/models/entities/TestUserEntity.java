@@ -3,8 +3,10 @@
  */
 package org.drdeesw.commons.security.models.entities;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 
 /**
  * @author gary_kephart
@@ -13,7 +15,12 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "test_user_entities")
-public class TestUserEntity extends UserEntity
+public class TestUserEntity extends SystemUserEntity
 {
+  @Override
+  public AccountType getAccountType()
+  {
+    return AccountType.USER;
+  }
 
 }

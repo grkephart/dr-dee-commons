@@ -7,7 +7,6 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 import java.time.Instant;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
@@ -16,14 +15,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountTokenHolderEntity<U extends User>
-    extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder<U>
+public class ServiceProviderAccountTokenHolderEntity extends AbstractLongUniqueEntity
+    implements ServiceProviderAccountTokenHolder
 {
-  private String                          accessToken;
-  private Instant                         accessTokenExpiry;
-  private ServiceProviderAccountEntity<U> account;
-  private String                          refreshToken;
-  private Instant                         refreshTokenExpiry;
+  private String                       accessToken;
+  private Instant                      accessTokenExpiry;
+  private ServiceProviderAccountEntity account;
+  private String                       refreshToken;
+  private Instant                      refreshTokenExpiry;
 
   /**
    * @return the accessToken
@@ -46,7 +45,7 @@ public class ServiceProviderAccountTokenHolderEntity<U extends User>
   /**
    * @return the account
    */
-  public ServiceProviderAccount<U> getAccount()
+  public ServiceProviderAccount getAccount()
   {
     return account;
   }
@@ -94,9 +93,9 @@ public class ServiceProviderAccountTokenHolderEntity<U extends User>
   * @param account the account to set
   */
   public void setAccount(
-    ServiceProviderAccount<U> account)
+    ServiceProviderAccount account)
   {
-    this.account = (ServiceProviderAccountEntity<U>)account;
+    this.account = (ServiceProviderAccountEntity)account;
   }
 
 

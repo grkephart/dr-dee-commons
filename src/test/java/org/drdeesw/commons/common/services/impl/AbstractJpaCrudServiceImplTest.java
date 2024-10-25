@@ -19,7 +19,7 @@ import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.common.queries.datatables.DataTablesJpqlQuery;
 import org.drdeesw.commons.common.repositories.TestUserEntityRepository;
 import org.drdeesw.commons.security.models.entities.TestUserEntity;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -73,12 +73,12 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testCreateAndFlushCollectionOfP()
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
     TestUserEntity queryEntity = new TestUserEntity();
     List<TestUserEntity> entities = Collections.singletonList(entity);
     List<TestUserEntity> queryEntities = Collections.singletonList(queryEntity);
-    List<UserPojo> expected = Collections.singletonList(pojo);
+    List<SystemUserPojo> expected = Collections.singletonList(pojo);
 
     // Arrange
 
@@ -94,14 +94,14 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.saveAllAndFlush(queryEntities)).thenReturn(entities);
 
     // Act
-    List<UserPojo> actuals = this.objectUnderTest.createAndFlush(expected);
+    List<SystemUserPojo> actuals = this.objectUnderTest.createAndFlush(expected);
 
     // Assert
 
     Mockito.verify(this.repository).saveAllAndFlush(queryEntities);
 
     Assert.assertEquals(1, actuals.size());
-    UserPojo actual = actuals.get(0);
+    SystemUserPojo actual = actuals.get(0);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
@@ -113,7 +113,7 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testCreateAndFlushP()
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
 
     // Arrange
@@ -128,7 +128,7 @@ public class AbstractJpaCrudServiceImplTest
         .thenReturn(entity);
 
     // Act
-    UserPojo actual = this.objectUnderTest.createAndFlush(pojo);
+    SystemUserPojo actual = this.objectUnderTest.createAndFlush(pojo);
 
     // Assert
 
@@ -145,12 +145,12 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testCreateCollectionOfP()
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
     TestUserEntity queryEntity = new TestUserEntity();
     List<TestUserEntity> entities = Collections.singletonList(entity);
     List<TestUserEntity> queryEntities = Collections.singletonList(queryEntity);
-    List<UserPojo> expected = Collections.singletonList(pojo);
+    List<SystemUserPojo> expected = Collections.singletonList(pojo);
 
     // Arrange
 
@@ -166,14 +166,14 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.saveAll(queryEntities)).thenReturn(entities);
 
     // Act
-    List<UserPojo> actuals = this.objectUnderTest.create(expected);
+    List<SystemUserPojo> actuals = this.objectUnderTest.create(expected);
 
     // Assert
 
     Mockito.verify(this.repository).saveAll(queryEntities);
 
     Assert.assertEquals(1, actuals.size());
-    UserPojo actual = actuals.get(0);
+    SystemUserPojo actual = actuals.get(0);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
@@ -186,7 +186,7 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testCreateP() throws Exception
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
 
     // Arrange
@@ -200,7 +200,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.save(Mockito.any(TestUserEntity.class))).thenReturn(entity);
 
     // Act
-    UserPojo actual = this.objectUnderTest.create(pojo);
+    SystemUserPojo actual = this.objectUnderTest.create(pojo);
 
     // Assert
 
@@ -217,7 +217,7 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testDelete()
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
 
     // Arrange
@@ -253,7 +253,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findById(ID)).thenReturn(Optional.of(entity));
 
     // Act
-    Optional<UserPojo> actual = this.objectUnderTest.findById(ID);
+    Optional<SystemUserPojo> actual = this.objectUnderTest.findById(ID);
 
     // Assert
 
@@ -276,7 +276,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findById(ID)).thenReturn(Optional.empty());
 
     // Act
-    Optional<UserPojo> actual = this.objectUnderTest.findById(ID);
+    Optional<SystemUserPojo> actual = this.objectUnderTest.findById(ID);
 
     // Assert
 
@@ -307,14 +307,14 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findByQuery(query)).thenReturn(entityQueryResults);
 
     // Act
-    QueryResults<UserPojo> pojoQueryResults = this.objectUnderTest.findByQuery(parameterMap);
+    QueryResults<SystemUserPojo> pojoQueryResults = this.objectUnderTest.findByQuery(parameterMap);
 
     // Assert
 
     Mockito.verify(this.repository).findByQuery(query);
 
     Assert.assertEquals(1, pojoQueryResults.getSize());
-    UserPojo pojo = pojoQueryResults.get(0);
+    SystemUserPojo pojo = pojoQueryResults.get(0);
 
     Assert.assertEquals(ID, pojo.getId());
     Assert.assertEquals(USERNAME, pojo.getUsername());
@@ -329,7 +329,7 @@ public class AbstractJpaCrudServiceImplTest
   {
 
     TestUserEntity entity = new TestUserEntity();
-    JpqlQuery<UserPojo> pojoQuery = new JpqlQuery<UserPojo>(UserPojo.class)//
+    JpqlQuery<SystemUserPojo> pojoQuery = new JpqlQuery<SystemUserPojo>(SystemUserPojo.class)//
         .equals("name", NAME);
     JpqlQuery<TestUserEntity> entityQuery = new JpqlQuery<TestUserEntity>(TestUserEntity.class,
         pojoQuery);
@@ -344,14 +344,14 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findByQuery(entityQuery)).thenReturn(queryResults);
 
     // Act
-    QueryResults<UserPojo> actualQueryResults = this.objectUnderTest.findByQuery(pojoQuery);
+    QueryResults<SystemUserPojo> actualQueryResults = this.objectUnderTest.findByQuery(pojoQuery);
 
     // Assert
 
     Mockito.verify(this.repository).findByQuery(entityQuery);
 
     Assert.assertEquals(1, actualQueryResults.getRecordsTotal());
-    UserPojo actual = actualQueryResults.get(0);
+    SystemUserPojo actual = actualQueryResults.get(0);
     Assert.assertEquals(ID, actual.getId());
     Assert.assertEquals(USERNAME, actual.getUsername());
   }
@@ -402,7 +402,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.getReferenceById(ID)).thenReturn(entity);
 
     // Act
-    UserPojo actual = this.objectUnderTest.get(ID);
+    SystemUserPojo actual = this.objectUnderTest.get(ID);
 
     // Assert
 
@@ -421,7 +421,7 @@ public class AbstractJpaCrudServiceImplTest
   {
     TestUserEntity entity = new TestUserEntity();
     Set<Long> ids = new HashSet<>(Collections.singleton(ID));
-    UserPojo actual;
+    SystemUserPojo actual;
     JpqlQuery<TestUserEntity> query = new JpqlQuery<TestUserEntity>(TestUserEntity.class)//
         .in("id", ids);
     TestUserEntity[] expected = new TestUserEntity[] { entity };
@@ -435,7 +435,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
 
     // Act
-    Map<Long, UserPojo> actuals = this.objectUnderTest.getMap(ids);
+    Map<Long, SystemUserPojo> actuals = this.objectUnderTest.getMap(ids);
 
     // Assert
 
@@ -473,7 +473,7 @@ public class AbstractJpaCrudServiceImplTest
   {
     TestUserEntity entity = new TestUserEntity();
     Set<Long> ids = new HashSet<>(Collections.singleton(ID));
-    UserPojo actual;
+    SystemUserPojo actual;
     JpqlQuery<TestUserEntity> query = new JpqlQuery<TestUserEntity>(TestUserEntity.class)//
         .in("id", ids);
     TestUserEntity[] expected = new TestUserEntity[] { entity };
@@ -487,7 +487,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.findByQuery(query)).thenReturn(queryResults);
 
     // Act
-    QueryResults<UserPojo> actuals = this.objectUnderTest.get(ids);
+    QueryResults<SystemUserPojo> actuals = this.objectUnderTest.get(ids);
 
     // Assert
 
@@ -506,8 +506,8 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testIsNotEmptyMapOfQQWhenFalse()
   {
-    Map<Long, UserPojo> map = new HashMap<>();
-    UserPojo pojo = new UserPojo();
+    Map<Long, SystemUserPojo> map = new HashMap<>();
+    SystemUserPojo pojo = new SystemUserPojo();
 
     // Arrange
 
@@ -527,7 +527,7 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testIsNotEmptyMapOfQQWhenTrue()
   {
-    Map<Long, UserPojo> map = new HashMap<>();
+    Map<Long, SystemUserPojo> map = new HashMap<>();
 
     // Arrange
 
@@ -546,10 +546,10 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testCreateOrUpdateAllWithAllExisting() throws Exception
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
-    List<UserPojo> all = new ArrayList<>(Collections.singletonList(pojo));
-    Function<UserPojo, Long> pojoKeyMapper = UserPojo::getId;
+    List<SystemUserPojo> all = new ArrayList<>(Collections.singletonList(pojo));
+    Function<SystemUserPojo, Long> pojoKeyMapper = SystemUserPojo::getId;
     Function<TestUserEntity, Long> entityKeyMapper = TestUserEntity::getId;
     String idFieldName = "id";
     Set<Long> keySet = Sets.newSet(ID);
@@ -588,7 +588,7 @@ public class AbstractJpaCrudServiceImplTest
   @Test
   public void testUpdate()
   {
-    UserPojo pojo = new UserPojo();
+    SystemUserPojo pojo = new SystemUserPojo();
     TestUserEntity entity = new TestUserEntity();
 
     // Arrange
@@ -602,7 +602,7 @@ public class AbstractJpaCrudServiceImplTest
     Mockito.when(this.repository.save(entity)).thenReturn(entity);
 
     // Act
-    UserPojo updatedPojo = this.objectUnderTest.update(pojo);
+    SystemUserPojo updatedPojo = this.objectUnderTest.update(pojo);
 
     // Assert
 

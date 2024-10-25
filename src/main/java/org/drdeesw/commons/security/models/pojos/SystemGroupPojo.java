@@ -2,7 +2,7 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedUniquePojo;
-import org.drdeesw.commons.security.models.Group;
+import org.drdeesw.commons.security.models.SystemGroup;
 
 
 /**
@@ -12,7 +12,7 @@ import org.drdeesw.commons.security.models.Group;
  *
  */
 @SuppressWarnings("serial")
-public class GroupPojo extends AbstractNamedUniquePojo<Long> implements Group
+public class SystemGroupPojo extends AbstractNamedUniquePojo<Long> implements SystemGroup
 {
 
 }

@@ -1,15 +1,15 @@
 package org.drdeesw.commons.common.services.impl;
 
 import org.drdeesw.commons.security.models.entities.TestUserEntity;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
 
 public class TestableAbstractJpaCrudServiceImpl
-    extends AbstractJpaCrudServiceImpl<UserPojo, TestUserEntity, Long>
+    extends AbstractJpaCrudServiceImpl<SystemUserPojo, TestUserEntity, Long>
 {
 
   public TestableAbstractJpaCrudServiceImpl()
   {
-    super(UserPojo.class, TestUserEntity.class);
+    super(SystemUserPojo.class, TestUserEntity.class);
   }
 
 }

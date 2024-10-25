@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.security.models.GroupMember;
+import org.drdeesw.commons.security.models.SystemGroupMember;
 
 
 /**
@@ -23,33 +23,33 @@ import org.drdeesw.commons.security.models.GroupMember;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class GroupMemberEntity extends AbstractLongUniqueEntity implements GroupMember
+public abstract class SystemGroupMemberEntity extends AbstractLongUniqueEntity implements SystemGroupMember
 {
   @Column(name = "group_id")
-  private Long   groupId;
+  private Long   systemGroupId;
   @Column(name = "username")
   private String username;
 
   /**
    * Hibernate
    */
-  protected GroupMemberEntity()
+  protected SystemGroupMemberEntity()
   {
   }
 
 
-  protected GroupMemberEntity(Long id)
+  protected SystemGroupMemberEntity(Long id)
   {
     super(id);
   }
 
 
   /**
-   * @return the groupId
+   * @return the systemGroupId
    */
-  public Long getGroupId()
+  public Long getSystemGroupId()
   {
-    return groupId;
+    return systemGroupId;
   }
 
 
@@ -64,11 +64,11 @@ public abstract class GroupMemberEntity extends AbstractLongUniqueEntity impleme
 
 
   /**
-   * @param groupId the role to set
+   * @param systemGroupId the role to set
    */
-  public void setGroupId(Long groupId)
+  public void setSystemGroupId(Long systemGroupId)
   {
-    this.groupId = groupId;
+    this.systemGroupId = systemGroupId;
   }
 
 

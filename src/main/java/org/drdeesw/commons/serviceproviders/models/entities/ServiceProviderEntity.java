@@ -17,7 +17,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "aervice_providers")
+@Table(name = "service_providers")
 public class ServiceProviderEntity extends AbstractNamedLongUniqueEntity implements ServiceProvider
 {
   ServiceProviderTypeEntity type;

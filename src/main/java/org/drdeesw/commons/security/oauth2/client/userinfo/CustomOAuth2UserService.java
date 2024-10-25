@@ -99,7 +99,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                             + "': response contains invalid content type '"
                             + ex.getContentType().toString() + "'. "
                             + "The UserInfo Response should return a JSON object (content type 'application/json') "
-                            + "that contains a collection of name and value pairs of the claims about the authenticated End-User. "
+                            + "that contains a collection of name and value pairs of the claims about the authenticated End-SystemUser. "
                             + "Please ensure the UserInfo Uri in UserInfoEndpoint for Client Registration '"
                             + userRequest.getClientRegistration().getRegistrationId()
                             + "' conforms to the UserInfo Endpoint, "
