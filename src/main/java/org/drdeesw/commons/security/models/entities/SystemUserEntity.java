@@ -8,11 +8,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.security.models.SystemUser;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder.AccountType;
 
 
 /**
@@ -23,7 +23,8 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder.
  *
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
+@Entity
+@Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @Access(AccessType.FIELD)
 public abstract class SystemUserEntity extends AbstractLongUniqueEntity implements SystemUser

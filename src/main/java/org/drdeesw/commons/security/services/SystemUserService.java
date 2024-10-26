@@ -9,10 +9,10 @@ import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
 /**
  * 
  */
-public interface UserService<P extends SystemUserPojo> extends CrudService<P, Long>
+public interface SystemUserService extends CrudService<SystemUserPojo, Long>
 {
   /**
    * @return
    */
-  P getCurrentUser();
+  SystemUserPojo getCurrentUser();
 }

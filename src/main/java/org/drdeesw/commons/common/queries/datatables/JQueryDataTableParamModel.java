@@ -50,7 +50,7 @@ public class JQueryDataTableParamModel implements Serializable
   /**
    * The copy constructor.
    * 
-   * @param that
+   * @param that the object to copy
    */
   public JQueryDataTableParamModel(JQueryDataTableParamModel that)
   {
@@ -142,8 +142,8 @@ public class JQueryDataTableParamModel implements Serializable
 
 
   /**
-   * @param data
-   * @return
+   * @param data the columnData to set
+   * @return the column search value
    */
   public String getColumnSearchValue(
     String data)
@@ -186,7 +186,7 @@ public class JQueryDataTableParamModel implements Serializable
    * thus can return out of sequence). This is used as part of the draw 
    * return parameter.
    * 
-   * @return the draw
+   * @return the draw 
    */
   public Integer getDraw()
   {
@@ -270,8 +270,8 @@ public class JQueryDataTableParamModel implements Serializable
 
 
   /**
-   * @param data
-   * @return
+   * @param data the columnData to search
+   * @return the search value for the column
    */
   public String getSearchValue(
     String data)
@@ -317,6 +317,10 @@ public class JQueryDataTableParamModel implements Serializable
   }
 
 
+  /**
+   * @param key the key
+   * @param value the value
+   */
   public void setAjaxData(
     String key,
     Object value)
@@ -335,6 +339,9 @@ public class JQueryDataTableParamModel implements Serializable
   }
 
 
+  /**
+   * @param columnNames the column names to set
+   */
   public void setColumnNames(
     String[] columnNames)
   {

@@ -7,7 +7,8 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.security.models.SystemGroupMember;
@@ -21,7 +22,8 @@ import org.drdeesw.commons.security.models.SystemGroupMember;
  *
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
+@Entity
+@Table(name = "group_members")
 @Access(AccessType.FIELD)
 public abstract class SystemGroupMemberEntity extends AbstractLongUniqueEntity implements SystemGroupMember
 {
