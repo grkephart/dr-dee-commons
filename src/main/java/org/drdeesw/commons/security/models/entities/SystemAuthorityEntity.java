@@ -3,6 +3,7 @@ package org.drdeesw.commons.security.models.entities;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -21,6 +22,7 @@ import org.drdeesw.commons.security.models.SystemAuthority;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "authorities")
+@AttributeOverride(name = "id", column = @Column(name = "authority_id"))
 @Access(AccessType.FIELD)
 public abstract class SystemAuthorityEntity extends AbstractUniqueEntity<Long> implements SystemAuthority
 {

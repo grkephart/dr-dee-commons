@@ -6,6 +6,8 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +28,7 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @Entity
 @Table(name = "organizations")
 @AttributeOverride(name = "id", column = @Column(name = "organization_id"))
+@Access(AccessType.FIELD)
 public class OrganizationEntity extends AbstractNamedLongUniqueEntity implements Organization
 {
   @Column(name = "created_by_id")

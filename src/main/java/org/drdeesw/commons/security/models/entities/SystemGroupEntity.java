@@ -22,8 +22,8 @@ import org.drdeesw.commons.security.models.SystemGroup;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "groups")
-@Access(AccessType.FIELD)
 @AttributeOverride(name = "name", column = @Column(name = "group_name"))
+@Access(AccessType.FIELD)
 public abstract class SystemGroupEntity extends AbstractNamedUniqueEntity<Long> implements SystemGroup
 {
 

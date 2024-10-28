@@ -6,6 +6,7 @@ package org.drdeesw.commons.security.models.entities;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -24,6 +25,7 @@ import org.drdeesw.commons.security.models.SystemGroupMember;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "group_members")
+@AttributeOverride(name = "id", column = @Column(name = "group_member_id"))
 @Access(AccessType.FIELD)
 public abstract class SystemGroupMemberEntity extends AbstractLongUniqueEntity implements SystemGroupMember
 {

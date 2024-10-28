@@ -6,6 +6,13 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 import java.time.Instant;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
@@ -15,13 +22,22 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
+@Entity
+@Table(name = "service_provider_account_token_holders")
+@AttributeOverride(name = "id", column = @Column(name = "service_provider_account_token_holder_id"))
+@Access(AccessType.FIELD)
 public class ServiceProviderAccountTokenHolderEntity extends AbstractLongUniqueEntity
     implements ServiceProviderAccountTokenHolder
 {
+  @Column(name = "access_token")
   private String                       accessToken;
+  @Column(name = "access_token_expiry")
   private Instant                      accessTokenExpiry;
+  @Column(name = "account_id")
   private ServiceProviderAccountEntity account;
+  @Column(name = "refresh_token")
   private String                       refreshToken;
+  @Column(name = "refresh_token_expiry")
   private Instant                      refreshTokenExpiry;
 
   /**

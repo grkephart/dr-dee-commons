@@ -6,6 +6,9 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,6 +23,8 @@ import org.drdeesw.commons.organization.models.OrganizationMember;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organization_members")
+@AttributeOverride(name = "id", column = @Column(name = "organization_member_id"))
+@Access(AccessType.FIELD)
 public class OrganizationMemberEntity extends AbstractLongUniqueEntity
     implements OrganizationMember
 {

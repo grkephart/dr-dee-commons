@@ -6,6 +6,9 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -23,6 +26,8 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organization_roles")
+@AttributeOverride(name = "id", column = @Column(name = "organization_role_id"))
+@Access(AccessType.FIELD)
 public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationRole
 {

@@ -4,7 +4,12 @@
 package org.drdeesw.commons.serviceproviders.models.entities;
 
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,17 +23,22 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 /**
  * 
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "service_provider_accounts")
-@SuppressWarnings("serial")
+@AttributeOverride(name = "id", column = @Column(name = "service_provider_account_id"))
+@Access(AccessType.FIELD)
 public class ServiceProviderAccountEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProviderAccount
 {
   @ManyToOne
+  @JoinColumn(name = "service_provider_id")
   private ServiceProviderEntity                   serviceProvider;
   @ManyToOne
+  @JoinColumn(name = "token_holder_id")
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
   @ManyToOne
+  @JoinColumn(name = "account_holder_id")
   private ServiceProviderAccountHolder            accountHolder;
 
   @Override
