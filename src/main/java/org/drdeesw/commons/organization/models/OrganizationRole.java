@@ -4,13 +4,15 @@
 package org.drdeesw.commons.organization.models;
 
 
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
  * 
  */
-public interface OrganizationRole extends NamedLongUniqueObject
+public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enableable
 {
   /**
   /**

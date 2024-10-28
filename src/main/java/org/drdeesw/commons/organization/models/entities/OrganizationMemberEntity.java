@@ -8,13 +8,10 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.organization.models.OrganizationMember;
 
 
 /**
@@ -22,25 +19,27 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "organization_roles")
-public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationRole
+@Table(name = "organization_members")
+public class OrganizationMemberEntity extends AbstractLongUniqueEntity
+    implements OrganizationMember
 {
   @Column(name = "created_by_id")
-  private Long               createdById;
+  private Long    createdById;
   @Column(name = "creation_date")
-  private Instant            creationDate;
-  @Column(name = "description")
-  private String             description;
+  private Instant creationDate;
   @Column(name = "enabled")
-  private boolean            enabled;
+  private boolean enabled;
   @Column(name = "last_update_date")
-  private Instant            lastUpdateDate;
+  private Instant lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long               lastUpdateId;
-  @ManyToOne
-  @JoinColumn(name = "organization_id")
-  private OrganizationEntity organization;
+  private Long    lastUpdateId;
+  @Column(name = "organization_id")
+  private Long    organizationId;
+  @Column(name = "organization_role_id")
+  private Long    roleId;
+  @Column(name = "user_id")
+  private Long    systemUserId;
+
 
   /**
    * @return the createdById
@@ -49,8 +48,6 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
   {
     return createdById;
   }
-
-
   /**
    * @return the creationDate
    */
@@ -58,15 +55,6 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
   {
     return creationDate;
   }
-
-
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-
   /**
    * @return the lastUpdateDate
    */
@@ -74,8 +62,6 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
   {
     return lastUpdateDate;
   }
-
-
   /**
    * @return the lastUpdateId
    */
@@ -83,21 +69,26 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
   {
     return lastUpdateId;
   }
-
-
   @Override
-  public Organization getOrganization()
+  public Long getOrganizationId()
   {
-    return organization;
+    return this.organizationId;
+  }
+  @Override
+  public Long getRoleId()
+  {
+    return this.roleId;
+  }
+  @Override
+  public Long getSystemUserId()
+  {
+    return this.systemUserId;
   }
 
-
-  /**
-   * @return the enabled
-   */
+  @Override
   public boolean isEnabled()
   {
-    return enabled;
+    return this.enabled;
   }
 
 
@@ -122,16 +113,6 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
 
 
   @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
-  }
-
-
-  /**
-   * @param enabled the enabled to set
-   */
   public void setEnabled(
     boolean enabled)
   {
@@ -160,19 +141,24 @@ public class OrganizationRoleEntity extends AbstractNamedLongUniqueEntity
 
 
   @Override
-  public void setOrganization(
-    Organization organization)
+  public void setOrganizationId(
+    Long organizationId)
   {
-    this.organization = (OrganizationEntity)organization;
+    this.organizationId = organizationId;
   }
-
-
   /**
-   * @param organization the organization to set
+   * @param roleId the roleId to set
    */
-  public void setOrganization(
-    OrganizationEntity organization)
+  public void setRoleId(
+    Long roleId)
   {
-    this.organization = organization;
+    this.roleId = roleId;
   }
+  @Override
+  public void setSystemUserId(
+    Long systemUserId)
+  {
+    this.systemUserId = systemUserId;
+  }
+
 }

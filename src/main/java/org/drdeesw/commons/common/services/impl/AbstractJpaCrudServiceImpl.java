@@ -47,8 +47,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   private JpaRepository<E, ID>   repository;
 
   /**
-   * @param pojoClass
-   * @param entityClass
+   * @param pojoClass the POJO class
+   * @param entityClass the entity class
    */
   protected AbstractJpaCrudServiceImpl(Class<P> pojoClass, Class<E> entityClass)
   {
@@ -69,7 +69,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   /**
    * Allows subclasses to customize the ModelMapper.
    * 
-   * @param modelMapper
+   * @param modelMapper the ModelMapper to customize
    */
   protected void customizeModelMapper(
     ModelMapper modelMapper)
@@ -78,8 +78,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param entities
-   * @return
+   * @param entities the entities to convert
+   * @return the converted POJOs
    */
   private List<P> convertEntityToPojo(
     Collection<E> entities)
@@ -93,8 +93,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param entity
-   * @return
+   * @param entity the entity to convert
+   * @return the converted POJO
    */
   protected P convertEntityToPojo(
     E entity)
@@ -104,8 +104,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param entityQueryResults
-   * @return
+   * @param entityQueryResults the entity query results to convert
+   * @return the converted POJO query results
    */
   protected QueryResults<P> convertEntityToPojo(
     QueryResults<E> entityQueryResults)
@@ -120,8 +120,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param entities
-   * @return
+   * @param pojos the POJOs to convert to entities 
+   * @return the converted entities
    */
   private List<E> convertPojoToEntity(
     Collection<P> pojos)
@@ -138,8 +138,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param pojo
-   * @return
+   * @param pojo the POJO to convert to an entity
+   * @return the converted entity
    */
   protected E convertPojoToEntity(
     P pojo)
@@ -277,9 +277,9 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param <Q>
-   * @param query
-   * @return
+   * @param <Q> the query type
+   * @param query the query to execute
+   * @return the query results
    */
   private <Q extends JpqlQuery<E>> QueryResults<P> findByEntityQuery(
     Q query)
@@ -341,8 +341,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param query
-   * @return
+   * @param query the query to execute
+   * @return the query results
    */
   public QueryResults<E> findEntities(
     JpqlQuery<E> query)
@@ -422,8 +422,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param parameterMap
-   * @return
+   * @param parameterMap the parameter map
+   * @return the query
    */
   private JpqlQuery<E> getQuery(
     MultiValueMap<String, String> parameterMap)
@@ -433,8 +433,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param <R>
-   * @param repository
+   * @param <R> the repository type
+   * @param repository the repository
    */
   protected <R extends JpaRepository<E, ID> & QueryRepository<E, ID>> void init(
     R repository)
@@ -445,8 +445,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param ids
-   * @return
+   * @param ids the IDs to check
+   * @return true if the IDs are not empty
    */
   protected boolean isNotEmpty(
     Collection<?> ids)
@@ -456,8 +456,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
 
 
   /**
-   * @param map
-   * @return
+   * @param map the map to check
+   * @return true if the map is not empty
    */
   public boolean isNotEmpty(
     Map<?, ?> map)
@@ -486,8 +486,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   /**
    * This is only used to update a Reaction, so expect this to disappear.
    * 
-   * @param entity
-   * @return
+   * @param entity the entity to update
+   * @return the updated entity as a POJO
    */
   protected P updateEntity(
     E entity)
@@ -500,8 +500,8 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * Update the existing entity's properties using the pojo's properties.
    * Used in saveOrUpdateAll() when we're updating some entities and creating others.
    * 
-   * @param entity
-   * @param pojo
+   * @param entity the entity to update
+   * @param pojo the pojo to update from
    */
   protected void updateEntity(
     E entity,

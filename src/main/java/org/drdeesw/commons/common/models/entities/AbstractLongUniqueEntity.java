@@ -29,7 +29,7 @@ public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long
 
 
   /**
-   * @param that
+   * @param that the entity to copy
    */
   protected AbstractLongUniqueEntity(LongUniqueObject that)
   {
@@ -38,7 +38,7 @@ public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long
 
 
   /**
-   * @param id
+   * @param id the ID of the entity
    */
   protected AbstractLongUniqueEntity(Long id)
   {
@@ -47,7 +47,7 @@ public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long
 
 
   /**
-   * @param that
+   * @param that the entity to copy
    */
   public void update(
     AbstractLongUniqueEntity that)

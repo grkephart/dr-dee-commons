@@ -5,15 +5,15 @@ package org.drdeesw.commons.organization.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.organization.models.UserOrganizationRoleMembership;
+import org.drdeesw.commons.organization.models.OrganizationRoleMember;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public class UserOrganizationRoleMembershipPojo extends AbstractLongUniquePojo
-    implements UserOrganizationRoleMembership
+public class OrganizationRoleMemberPojo extends AbstractLongUniquePojo
+    implements OrganizationRoleMember
 {
   private boolean enabled;
   private Long    organizationRoleId;

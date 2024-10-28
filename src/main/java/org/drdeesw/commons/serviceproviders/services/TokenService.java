@@ -1,4 +1,4 @@
-package org.drdeesw.commons.serviceproviders.services.impl;
+package org.drdeesw.commons.serviceproviders.services;
 
 
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;

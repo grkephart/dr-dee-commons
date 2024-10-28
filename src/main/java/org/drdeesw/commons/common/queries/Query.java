@@ -101,6 +101,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the query type
    * @param propertyName the name of the property to compare against
    * @param value the value to compare against
    * @return the query
@@ -132,6 +133,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the query type
    * @param propertyName the name of property to compare against
    * @param operator the operator to use in the comparison
    * @param value the value to compare against
@@ -169,8 +171,10 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the query type
    * @param name the name of property to order against
    * @param ascending true for ascending or false for descending
+   * @return the query
    */
   public <Q extends Query<T>> Q addOrdering(
     String name,
@@ -241,6 +245,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query  
@@ -256,6 +261,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param propertyName the name of the property to compare against
    * @param value the value to compare against
    * @param isRef true if the value is actually a reference to another attribute (e.g. x.a = y.b) versus a literal value
@@ -274,6 +280,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param subquery the subquery to check for existence
    * @return the query
    */
@@ -358,8 +365,8 @@ public class Query<T>
 
 
   /**
-   * @param defaultValue
-   * @return
+   * @param defaultValue the default value
+   * @return the maxResults
    */
   public int getMaxResults(
     int defaultValue)
@@ -398,6 +405,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -433,6 +441,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -448,6 +457,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -463,6 +473,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -478,6 +489,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param values the values to compare against
    * @return the query
@@ -502,6 +514,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @return the query
    */
@@ -515,6 +528,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @return the query
    */
@@ -537,6 +551,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -552,6 +567,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -567,6 +583,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param fieldName the name of the field to compare against
    * @param value the value to compare against
    * @return the query
@@ -582,6 +599,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param subquery the subquery to check for non-existence
    * @return the query
    */
@@ -610,6 +628,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param alias the alias to set
    * @return the query
    */
@@ -643,7 +662,8 @@ public class Query<T>
 
 
   /**
-   * @param maxResults 
+   * @param <Q> the class of the query
+   * @param maxResults  the maxResults to set
    * @return the query
    */
   public <Q extends Query<T>> Q setMaxResults(
@@ -656,6 +676,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param performCount true if the count should be performed
    * @return the query
    */
@@ -669,6 +690,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param start the start to set
    * @return the query
    */
@@ -682,6 +704,7 @@ public class Query<T>
 
 
   /**
+   * @param <Q> the class of the query
    * @param <Q> the query type
    * @return the query
    */

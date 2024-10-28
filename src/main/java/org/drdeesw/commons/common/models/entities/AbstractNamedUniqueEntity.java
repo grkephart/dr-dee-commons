@@ -36,7 +36,7 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * @param id
+   * @param id the ID of the entity
    */
   protected AbstractNamedUniqueEntity(ID id)
   {
@@ -45,8 +45,8 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * @param id
-   * @param name
+   * @param id the ID of the entity
+   * @param name the name of the entity
    */
   protected AbstractNamedUniqueEntity(ID id, String name)
   {
@@ -56,7 +56,7 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * @param name
+   * @param name the name of the entity
    */
   protected AbstractNamedUniqueEntity(String name)
   {
@@ -65,7 +65,7 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * @param that
+   * @param that the entity to copy
    */
   protected AbstractNamedUniqueEntity(NamedUniqueObject<ID> that)
   {
@@ -170,6 +170,9 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
   }
 
 
+  /**
+   * @param that the entity to update
+   */
   public void update(
     AbstractNamedUniqueEntity<ID> that)
   {

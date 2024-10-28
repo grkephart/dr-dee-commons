@@ -3,12 +3,14 @@
  */
 package org.drdeesw.commons.organization.models;
 
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.LongUniqueObject;
 
 /**
- * 
+ * Defines a user's membership in an organization.
  */
-public interface UserOrganizationMembership extends LongUniqueObject
+public interface OrganizationMember extends LongUniqueObject, Enableable, Auditable
 {
   /**
    * @return the system userId
@@ -24,17 +26,7 @@ public interface UserOrganizationMembership extends LongUniqueObject
    * @return the organization role ID
    */
   public Long getRoleId();
-  
-  /**
-   * @return the enabled status
-   */
-  public boolean isEnabled();
-  
-  /**
-   * @param enabled the enabled status to set
-   */
-  public void setEnabled(boolean enabled);
-  
+   
   /**
    * @param systemUserId the system userId to set
    */

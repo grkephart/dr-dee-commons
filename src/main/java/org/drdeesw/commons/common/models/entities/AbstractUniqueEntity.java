@@ -66,7 +66,7 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
 
 
   /**
-   * @return
+   * @return the object
    */
   @SuppressWarnings("unchecked")
   protected <T extends AbstractUniqueEntity<ID>> T cast()
@@ -102,9 +102,9 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
 
 
   /**
-   * @param value1
-   * @param value2
-   * @return
+   * @param value1 the first value to compare
+   * @param value2 the second value to compare
+   * @return true if the values are equal, false otherwise
    */
   public boolean equalsWithNullCheck(
     Object value1,
@@ -168,7 +168,7 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
 
 
   /**
-   * @param that
+   * @param that the object
    */
   public void update(
     AbstractUniqueEntity<ID> that)
