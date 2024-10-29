@@ -66,6 +66,7 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
 
 
   /**
+   * @param <T> the type of the object
    * @return the object
    */
   @SuppressWarnings("unchecked")

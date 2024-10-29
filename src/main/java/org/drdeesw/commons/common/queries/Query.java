@@ -432,7 +432,7 @@ public class Query<T>
 
 
   /**
-   * @return
+   * @return true if there are mandatory conditions, false otherwise
    */
   public boolean hasMandatoryConditions()
   {
@@ -704,7 +704,6 @@ public class Query<T>
 
 
   /**
-   * @param <Q> the class of the query
    * @param <Q> the query type
    * @return the query
    */

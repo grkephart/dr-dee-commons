@@ -17,7 +17,6 @@ import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
-import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderTypePojo;
 
 
 /**
@@ -97,12 +96,4 @@ public class ServiceProviderEntity extends AbstractNamedLongUniqueEntity impleme
   }
 
 
-  /**
-   * @param type the type to set
-   */
-  public void setType(
-    ServiceProviderTypePojo type)
-  {
-    this.type = type;
-  }
 }

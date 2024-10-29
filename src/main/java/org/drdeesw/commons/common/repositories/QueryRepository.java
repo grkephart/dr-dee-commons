@@ -20,8 +20,9 @@ public interface QueryRepository<T extends UniqueObject<ID>, ID extends Serializ
   /**
    * Remember to add this to @EnableJpaRepositories(basePackages = { "org.drdeesw.commons.repositories", ...})
    *
-   * @param query
-   * @return
+   * @param <Q> The type of query to execute
+   * @param query The query to execute
+   * @return The results of the query
    */
   <Q extends JpqlQuery<T>> QueryResults<T> findByQuery(Q query);
 }

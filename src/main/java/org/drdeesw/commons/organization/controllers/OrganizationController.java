@@ -39,10 +39,11 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
   private OrganizationService service;
 
   /**
-   *
+   * @param order 
+   * @param bindingResult
    */
   @PostMapping(value = SECURE_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public ResponseEntity<?> createOrder(
+  public ResponseEntity<?> create(
     @Valid
     OrganizationPojo order,
     BindingResult bindingResult) throws Exception
@@ -62,9 +63,10 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param allRequestParams the request parameters
+   * @param authentication the authentication token
+   * @return the results
+   * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
   public QueryResults<OrganizationPojo> findByQuery(
@@ -77,9 +79,8 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param id 
+   * @return the organization with the given id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
   public ResponseEntity<OrganizationPojo> get(

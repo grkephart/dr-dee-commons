@@ -59,7 +59,7 @@ public class JpqlQuery<T> extends Query<T>
 
   /**
    * @param clazz the entity class
-   * @param match
+   * @param match the match type
    */
   public JpqlQuery(Class<T> clazz, Match match)
   {
@@ -69,8 +69,8 @@ public class JpqlQuery<T> extends Query<T>
 
   /**
    * @param clazz the entity class
-   * @param match
-   * @param df
+   * @param match the match type
+   * @param df the date format
    */
   public JpqlQuery(Class<T> clazz, Match match, DateFormat df)
   {
@@ -109,10 +109,10 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @param value
-   * @param operator
-   * @param isRef
-   * @return
+   * @param value the value
+   * @param operator the operator
+   * @param isRef whether the value is a reference
+   * @return the formatted value
    */
   private String formatValue(
     Object value,
@@ -162,7 +162,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @return
+   * @return the JPQL query order clause
    */
   private String getOrderClause()
   {
@@ -195,7 +195,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @return
+   * @return the JPQL query where clause
    */
   private String getWhereClause()
   {
@@ -275,8 +275,8 @@ public class JpqlQuery<T> extends Query<T>
   /**
    * Primarily for escaping single quotes in a string value.
    * 
-   * @param value
-   * @return
+   * @param value the value
+   * @return the SQL-safe string
    */
   private Object sqlSafeString(
     Object value)
@@ -293,7 +293,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @return
+   * @return the JPQL count query
    */
   public String toCountJpql()
   {
@@ -303,7 +303,7 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @return
+   * @return the JPQL query
    */
   public String toJpql()
   {
@@ -321,8 +321,8 @@ public class JpqlQuery<T> extends Query<T>
 
 
   /**
-   * @param condition
-   * @return
+   * @param condition the condition
+   * @return the JPQL version of the condition
    */
   public String toJpql(
     Condition condition)

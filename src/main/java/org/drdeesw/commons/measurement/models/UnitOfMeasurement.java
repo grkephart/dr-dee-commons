@@ -64,7 +64,7 @@ public interface UnitOfMeasurement extends NamedLongUniqueObject
   /**
    * Sets whether this is a base unit of measurement for this quantity.
    * 
-   * @param base
+   * @param base true if this is a base unit of measurement for this quantity, false otherwise
    */
   void setBase(
     boolean base);

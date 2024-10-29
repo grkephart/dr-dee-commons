@@ -26,7 +26,7 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public AbstractNamedLongUniquePojo(AbstractNamedLongUniquePojo that)
   {
@@ -35,8 +35,8 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
 
 
   /**
-   * @param id
-   * @param name
+   * @param id the id
+   * @param name the name
    */
   public AbstractNamedLongUniquePojo(Long id, String name)
   {
@@ -45,7 +45,7 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
 
 
   /**
-   * @param id
+   * @param id  
    */
   public AbstractNamedLongUniquePojo(Long id)
   {
@@ -54,7 +54,7 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
 
 
   /**
-   * @param name
+   * @param name the name
    */
   public AbstractNamedLongUniquePojo(String name)
   {
@@ -62,6 +62,9 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
   }
 
 
+  /**
+   * @param that the object to copy
+   */
   public AbstractNamedLongUniquePojo(NamedLongUniqueObject that)
   {
     super(that);

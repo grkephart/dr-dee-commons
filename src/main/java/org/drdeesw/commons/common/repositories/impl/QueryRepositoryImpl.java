@@ -40,7 +40,7 @@ public class QueryRepositoryImpl<T extends UniqueObject<ID>, ID extends Serializ
   /**
    * Unit testing.
    * 
-   * @param em
+   * @param em EntityManager
    */
   public QueryRepositoryImpl(EntityManager em)
   {

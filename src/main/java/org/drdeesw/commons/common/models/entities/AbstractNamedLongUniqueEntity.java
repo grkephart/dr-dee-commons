@@ -27,7 +27,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public AbstractNamedLongUniqueEntity(NamedLongUniqueObject that)
   {
@@ -36,8 +36,8 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
 
 
   /**
-   * @param id
-   * @param name
+   * @param id the id
+   * @param name the name
    */
   public AbstractNamedLongUniqueEntity(Long id, String name)
   {
@@ -46,7 +46,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
 
 
   /**
-   * @param id
+   * @param id the id
    */
   public AbstractNamedLongUniqueEntity(Long id)
   {
@@ -55,7 +55,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
 
 
   /**
-   * @param name
+   * @param name the name
    */
   public AbstractNamedLongUniqueEntity(String name)
   {

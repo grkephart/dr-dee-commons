@@ -30,6 +30,7 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
   /**
    * @param pojos the list of POJOs to create
    * @return the list of created POJOs
+   * @throws Exception
    */
   List<P> create(
     Collection<P> pojos) throws Exception;

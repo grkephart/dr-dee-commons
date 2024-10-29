@@ -28,7 +28,7 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
 
 
   /**
-   * @param id
+   * @param id the id
    */
   protected AbstractNamedUniquePojo(ID id)
   {
@@ -37,8 +37,8 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
 
 
   /**
-   * @param id
-   * @param name
+   * @param id the id
+   * @param name the name
    */
   protected AbstractNamedUniquePojo(ID id, String name)
   {
@@ -48,7 +48,7 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
 
 
   /**
-   * @param name
+   * @param name the name
    */
   protected AbstractNamedUniquePojo(String name)
   {
@@ -57,7 +57,7 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   protected AbstractNamedUniquePojo(AbstractNamedUniquePojo<ID> that)
   {
@@ -68,7 +68,7 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public AbstractNamedUniquePojo(NamedUniqueObject<ID> that)
   {
@@ -174,6 +174,9 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
   }
 
 
+  /**
+   * @param that the object to update
+   */
   public void update(
     AbstractNamedUniquePojo<ID> that)
   {

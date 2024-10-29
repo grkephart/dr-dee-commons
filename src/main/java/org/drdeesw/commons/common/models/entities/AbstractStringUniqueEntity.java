@@ -29,7 +29,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
 
 
   /**
-   * @param that
+   * @param that  The object to copy
    */
   protected AbstractStringUniqueEntity(StringUniqueObject that)
   {
@@ -38,7 +38,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
 
 
   /**
-   * @param id
+   * @param id The unique identifier
    */
   protected AbstractStringUniqueEntity(String id)
   {
@@ -47,7 +47,7 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
 
 
   /**
-   * @param that
+   * @param that The object to copy
    */
   public void update(
     AbstractStringUniqueEntity that)

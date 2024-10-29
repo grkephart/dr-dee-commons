@@ -52,7 +52,7 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public AbstractUniquePojo(UniqueObject<ID> that)
   {
@@ -61,7 +61,8 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
 
 
   /**
-   * @return
+   * @param <T> the type of the object
+   * @return the object
    */
   @SuppressWarnings("unchecked")
   protected <T extends AbstractUniquePojo<ID>> T cast()
@@ -97,9 +98,9 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
 
 
   /**
-   * @param value1
-   * @param value2
-   * @return
+   * @param value1 the first value
+   * @param value2 the second value
+   * @return true if the values are equal, false otherwise  
    */
   public boolean equalsWithNullCheck(
     Object value1,

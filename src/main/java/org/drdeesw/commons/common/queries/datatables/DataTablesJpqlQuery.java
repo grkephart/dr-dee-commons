@@ -26,7 +26,7 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
   /**
    * Defaults to MATCH_ANY.
    * 
-   * @param clazz
+   * @param clazz The entity class
    */
   public DataTablesJpqlQuery(Class<T> clazz)
   {
@@ -37,8 +37,8 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
   /**
    * Defaults to MATCH_ANY.
    * 
-   * @param clazz
-   * @param model
+   * @param clazz The entity class
+   * @param model The DataTables model
    */
   public DataTablesJpqlQuery(Class<T> clazz, JQueryDataTableParamModel model)
   {
@@ -47,9 +47,9 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 
 
   /**
-   * @param clazz
-   * @param model
-   * @param match
+   * @param clazz The entity class
+   * @param model The DataTable model
+   * @param match The match type
    */
   public DataTablesJpqlQuery(Class<T> clazz, JQueryDataTableParamModel model, Match match)
   {
@@ -153,8 +153,8 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 
   /**
    * 
-   * @param clazz
-   * @param match
+   * @param clazz The entity class
+   * @param match The match type
    */
   public DataTablesJpqlQuery(Class<T> clazz, Match match)
   {
@@ -163,8 +163,8 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 
 
   /**
-   * @param clazz
-   * @param allRequestParams
+   * @param clazz The entity class
+   * @param allRequestParams The request parameters
    */
   public DataTablesJpqlQuery(Class<T> clazz, MultiValueMap<String, String> allRequestParams)
   {
@@ -173,9 +173,9 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 
 
   /**
-   * @param clazz
-   * @param allRequestParams
-   * @param match
+   * @param clazz The entity class
+   * @param allRequestParams The request parameters
+   * @param match The match type
    */
   public DataTablesJpqlQuery(Class<T> clazz, MultiValueMap<String, String> allRequestParams,
                              Match match)
@@ -184,6 +184,7 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
   }
 
 
+  @SuppressWarnings("rawtypes")
   @Override
   public boolean equals(
     Object obj)

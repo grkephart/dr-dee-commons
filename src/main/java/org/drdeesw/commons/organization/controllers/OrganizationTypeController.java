@@ -62,9 +62,10 @@ public class OrganizationTypeController extends AbstractCrudController<Organizat
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param allRequestParams the request parameters
+   * @param authentication the authentication token
+   * @return the results of the query
+   * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
   public QueryResults<OrganizationTypePojo> findByQuery(
@@ -77,9 +78,8 @@ public class OrganizationTypeController extends AbstractCrudController<Organizat
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param id the id
+   * @return the entity with the given id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
   public ResponseEntity<OrganizationTypePojo> get(

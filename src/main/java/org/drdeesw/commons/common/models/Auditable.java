@@ -52,14 +52,14 @@ public interface Auditable
 
 
   /**
-   * @param lastUpdateDate
+   * @param lastUpdateDate the last update date of the object
    */
   void setLastUpdateDate(
     Instant lastUpdateDate);
 
 
   /**
-   * @param lastUpdateId
+   * @param lastUpdateId the ID of the user who last updated the object
    */
   void setLastUpdateId(
     Long lastUpdateId);

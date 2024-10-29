@@ -30,8 +30,8 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
     extends AbstractJpaCrudServiceImpl<P, E, ID> implements ComposerCrudService<P, ID>
 {
   /**
-   * @param pojoClass
-   * @param entityClass
+   * @param pojoClass the POJO class
+   * @param entityClass the entity class
    */
   protected AbstractComposerJpaCrudServiceImpl(Class<P> pojoClass, Class<E> entityClass)
   {
@@ -43,8 +43,8 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
    * Sometimes it's more efficient to compose the entire collection at once.
    * May save on calls to other services.
    * 
-   * @param values
-   * @return
+   * @param values the collection of POJOs
+   * @return the collection of composed POJOs
    */
   protected abstract Collection<P> compose(
     Collection<P> values);
@@ -52,16 +52,16 @@ public abstract class AbstractComposerJpaCrudServiceImpl<P extends UniquePojo<ID
 
   /**
    * 
-   * @param pojo
-   * @return
+   * @param pojo the POJO
+   * @return the composed POJO
    */
   protected abstract P compose(
     P pojo);
 
 
   /**
-   * @param queryResults
-   * @return
+   * @param queryResults the query results
+   * @return the composed query results
    */
   protected QueryResults<P> compose(
     QueryResults<P> queryResults)

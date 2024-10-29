@@ -26,7 +26,7 @@ public abstract class AbstractLongUniquePojo extends AbstractUniquePojo<Long>
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   protected AbstractLongUniquePojo(LongUniqueObject that)
   {
@@ -35,7 +35,7 @@ public abstract class AbstractLongUniquePojo extends AbstractUniquePojo<Long>
 
 
   /**
-   * @param id
+   * @param id the id
    */
   protected AbstractLongUniquePojo(Long id)
   {
@@ -44,7 +44,7 @@ public abstract class AbstractLongUniquePojo extends AbstractUniquePojo<Long>
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public void update(
     AbstractLongUniquePojo that)

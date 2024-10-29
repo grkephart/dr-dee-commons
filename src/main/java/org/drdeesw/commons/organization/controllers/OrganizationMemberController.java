@@ -62,9 +62,10 @@ public class OrganizationMemberController extends AbstractCrudController<Organiz
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param allRequestParams the request parameters
+   * @param authentication the authentication token
+   * @return the results
+   * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
   public QueryResults<OrganizationMemberPojo> findByQuery(
@@ -77,9 +78,8 @@ public class OrganizationMemberController extends AbstractCrudController<Organiz
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param id the id
+   * @return the organization member with the given id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
   public ResponseEntity<OrganizationMemberPojo> get(

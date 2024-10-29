@@ -62,9 +62,10 @@ public class OrganizationRoleController extends AbstractCrudController<Organizat
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param allRequestParams the request parameters
+   * @param authentication the authentication token
+   * @return the query results
+   * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
   public QueryResults<OrganizationRolePojo> findByQuery(
@@ -77,9 +78,8 @@ public class OrganizationRoleController extends AbstractCrudController<Organizat
 
 
   /**
-   * @param id
-   * @return
-   * @throws Exception 
+   * @param id the id
+   * @return the organization role that matches the id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
   public ResponseEntity<OrganizationRolePojo> get(
