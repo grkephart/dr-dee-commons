@@ -20,27 +20,20 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   private String                  description;
   private ServiceProviderTypePojo type;
 
-  /**
-   * @return the authenticationType
-   */
+  @Override
   public AuthenticationType getAuthenticationType()
   {
     return authenticationType;
   }
 
 
-  /**
-   * @return the description
-   */
+  @Override
   public String getDescription()
   {
     return description;
   }
 
 
-  /**
-   * @return the type
-   */
   @Override
   public ServiceProviderTypePojo getType()
   {
@@ -48,9 +41,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
-  /**
-   * @param authenticationType the authenticationType to set
-   */
+  @Override
   public void setAuthenticationType(
     AuthenticationType authenticationType)
   {
@@ -58,9 +49,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
-  /**
-   * @param description the description to set
-   */
+  @Override
   public void setDescription(
     String description)
   {
@@ -68,9 +57,6 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
-  /**
-   * @param type the type to set
-   */
   @Override
   public void setType(
     ServiceProviderType type)
@@ -78,13 +64,4 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
     this.type = (ServiceProviderTypePojo)type;
   }
 
-
-  /**
-   * @param type the type to set
-   */
-  public void setType(
-    ServiceProviderTypePojo type)
-  {
-    this.type = type;
-  }
 }

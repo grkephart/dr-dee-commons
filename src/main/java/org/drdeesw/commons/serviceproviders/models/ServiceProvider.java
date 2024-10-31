@@ -4,13 +4,14 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
+import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
  * 
  */
-public interface ServiceProvider extends NamedLongUniqueObject
+public interface ServiceProvider extends NamedLongUniqueObject, Describable
 {
   /**
    * Returns the authentication type of the service provider.
@@ -18,14 +19,6 @@ public interface ServiceProvider extends NamedLongUniqueObject
    * @return the authentication type
    */
   AuthenticationType getAuthenticationType();
-
-
-  /**
-   * Returns the description of the service provider.
-   * 
-   * @return the description
-   */
-  String getDescription();
 
 
   /**
@@ -43,15 +36,6 @@ public interface ServiceProvider extends NamedLongUniqueObject
    */
   void setAuthenticationType(
     AuthenticationType authenticationType);
-
-
-  /**
-   * Sets the description of the service provider.
-   * 
-   * @param description the description
-   */
-  void setDescription(
-    String description);
 
 
   /**

@@ -45,54 +45,42 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   }
 
 
-  /**
-   * @return the accessToken
-   */
+  @Override
   public String getAccessToken()
   {
     return accessToken;
   }
 
 
-  /**
-   * @return the accessTokenExpiry
-   */
+  @Override
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
   }
 
 
-  /**
-   * @return the account
-   */
+  @Override
   public ServiceProviderAccount getAccount()
   {
     return account;
   }
 
 
-  /**
-   * @return the refreshToken
-   */
+  @Override
   public String getRefreshToken()
   {
     return refreshToken;
   }
 
 
-  /**
-   * @return the refreshTokenExpiry
-   */
+  @Override
   public Instant getRefreshTokenExpiry()
   {
     return refreshTokenExpiry;
   }
 
 
-  /**
-   * @param accessToken the accessToken to set
-   */
+  @Override
   public void setAccessToken(
     String accessToken)
   {
@@ -100,9 +88,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   }
 
 
-  /**
-   * @param accessTokenExpiry the accessTokenExpiry to set
-   */
+  @Override
   public void setAccessTokenExpiry(
     Instant accessTokenExpiry)
   {
@@ -110,9 +96,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   }
 
 
-  /**
-  * @param account the account to set
-  */
+  @Override
   public void setAccount(
     ServiceProviderAccount account)
   {
@@ -120,9 +104,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   }
 
 
-  /**
-  * @param refreshToken the refreshToken to set
-  */
+  @Override
   public void setRefreshToken(
     String refreshToken)
   {
@@ -130,9 +112,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   }
 
 
-  /**
-  * @param refreshTokenExpiry the refreshTokenExpiry to set
-  */
+  @Override
   public void setRefreshTokenExpiry(
     Instant refreshTokenExpiry)
   {

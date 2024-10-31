@@ -4,14 +4,32 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
  * 
  */
-public interface ServiceProviderAccount extends NamedLongUniqueObject
+public interface ServiceProviderAccount extends LongUniqueObject, Describable
 {
+  /**
+   * Returns the accountHolder.
+   * 
+   * @return the accountHolder
+   */
+  ServiceProviderAccountHolder getAccountHolder();
+
+
+  /**
+   * Returns the service provider's internal ID of the account.
+   * It could be an account number or a username or email or GUID.
+   * 
+   * @return  the service provider's internal ID of the account
+   */
+  String getInternalId();
+
+
   /**
    * Returns the serviceProvider.
    * 
@@ -29,11 +47,22 @@ public interface ServiceProviderAccount extends NamedLongUniqueObject
 
 
   /**
-   * Returns the accountHolder.
+   * Sets the accountHolder.
    * 
-   * @return the accountHolder
+   * @param accountHolder the accountHolder to set
    */
-  ServiceProviderAccountHolder getAccountHolder();
+  void setAccountHolder(
+    ServiceProviderAccountHolder accountHolder);
+
+
+  /**
+   * Sets the service provider's internal ID of the account.
+   * It could be an account number or a username or email or GUID.
+   * 
+   * @param internalId the service provider's internal ID of the account to set
+   */
+  void setInternalId(
+    String internalId);
 
 
   /**
@@ -52,13 +81,4 @@ public interface ServiceProviderAccount extends NamedLongUniqueObject
    */
   void setTokenHolder(
     ServiceProviderAccountTokenHolder tokenHolder);
-
-
-  /**
-   * Sets the accountHolder.
-   * 
-   * @param accountHolder the accountHolder to set
-   */
-  void setAccountHolder(
-    ServiceProviderAccountHolder accountHolder);
 }

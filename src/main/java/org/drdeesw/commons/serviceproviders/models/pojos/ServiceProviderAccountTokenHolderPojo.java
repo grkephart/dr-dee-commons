@@ -18,60 +18,48 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePojo
     implements ServiceProviderAccountTokenHolder
 {
-  private String                        accessToken;
-  private Instant                       accessTokenExpiry;
+  private String                     accessToken;
+  private Instant                    accessTokenExpiry;
   private ServiceProviderAccountPojo account;
-  private String                        refreshToken;
-  private Instant                       refreshTokenExpiry;
+  private String                     refreshToken;
+  private Instant                    refreshTokenExpiry;
 
-  /**
-   * @return the accessToken
-   */
+  @Override
   public String getAccessToken()
   {
     return accessToken;
   }
 
 
-  /**
-   * @return the accessTokenExpiry
-   */
+  @Override
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
   }
 
 
-  /**
-   * @return the account
-   */
+  @Override
   public ServiceProviderAccount getAccount()
   {
     return account;
   }
 
 
-  /**
-   * @return the refreshToken
-   */
+  @Override
   public String getRefreshToken()
   {
     return refreshToken;
   }
 
 
-  /**
-   * @return the refreshTokenExpiry
-   */
+  @Override
   public Instant getRefreshTokenExpiry()
   {
     return refreshTokenExpiry;
   }
 
 
-  /**
-   * @param accessToken the accessToken to set
-   */
+  @Override
   public void setAccessToken(
     String accessToken)
   {
@@ -79,9 +67,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
   }
 
 
-  /**
-   * @param accessTokenExpiry the accessTokenExpiry to set
-   */
+  @Override
   public void setAccessTokenExpiry(
     Instant accessTokenExpiry)
   {
@@ -89,9 +75,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
   }
 
 
-  /**
-  * @param account the account to set
-  */
+  @Override
   public void setAccount(
     ServiceProviderAccount account)
   {
@@ -99,9 +83,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
   }
 
 
-  /**
-  * @param refreshToken the refreshToken to set
-  */
+  @Override
   public void setRefreshToken(
     String refreshToken)
   {
@@ -109,9 +91,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
   }
 
 
-  /**
-  * @param refreshTokenExpiry the refreshTokenExpiry to set
-  */
+  @Override
   public void setRefreshTokenExpiry(
     Instant refreshTokenExpiry)
   {

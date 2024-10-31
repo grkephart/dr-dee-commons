@@ -6,11 +6,12 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
+import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
@@ -23,18 +24,22 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderAccountEntity extends AbstractNamedLongUniqueEntity
+public abstract class AbstractServiceProviderAccountEntity extends AbstractLongUniqueEntity
     implements ServiceProviderAccount
 {
+  @ManyToOne
+  @JoinColumn(name = "account_holder_id")
+  private ServiceProviderAccountHolder            accountHolder;
+  @Column(name = "description")
+  private String                                  description;
+  @Column(name = "internal_id")
+  private String                                  internalId;
   @ManyToOne
   @JoinColumn(name = "service_provider_id")
   private ServiceProviderEntity                   serviceProvider;
   @ManyToOne
   @JoinColumn(name = "token_holder_id")
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
-  @ManyToOne
-  @JoinColumn(name = "account_holder_id")
-  private ServiceProviderAccountHolder            accountHolder;
 
   /**
    * 
@@ -42,6 +47,27 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   protected AbstractServiceProviderAccountEntity()
   {
 
+  }
+
+
+  @Override
+  public ServiceProviderAccountHolder getAccountHolder()
+  {
+    return this.accountHolder;
+  }
+
+
+  @Override
+  public String getDescription()
+  {
+    return description;
+  }
+
+
+  @Override
+  public String getInternalId()
+  {
+    return this.internalId;
   }
 
 
@@ -60,9 +86,26 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
-  public ServiceProviderAccountHolder getAccountHolder()
+  public void setAccountHolder(
+    ServiceProviderAccountHolder accountHolder)
   {
-    return this.accountHolder;
+    this.accountHolder = accountHolder;
+  }
+
+
+  @Override
+  public void setDescription(
+    String description)
+  {
+    this.description = description;
+  }
+
+
+  @Override
+  public void setInternalId(
+    String internalId)
+  {
+    this.internalId = internalId;
   }
 
 
@@ -79,14 +122,6 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
     ServiceProviderAccountTokenHolder tokenHolder)
   {
     this.tokenHolder = (ServiceProviderAccountTokenHolderEntity)tokenHolder;
-  }
-
-
-  @Override
-  public void setAccountHolder(
-    ServiceProviderAccountHolder accountHolder)
-  {
-    this.accountHolder = accountHolder;
   }
 
 }

@@ -43,27 +43,20 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
-  /**
-   * @return the authenticationType
-   */
+  @Override
   public AuthenticationType getAuthenticationType()
   {
     return authenticationType;
   }
 
 
-  /**
-   * @return the description
-   */
+  @Override
   public String getDescription()
   {
     return description;
   }
 
 
-  /**
-   * @return the type
-   */
   @Override
   public ServiceProviderType getType()
   {
@@ -71,9 +64,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
-  /**
-   * @param authenticationType the authenticationType to set
-   */
+  @Override
   public void setAuthenticationType(
     AuthenticationType authenticationType)
   {
@@ -81,9 +72,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
-  /**
-   * @param description the description to set
-   */
+  @Override
   public void setDescription(
     String description)
   {
@@ -91,9 +80,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
-  /**
-   * @param type the type to set
-   */
   @Override
   public void setType(
     ServiceProviderType type)

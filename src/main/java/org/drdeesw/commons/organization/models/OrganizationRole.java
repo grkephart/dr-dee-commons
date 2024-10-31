@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models;
 
 
 import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
@@ -12,16 +13,8 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enableable
+public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enableable, Describable
 {
-  /**
-  /**
-   * Returns the description of the organization role.
-   * 
-   * @return the description of the organization role
-   */
-  String getDescription();
-
 
   /**
    * Returns the organization associated with this role.
@@ -29,15 +22,6 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * @return the organization associated with this role
    */
   Organization getOrganization();
-
-
-  /**
-   * Sets the description of the organization role.
-   * 
-   * @param description the new description of the organization role
-   */
-  void setDescription(
-    String description);
 
 
   /**
