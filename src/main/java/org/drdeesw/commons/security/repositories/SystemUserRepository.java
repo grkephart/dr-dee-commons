@@ -15,6 +15,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SystemUserRepository extends JpaRepository<SystemUserEntity, Long>, QueryRepository<SystemUserEntity, Long>
 {
+  /**
+   * return the user by username
+   * 
+   * @param username the username
+   * @return the user
+   */
   SystemUserEntity findByUsername(
     String username);
 }

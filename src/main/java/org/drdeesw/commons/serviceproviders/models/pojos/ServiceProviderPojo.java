@@ -17,6 +17,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements ServiceProvider
 {
   private AuthenticationType      authenticationType;
+  private String                  clientRegistrationId;
   private String                  description;
   private ServiceProviderTypePojo type;
 
@@ -24,6 +25,13 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   public AuthenticationType getAuthenticationType()
   {
     return authenticationType;
+  }
+
+
+  @Override
+  public String getClientRegistrationId()
+  {
+    return this.clientRegistrationId;
   }
 
 
@@ -46,6 +54,14 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
     AuthenticationType authenticationType)
   {
     this.authenticationType = authenticationType;
+  }
+
+
+  @Override
+  public void setClientRegistrationId(
+    String clientRegistrationId)
+  {
+    this.clientRegistrationId = clientRegistrationId;
   }
 
 

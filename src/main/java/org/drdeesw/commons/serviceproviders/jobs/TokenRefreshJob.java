@@ -7,7 +7,7 @@ import java.util.List;
 import org.drdeesw.commons.security.models.SystemUser;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
-import org.drdeesw.commons.serviceproviders.services.TokenService;
+import org.drdeesw.commons.serviceproviders.services.ServiceProviderTokenService;
 import org.drdeesw.commons.serviceproviders.services.impl.ServiceProviderAccountServiceImpl;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TokenRefreshJob<U extends SystemUser> implements Job
 {
   @Autowired
-  private TokenService                      tokenService;
+  private ServiceProviderTokenService                      tokenService;
 
   @Autowired
   private ServiceProviderAccountServiceImpl serviceProviderAccountService;

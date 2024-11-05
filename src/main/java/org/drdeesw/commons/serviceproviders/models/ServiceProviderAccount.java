@@ -9,12 +9,12 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
- * 
+ * Represents a service provider account. Contains account information and tokens.
  */
 public interface ServiceProviderAccount extends LongUniqueObject, Describable
 {
   /**
-   * Returns the accountHolder.
+   * Returns the accountHolder, either an organization or a user.
    * 
    * @return the accountHolder
    */
@@ -39,7 +39,7 @@ public interface ServiceProviderAccount extends LongUniqueObject, Describable
 
 
   /**
-   * Returns the serviceProviderAccountTokenHolder.
+   * Returns the token holder for the account.
    * 
    * @return the serviceProviderAccountTokenHolder
    */

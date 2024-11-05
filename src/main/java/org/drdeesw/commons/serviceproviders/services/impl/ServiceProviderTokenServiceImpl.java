@@ -10,7 +10,7 @@ import java.util.Map;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.services.OAuth2Client;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountService;
-import org.drdeesw.commons.serviceproviders.services.TokenService;
+import org.drdeesw.commons.serviceproviders.services.ServiceProviderTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,7 +23,7 @@ import org.springframework.util.MultiValueMap;
  * 
  */
 @Service
-public class TokenServiceImpl implements TokenService
+public class ServiceProviderTokenServiceImpl implements ServiceProviderTokenService
 {
   @Autowired
   private OAuth2Client                  oauth2Client;

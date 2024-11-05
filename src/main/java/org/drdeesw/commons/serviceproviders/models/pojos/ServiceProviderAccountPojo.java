@@ -24,6 +24,24 @@ public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
   private ServiceProviderPojo                   serviceProvider;
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 
+  /**
+   * 
+   */
+  public ServiceProviderAccountPojo()
+  {
+  }
+
+  /**
+   * @param serviceProvider the service provider
+   * @param internalId the internal id
+   */
+  public ServiceProviderAccountPojo(ServiceProviderPojo serviceProvider, String internalId)
+  {
+    this.serviceProvider = serviceProvider;
+    this.internalId = internalId;
+  }
+
+
   @Override
   public ServiceProviderAccountHolder getAccountHolder()
   {

@@ -4,7 +4,7 @@ package org.drdeesw.commons.serviceproviders.services;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 
 
-public interface TokenService
+public interface ServiceProviderTokenService
 {
 
   /**

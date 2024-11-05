@@ -5,7 +5,7 @@ package org.drdeesw.commons.serviceproviders.models;
 
 
 /**
- * 
+ * The authentication type of a service provider. This enum is used to determine the type of authentication required to access a service provider's API. Examples include API key, OAuth 2.0, and JWT.
  */
 public enum AuthenticationType {
   NONE, //No authentication is required.

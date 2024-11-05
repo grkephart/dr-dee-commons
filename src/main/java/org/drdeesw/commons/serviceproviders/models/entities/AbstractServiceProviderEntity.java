@@ -28,6 +28,8 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 {
   @Column(name = "authentication_type")
   private AuthenticationType        authenticationType;
+  @Column(name = "client_registration_Id")
+  private String        clientRegistrationId;
   @Column(name = "description")
   private String                    description;
   @ManyToOne
@@ -47,6 +49,15 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public AuthenticationType getAuthenticationType()
   {
     return authenticationType;
+  }
+
+
+  /**
+   * @return the clientRegistrationId
+   */
+  public String getClientRegistrationId()
+  {
+    return clientRegistrationId;
   }
 
 
@@ -72,6 +83,16 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  /**
+   * @param clientRegistrationId the clientRegistrationId to set
+   */
+  public void setClientRegistrationId(
+    String clientRegistrationId)
+  {
+    this.clientRegistrationId = clientRegistrationId;
+  }
+
+
   @Override
   public void setDescription(
     String description)
@@ -85,6 +106,16 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     ServiceProviderType type)
   {
     this.type = (ServiceProviderTypeEntity)type;
+  }
+
+
+  /**
+   * @param type the type to set
+   */
+  public void setType(
+    ServiceProviderTypeEntity type)
+  {
+    this.type = type;
   }
 
 }

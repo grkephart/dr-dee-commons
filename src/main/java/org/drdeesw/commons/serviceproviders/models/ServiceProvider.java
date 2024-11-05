@@ -22,6 +22,14 @@ public interface ServiceProvider extends NamedLongUniqueObject, Describable
 
 
   /**
+   * Returns the OAuth2 client registration ID for the service provider.
+   * 
+   * @return the OAuth2 client registration ID for the service provider
+   */
+  String getClientRegistrationId();
+
+
+  /**
    * Returns the type of the service provider.
    * 
    * @return the type
@@ -36,6 +44,14 @@ public interface ServiceProvider extends NamedLongUniqueObject, Describable
    */
   void setAuthenticationType(
     AuthenticationType authenticationType);
+
+
+  /**
+   * Sets the OAuth2 client registration ID for the service provider.
+   * 
+   */
+  void setClientRegistrationId(
+    String clientRegistrationId);
 
 
   /**

@@ -25,10 +25,10 @@ public class SystemUserServiceImpl extends
 {
 
   @Autowired
-  private SystemUserRepository        systemUserRepository;
+  private Oauth2SecurityConfiguration securityConfiguration;
 
   @Autowired
-  private Oauth2SecurityConfiguration securityConfiguration;
+  private SystemUserRepository        systemUserRepository;
 
   /**
    * 
@@ -36,6 +36,14 @@ public class SystemUserServiceImpl extends
   protected SystemUserServiceImpl()
   {
     super(SystemUserPojo.class, SystemUserEntity.class);
+  }
+
+
+  @Override
+  public SystemUserPojo findByUsername(
+    String username)
+  {
+    return convertEntityToPojo(this.systemUserRepository.findByUsername(username));
   }
 
 
