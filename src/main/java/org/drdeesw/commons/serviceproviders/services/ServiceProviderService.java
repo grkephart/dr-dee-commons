@@ -3,6 +3,8 @@
  */
 package org.drdeesw.commons.serviceproviders.services;
 
+import java.util.Optional;
+
 import org.drdeesw.commons.common.services.CrudService;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 
@@ -18,7 +20,7 @@ public interface ServiceProviderService extends CrudService<ServiceProviderPojo,
    * @param clientRegistrationId
    * @return the service provider
    */
-  ServiceProviderPojo findByClientRegistrationId(
+  Optional<ServiceProviderPojo> findByClientRegistrationId(
     String clientRegistrationId);
 
 }
