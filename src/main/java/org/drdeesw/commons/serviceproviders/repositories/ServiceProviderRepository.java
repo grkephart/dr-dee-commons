@@ -4,8 +4,9 @@
 package org.drdeesw.commons.serviceproviders.repositories;
 
 
+import java.util.Optional;
+
 import org.drdeesw.commons.common.repositories.QueryRepository;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -22,7 +23,7 @@ public interface ServiceProviderRepository
    * @param clientRegistrationId the OAuth2 client registration ID
    * @return
    */
-  ServiceProvider findByClientRegistrationId(
+  Optional<ServiceProviderEntity> findByClientRegistrationId(
     String clientRegistrationId);
 
 }

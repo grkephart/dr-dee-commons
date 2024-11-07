@@ -1,10 +1,11 @@
 package org.drdeesw.commons.serviceproviders.services.impl;
 
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderEntity;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 import org.drdeesw.commons.serviceproviders.repositories.ServiceProviderRepository;
@@ -30,10 +31,13 @@ public class ServiceProviderServiceImpl
 
 
   @Override
-  public ServiceProvider findByClientRegistrationId(
+  public Optional<ServiceProviderPojo> findByClientRegistrationId(
     String clientRegistrationId)
   {
-    return this.serviceProviderRepository.findByClientRegistrationId(clientRegistrationId);
+    Optional<ServiceProviderEntity> serviceProviderEntity = this.serviceProviderRepository
+        .findByClientRegistrationId(clientRegistrationId);
+
+    return serviceProviderEntity.map(this::convertEntityToPojo);
   }
 
 
