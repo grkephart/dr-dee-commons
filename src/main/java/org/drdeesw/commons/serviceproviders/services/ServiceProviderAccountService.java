@@ -27,7 +27,24 @@ public interface ServiceProviderAccountService extends CrudService<ServiceProvid
     ServiceProviderPojo serviceProvider,
     String principalName);
 
+  /**
+   * Find or create an account for the given principal name and service provider.
+   * @param clientRegistrationId the client registration id of the service provider
+   * @param principalName
+   * @return the account or empty if not found
+   */
   Optional<ServiceProviderAccountPojo> find(
+    String clientRegistrationId,
+    String principalName);
+
+  /**
+   * Find or create an account for the given principal name and service provider.
+   * 
+   * @param clientRegistrationId the client registration id of the service provider
+   * @param principalName the principal
+   * @return the account or empty if not found
+   */
+  ServiceProviderAccountPojo findOrCreate(
     String clientRegistrationId,
     String principalName);
 

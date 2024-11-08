@@ -4,7 +4,7 @@ package org.drdeesw.commons.serviceproviders.services.impl;
 import java.util.Optional;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
-import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
+import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountTokenHolderEntity;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountTokenHolderPojo;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountService;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceProviderAccountTokenHolderServiceImpl extends
-    AbstractJpaCrudServiceImpl<ServiceProviderAccountPojo, ServiceProviderAccountEntity, Long>
+    AbstractJpaCrudServiceImpl<ServiceProviderAccountTokenHolderPojo, ServiceProviderAccountTokenHolderEntity, Long>
     implements ServiceProviderAccountTokenHolderService
 {
   @Autowired
@@ -26,7 +26,7 @@ public class ServiceProviderAccountTokenHolderServiceImpl extends
    */
   protected ServiceProviderAccountTokenHolderServiceImpl()
   {
-    super(ServiceProviderAccountPojo.class, ServiceProviderAccountEntity.class);
+    super(ServiceProviderAccountTokenHolderPojo.class, ServiceProviderAccountTokenHolderEntity.class);
   }
 
 
@@ -47,15 +47,29 @@ public class ServiceProviderAccountTokenHolderServiceImpl extends
 
 
   /**
+   * @throws Exception 
    *
    */
   @Override
   public ServiceProviderAccountTokenHolderPojo findOrCreate(
     String clientRegistrationId,
-    String principalName)
+    String principalName) throws Exception
   {
-    ServiceProviderAccountService serviceProviderAccountService = this.serviceProviderAccountService
+    ServiceProviderAccountPojo serviceProviderAccount = this.serviceProviderAccountService
         .findOrCreate(clientRegistrationId, principalName);
+    ServiceProviderAccountTokenHolderPojo tokenHolder = serviceProviderAccount.getTokenHolder();
+    
+    if (serviceProviderAccount.getTokenHolder() == null)
+    {
+      tokenHolder = new ServiceProviderAccountTokenHolderPojo();
+      
+      tokenHolder.setAccount(serviceProviderAccount);
+      serviceProviderAccount.setTokenHolder(tokenHolder);
+      
+      tokenHolder = super.create(tokenHolder);
+    }
+    
+    return tokenHolder;
   }
 
 }

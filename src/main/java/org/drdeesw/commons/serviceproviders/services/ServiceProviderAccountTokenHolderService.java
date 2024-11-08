@@ -27,9 +27,10 @@ public interface ServiceProviderAccountTokenHolderService extends CrudService<Se
    * @param clientRegistrationId the service provider client registration id
    * @param principalName the principal
    * @return
+   * @throws Exception 
    */
   ServiceProviderAccountTokenHolderPojo findOrCreate(
     String clientRegistrationId,
-    String principalName);
+    String principalName) throws Exception;
 
 }
