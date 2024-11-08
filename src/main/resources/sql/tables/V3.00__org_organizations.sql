@@ -8,14 +8,13 @@ BEGIN
 
   SELECT 'Executing CheckAndCreateOrgsTable' AS Message;
 
-  SET @schema_name = 'reactrax';
   SET @table_name  = 'organizations';
   
-  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = @schema_name AND TABLE_NAME = @table_name;
+  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @table_name;
 
   IF table_exists = 0 THEN
       
-    CREATE TABLE reactrax.organizations (
+    CREATE TABLE organizations (
       organization_id  BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
       name             VARCHAR(255) NOT NULL,
       description      VARCHAR(255) NULL,
@@ -51,4 +50,4 @@ CALL CheckAndCreateOrgsTable();
 DROP PROCEDURE IF EXISTS CheckAndCreateOrgsTable;
 
 -- Verify the table creation by counting rows (should return 0 if empty)
-SELECT COUNT(*) FROM reactrax.organizations;
+SELECT COUNT(*) FROM organizations;

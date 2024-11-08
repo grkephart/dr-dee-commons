@@ -8,14 +8,13 @@ BEGIN
 
   SELECT 'Executing CheckAndCreateServiceProviderAccountsTable' AS Message;
 
-  SET @schema_name = 'reactrax';
   SET @table_name  = 'service_provider_accounts';
   
-  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = @schema_name AND TABLE_NAME = @table_name;
+  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @table_name;
 
   IF table_exists = 0 THEN
       
-    CREATE TABLE reactrax.service_provider_accounts (
+    CREATE TABLE service_provider_accounts (
       service_provider_account_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
       service_provider_id         BIGINT       UNSIGNED NOT NULL,
       name                        VARCHAR(255) NOT NULL,
@@ -45,4 +44,4 @@ CALL CheckAndCreateServiceProviderAccountsTable();
 DROP PROCEDURE IF EXISTS CheckAndCreateServiceProviderAccountsTable;
 
 -- Verify the table creation by counting rows (should return 0 if empty)
-SELECT COUNT(*) FROM reactrax.service_provider_accounts;
+SELECT COUNT(*) FROM service_provider_accounts;

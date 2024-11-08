@@ -8,14 +8,13 @@ BEGIN
   DECLARE table_exists INT           DEFAULT 0;
   DECLARE logMessage   VARCHAR(255);
 
-  SET @schema_name = 'reactrax';
   SET @table_name  = 'organization_roles';
   
-  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = @schema_name AND TABLE_NAME = @table_name;
+  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @table_name;
   
   IF table_exists = 0 THEN
       
-    CREATE TABLE reactrax.organization_roles (
+    CREATE TABLE organization_roles (
       organization_role_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
       organization_id      BIGINT       UNSIGNED NOT NULL,
       name                 VARCHAR(255) NOT NULL,
@@ -49,4 +48,4 @@ SELECT @logMessage AS Message;
 DROP PROCEDURE IF EXISTS CheckAndCreateOrgRolesTable;
 
 -- Verify the table creation by counting rows (should return 0 if empty)
-SELECT COUNT(*) FROM reactrax.organization_roles;
+SELECT COUNT(*) FROM organization_roles;

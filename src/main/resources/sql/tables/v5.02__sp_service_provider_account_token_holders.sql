@@ -8,14 +8,13 @@ BEGIN
 
   SELECT 'Executing CheckAndCreateServiceProviderTokenHoldersTable' AS Message;
 
-  SET @schema_name = 'reactrax';
   SET @table_name  = 'service_provider_account_token_holders';
   
-  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = @schema_name AND TABLE_NAME = @table_name;
+  SELECT COUNT(*) INTO table_exists FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @table_name;
 
   IF table_exists = 0 THEN
       
-    CREATE TABLE reactrax.service_provider_account_token_holders (
+    CREATE TABLE service_provider_account_token_holders (
       service_provider_account_token_holder_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
       account_id          BIGINT       UNSIGNED NOT NULL,
       access_token        VARCHAR(255) NOT NULL,
@@ -47,4 +46,4 @@ CALL CheckAndCreateServiceProviderTokenHoldersTable();
 DROP PROCEDURE IF EXISTS CheckAndCreateServiceProviderTokenHoldersTable;
 
 -- Verify the table creation by counting rows (should return 0 if empty)
-SELECT COUNT(*) FROM reactrax.service_provider_account_token_holders;
+SELECT COUNT(*) FROM service_provider_account_token_holders;
