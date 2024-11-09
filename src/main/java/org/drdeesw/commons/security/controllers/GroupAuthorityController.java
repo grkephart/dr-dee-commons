@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.serviceproviders.controllers;
+package org.drdeesw.commons.security.controllers;
 
 
 import javax.annotation.PostConstruct;
@@ -9,45 +9,46 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderTypePojo;
-import org.drdeesw.commons.serviceproviders.services.ServiceProviderTypeService;
+import org.drdeesw.commons.security.models.pojos.SystemGroupAuthorityPojo;
+import org.drdeesw.commons.security.services.SystemGroupAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- *  Service Provider Type Controller
+ * 
  */
-public class ServiceProviderControllerType
-    extends AbstractCrudController<ServiceProviderTypePojo, Long>
+@RestController
+@Validated
+public class GroupAuthorityController extends AbstractCrudController<SystemGroupAuthorityPojo, Long>
 {
-  private static final String        MAPPING_PREFIX      = "/types";
-  private static final String        FULL_MAPPING_PREFIX = ServiceProviderController.MAPPING_PREFIX
-                                                           + MAPPING_PREFIX;
+  private static final String         MAPPING_PREFIX = "/security/groupauthorities";
   @Autowired
-  private ServiceProviderTypeService service;
+  private SystemGroupAuthorityService service;
 
   /**
-   * Create a new service provider type.
+   * Creates a new groupAuthority.
    * 
-   * @param type  the service provider type
+   * @param groupAuthority the groupAuthority to create 
    * @param bindingResult the binding result
    */
-  @PostMapping(value = FULL_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    ServiceProviderTypePojo type,
+    SystemGroupAuthorityPojo groupAuthority,
     BindingResult bindingResult) throws Exception
   {
-    return super.create(type, bindingResult);
+    return super.create(groupAuthority, bindingResult);
   }
 
 
@@ -62,15 +63,15 @@ public class ServiceProviderControllerType
 
 
   /**
-   * Find all service provider types by query.
+   * Finds groupAuthorities by query.
    * 
    * @param allRequestParams the request parameters
    * @param authentication the authentication token
    * @return the results
    * @throws Exception
    */
-  @GetMapping("/dt" + FULL_MAPPING_PREFIX)
-  public QueryResults<ServiceProviderTypePojo> findByQuery(
+  @GetMapping("/dt" + MAPPING_PREFIX)
+  public QueryResults<SystemGroupAuthorityPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -80,13 +81,13 @@ public class ServiceProviderControllerType
 
 
   /**
-   * Get the service provider type with the given id.
+   * Gets an groupAuthority by id.
    * 
-   * @param id the id of the service provider type
-   * @return the service provider with the given id
+   * @param id the id of the groupAuthority 
+   * @return the groupAuthority with the given id
    */
-  @GetMapping(value = FULL_MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<ServiceProviderTypePojo> get(
+  @GetMapping(value = MAPPING_PREFIX + "/{id}")
+  public ResponseEntity<SystemGroupAuthorityPojo> get(
     @PathVariable
     Long id)
   {

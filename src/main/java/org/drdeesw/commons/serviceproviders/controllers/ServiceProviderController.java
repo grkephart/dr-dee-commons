@@ -26,9 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 public class ServiceProviderController extends AbstractCrudController<ServiceProviderPojo, Long>
 {
-  private static final String SECURE_PREFIX         = "/secure";
-  private static final String MAPPING_PREFIX        = "/serviceproviders";
-  private static final String SECURE_MAPPING_PREFIX = SECURE_PREFIX + MAPPING_PREFIX;
+  static final String MAPPING_PREFIX        = "/serviceproviders";
   @Autowired
   private ServiceProviderService service;
 
@@ -38,7 +36,7 @@ public class ServiceProviderController extends AbstractCrudController<ServicePro
    * @param serviceProvider the service provider to create
    * @param bindingResult the binding result
    */
-  @PostMapping(value = SECURE_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
     ServiceProviderPojo serviceProvider,
@@ -66,7 +64,7 @@ public class ServiceProviderController extends AbstractCrudController<ServicePro
    * @return the results
    * @throws Exception
    */
-  @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
+  @GetMapping("/dt" + MAPPING_PREFIX)
   public QueryResults<ServiceProviderPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
@@ -82,7 +80,7 @@ public class ServiceProviderController extends AbstractCrudController<ServicePro
    * @param id the id of the service provider
    * @return the service provider with the given id
    */
-  @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
+  @GetMapping(value = MAPPING_PREFIX + "/{id}")
   public ResponseEntity<ServiceProviderPojo> get(
     @PathVariable
     Long id)

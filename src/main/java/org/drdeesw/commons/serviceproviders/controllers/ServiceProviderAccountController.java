@@ -3,6 +3,7 @@
  */
 package org.drdeesw.commons.serviceproviders.controllers;
 
+
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
@@ -21,14 +22,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 /**
  * The controller for the service provider accounts
  */
-public class ServiceProviderAccountController extends AbstractCrudController<ServiceProviderAccountPojo, Long>
+public class ServiceProviderAccountController
+    extends AbstractCrudController<ServiceProviderAccountPojo, Long>
 {
-  private static final String SECURE_PREFIX         = "/secure";
-  private static final String MAPPING_PREFIX        = "/serviceprovideraccounts";
-  private static final String SECURE_MAPPING_PREFIX = SECURE_PREFIX + MAPPING_PREFIX;
+  private static final String           MAPPING_PREFIX      = "/accounts";
+  static final String                   FULL_MAPPING_PREFIX = ServiceProviderController.MAPPING_PREFIX
+                                                              + MAPPING_PREFIX;
+
   @Autowired
   private ServiceProviderAccountService service;
 
@@ -38,7 +42,7 @@ public class ServiceProviderAccountController extends AbstractCrudController<Ser
    * @param serviceProviderAccount the service provider account 
    * @param bindingResult the validation binding result
    */
-  @PostMapping(value = SECURE_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  @PostMapping(value = FULL_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
     ServiceProviderAccountPojo serviceProviderAccount,
@@ -66,7 +70,7 @@ public class ServiceProviderAccountController extends AbstractCrudController<Ser
    * @return the results
    * @throws Exception
    */
-  @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
+  @GetMapping("/dt" + FULL_MAPPING_PREFIX)
   public QueryResults<ServiceProviderAccountPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
@@ -82,7 +86,7 @@ public class ServiceProviderAccountController extends AbstractCrudController<Ser
    * @param id  the id of the service provider account
    * @return the service provider account with the given id
    */
-  @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
+  @GetMapping(value = FULL_MAPPING_PREFIX + "/{id}")
   public ResponseEntity<ServiceProviderAccountPojo> get(
     @PathVariable
     Long id)
