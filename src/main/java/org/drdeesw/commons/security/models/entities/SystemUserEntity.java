@@ -55,8 +55,8 @@ public class SystemUserEntity extends AbstractSystemUserEntity
   /**
    * For when logging in reveals a new user.
    * 
-   * @param username
-   * @param enabled
+   * @param username the username
+   * @param enabled whether the user is enabled
    */
   public SystemUserEntity(String username, boolean enabled)
   {

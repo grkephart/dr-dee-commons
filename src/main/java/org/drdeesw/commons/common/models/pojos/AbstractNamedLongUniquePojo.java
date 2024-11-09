@@ -45,7 +45,7 @@ public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
 
 
   /**
-   * @param id  
+   * @param id the id
    */
   public AbstractNamedLongUniquePojo(Long id)
   {

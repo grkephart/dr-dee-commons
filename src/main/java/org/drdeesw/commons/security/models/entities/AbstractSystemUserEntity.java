@@ -65,8 +65,8 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
   /**
    * For when logging in reveals a new user.
    * 
-   * @param username
-   * @param enabled
+   * @param username the username of the user
+   * @param enabled whether the user is enabled or not
    */
   public AbstractSystemUserEntity(String username, boolean enabled)
   {
@@ -89,28 +89,21 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
   }
 
 
-  /**
-   * The email address is the username
-   * @return
-   */
+  @Override
   public String getUsername()
   {
     return username;
   }
 
 
-  /**
-   * @return the enabled
-   */
+  @Override
   public boolean isEnabled()
   {
     return enabled;
   }
 
 
-  /**
-   * @param enabled the enabled to set
-   */
+  @Override
   public void setEnabled(
     boolean enabled)
   {
@@ -118,6 +111,7 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
   }
 
 
+  @Override
   public void setUsername(
     String email)
   {

@@ -78,6 +78,8 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Returns the results of the query.
+   * 
    * @param parameterMap the map of parameters to use in the query
    * @return the results of the query
    */
@@ -86,6 +88,9 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Returns the results of the query.
+   * 
+   * @param <Q> the query class
    * @param query the query to use
    * @return the results of the query
    */
@@ -94,6 +99,8 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Gets the object by ID.
+   * 
    * @param id the ID of the POJO to find
    * @return the POJO
    */
@@ -102,6 +109,8 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Gets the objects by IDs.
+   * 
    * @param ids the IDs of the POJOs to find
    * @return the POJOs
    */
@@ -110,6 +119,8 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Gets the objects by IDs as a map.
+   * 
    * @param ids the IDs of the POJOs to find
    * @return the POJOs in a map
    */
@@ -118,6 +129,8 @@ public interface CrudService<P extends UniquePojo<ID>, ID extends Serializable>
 
 
   /**
+   * Updates the list of POJOs.
+   * 
    * @param obj the POJO to update
    * @return the updated POJO
    */

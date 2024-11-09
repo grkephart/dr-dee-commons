@@ -11,22 +11,22 @@ public interface ServiceProviderAccountTokenHolderService extends CrudService<Se
 {
 
   /**
-   * Returns the account for the given principal name and service provider.
+   * Returns the account token holder for the given service provider account.
    * 
    * @param clientRegistrationId the service provider client registration id
    * @param principalName the principal
-   * @return the account or empty if not found
+   * @return the account token holder or empty if not found
    */
   Optional<ServiceProviderAccountTokenHolderPojo> find(
     String clientRegistrationId,
     String principalName);
 
   /**
-   * Finds or creates an account for the given principal name and service provider.
+   * Finds or creates an account token holder for the given service provider account.
    * 
    * @param clientRegistrationId the service provider client registration id
    * @param principalName the principal
-   * @return
+   * @return the account token holder
    * @throws Exception 
    */
   ServiceProviderAccountTokenHolderPojo findOrCreate(

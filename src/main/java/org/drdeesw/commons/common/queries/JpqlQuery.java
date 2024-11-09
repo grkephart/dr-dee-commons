@@ -26,7 +26,7 @@ public class JpqlQuery<T> extends Query<T>
    * 
    * @param <T2> the entity class type
    * @param clazz the entity class
-   * @return
+   * @return the query
    */
   @SuppressWarnings("unchecked")
   public static <T2> T2 newQuery(

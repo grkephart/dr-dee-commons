@@ -15,7 +15,7 @@ public abstract class BasePage
   protected HtmlPage page;
 
   /**
-   * @param page
+   * @param page the page to set
    */
   protected BasePage(HtmlPage page)
   {

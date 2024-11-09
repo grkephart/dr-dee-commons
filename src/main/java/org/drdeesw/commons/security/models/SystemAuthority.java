@@ -13,26 +13,34 @@ import org.drdeesw.commons.common.models.UniqueObject;
 public interface SystemAuthority extends UniqueObject<Long>
 {
   /**
-   * @return
+   * Returns the authority.
+   * 
+   * @return the authority
    */
   String getAuthority();
 
 
   /**
-   * @return
+   * Returns the username.
+   * 
+   * @return the username
    */
   String getUsername();
 
 
   /**
-   * @param authority
+   * Sets the authority.
+   * 
+   * @param authority the authority to set
    */
   void setAuthority(
     String authority);
 
 
   /**
-   * @param username
+   * Sets the username.
+   * 
+   * @param username the username to set
    */
   void setUsername(
     String username);

@@ -36,7 +36,9 @@ public abstract class AbstractPageValidator<P extends BasePage, PVC extends Page
 
 
   /**
-   * @param page
+   * Validates the page.
+   * 
+   * @param page the page to validate
    */
   protected void validatePage(
     P page)

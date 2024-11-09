@@ -1,56 +1,50 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.controllers;
-
+package org.drdeesw.commons.serviceproviders.controllers;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.organization.models.pojos.OrganizationPojo;
-import org.drdeesw.commons.organization.services.OrganizationService;
+import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountTokenHolderPojo;
+import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountTokenHolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 
 /**
- * 
+ * The controller for service provider account token holder
  */
-@RestController
-@Validated
-public class OrganizationController extends AbstractCrudController<OrganizationPojo, Long>
+public class ServiceProviderAccountTokenHolderController extends AbstractCrudController<ServiceProviderAccountTokenHolderPojo, Long>
 {
   private static final String SECURE_PREFIX         = "/secure";
-  private static final String MAPPING_PREFIX        = "/organizations";
+  private static final String MAPPING_PREFIX        = "/serviceprovideraccounttokenholders";
   private static final String SECURE_MAPPING_PREFIX = SECURE_PREFIX + MAPPING_PREFIX;
   @Autowired
-  private OrganizationService service;
+  private ServiceProviderAccountTokenHolderService service;
 
   /**
-   * Creates a new organization.
-   * 
-   * @param order the organization to create 
+   * Creates a new instance of ServiceProviderAccountTokenHolderController.
+   *
+   * @param serviceProviderAccountTokenHolder the service provider account token holder to create
    * @param bindingResult the binding result
    */
   @PostMapping(value = SECURE_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    OrganizationPojo order,
+    ServiceProviderAccountTokenHolderPojo serviceProviderAccountTokenHolder,
     BindingResult bindingResult) throws Exception
   {
-    return super.create(order, bindingResult);
+    return super.create(serviceProviderAccountTokenHolder, bindingResult);
   }
 
 
@@ -65,7 +59,7 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
 
 
   /**
-   * Finds organizations by query.
+   * Finds all service provider account token holders by query.
    * 
    * @param allRequestParams the request parameters
    * @param authentication the authentication token
@@ -73,7 +67,7 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
    * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
-  public QueryResults<OrganizationPojo> findByQuery(
+  public QueryResults<ServiceProviderAccountTokenHolderPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -83,13 +77,13 @@ public class OrganizationController extends AbstractCrudController<OrganizationP
 
 
   /**
-   * Gets an organization by id.
+   * Gets the service provider account token holder with the given id.
    * 
-   * @param id the id of the organization 
-   * @return the organization with the given id
+   * @param id  the id
+   * @return the service provider account token holder with the given id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<OrganizationPojo> get(
+  public ResponseEntity<ServiceProviderAccountTokenHolderPojo> get(
     @PathVariable
     Long id)
   {

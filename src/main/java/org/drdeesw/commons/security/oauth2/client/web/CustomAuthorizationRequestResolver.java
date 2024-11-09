@@ -30,8 +30,8 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
   private Environment                              env;
 
   /**
-   * @param clientRegistrationRepository
-   * @param authorizationRequestBaseUri
+   * @param clientRegistrationRepository the client registration repository
+   * @param authorizationRequestBaseUri the authorization request base URI
    */
   public CustomAuthorizationRequestResolver(ClientRegistrationRepository clientRegistrationRepository,
                                             String authorizationRequestBaseUri)
@@ -41,9 +41,6 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
   }
 
 
-  /**
-   *
-   */
   @Override
   public OAuth2AuthorizationRequest resolve(
     HttpServletRequest request)
@@ -53,9 +50,6 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
   }
 
 
-  /**
-   *
-   */
   @Override
   public OAuth2AuthorizationRequest resolve(
     HttpServletRequest request,
@@ -63,13 +57,16 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
   {
     OAuth2AuthorizationRequest authorizationRequest = defaultResolver.resolve(request,
       clientRegistrationId);
+    
     return customizeAuthorizationRequest(authorizationRequest);
   }
 
 
   /**
-   * @param authorizationRequest
-   * @return
+   * Returns a customized authorization request with the redirect URI from the client registration.
+   * 
+   * @param authorizationRequest the authorization request
+   * @return a customized authorization request with the redirect URI from the client registration
    */
   private OAuth2AuthorizationRequest customizeAuthorizationRequest(
     OAuth2AuthorizationRequest authorizationRequest)

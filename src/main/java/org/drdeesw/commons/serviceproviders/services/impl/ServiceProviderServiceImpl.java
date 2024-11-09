@@ -21,8 +21,7 @@ public class ServiceProviderServiceImpl
 {
   @Autowired
   private ServiceProviderRepository serviceProviderRepository;
-  
-  
+
   /**
    * 
    */
@@ -36,10 +35,28 @@ public class ServiceProviderServiceImpl
   public Optional<ServiceProviderPojo> findByClientRegistrationId(
     String clientRegistrationId)
   {
-    Optional<ServiceProviderEntity> serviceProviderEntity = this.serviceProviderRepository
+    Optional<ServiceProviderEntity> serviceProvider = this.serviceProviderRepository
         .findByClientRegistrationId(clientRegistrationId);
 
-    return serviceProviderEntity.map(this::convertEntityToPojo);
+    return serviceProvider.map(this::convertEntityToPojo);
+  }
+
+
+  @Override
+  public ServiceProviderPojo findOrCreate(
+    String clientRegistrationId)
+  {
+    Optional<ServiceProviderEntity> serviceProviderOpt = this.serviceProviderRepository
+        .findByClientRegistrationId(clientRegistrationId);
+    ServiceProviderEntity serviceProvider = serviceProviderOpt.orElseGet(() -> {
+      ServiceProviderEntity newServiceProvider = new ServiceProviderEntity();
+
+      newServiceProvider.setClientRegistrationId(clientRegistrationId);
+
+      return this.serviceProviderRepository.save(newServiceProvider);
+    });
+
+    return convertEntityToPojo(serviceProvider);
   }
 
 

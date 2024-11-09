@@ -12,7 +12,9 @@ import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 public interface ServiceProviderAccountService extends CrudService<ServiceProviderAccountPojo, Long>
 {
   /**
-   * @return
+   * Returns all accounts.
+   * 
+   * @return all accounts
    */
   List<ServiceProviderAccountPojo> getAllAccounts();
 
@@ -29,8 +31,9 @@ public interface ServiceProviderAccountService extends CrudService<ServiceProvid
 
   /**
    * Find or create an account for the given principal name and service provider.
+   * 
    * @param clientRegistrationId the client registration id of the service provider
-   * @param principalName
+   * @param principalName the principal name
    * @return the account or empty if not found
    */
   Optional<ServiceProviderAccountPojo> find(
@@ -43,9 +46,10 @@ public interface ServiceProviderAccountService extends CrudService<ServiceProvid
    * @param clientRegistrationId the client registration id of the service provider
    * @param principalName the principal
    * @return the account or empty if not found
+   * @throws Exception 
    */
   ServiceProviderAccountPojo findOrCreate(
     String clientRegistrationId,
-    String principalName);
+    String principalName) throws Exception;
 
 }

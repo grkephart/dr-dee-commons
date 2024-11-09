@@ -160,7 +160,7 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
 
 
   /**
-   * @param that
+   * @param that the object to copy
    */
   public void update(
     AbstractUniquePojo<ID> that)

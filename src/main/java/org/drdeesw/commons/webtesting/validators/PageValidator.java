@@ -14,14 +14,18 @@ public interface PageValidator<P extends BasePage, PVC extends PageValidationCon
 {
 
   /**
-   * @param page
+   * Validates the page.
+   * 
+   * @param page the page to validate
    */
   void validate(
     P page);
 
 
   /**
-   * @param context
+   * Initializes the context.
+   * 
+   * @param context the context to initialize
    */
   void initialize(
     PVC context);

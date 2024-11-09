@@ -49,6 +49,7 @@ public interface ServiceProvider extends NamedLongUniqueObject, Describable
   /**
    * Sets the OAuth2 client registration ID for the service provider.
    * 
+   * @param clientRegistrationId the OAuth2 client registration ID for the service provider 
    */
   void setClientRegistrationId(
     String clientRegistrationId);

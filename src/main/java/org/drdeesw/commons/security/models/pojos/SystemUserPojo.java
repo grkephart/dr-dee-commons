@@ -37,7 +37,7 @@ public class SystemUserPojo extends AbstractLongUniquePojo implements SystemUser
   /**
    * For testing.
    * 
-   * @param username
+   * @param username the username
    */
   public SystemUserPojo(String username)
   {
@@ -59,28 +59,21 @@ public class SystemUserPojo extends AbstractLongUniquePojo implements SystemUser
   }
 
 
-  /**
-   * The email address is the username
-   * @return
-   */
+  @Override
   public String getUsername()
   {
     return username;
   }
 
 
-  /**
-   * @return the enabled
-   */
+  @Override
   public boolean isEnabled()
   {
     return enabled;
   }
 
 
-  /**
-   * @param enabled the enabled to set
-   */
+  @Override
   public void setEnabled(
     boolean enabled)
   {
@@ -88,6 +81,7 @@ public class SystemUserPojo extends AbstractLongUniquePojo implements SystemUser
   }
 
 
+  @Override
   public void setUsername(
     String email)
   {

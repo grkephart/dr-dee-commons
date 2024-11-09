@@ -55,7 +55,7 @@ public abstract class Oauth2SecurityConfiguration
   /**
    * For unit testing.
    * 
-   * @param env
+   * @param env the environment
    */
   public Oauth2SecurityConfiguration(Environment env)
   {
@@ -64,7 +64,9 @@ public abstract class Oauth2SecurityConfiguration
 
 
   /**
-   * @return
+   * Returns a new instance of OAuth2AuthorizedClientService.
+   * 
+   * @return a new instance of OAuth2AuthorizedClient
    */
   @Bean
   protected OAuth2AuthorizedClientService authorizedClientService()
@@ -93,7 +95,10 @@ public abstract class Oauth2SecurityConfiguration
 
 
   /**
-   * @return
+   * Returns the access token from the request.
+   * 
+   * @param request the request
+   * @return the access token from the request
    */
   public String getAccessToken(
     HttpServletRequest request)
@@ -103,8 +108,13 @@ public abstract class Oauth2SecurityConfiguration
 
 
   /**
-   * @param client
-   * @return
+   * Returns the custom client registration.
+   * 
+   * @param client the client
+   * @param clientId the client ID
+   * @param clientSecret the client secret
+   * @param clientScopes the client scopes
+   * @return the custom client registration
    */
   protected ClientRegistration getCustomClientRegistration(
     String client,
@@ -252,7 +262,7 @@ public abstract class Oauth2SecurityConfiguration
   /**
    * Returns a new instance of ClientRegistrationRepository; defaults to InMemoryClientRegistrationRepository
    *
-   * @param registrations
+   * @param registrations the set of client registrations to use
    * @return a new instance of ClientRegistrationRepository; defaults to InMemoryClientRegistrationRepository
    */
   protected ClientRegistrationRepository newClientRegistrationRepository(
@@ -265,7 +275,7 @@ public abstract class Oauth2SecurityConfiguration
   /**
    * Returns a new instance of OAuth2AuthorizedClientService; defaults to InMemoryOAuth2AuthorizedClientService.
    * 
-   * @param clientRegistrationRepository
+   * @param clientRegistrationRepository the client registration repository to use
    * @return a new instance of OAuth2AuthorizedClientService; defaults to InMemoryOAuth2AuthorizedClientService
    */
   protected OAuth2AuthorizedClientService newOAuth2AuthorizedClientService(

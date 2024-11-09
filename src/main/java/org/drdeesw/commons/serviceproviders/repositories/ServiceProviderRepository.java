@@ -21,7 +21,7 @@ public interface ServiceProviderRepository
    * Finds a service provider by the OAuth2 client registration ID.
    * 
    * @param clientRegistrationId the OAuth2 client registration ID
-   * @return
+   * @return the service provider
    */
   Optional<ServiceProviderEntity> findByClientRegistrationId(
     String clientRegistrationId);

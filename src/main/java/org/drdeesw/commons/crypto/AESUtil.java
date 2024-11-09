@@ -25,9 +25,11 @@ public class AESUtil
   private static final int    GCM_TAG_LENGTH = 16;
 
   /**
-   * @param plainText
-   * @param secretKey
-   * @return
+   * Encrypts the given plain text using the given secret key.
+   * 
+   * @param plainText the plain text to encrypt
+   * @param secretKey the secret key to use for encryption
+   * @return the encrypted text
    * @throws Exception
    */
   public static String encrypt(
@@ -56,9 +58,11 @@ public class AESUtil
 
 
   /**
-   * @param encryptedText
-   * @param secretKey
-   * @return
+   * Decrypts the given encrypted text using the given secret key.
+   * 
+   * @param encryptedText the encrypted text to decrypt
+   * @param secretKey the secret key to use for decryption
+   * @return the decrypted text
    * @throws Exception
    */
   public static String decrypt(
@@ -84,7 +88,9 @@ public class AESUtil
 
 
   /**
-   * @return
+   * Generates a secret key for use with AES encryption.
+   * 
+   * @return the secret key
    * @throws Exception
    */
   public static String generateSecretKey() throws Exception

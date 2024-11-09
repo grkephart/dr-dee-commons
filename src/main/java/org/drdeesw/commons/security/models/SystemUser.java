@@ -17,24 +17,26 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 public interface SystemUser extends LongUniqueObject, ServiceProviderAccountHolder
 {
 
-  @Override
-  public Long getId();
-
 
   /**
-   * The email address is the username
-   * @return
+   * Returns the username of the user.
+   * 
+   * @return the username of the user
    */
   public String getUsername();
 
 
   /**
-   * @return the enabled
+   * Returns true if the user is enabled, or false if the user is disabled.
+   * 
+   * @return true if the user is enabled, or false if the user is disabled
    */
   public boolean isEnabled();
 
 
   /**
+   * Sets the enabled status of the user.
+   * 
    * @param enabled the enabled to set
    */
   public void setEnabled(
@@ -43,7 +45,9 @@ public interface SystemUser extends LongUniqueObject, ServiceProviderAccountHold
 
 
   /**
-   * @param username
+   * Sets the username of the user.
+   * 
+   * @param username the username to set
    */
   public void setUsername(
     String username);

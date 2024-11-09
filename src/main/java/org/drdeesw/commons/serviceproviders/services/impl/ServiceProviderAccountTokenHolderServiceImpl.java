@@ -30,9 +30,6 @@ public class ServiceProviderAccountTokenHolderServiceImpl extends
   }
 
 
-  /**
-   *
-   */
   @Override
   public Optional<ServiceProviderAccountTokenHolderPojo> find(
     String clientRegistrationId,
@@ -46,10 +43,6 @@ public class ServiceProviderAccountTokenHolderServiceImpl extends
   }
 
 
-  /**
-   * @throws Exception 
-   *
-   */
   @Override
   public ServiceProviderAccountTokenHolderPojo findOrCreate(
     String clientRegistrationId,

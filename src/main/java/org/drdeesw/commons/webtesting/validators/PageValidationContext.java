@@ -26,7 +26,9 @@ public class PageValidationContext
 
 
   /**
-   * @return
+   * Returns the expected title.
+   * 
+   * @return the expected title
    */
   public String getExpectedTitle()
   {
@@ -35,8 +37,10 @@ public class PageValidationContext
 
 
   /**
-   * @param key
-   * @return
+   * Returns the value of the property with the given key.
+   * 
+   * @param key the key of the property
+   * @return the value of the property
    */
   public Object getProperty(
     String key)
@@ -46,7 +50,9 @@ public class PageValidationContext
 
 
   /**
-   * @param expectedTitle
+   * Sets the expected title.
+   * 
+   * @param expectedTitle the expected title
    */
   public void setExpectedTitle(
     String expectedTitle)
@@ -56,8 +62,10 @@ public class PageValidationContext
 
 
   /**
-   * @param key
-   * @param value
+   * Sets the value of the property with the given key.
+   * 
+   * @param key the key of the property
+   * @param value the value of the property
    */
   public void setProperty(
     String key,

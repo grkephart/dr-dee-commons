@@ -81,7 +81,7 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
    * @param entities the entities to convert
    * @return the converted POJOs
    */
-  private List<P> convertEntityToPojo(
+  protected List<P> convertEntityToPojo(
     Collection<E> entities)
   {
     List<P> pojos = new ArrayList<P>(entities.size());
@@ -366,11 +366,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.drdeesw.commons.services.CrudService#get(java.util.Set)
-   */
   @Override
   public QueryResults<P> get(
     Set<ID> ids)
@@ -395,10 +390,6 @@ public abstract class AbstractJpaCrudServiceImpl<P extends UniquePojo<ID>, E ext
   }
 
 
-  /**
-   * @param ids
-   * @return
-   */
   @Override
   public Map<ID, P> getMap(
     Set<ID> ids)
