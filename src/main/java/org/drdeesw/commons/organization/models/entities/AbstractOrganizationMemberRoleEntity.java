@@ -143,9 +143,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
   }
 
 
-  /**
-   * @param organizationRoleId the organizationRoleId to set
-   */
+  @Override
   public void setRole(
     OrganizationRole role)
   {

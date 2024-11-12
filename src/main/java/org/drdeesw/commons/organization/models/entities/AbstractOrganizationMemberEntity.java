@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -47,7 +48,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
   private OrganizationEntity          organization;
   @Column(name = "organization_id")
   private Long                        organizationId;
-  @OneToMany(mappedBy = "member")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRole> roles;
   @ManyToOne
   @JoinColumn(name = "user_id")

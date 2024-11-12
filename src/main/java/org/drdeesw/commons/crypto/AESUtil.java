@@ -15,7 +15,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- * 
+ * Utility class for AES encryption and decryption.
+ * AES (Advanced Encryption Standard) is a symmetric encryption algorithm.
  */
 public class AESUtil
 {

@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -31,21 +32,21 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
     implements OrganizationRole
 {
   @Column(name = "created_by_id")
-  private Long               createdById;
+  private Long                        createdById;
   @Column(name = "creation_date")
-  private Instant            creationDate;
+  private Instant                     creationDate;
   @Column(name = "description")
-  private String             description;
+  private String                      description;
   @Column(name = "enabled")
-  private boolean            enabled;
+  private boolean                     enabled;
   @Column(name = "last_update_date")
-  private Instant            lastUpdateDate;
+  private Instant                     lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long               lastUpdateId;
+  private Long                        lastUpdateId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationEntity organization;
-  @OneToMany(mappedBy = "member")
+  private OrganizationEntity          organization;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRole> members;
 
   /**
@@ -167,7 +168,6 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   {
     this.organization = (OrganizationEntity)organization;
   }
-
 
 
   @Override

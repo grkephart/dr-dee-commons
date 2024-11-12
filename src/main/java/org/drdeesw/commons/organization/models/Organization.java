@@ -62,7 +62,7 @@ public interface Organization
   /**
    * Sets the organization members.
    * 
-   * @return the organization members to set
+   * @param members the organization members to set
    */
   public void setMembers(
     Set<OrganizationMember> members);
@@ -80,7 +80,7 @@ public interface Organization
   /**
    * Sets the organization roles.
    * 
-   * @return the organization roles to set
+   * @param roles the organization roles to set
    */
   public void setRoles(
     Set<OrganizationRole> roles);

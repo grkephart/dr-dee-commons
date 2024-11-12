@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -42,11 +43,11 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   private Instant                 lastUpdateDate;
   @Column(name = "last_update_id")
   private Long                    lastUpdateId;
-  @OneToMany(mappedBy = "organization")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationMember> members;
   @Column(name = "parent_id")
   private OrganizationEntity      parent;
-  @OneToMany(mappedBy = "organization")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationRole>   roles;
   @Column(name = "status")
   private OrganizationStatus      status;

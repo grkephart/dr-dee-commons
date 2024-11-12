@@ -9,6 +9,8 @@ import java.time.Instant;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
@@ -29,7 +31,8 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   private String                       accessToken;
   @Column(name = "access_token_expiry")
   private Instant                      accessTokenExpiry;
-  @Column(name = "account_id")
+  @ManyToOne
+  @JoinColumn(name = "account_id")
   private ServiceProviderAccountEntity account;
   @Column(name = "refresh_token")
   private String                       refreshToken;

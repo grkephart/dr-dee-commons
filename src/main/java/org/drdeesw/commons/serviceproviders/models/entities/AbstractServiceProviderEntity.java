@@ -4,16 +4,21 @@
 package org.drdeesw.commons.serviceproviders.models.entities;
 
 
+import java.util.Set;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 
 
@@ -26,15 +31,17 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProvider
 {
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceProvider")
+  private Set<ServiceProviderAccount> accounts;
   @Column(name = "authentication_type")
-  private AuthenticationType        authenticationType;
+  private AuthenticationType          authenticationType;
   @Column(name = "client_registration_Id")
-  private String        clientRegistrationId;
+  private String                      clientRegistrationId;
   @Column(name = "description")
-  private String                    description;
+  private String                      description;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private ServiceProviderTypeEntity type;
+  private ServiceProviderTypeEntity   type;
 
   /**
    * 
@@ -42,6 +49,15 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   protected AbstractServiceProviderEntity()
   {
 
+  }
+
+
+  /**
+   * @return the accounts
+   */
+  public Set<ServiceProviderAccount> getAccounts()
+  {
+    return accounts;
   }
 
 
@@ -72,6 +88,16 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public ServiceProviderType getType()
   {
     return type;
+  }
+
+
+  /**
+   * @param accounts the accounts to set
+   */
+  public void setAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    this.accounts = accounts;
   }
 
 

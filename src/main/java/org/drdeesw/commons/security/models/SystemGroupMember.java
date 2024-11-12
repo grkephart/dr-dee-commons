@@ -16,9 +16,9 @@ public interface SystemGroupMember extends LongUniqueObject
 
 
   /**
-   * @return the system group ID
+   * @return the system group
    */
-  public Long getSystemGroupId();
+  public SystemGroup getSystemGroup();
 
 
   /**
@@ -28,10 +28,10 @@ public interface SystemGroupMember extends LongUniqueObject
 
 
   /**
-   * @param systemGroupId the role ID to set
+   * @param systemGroup the group to set
    */
-  public void setSystemGroupId(
-    Long systemGroupId);
+  public void setSystemGroup(
+    SystemGroup systemGroup);
 
 
 

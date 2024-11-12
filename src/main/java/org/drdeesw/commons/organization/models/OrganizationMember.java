@@ -54,7 +54,7 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
   /**
    * Sets the organization roles for this member.
    * 
-   * @return the organization roles to set
+   * @param roles the organization roles to set
    */
   public void setRoles(
     Set<OrganizationMemberRole> roles);

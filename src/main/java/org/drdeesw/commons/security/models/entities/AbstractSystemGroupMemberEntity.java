@@ -7,9 +7,12 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.security.models.SystemGroup;
 import org.drdeesw.commons.security.models.SystemGroupMember;
 
 
@@ -25,8 +28,9 @@ import org.drdeesw.commons.security.models.SystemGroupMember;
 @Access(AccessType.FIELD)
 public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUniqueEntity implements SystemGroupMember
 {
-  @Column(name = "group_id")
-  private Long   systemGroupId;
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  private SystemGroup   systemGroup;
   @Column(name = "username")
   private String username;
 
@@ -45,11 +49,11 @@ public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUnique
 
 
   /**
-   * @return the systemGroupId
+   * @return the systemGroup
    */
-  public Long getSystemGroupId()
+  public SystemGroup getSystemGroup()
   {
-    return systemGroupId;
+    return systemGroup;
   }
 
 
@@ -64,11 +68,11 @@ public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUnique
 
 
   /**
-   * @param systemGroupId the role to set
+   * @param systemGroup the role to set
    */
-  public void setSystemGroupId(Long systemGroupId)
+  public void setSystemGroup(SystemGroup systemGroup)
   {
-    this.systemGroupId = systemGroupId;
+    this.systemGroup = systemGroup;
   }
 
 
