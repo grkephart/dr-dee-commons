@@ -15,8 +15,8 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "organization_role_members")
+@Table(name = "organization_member_roles")
 @AttributeOverride(name = "id", column = @Column(name = "organization_role_member_id"))
-public class OrganizationRoleMemberEntity extends AbstractOrganizationRoleMemberEntity
+public class OrganizationMemberRoleEntity extends AbstractOrganizationMemberRoleEntity
 {
 }

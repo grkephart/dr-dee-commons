@@ -9,10 +9,14 @@ import java.time.Instant;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationRoleMember;
+import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.organization.models.OrganizationMemberRole;
+import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
 /**
@@ -21,63 +25,57 @@ import org.drdeesw.commons.organization.models.OrganizationRoleMember;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongUniqueEntity
-    implements OrganizationRoleMember
+public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongUniqueEntity
+    implements OrganizationMemberRole
 {
   @Column(name = "created_by_id", nullable = false)
-  private Long    createdById;
+  private Long                     createdById;
   @Column(name = "creation_date", nullable = false)
-  private Instant creationDate;
+  private Instant                  creationDate;
   @Column(name = "enabled")
-  private boolean enabled;
+  private boolean                  enabled;
   @Column(name = "last_update_date")
-  private Instant lastUpdateDate;
+  private Instant                  lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long    lastUpdateId;
-  @Column(name = "organization_role_id")
-  private Long    organizationRoleId;
-  @Column(name = "user_id")
-  private Long    systemUserId;
+  private Long                     lastUpdateId;
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  private OrganizationRoleEntity   role;
+  @ManyToOne
+  @JoinColumn(name = "member_id")
+  private OrganizationMemberEntity member;
 
   /**
    * 
    */
-  protected AbstractOrganizationRoleMemberEntity()
+  protected AbstractOrganizationMemberRoleEntity()
   {
     super();
   }
 
 
-  /**
-   * @return the createdById
-   */
+  @Override
   public Long getCreatedById()
   {
     return createdById;
   }
 
 
-  /**
-   * @return the creationDate
-   */
+  @Override
   public Instant getCreationDate()
   {
     return creationDate;
   }
 
 
-  /**
-   * @return the lastUpdateDate
-   */
+  @Override
   public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
 
 
-  /**
-   * @return the lastUpdateId
-   */
+  @Override
   public Long getLastUpdateId()
   {
     return lastUpdateId;
@@ -85,18 +83,16 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
 
 
   @Override
-  public Long getOrganizationRoleId()
+  public OrganizationRole getRole()
   {
-    return this.organizationRoleId;
+    return this.role;
   }
 
 
-  /**
-   * @return the systemUserId
-   */
-  public Long getSystemUserId()
+  @Override
+  public OrganizationMember getMember()
   {
-    return systemUserId;
+    return this.member;
   }
 
 
@@ -107,9 +103,7 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
   }
 
 
-  /**
-   * @param createdById the createdById to set
-   */
+  @Override
   public void setCreatedById(
     Long createdById)
   {
@@ -117,9 +111,7 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
   }
 
 
-  /**
-   * @param creationDate the creationDate to set
-   */
+  @Override
   public void setCreationDate(
     Instant creationDate)
   {
@@ -135,9 +127,7 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
   }
 
 
-  /**
-   * @param lastUpdateDate the lastUpdateDate to set
-   */
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -145,9 +135,7 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
   }
 
 
-  /**
-   * @param lastUpdateId the lastUpdateId to set
-   */
+  @Override
   public void setLastUpdateId(
     Long lastUpdateId)
   {
@@ -158,18 +146,18 @@ public abstract class AbstractOrganizationRoleMemberEntity extends AbstractLongU
   /**
    * @param organizationRoleId the organizationRoleId to set
    */
-  public void setOrganizationRoleId(
-    Long organizationRoleId)
+  public void setRole(
+    OrganizationRole role)
   {
-    this.organizationRoleId = organizationRoleId;
+    this.role = (OrganizationRoleEntity)role;
   }
 
 
   @Override
-  public void setSystemUserId(
-    Long systemUserId)
+  public void setMember(
+    OrganizationMember member)
   {
-    this.systemUserId = systemUserId;
+    this.member = (OrganizationMemberEntity)member;
   }
 
 }

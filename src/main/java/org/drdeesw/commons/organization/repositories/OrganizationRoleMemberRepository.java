@@ -5,14 +5,14 @@ package org.drdeesw.commons.organization.repositories;
 
 
 import org.drdeesw.commons.common.repositories.QueryRepository;
-import org.drdeesw.commons.organization.models.entities.OrganizationRoleMemberEntity;
+import org.drdeesw.commons.organization.models.entities.OrganizationMemberRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 /**
  */
 public interface OrganizationRoleMemberRepository
-    extends JpaRepository<OrganizationRoleMemberEntity, Long>, QueryRepository<OrganizationRoleMemberEntity, Long>
+    extends JpaRepository<OrganizationMemberRoleEntity, Long>, QueryRepository<OrganizationMemberRoleEntity, Long>
 {
 
 }

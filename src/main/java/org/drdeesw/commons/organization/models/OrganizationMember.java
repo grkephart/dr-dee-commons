@@ -3,37 +3,68 @@
  */
 package org.drdeesw.commons.organization.models;
 
+
+import java.util.Set;
+
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.security.models.SystemUser;
+
 
 /**
- * Defines a user's membership in an organization.
+ * Defines a user's membership in an organization in a particular role.
+ * If a user is in multiple organizations or multiple roles in the same organization, then there will be multiple instances of this class.
  */
 public interface OrganizationMember extends LongUniqueObject, Enableable, Auditable
 {
   /**
-   * @return the system userId
+   * Returns the organization.
+   * 
+   * @return the organization
    */
-  public Long getSystemUserId();
-  
+  public Organization getOrganization();
+
+
   /**
-   * @return the organizationId
+   * Returns the organization roles for this member.
+   * 
+   * @return the organization roles for this member.
    */
-  public Long getOrganizationId();
-  
+  public Set<OrganizationMemberRole> getRoles();
+
+
   /**
-   * @return the organization role ID
+   * Returns the system user.
+   * 
+   * @return the system user
    */
-  public Long getRoleId();
-   
+  public SystemUser getSystemUser();
+
+
   /**
-   * @param systemUserId the system userId to set
+   * Sets the organization.
+   * 
+   * @param organization the organization to set
    */
-  public void setSystemUserId(Long systemUserId);
-  
+  public void setOrganization(
+    Organization organization);
+
+
   /**
-   * @param organizationId the organizationId to set
+   * Sets the organization roles for this member.
+   * 
+   * @return the organization roles to set
    */
-  public void setOrganizationId(Long organizationId);
+  public void setRoles(
+    Set<OrganizationMemberRole> roles);
+
+
+  /**
+   * Sets the system user.
+   * 
+   * @param systemUser the systemUser to set
+   */
+  public void setSystemUser(
+    SystemUser systemUser);
 }

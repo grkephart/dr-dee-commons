@@ -5,9 +5,11 @@ package org.drdeesw.commons.organization.models.pojos;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
@@ -17,13 +19,14 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @SuppressWarnings("serial")
 public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements OrganizationRole
 {
-  private Long             createdById;
-  private Instant          creationDate;
-  private String           description;
-  private boolean          enabled;
-  private Instant          lastUpdateDate;
-  private Long             lastUpdateId;
-  private OrganizationPojo organization;
+  private Long                        createdById;
+  private Instant                     creationDate;
+  private String                      description;
+  private boolean                     enabled;
+  private Instant                     lastUpdateDate;
+  private Long                        lastUpdateId;
+  private Set<OrganizationMemberRole> members;
+  private OrganizationPojo            organization;
 
   @Override
   public Long getCreatedById()
@@ -57,6 +60,13 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
   public Long getLastUpdateId()
   {
     return this.lastUpdateId;
+  }
+
+
+  @Override
+  public Set<OrganizationMemberRole> getMembers()
+  {
+    return members;
   }
 
 
@@ -119,6 +129,14 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
     Long lastUpdateId)
   {
     this.lastUpdateId = lastUpdateId;
+  }
+
+
+  @Override
+  public void setMembers(
+    Set<OrganizationMemberRole> members)
+  {
+    this.members = members;
   }
 
 

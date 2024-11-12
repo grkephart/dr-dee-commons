@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -12,9 +13,11 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
@@ -42,6 +45,8 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @ManyToOne
   @JoinColumn(name = "organization_id")
   private OrganizationEntity organization;
+  @OneToMany(mappedBy = "member")
+  private Set<OrganizationMemberRole> members;
 
   /**
    * 
@@ -52,18 +57,14 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @return the createdById
-   */
+  @Override
   public Long getCreatedById()
   {
     return createdById;
   }
 
 
-  /**
-   * @return the creationDate
-   */
+  @Override
   public Instant getCreationDate()
   {
     return creationDate;
@@ -77,18 +78,14 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @return the lastUpdateDate
-   */
+  @Override
   public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
 
 
-  /**
-   * @return the lastUpdateId
-   */
+  @Override
   public Long getLastUpdateId()
   {
     return lastUpdateId;
@@ -102,18 +99,21 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @return the enabled
-   */
+  @Override
+  public Set<OrganizationMemberRole> getMembers()
+  {
+    return members;
+  }
+
+
+  @Override
   public boolean isEnabled()
   {
     return enabled;
   }
 
 
-  /**
-   * @param createdById the createdById to set
-   */
+  @Override
   public void setCreatedById(
     Long createdById)
   {
@@ -121,9 +121,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @param creationDate the creationDate to set
-   */
+  @Override
   public void setCreationDate(
     Instant creationDate)
   {
@@ -139,9 +137,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @param enabled the enabled to set
-   */
+  @Override
   public void setEnabled(
     boolean enabled)
   {
@@ -149,9 +145,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @param lastUpdateDate the lastUpdateDate to set
-   */
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -159,9 +153,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @param lastUpdateId the lastUpdateId to set
-   */
+  @Override
   public void setLastUpdateId(
     Long lastUpdateId)
   {
@@ -177,12 +169,11 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  /**
-   * @param organization the organization to set
-   */
-  public void setOrganization(
-    OrganizationEntity organization)
+
+  @Override
+  public void setMembers(
+    Set<OrganizationMemberRole> members)
   {
-    this.organization = organization;
+    this.members = members;
   }
 }

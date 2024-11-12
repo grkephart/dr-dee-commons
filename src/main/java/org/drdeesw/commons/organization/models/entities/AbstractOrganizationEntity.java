@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -12,9 +13,12 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 
@@ -29,22 +33,26 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
     implements Organization
 {
   @Column(name = "created_by_id", nullable = false)
-  private Long               createdById;
+  private Long                    createdById;
   @Column(name = "creation_date", nullable = false)
-  private Instant            creationDate;
+  private Instant                 creationDate;
   @Column(name = "description")
-  private String             description;
+  private String                  description;
   @Column(name = "last_update_date")
-  private Instant            lastUpdateDate;
+  private Instant                 lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long               lastUpdateId;
+  private Long                    lastUpdateId;
+  @OneToMany(mappedBy = "organization")
+  private Set<OrganizationMember> members;
   @Column(name = "parent_id")
-  private Organization       parent;
+  private OrganizationEntity      parent;
+  @OneToMany(mappedBy = "organization")
+  private Set<OrganizationRole>   roles;
   @Column(name = "status")
-  private OrganizationStatus status;
+  private OrganizationStatus      status;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private OrganizationType   type;
+  private OrganizationTypeEntity  type;
 
   /**
    * 
@@ -97,6 +105,13 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
+  @Override
+  public Set<OrganizationMember> getMembers()
+  {
+    return this.members;
+  }
+
+
   /**
    * @return the parent
    */
@@ -104,6 +119,13 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public Organization getParent()
   {
     return parent;
+  }
+
+
+  @Override
+  public Set<OrganizationRole> getRoles()
+  {
+    return this.roles;
   }
 
 
@@ -167,6 +189,14 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
+  @Override
+  public void setMembers(
+    Set<OrganizationMember> members)
+  {
+    this.members = members;
+  }
+
+
   /**
    * @param parent the parent to set
    */
@@ -174,7 +204,15 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setParent(
     Organization parent)
   {
-    this.parent = parent;
+    this.parent = (OrganizationEntity)parent;
+  }
+
+
+  @Override
+  public void setRoles(
+    Set<OrganizationRole> roles)
+  {
+    this.roles = roles;
   }
 
 
@@ -196,7 +234,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setType(
     OrganizationType type)
   {
-    this.type = type;
+    this.type = (OrganizationTypeEntity)type;
   }
 
 }

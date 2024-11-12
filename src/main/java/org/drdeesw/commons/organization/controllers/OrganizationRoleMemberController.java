@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.organization.models.pojos.OrganizationRoleMemberPojo;
+import org.drdeesw.commons.organization.models.pojos.OrganizationMemberRolePojo;
 import org.drdeesw.commons.organization.services.OrganizationRoleMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class OrganizationRoleMemberController extends AbstractCrudController<OrganizationRoleMemberPojo, Long>
+public class OrganizationRoleMemberController extends AbstractCrudController<OrganizationMemberRolePojo, Long>
 {
   private static final String SECURE_PREFIX         = "/secure";
   private static final String MAPPING_PREFIX        = "/organization_role_members";
@@ -44,7 +44,7 @@ public class OrganizationRoleMemberController extends AbstractCrudController<Org
   @PostMapping(value = SECURE_MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    OrganizationRoleMemberPojo order,
+    OrganizationMemberRolePojo order,
     BindingResult bindingResult) throws Exception
   {
     return super.create(order, bindingResult);
@@ -68,7 +68,7 @@ public class OrganizationRoleMemberController extends AbstractCrudController<Org
    * @throws Exception
    */
   @GetMapping("/dt" + SECURE_MAPPING_PREFIX)
-  public QueryResults<OrganizationRoleMemberPojo> findByQuery(
+  public QueryResults<OrganizationMemberRolePojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -82,7 +82,7 @@ public class OrganizationRoleMemberController extends AbstractCrudController<Org
    * @return the object with the given id
    */
   @GetMapping(value = SECURE_MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<OrganizationRoleMemberPojo> get(
+  public ResponseEntity<OrganizationMemberRolePojo> get(
     @PathVariable
     Long id)
   {

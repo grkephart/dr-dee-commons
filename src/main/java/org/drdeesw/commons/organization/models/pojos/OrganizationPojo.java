@@ -5,12 +5,15 @@ package org.drdeesw.commons.organization.models.pojos;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 
@@ -23,14 +26,16 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @Table(name = "organizations")
 public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Long               createdById;
-  private Instant            creationDate;
-  private String             description;
-  private Instant            lastUpdateDate;
-  private Long               lastUpdateId;
-  private Organization       parent;
-  private OrganizationStatus status;
-  private OrganizationType   type;
+  private Long                  createdById;
+  private Instant               creationDate;
+  private String                description;
+  private Instant               lastUpdateDate;
+  private Long                  lastUpdateId;
+  private Organization          parent;
+  private Set<OrganizationMember> members;
+  private Set<OrganizationRole> roles;
+  private OrganizationStatus    status;
+  private OrganizationType      type;
 
   @Override
   public AccountType getAccountType()
@@ -74,9 +79,6 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @return the parent
-   */
   @Override
   public Organization getParent()
   {
@@ -84,9 +86,13 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @return the status
-   */
+  @Override
+  public Set<OrganizationRole> getRoles()
+  {
+    return this.roles;
+  }
+
+
   @Override
   public OrganizationStatus getStatus()
   {
@@ -94,9 +100,6 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @return the type
-   */
   @Override
   public OrganizationType getType()
   {
@@ -144,9 +147,6 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @param parent the parent to set
-   */
   @Override
   public void setParent(
     Organization parent)
@@ -155,9 +155,14 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @param status the status to set
-   */
+  @Override
+  public void setRoles(
+    Set<OrganizationRole> roles)
+  {
+    this.roles = roles;
+  }
+
+
   @Override
   public void setStatus(
     OrganizationStatus status)
@@ -166,13 +171,25 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
-  /**
-   * @param type the type to set
-   */
   @Override
   public void setType(
     OrganizationType type)
   {
     this.type = type;
+  }
+
+
+  @Override
+  public Set<OrganizationMember> getMembers()
+  {
+    return members;
+  }
+
+
+  @Override
+  public void setMembers(
+    Set<OrganizationMember> members)
+  {
+    this.members = members;
   }
 }

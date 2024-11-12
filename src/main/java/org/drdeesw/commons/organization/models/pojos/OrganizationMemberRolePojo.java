@@ -5,29 +5,27 @@ package org.drdeesw.commons.organization.models.pojos;
 
 
 import java.time.Instant;
-import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationMemberPojo extends AbstractLongUniquePojo implements OrganizationMember
+public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
+    implements OrganizationMemberRole
 {
-  private Long                        createdById;
-  private Instant                     creationDate;
-  private boolean                     enabled;
-  private Instant                     lastUpdateDate;
-  private Long                        lastUpdateId;
-  private Organization                organization;
-  private Set<OrganizationMemberRole> roles;
-  private SystemUser                  systemUser;
+  private Long                   createdById;
+  private Instant                creationDate;
+  private boolean                enabled;
+  private Instant                lastUpdateDate;
+  private Long                   lastUpdateId;
+  private OrganizationMemberPojo member;
+  private OrganizationRolePojo   role;
 
   @Override
   public Long getCreatedById()
@@ -58,23 +56,16 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public Organization getOrganization()
+  public OrganizationMemberPojo getMember()
   {
-    return this.organization;
+    return this.member;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getRoles()
+  public OrganizationRole getRole()
   {
-    return this.roles;
-  }
-
-
-  @Override
-  public SystemUser getSystemUser()
-  {
-    return this.systemUser;
+    return this.role;
   }
 
 
@@ -126,26 +117,18 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public void setOrganization(
-    Organization organization)
+  public void setMember(
+    OrganizationMember member)
   {
-    this.organization = organization;
+    this.member = (OrganizationMemberPojo)member;
   }
 
 
   @Override
-  public void setRoles(
-    Set<OrganizationMemberRole> roles)
+  public void setRole(
+    OrganizationRole role)
   {
-    this.roles = roles;
-  }
-
-
-  @Override
-  public void setSystemUser(
-    SystemUser systemUser)
-  {
-    this.systemUser = systemUser;
+    this.role = (OrganizationRolePojo)role;
   }
 
 }
