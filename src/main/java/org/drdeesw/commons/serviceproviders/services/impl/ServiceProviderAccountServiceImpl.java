@@ -46,39 +46,39 @@ public class ServiceProviderAccountServiceImpl extends
   @Override
   public Optional<ServiceProviderAccountPojo> find(
     ServiceProviderPojo serviceProvider,
-    String principalName)
+    String internalId)
   {
     return this.serviceProviderAccountRepository
-        .findByServiceProviderAndPrincipalName(serviceProvider, principalName);
+        .findByServiceProviderAndInternalId(serviceProvider, internalId);
   }
 
 
   @Override
   public Optional<ServiceProviderAccountPojo> find(
     String clientRegistrationId,
-    String principalName)
+    String internalId)
   {
     return this.serviceProviderAccountRepository
-        .findByClientRegistrationIdAndPrincipalName(clientRegistrationId, principalName);
+        .findByServiceProviderClientRegistrationIdAndInternalId(clientRegistrationId, internalId);
   }
 
 
   @Override
   public ServiceProviderAccountPojo findOrCreate(
     String clientRegistrationId,
-    String principalName) throws Exception
+    String internalId) throws Exception
   {
     ServiceProviderPojo serviceProvider = this.serviceProviderService
         .findOrCreate(clientRegistrationId);
     Optional<ServiceProviderAccountPojo> serviceProviderAccountOpt = this.serviceProviderAccountRepository
-        .findByServiceProviderAndPrincipalName(serviceProvider, principalName);
+        .findByServiceProviderAndInternalId(serviceProvider, internalId);
     ServiceProviderAccountPojo serviceProviderAccount;
 
     if (serviceProviderAccountOpt.isEmpty())
     {
       serviceProviderAccount = new ServiceProviderAccountPojo();
 
-      serviceProviderAccount.setInternalId(principalName);
+      serviceProviderAccount.setInternalId(internalId);
       serviceProviderAccount.setServiceProvider(serviceProvider);
 
       serviceProviderAccount = super.create(serviceProviderAccount);

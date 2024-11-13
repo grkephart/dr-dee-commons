@@ -4,9 +4,12 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
+import org.drdeesw.commons.security.models.SystemGroup;
 import org.drdeesw.commons.security.models.SystemGroupAuthority;
 
 
@@ -24,8 +27,9 @@ public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueE
 {
   @Column(name = "authority")
   private String authority;
-  @Column(name = "group_id")
-  private Long systemGroupId;
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  private SystemGroupEntity systemGroup;
 
   /**
    * Hibernate
@@ -49,9 +53,9 @@ public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueE
 
 
   @Override
-  public Long getSystemGroupId()
+  public SystemGroup getSystemGroup()
   {
-    return this.systemGroupId;
+    return this.systemGroup;
   }
 
 
@@ -64,10 +68,10 @@ public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueE
 
 
   @Override
-  public void setSystemGroupId(
-    Long systemGroupId)
+  public void setSystemGroup(
+    SystemGroup systemGroup)
   {
-    this.systemGroupId = systemGroupId;
+    this.systemGroup = (SystemGroupEntity)systemGroup;
   }
 
 }

@@ -18,7 +18,7 @@ import org.drdeesw.commons.common.queries.QueryResults;
 public interface QueryRepository<T extends UniqueObject<ID>, ID extends Serializable>
 {
   /**
-   * Remember to add this to @EnableJpaRepositories(basePackages = { "org.drdeesw.commons.repositories", ...})
+   * Remember to add this to @EnableJpaRepositories(basePackages = { "org.drdeesw.commons.common.repositories", ...})
    *
    * @param <Q> The type of query to execute
    * @param query The query to execute

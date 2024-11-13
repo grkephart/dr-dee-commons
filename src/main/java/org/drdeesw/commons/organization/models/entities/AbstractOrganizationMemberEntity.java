@@ -47,8 +47,6 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
   @ManyToOne
   @JoinColumn(name = "organization_id")
   private OrganizationEntity                organization;
-  @Column(name = "organization_id")
-  private Long                              organizationId;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRoleEntity> roles;
   @ManyToOne

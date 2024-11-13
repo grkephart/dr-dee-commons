@@ -20,25 +20,25 @@ public interface ServiceProviderAccountRepository
 {
 
   /**
-   * Returns the service provider account with the given service provider and principal name.
+   * Returns the service provider account with the given service provider and internalId.
    * 
    * @param serviceProvider the service provider
-   * @param principalName the principal name
+   * @param internalId the internalId of the account
    * @return the service provider account
    */
-  Optional<ServiceProviderAccountPojo> findByServiceProviderAndPrincipalName(
+  Optional<ServiceProviderAccountPojo> findByServiceProviderAndInternalId(
     ServiceProviderPojo serviceProvider,
-    String principalName);
+    String internalId);
 
   /**
-   * Returns the service provider account with the given client registration ID and principal name.
+   * Returns the service provider account with the given client registration ID and internalId.
    * 
    * @param clientRegistrationId the client registration ID
-   * @param principalName the principal name
+   * @param internalId the internalId
    * @return the service provider account
    */
-  Optional<ServiceProviderAccountPojo> findByClientRegistrationIdAndPrincipalName(
+  Optional<ServiceProviderAccountPojo> findByServiceProviderClientRegistrationIdAndInternalId(
     String clientRegistrationId,
-    String principalName);
+    String internalId);
 
 }

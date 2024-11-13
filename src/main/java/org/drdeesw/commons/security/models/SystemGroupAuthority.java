@@ -21,11 +21,11 @@ public interface SystemGroupAuthority extends UniqueObject<Long>
 
 
   /**
-   * Returns the group id.
+   * Returns the group.
    * 
-   * @return groupId the group id
+   * @return the group
    */
-  Long getSystemGroupId();
+  SystemGroup getSystemGroup();
 
 
   /**
@@ -38,10 +38,10 @@ public interface SystemGroupAuthority extends UniqueObject<Long>
 
 
   /**
-   * Sets the group id.
+   * Sets the group.
    * 
-   * @param systemGroupId the group id
+   * @param systemGroup the group
    */
-  void setSystemGroupId(
-    Long systemGroupId);
+  void setSystemGroup(
+    SystemGroup systemGroup);
 }

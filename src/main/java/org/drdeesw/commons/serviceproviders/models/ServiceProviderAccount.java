@@ -16,9 +16,9 @@ public interface ServiceProviderAccount extends LongUniqueObject, Describable
   /**
    * Returns the accountHolder, either an organization or a user.
    * 
-   * @return the accountHolder
+   * @return the accountHolderId
    */
-  ServiceProviderAccountHolder getAccountHolder();
+  Long getAccountHolderId();
 
 
   /**
@@ -47,12 +47,12 @@ public interface ServiceProviderAccount extends LongUniqueObject, Describable
 
 
   /**
-   * Sets the accountHolder.
+   * Sets the accountHolder id.
    * 
-   * @param accountHolder the accountHolder to set
+   * @param accountHolderId id the accountHolder id to set
    */
-  void setAccountHolder(
-    ServiceProviderAccountHolder accountHolder);
+  void setAccountHolderId(
+    Long accountHolderId);
 
 
   /**

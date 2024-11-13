@@ -22,34 +22,34 @@ public interface ServiceProviderAccountService extends CrudService<ServiceProvid
    * Returns the account for the given principal name and service provider.
    * 
    * @param serviceProvider the service provider
-   * @param principalName the principal
+   * @param internalId the internalId
    * @return the account or empty if not found
    */
   Optional<ServiceProviderAccountPojo> find(
     ServiceProviderPojo serviceProvider,
-    String principalName);
+    String internalId);
 
   /**
    * Find or create an account for the given principal name and service provider.
    * 
    * @param clientRegistrationId the client registration id of the service provider
-   * @param principalName the principal name
+   * @param internalId the internalId
    * @return the account or empty if not found
    */
   Optional<ServiceProviderAccountPojo> find(
     String clientRegistrationId,
-    String principalName);
+    String internalId);
 
   /**
    * Find or create an account for the given principal name and service provider.
    * 
    * @param clientRegistrationId the client registration id of the service provider
-   * @param principalName the principal
+   * @param internalId the internalId
    * @return the account or empty if not found
    * @throws Exception 
    */
   ServiceProviderAccountPojo findOrCreate(
     String clientRegistrationId,
-    String principalName) throws Exception;
+    String internalId) throws Exception;
 
 }

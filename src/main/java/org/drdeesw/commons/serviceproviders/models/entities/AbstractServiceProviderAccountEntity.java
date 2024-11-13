@@ -14,7 +14,6 @@ import javax.persistence.MappedSuperclass;
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -27,9 +26,8 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 public abstract class AbstractServiceProviderAccountEntity extends AbstractLongUniqueEntity
     implements ServiceProviderAccount
 {
-  @ManyToOne
-  @JoinColumn(name = "account_holder_id")
-  private ServiceProviderAccountHolder            accountHolder;
+  @Column(name = "account_holder_id")
+  private Long                                    accountHolderId;
   @Column(name = "description")
   private String                                  description;
   @Column(name = "internal_id")
@@ -51,9 +49,9 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractLongU
 
 
   @Override
-  public ServiceProviderAccountHolder getAccountHolder()
+  public Long getAccountHolderId()
   {
-    return this.accountHolder;
+    return this.accountHolderId;
   }
 
 
@@ -86,10 +84,10 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractLongU
 
 
   @Override
-  public void setAccountHolder(
-    ServiceProviderAccountHolder accountHolder)
+  public void setAccountHolderId(
+    Long accountHolderId)
   {
-    this.accountHolder = accountHolder;
+    this.accountHolderId = accountHolderId;
   }
 
 

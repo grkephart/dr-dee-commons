@@ -7,7 +7,6 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -18,7 +17,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
     implements ServiceProviderAccount
 {
-  private ServiceProviderAccountHolder          accountHolder;
+  private Long          accountHolderId;
   private String                                description;
   private String                                internalId;
   private ServiceProviderPojo                   serviceProvider;
@@ -43,9 +42,9 @@ public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
 
 
   @Override
-  public ServiceProviderAccountHolder getAccountHolder()
+  public Long getAccountHolderId()
   {
-    return accountHolder;
+    return accountHolderId;
   }
 
 
@@ -78,10 +77,10 @@ public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
 
 
   @Override
-  public void setAccountHolder(
-    ServiceProviderAccountHolder accountHolder)
+  public void setAccountHolderId(
+    Long accountHolderId)
   {
-    this.accountHolder = accountHolder;
+    this.accountHolderId = accountHolderId;
   }
 
 

@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -32,22 +33,22 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
     implements OrganizationRole
 {
   @Column(name = "created_by_id")
-  private Long                        createdById;
+  private Long                              createdById;
   @Column(name = "creation_date")
-  private Instant                     creationDate;
+  private Instant                           creationDate;
   @Column(name = "description")
-  private String                      description;
+  private String                            description;
   @Column(name = "enabled")
-  private boolean                     enabled;
+  private boolean                           enabled;
   @Column(name = "last_update_date")
-  private Instant                     lastUpdateDate;
+  private Instant                           lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long                        lastUpdateId;
+  private Long                              lastUpdateId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationEntity          organization;
+  private OrganizationEntity                organization;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-  private Set<OrganizationMemberRole> members;
+  private Set<OrganizationMemberRoleEntity> members;
 
   /**
    * 
@@ -103,7 +104,9 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @Override
   public Set<OrganizationMemberRole> getMembers()
   {
-    return members;
+    return this.members.stream()//
+        .map(member -> (OrganizationMemberRole)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -174,6 +177,8 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   public void setMembers(
     Set<OrganizationMemberRole> members)
   {
-    this.members = members;
+    this.members = members.stream()//
+        .map(member -> (OrganizationMemberRoleEntity)member)//
+        .collect(Collectors.toSet());
   }
 }

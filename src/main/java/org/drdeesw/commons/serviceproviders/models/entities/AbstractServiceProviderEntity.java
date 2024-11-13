@@ -5,6 +5,7 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -32,16 +33,16 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     implements ServiceProvider
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceProvider")
-  private Set<ServiceProviderAccount> accounts;
+  private Set<ServiceProviderAccountEntity> accounts;
   @Column(name = "authentication_type")
-  private AuthenticationType          authenticationType;
+  private AuthenticationType                authenticationType;
   @Column(name = "client_registration_Id")
-  private String                      clientRegistrationId;
+  private String                            clientRegistrationId;
   @Column(name = "description")
-  private String                      description;
+  private String                            description;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private ServiceProviderTypeEntity   type;
+  private ServiceProviderTypeEntity         type;
 
   /**
    * 
@@ -57,7 +58,9 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
    */
   public Set<ServiceProviderAccount> getAccounts()
   {
-    return accounts;
+    return this.accounts.stream()//
+        .map(member -> (ServiceProviderAccountEntity)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -97,7 +100,9 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    this.accounts = accounts;
+    this.accounts = accounts.stream()//
+        .map(member -> (ServiceProviderAccountEntity)member)//
+        .collect(Collectors.toSet());
   }
 
 

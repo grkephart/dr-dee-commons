@@ -33,10 +33,10 @@ public class ServiceProviderAccountTokenHolderServiceImpl extends
   @Override
   public Optional<ServiceProviderAccountTokenHolderPojo> find(
     String clientRegistrationId,
-    String principalName)
+    String internalId)
   {
     Optional<ServiceProviderAccountPojo> serviceProviderAccount = this.serviceProviderAccountService
-        .find(clientRegistrationId, principalName);
+        .find(clientRegistrationId, internalId);
 
     return serviceProviderAccount.map(account -> Optional.of(account.getTokenHolder()))
         .orElse(Optional.empty());
