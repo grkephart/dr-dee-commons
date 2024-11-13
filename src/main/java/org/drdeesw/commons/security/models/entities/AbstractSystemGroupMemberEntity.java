@@ -26,13 +26,14 @@ import org.drdeesw.commons.security.models.SystemGroupMember;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUniqueEntity implements SystemGroupMember
+public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUniqueEntity
+    implements SystemGroupMember
 {
   @ManyToOne
   @JoinColumn(name = "group_id")
-  private SystemGroup   systemGroup;
+  private SystemGroupEntity systemGroup;
   @Column(name = "username")
-  private String username;
+  private String            username;
 
   /**
    * Hibernate
@@ -57,7 +58,6 @@ public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUnique
   }
 
 
-
   /**
    * @return the username
    */
@@ -70,17 +70,18 @@ public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUnique
   /**
    * @param systemGroup the role to set
    */
-  public void setSystemGroup(SystemGroup systemGroup)
+  public void setSystemGroup(
+    SystemGroup systemGroup)
   {
-    this.systemGroup = systemGroup;
+    this.systemGroup = (SystemGroupEntity)systemGroup;
   }
-
 
 
   /**
    * @param username the username to set
    */
-  public void setUsername(String username)
+  public void setUsername(
+    String username)
   {
     this.username = username;
   }

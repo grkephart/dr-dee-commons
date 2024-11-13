@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -34,26 +35,26 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
     implements Organization
 {
   @Column(name = "created_by_id", nullable = false)
-  private Long                    createdById;
+  private Long                          createdById;
   @Column(name = "creation_date", nullable = false)
-  private Instant                 creationDate;
+  private Instant                       creationDate;
   @Column(name = "description")
-  private String                  description;
+  private String                        description;
   @Column(name = "last_update_date")
-  private Instant                 lastUpdateDate;
+  private Instant                       lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long                    lastUpdateId;
+  private Long                          lastUpdateId;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationMember> members;
+  private Set<OrganizationMemberEntity> members;
   @Column(name = "parent_id")
-  private OrganizationEntity      parent;
+  private OrganizationEntity            parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationRole>   roles;
+  private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
-  private OrganizationStatus      status;
+  private OrganizationStatus            status;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private OrganizationTypeEntity  type;
+  private OrganizationTypeEntity        type;
 
   /**
    * 
@@ -109,7 +110,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<OrganizationMember> getMembers()
   {
-    return this.members;
+    return this.members.stream()//
+        .map(member -> (OrganizationMember)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -126,7 +129,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<OrganizationRole> getRoles()
   {
-    return this.roles;
+    return this.roles.stream()//
+        .map(member -> (OrganizationRole)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -194,7 +199,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setMembers(
     Set<OrganizationMember> members)
   {
-    this.members = members;
+    this.members = members.stream()//
+        .map(member -> (OrganizationMemberEntity)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -213,7 +220,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setRoles(
     Set<OrganizationRole> roles)
   {
-    this.roles = roles;
+    this.roles = roles.stream()//
+        .map(member -> (OrganizationRoleEntity)member)//
+        .collect(Collectors.toSet());
   }
 
 
