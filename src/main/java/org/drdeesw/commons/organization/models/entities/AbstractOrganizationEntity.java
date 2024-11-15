@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
@@ -34,27 +35,29 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
     implements Organization
 {
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+  private Set<OrganizationAccountEntity> accounts;
   @Column(name = "created_by_id", nullable = false)
-  private Long                          createdById;
+  private Long                           createdById;
   @Column(name = "creation_date", nullable = false)
-  private Instant                       creationDate;
+  private Instant                        creationDate;
   @Column(name = "description")
-  private String                        description;
+  private String                         description;
   @Column(name = "last_update_date")
-  private Instant                       lastUpdateDate;
+  private Instant                        lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long                          lastUpdateId;
+  private Long                           lastUpdateId;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationMemberEntity> members;
+  private Set<OrganizationMemberEntity>  members;
   @Column(name = "parent_id")
-  private OrganizationEntity            parent;
+  private OrganizationEntity             parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationRoleEntity>   roles;
+  private Set<OrganizationRoleEntity>    roles;
   @Column(name = "status")
-  private OrganizationStatus            status;
+  private OrganizationStatus             status;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private OrganizationTypeEntity        type;
+  private OrganizationTypeEntity         type;
 
   /**
    * 
@@ -66,9 +69,18 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public AccountType getAccountType()
+  public AccountHolderType getAccountHolderType()
   {
-    return AccountType.ORGANIZATION;
+    return AccountHolderType.ORGANIZATION;
+  }
+
+
+  @Override
+  public Set<OrganizationAccount> getAccounts()
+  {
+    return this.members.stream()//
+        .map(member -> (OrganizationAccount)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -152,6 +164,17 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public OrganizationType getType()
   {
     return type;
+  }
+
+
+  @Override
+  public void setAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    this.accounts = accounts.stream()//
+    .map(member -> (OrganizationAccountEntity)member)//
+    .collect(Collectors.toSet());
+
   }
 
 

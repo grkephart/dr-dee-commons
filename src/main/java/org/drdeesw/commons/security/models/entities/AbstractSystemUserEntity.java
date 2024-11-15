@@ -76,9 +76,9 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
 
 
   @Override
-  public AccountType getAccountType()
+  public AccountHolderType getAccountHolderType()
   {
-    return AccountType.USER;
+    return AccountHolderType.USER;
   }
 
 

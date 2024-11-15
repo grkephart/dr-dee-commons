@@ -9,15 +9,22 @@ import java.util.Set;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 
 
 /**
  * 
  */
 public interface Organization
-    extends NamedLongUniqueObject, ServiceProviderAccountHolder, Auditable, Describable
+    extends NamedLongUniqueObject, OrganizationAccountHolder, Auditable, Describable
 {
+
+  /**
+   * Returns the accounts.
+   * 
+   * @return the accounts
+   */
+  Set<OrganizationAccount> getAccounts();
+
 
   /**
    * Returns the organization members.
@@ -57,6 +64,15 @@ public interface Organization
    * @return the type
    */
   OrganizationType getType();
+
+
+  /**
+   * Sets the accounts.
+   * 
+   * @param accounts the accounts to set
+   */
+  void setAccounts(
+    Set<OrganizationAccount> accounts);
 
 
   /**

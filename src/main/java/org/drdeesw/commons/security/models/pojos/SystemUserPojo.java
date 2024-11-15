@@ -46,9 +46,9 @@ public class SystemUserPojo extends AbstractLongUniquePojo implements SystemUser
 
 
   @Override
-  public AccountType getAccountType()
+  public AccountHolderType getAccountHolderType()
   {
-    return AccountType.USER;
+    return AccountHolderType.USER;
   }
 
 

@@ -13,8 +13,7 @@ import org.drdeesw.commons.security.models.SystemUser;
 
 
 /**
- * Defines a user's membership in an organization in a particular role.
- * If a user is in multiple organizations or multiple roles in the same organization, then there will be multiple instances of this class.
+ * Defines a user's membership in an organization.
  */
 public interface OrganizationMember extends LongUniqueObject, Enableable, Auditable
 {

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
@@ -26,21 +27,28 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @Table(name = "organizations")
 public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Long                  createdById;
-  private Instant               creationDate;
-  private String                description;
-  private Instant               lastUpdateDate;
-  private Long                  lastUpdateId;
-  private Organization          parent;
-  private Set<OrganizationMember> members;
-  private Set<OrganizationRole> roles;
-  private OrganizationStatus    status;
-  private OrganizationType      type;
+  private Set<OrganizationAccount> accounts;
+  private Long                     createdById;
+  private Instant                  creationDate;
+  private String                   description;
+  private Instant                  lastUpdateDate;
+  private Long                     lastUpdateId;
+  private Set<OrganizationMember>  members;
+  private Organization             parent;
+  private Set<OrganizationRole>    roles;
+  private OrganizationStatus       status;
+  private OrganizationType         type;
 
   @Override
-  public AccountType getAccountType()
+  public AccountHolderType getAccountHolderType()
   {
-    return AccountType.ORGANIZATION;
+    return AccountHolderType.ORGANIZATION;
+  }
+
+
+  public Set<OrganizationAccount> getAccounts()
+  {
+    return accounts;
   }
 
 
@@ -80,6 +88,13 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
+  public Set<OrganizationMember> getMembers()
+  {
+    return members;
+  }
+
+
+  @Override
   public Organization getParent()
   {
     return parent;
@@ -104,6 +119,13 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public OrganizationType getType()
   {
     return type;
+  }
+
+
+  public void setAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    this.accounts = accounts;
   }
 
 
@@ -148,6 +170,14 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
+  public void setMembers(
+    Set<OrganizationMember> members)
+  {
+    this.members = members;
+  }
+
+
+  @Override
   public void setParent(
     Organization parent)
   {
@@ -176,20 +206,5 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
     OrganizationType type)
   {
     this.type = type;
-  }
-
-
-  @Override
-  public Set<OrganizationMember> getMembers()
-  {
-    return members;
-  }
-
-
-  @Override
-  public void setMembers(
-    Set<OrganizationMember> members)
-  {
-    this.members = members;
   }
 }

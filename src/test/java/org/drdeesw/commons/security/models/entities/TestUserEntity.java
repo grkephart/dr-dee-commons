@@ -18,9 +18,9 @@ import javax.persistence.Table;
 public class TestUserEntity extends SystemUserEntity
 {
   @Override
-  public AccountType getAccountType()
+  public AccountHolderType getAccountHolderType()
   {
-    return AccountType.USER;
+    return AccountHolderType.USER;
   }
 
 }

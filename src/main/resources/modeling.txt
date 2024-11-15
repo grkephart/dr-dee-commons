@@ -16,8 +16,7 @@ This file contains the set of things that must be modeled in the system and the 
 - - Voter Ballot - holds information (how it was returned, etc) about a voter's ballot in an election.
 - Financial Module
 - - Account Transaction - a transaction on an account. It has a type (deposit, withdrawal, transfer, etc), amount, transaction date, and a source and destination.
-- - Transaction Destination - the source of a transaction. Can be a person, a company, a bank, etc. 
-- - Transaction Source - the source of a transaction. Can be a person, a company, a bank, etc. 
+- - Transaction Party  - the source or destination of a transaction. Can be a person, a company, a bank, etc. 
 - Geopolitical Module
 - - Building - a building. Can be a house, an office building, an apartment building, a store, etc. Is in only one precinct. Has a street address (parent=street, parent of units)) 
 - - Census tract - a census tract. A census tract is a geographic area defined by the United States Census Bureau and used for the census. (parent=county) 
@@ -42,8 +41,8 @@ This file contains the set of things that must be modeled in the system and the 
 - - Organization Account - an account for an organization. Can be for a company, a non-profit, a government, a person, a user, etc.
 - - Organization Account Holder - a person or organization that holds an organization account. Is this the same as a customer? 
 - - Organization Member - a member of an organization. Can be a person or another organization.
-- - Organization Role - a role within an organization.
 - - Organization Member Role - a role that a member has within an organization. 
+- - Organization Role - a role within an organization.
 - - Organization Type - a type of organization. Can be a company, a non-profit, a government, etc. A virtually unlimited list.  
 - - Vendor - an organization that provides goods or services to another organization. Differs from a service provider in that a vendor is not necessarily a service provider.
 - Security Module

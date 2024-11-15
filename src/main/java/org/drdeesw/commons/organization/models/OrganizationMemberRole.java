@@ -13,22 +13,26 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 public interface OrganizationMemberRole extends LongUniqueObject, Enableable, Auditable
 {
   /**
-   * @return the system userId
+   * Returns the organization member.
+   * 
+   * @return the member
    */
   public OrganizationMember getMember();
   
   /**
-   * @return the organizationRoleId
+   * Returns the organizationRole.
+   * 
+   * @return the organizationRole
    */
   public OrganizationRole getRole();
    
   /**
-   * @param member the system userId to set
+   * @param member the member to set
    */
   public void setMember(OrganizationMember member);
   
   /**
-   * @param role the organizationRoleId to set
+   * @param role the organizationRole to set
    */
   public void setRole(OrganizationRole role);
   

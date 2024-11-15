@@ -10,16 +10,16 @@ import org.drdeesw.commons.common.models.UniqueObject;
  */
 public interface ServiceProviderAccountHolder extends UniqueObject<Long>
 {
-  enum AccountType {
+  enum AccountHolderType {
     ORGANIZATION, USER
   };
 
   /**
    * Returns the account type. Example: ORGANIZATION, USER
    * 
-   * @return the account type
+   * @return the account holder type
    */
-  AccountType getAccountType();
+  AccountHolderType getAccountHolderType();
 
 
 }

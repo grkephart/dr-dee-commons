@@ -6,12 +6,14 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
 
 
 /**
@@ -20,14 +22,14 @@ import org.drdeesw.commons.security.models.SystemUser;
 @SuppressWarnings("serial")
 public class OrganizationMemberPojo extends AbstractLongUniquePojo implements OrganizationMember
 {
-  private Long                        createdById;
-  private Instant                     creationDate;
-  private boolean                     enabled;
-  private Instant                     lastUpdateDate;
-  private Long                        lastUpdateId;
-  private Organization                organization;
-  private Set<OrganizationMemberRole> roles;
-  private SystemUser                  systemUser;
+  private Long                            createdById;
+  private Instant                         creationDate;
+  private boolean                         enabled;
+  private Instant                         lastUpdateDate;
+  private Long                            lastUpdateId;
+  private OrganizationPojo                organization;
+  private Set<OrganizationMemberRolePojo> roles;
+  private SystemUserPojo                  systemUser;
 
   @Override
   public Long getCreatedById()
@@ -67,7 +69,9 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   @Override
   public Set<OrganizationMemberRole> getRoles()
   {
-    return this.roles;
+    return this.roles.stream()//
+        .map(member -> (OrganizationMemberRole)member)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -129,7 +133,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   public void setOrganization(
     Organization organization)
   {
-    this.organization = organization;
+    this.organization = (OrganizationPojo)organization;
   }
 
 
@@ -137,7 +141,9 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   public void setRoles(
     Set<OrganizationMemberRole> roles)
   {
-    this.roles = roles;
+    this.roles = roles.stream()//
+        .map(role -> (OrganizationMemberRolePojo)role)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -145,7 +151,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   public void setSystemUser(
     SystemUser systemUser)
   {
-    this.systemUser = systemUser;
+    this.systemUser = (SystemUserPojo)systemUser;
   }
 
 }

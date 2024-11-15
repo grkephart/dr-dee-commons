@@ -173,7 +173,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
     Set<OrganizationMemberRole> roles)
   {
     this.roles = roles.stream()//
-        .map(member -> (OrganizationMemberRoleEntity)member)//
+        .map(role -> (OrganizationMemberRoleEntity)role)//
         .collect(Collectors.toSet());
   }
 
