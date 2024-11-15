@@ -1,0 +1,94 @@
+This file contains the set of things that must be modeled in the system and the relations between them.
+
+* Is the model factually correct?
+* Does the model cover all the examples listed at the bottom of the file?
+* Is it a good design for the system?
+
+- Electoral Module
+- - Candidate - a candidate for a race for an office in an election. Must be a person.
+- - Ballot - a ballot for an election. Contains a list of races and or contests along with the candidates running for those races or contests.
+- - Contest - an item on an election ballot. It can be applied to both races for office and ballot measures (propositions, initiatives, referendums, etc.). Includes candidates if it's a race for office.
+- - Election - an election. Can be a primary, a general, a special, etc.
+- - Office - an office that is up for election. Can be a federal, state, or local office. Is usually associated with a district or some other geopolitical area (city, ward).
+- - Voter - a person who is eligible and registered to vote in an election.
+- - Candidate Contest - holds information about a candidate's performance in a contest.
+- - Candidate Contest Precinct - holds information about a candidate's performance in a contest in a precinct.
+- - Voter Ballot - holds information (how it was returned, etc) about a voter's ballot in an election.
+- Financial Module
+- - Account Transaction - a transaction on an account. It has a type (deposit, withdrawal, transfer, etc), amount, transaction date, and a source and destination.
+- - Transaction Destination - the source of a transaction. Can be a person, a company, a bank, etc. 
+- - Transaction Source - the source of a transaction. Can be a person, a company, a bank, etc. 
+- Geopolitical Module
+- - Building - a building. Can be a house, an office building, an apartment building, a store, etc. Is in only one precinct. Has a street address (parent=street, parent of units)) 
+- - Census tract - a census tract. A census tract is a geographic area defined by the United States Census Bureau and used for the census. (parent=county) 
+- - Community - a community. Can be a city, town, village, etc. Can cross counties. Can be incorporated or unincorporated.  (parent=state, parent of streets, neighborhoods, precincts, wards)
+- - Country - a country - a geopolitical entity (parent=none, parent of states, ZIP codes)
+- - County - a county - a geopolitical entity within a state (parent=state, parent of cities, census tracts, precincts)
+- - District - a district. Can be a state district, school district, community college district, special district, board of equalization district, county supervisor district, etc. Districts are divided into precincts although counties are the parent of precincts.
+- - Precinct - a precinct or voting district within a community. (parent=county, contains buildings)
+- - Neighborhood - a neighborhood within a ward or community. (parent=community)
+- - School District - a school district. (parent=state)
+- - State - a state or province within a country (parent=country, parent of counties, cities)
+- - State District - a district within a state. Can be a congressional district, a state senate district, a state assembly district, etc. (parent=state)
+- - Street - a street within a community. Streets that cross communities are considered different streets. (parent=community, parent of buildings)
+- - Street Address - a street address for a building or a unit. Contains house number, optional unit number, street, pre dir, post dir (parent=none)
+- - Unit - a unit within a building. Can be an apartment, a suite, a room, etc. (parent=building)  
+- - Ward - a ward or district within a community. (parent=community)
+- - ZIP Code - a postal code. Unique to a country, not to a state. ZIP Code can cross state boundaries. (parent=state)
+- Organizations Module
+- - Company - an organization that is a company. The defining characteristic is that it has a legal entity.
+- - Customer - a customer of a company. Can be a person or an organization. Usually has an account with the company.
+- - Organization - a generic organization. Can be a company, a non-profit, a government, etc.
+- - Organization Account - an account for an organization. Can be for a company, a non-profit, a government, a person, a user, etc.
+- - Organization Account Holder - a person or organization that holds an organization account. Is this the same as a customer? 
+- - Organization Member - a member of an organization. Can be a person or another organization.
+- - Organization Role - a role within an organization.
+- - Organization Member Role - a role that a member has within an organization. 
+- - Organization Type - a type of organization. Can be a company, a non-profit, a government, etc. A virtually unlimited list.  
+- - Vendor - an organization that provides goods or services to another organization. Differs from a service provider in that a vendor is not necessarily a service provider.
+- Security Module
+- - Authority - A permission that can be granted to a user or group.
+- - Group - A collection of users via memberships. Can be used to define permissions.
+- - Group Authority - A permission that is granted to a group.
+- - Group Member - A user that is a member of a group.
+- - User - A user of a system. Can be a person or a system.
+- Service Provider Module
+- - Service Provider - not necessarily an organization, but will be considered as one for simplicity
+- Identity Module
+- - Person - a person. Has a name and birthdate. Can be a user or a customer. Probably has a voter registration record, home address, phone numbers, email addresses, SSN, driver's license, etc.
+ 
+Examples:
+
+* ActBlue - a service provider that provides a way to donate to Democratic candidates.
+* Coinbase is a service provider that provides a way to exchange cryptocurrencies.
+* FEC - Federal Election Commission - is a government organization.
+* FPPC - Fair Political Practices Commission - is a government organization.
+* S&S Printers - is a vendor that provides printing services to political campaigns.
+* Spotify - is a company that provides music streaming services.
+* Wells Fargo is a company that provides banking services. 
+* YouTube - is a service provider that provides video streaming services.
+* "Gary Kephart For California State Assembly District 71 2024" is a political campaign with a FPPC committee ID of C00719806. The committee is a customer of ActBlue and also has an account with the FPPC.
+
+* 1313 Harbor Blvd, Anaheim, CA - is a building, sort of. It is the address of Disneyland.
+* California - is a state in the United States.
+* Orange County, CA - is a county in California.
+* Orange, CA - is a city in Orange County.  
+* United States - is a country.
+
+* The November 2024 General Election is an election.
+* District 71 is a state district within the California State Assembly
+* California State Assembly is a government organization. 
+* Gary Kephart is a person and voter and was a candidate for the California State Assembly, District 71 in the November 2024 General Election.
+* Gary Kephart received 89,015 votes in the November 2024 General Election.
+* Gary Kephart received 1,234 votes in precinct 23234 in the November 2024 General Election.
+* Tony Beall is a person and voter and was a candidate for the City Council in the city of Rancho Santa Margarita in the November 2024 General Election.
+
+* Canyon Democrats is a political club (organization). 
+* It has roles such as Chair, Secretary, Treasurer, etc. Each role has a term (start date, end date).
+* Louise Adler is a member (and a voter) of Canyon Democrats and is the Chair. Her term ends on December 31, 2024.
+* Canyon Dems donates to candidates through their campaign organizations.
+* Canyon Dems has a bank account with Wells Fargo.
+* Canyon Dems has a vendor relationship with S&S Printers.
+* Canyon Dems collects dues from its members via ActBlue.
+* Canyon Dems must report its financial transactions to the FPPC and FEC. 
+* Canyon Dems has a website and a Facebook page.
