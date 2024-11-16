@@ -10,7 +10,7 @@ import org.drdeesw.commons.organization.models.OrganizationAccount;
 /**
  * Represents a service provider account. Contains account information and tokens.
  */
-public interface ServiceProviderAccount extends OrganizationAccount
+public interface ServiceProviderAccount extends OrganizationAccount<ServiceProvider, ServiceProviderAccountHolder>
 {
 
   /**

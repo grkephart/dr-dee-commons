@@ -17,6 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "organization_members")
 @AttributeOverride(name = "id", column = @Column(name = "organization_member_id"))
-public class OrganizationMemberEntity extends AbstractOrganizationMemberEntity
+public class OrganizationMemberEntity extends AbstractOrganizationMemberEntity<OrganizationEntity>
 {
 }

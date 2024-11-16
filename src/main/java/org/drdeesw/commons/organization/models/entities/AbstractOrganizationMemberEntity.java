@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.security.models.SystemUser;
@@ -31,7 +32,7 @@ import org.drdeesw.commons.security.models.entities.SystemUserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqueEntity
+public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity<?>> extends AbstractLongUniqueEntity
     implements OrganizationMember
 {
   @Column(name = "created_by_id", nullable = false)
@@ -46,7 +47,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
   private Long                              lastUpdateId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationEntity                organization;
+  private O                organization;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRoleEntity> roles;
   @ManyToOne
@@ -91,9 +92,9 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
 
 
   @Override
-  public Organization getOrganization()
+  public <A extends OrganizationAccount> Organization<A> getOrganization()
   {
-    return this.organization;
+    return (Organization<A>) this.organization;
   }
 
 
@@ -161,10 +162,10 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractLongUniqu
 
 
   @Override
-  public void setOrganization(
-    Organization organization)
+  public <A extends OrganizationAccount> void setOrganization(
+    Organization<A> organization)
   {
-    this.organization = (OrganizationEntity)organization;
+    this.organization = (O)organization;
   }
 
 

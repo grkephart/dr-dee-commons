@@ -14,7 +14,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface Organization<A extends OrganizationAccount>
+public interface Organization<A extends OrganizationAccount<?, ?>, M extends OrganizationMember<?, ?, ?>, R extends OrganizationRole<?>>
     extends NamedLongUniqueObject, OrganizationAccountHolder, Auditable, Describable
 {
 
@@ -31,7 +31,7 @@ public interface Organization<A extends OrganizationAccount>
    * 
    * @return the organization members.
    */
-  public Set<OrganizationMember> getMembers();
+  public Set<M> getMembers();
 
 
   /**
@@ -39,7 +39,7 @@ public interface Organization<A extends OrganizationAccount>
    * 
    * @return the parent
    */
-  Organization<A> getParent();
+  Organization<?,?,?> getParent();
 
 
   /**
@@ -47,7 +47,7 @@ public interface Organization<A extends OrganizationAccount>
    * 
    * @return the organization roles.
    */
-  public Set<A> getRoles();
+  public Set<R> getRoles();
 
 
   /**
@@ -81,7 +81,7 @@ public interface Organization<A extends OrganizationAccount>
    * @param members the organization members to set
    */
   public void setMembers(
-    Set<OrganizationMember> members);
+    Set<M> members);
 
 
   /**
@@ -90,7 +90,7 @@ public interface Organization<A extends OrganizationAccount>
    * @param parent the parent to set
    */
   void setParent(
-    Organization<A> parent);
+    Organization<?,?,?> parent);
 
 
   /**
@@ -99,7 +99,7 @@ public interface Organization<A extends OrganizationAccount>
    * @param roles the organization roles to set
    */
   public void setRoles(
-    Set<OrganizationRole> roles);
+    Set<R> roles);
 
 
   /**

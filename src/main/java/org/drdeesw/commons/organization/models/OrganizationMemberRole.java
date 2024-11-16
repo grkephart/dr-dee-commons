@@ -10,30 +10,30 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 /**
  * Defines a user's membership in an organization role.
  */
-public interface OrganizationMemberRole extends LongUniqueObject, Enableable, Auditable
+public interface OrganizationMemberRole<M extends OrganizationMember<?, ?>, R extends OrganizationRole<?,?>> extends LongUniqueObject, Enableable, Auditable
 {
   /**
    * Returns the organization member.
    * 
    * @return the member
    */
-  public OrganizationMember getMember();
+  public M getMember();
   
   /**
    * Returns the organizationRole.
    * 
    * @return the organizationRole
    */
-  public OrganizationRole getRole();
+  public R getRole();
    
   /**
    * @param member the member to set
    */
-  public void setMember(OrganizationMember member);
+  public void setMember(M member);
   
   /**
    * @param role the organizationRole to set
    */
-  public void setRole(OrganizationRole role);
+  public void setRole(R role);
   
 }

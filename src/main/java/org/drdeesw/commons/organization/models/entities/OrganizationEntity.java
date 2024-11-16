@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 
 
 /**
@@ -19,6 +19,6 @@ import org.drdeesw.commons.organization.models.Organization;
 @Entity
 @Table(name = "organizations")
 @AttributeOverride(name = "id", column = @Column(name = "organization_id"))
-public class OrganizationEntity extends AbstractOrganizationEntity implements Organization
+public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationAccount<OrganizationEntity>>
 {
 }

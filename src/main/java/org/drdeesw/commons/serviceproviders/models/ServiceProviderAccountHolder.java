@@ -3,12 +3,13 @@
  */
 package org.drdeesw.commons.serviceproviders.models;
 
-import org.drdeesw.commons.common.models.UniqueObject;
+import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
+import org.drdeesw.commons.organization.models.OrganizationMember;
 
 /**
  * Represents the account holder of a service provider account.
  */
-public interface ServiceProviderAccountHolder extends UniqueObject<Long>
+public interface ServiceProviderAccountHolder extends OrganizationAccountHolder<ServiceProvider, ServiceProviderAccount>
 {
   enum AccountHolderType {
     ORGANIZATION, USER

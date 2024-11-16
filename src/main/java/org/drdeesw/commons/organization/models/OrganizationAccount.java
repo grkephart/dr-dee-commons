@@ -11,14 +11,14 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 /**
  * Represents a organization account. Contains account information and tokens.
  */
-public interface OrganizationAccount extends LongUniqueObject, Describable
+public interface OrganizationAccount<O extends Organization<?, ?, ?>, H extends OrganizationAccountHolder<?, ?>> extends LongUniqueObject, Describable
 {
   /**
    * Returns the accountHolder, either an organization or a user.
    * 
    * @return the accountHolder
    */
-  OrganizationAccountHolder getAccountHolder();
+  H getAccountHolder();
 
 
   /**
@@ -35,7 +35,7 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
    * 
    * @return the organization
    */
-  Organization getOrganization();
+  O getOrganization();
 
 
 
@@ -45,7 +45,7 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
    * @param accountHolder  the accountHolder to set
    */
   void setAccountHolder(
-    OrganizationAccountHolder accountHolder);
+    H accountHolder);
 
 
   /**
@@ -64,8 +64,6 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
    * @param organization the organization to set
    */
   void setOrganization(
-    Organization organization);
-
-
+    O organization);
 
 }

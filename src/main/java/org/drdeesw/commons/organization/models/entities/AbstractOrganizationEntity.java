@@ -32,11 +32,11 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
-    implements Organization
+public abstract class AbstractOrganizationEntity<A extends OrganizationAccountEntity<?>> extends AbstractNamedLongUniqueEntity
+    implements Organization<A>
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationAccountEntity> accounts;
+  private Set<OrganizationAccount<?>> accounts;
   @Column(name = "created_by_id", nullable = false)
   private Long                           createdById;
   @Column(name = "creation_date", nullable = false)
@@ -50,7 +50,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationMemberEntity>  members;
   @Column(name = "parent_id")
-  private OrganizationEntity             parent;
+  private AbstractOrganizationEntity<?>             parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationRoleEntity>    roles;
   @Column(name = "status")
@@ -76,10 +76,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public Set<OrganizationAccount> getAccounts()
+  public Set<A> getAccounts()
   {
-    return this.members.stream()//
-        .map(member -> (OrganizationAccount)member)//
+    return this.accounts.stream()//
+        .map(account -> (A)account)//
         .collect(Collectors.toSet());
   }
 
@@ -132,7 +132,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
    * @return the parent
    */
   @Override
-  public Organization getParent()
+  public Organization<?> getParent()
   {
     return parent;
   }
@@ -169,14 +169,14 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
   @Override
   public void setAccounts(
-    Set<OrganizationAccount> accounts)
+    Set<OrganizationAccount<?>> accounts)
   {
     this.accounts = accounts.stream()//
-    .map(member -> (OrganizationAccountEntity)member)//
+    .map(account -> (OrganizationAccount<?>)account)//
     .collect(Collectors.toSet());
 
   }
-
+  
 
   @Override
   public void setCreatedById(
@@ -233,9 +233,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
    */
   @Override
   public void setParent(
-    Organization parent)
+    Organization<?> parent)
   {
-    this.parent = (OrganizationEntity)parent;
+    this.parent = (AbstractOrganizationEntity<?>)parent;
   }
 
 

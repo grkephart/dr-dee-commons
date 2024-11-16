@@ -23,8 +23,8 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniqueEntity
-    implements OrganizationAccount
+public abstract class AbstractOrganizationAccountEntity<O extends Organization<?>> extends AbstractLongUniqueEntity
+    implements OrganizationAccount<O>
 {
   @Column(name = "account_holder_id")
   private OrganizationAccountHolder accountHolder;
@@ -34,7 +34,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
   private String                    internalId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationEntity        organization;
+  private O                         organization;
 
   /**
    * 
@@ -67,41 +67,37 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
 
 
   @Override
-  public Organization getOrganization()
+  public O getOrganization()
   {
     return this.organization;
   }
 
 
   @Override
-  public void setAccountHolder(
-    OrganizationAccountHolder accountHolder)
+  public void setAccountHolder(OrganizationAccountHolder accountHolder)
   {
     this.accountHolder = accountHolder;
   }
 
 
   @Override
-  public void setDescription(
-    String description)
+  public void setDescription(String description)
   {
     this.description = description;
   }
 
 
   @Override
-  public void setInternalId(
-    String internalId)
+  public void setInternalId(String internalId)
   {
     this.internalId = internalId;
   }
 
 
   @Override
-  public void setOrganization(
-    Organization organization)
+  public void setOrganization(O organization)
   {
-    this.organization = (OrganizationEntity)organization;
+    this.organization = (O) organization;
   }
 
 }

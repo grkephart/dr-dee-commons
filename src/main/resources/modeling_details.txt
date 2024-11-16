@@ -1,0 +1,56 @@
+Organization Module:
+
+Organization
+* Can have a parent organization
+* Can be an account holder
+* Has a type, which there can be an unlimited set of values
+* Has a status, which is an enum
+* Has accounts
+* Has members
+* Has roles
+
+Organization Account
+* Belongs to an organization
+* Has an internal ID
+* Has a holder, which can be an organization (or subclass) or a person (or a subclass)
+
+Organization Account Holder
+* Is a person or an organization
+
+Organization Member
+* Belongs to an organization
+* Has member roles
+* Can be an organization (or subclass) or a person (or a subclass)
+
+Organization Role
+* Belongs to an organization
+* Has member roles
+
+Organization Member Role
+* Has a member
+* Has a role
+
+Service Provider Module:
+
+Service Provider - not necessarily an organization, but will be considered as one for simplicity
+* Has an AuthenticationType enum
+* Has a ClientRegistrationId
+
+Service Provider Account - is an organization account
+* Belongs to a service provider
+* Has a token holder
+
+* Service Provider Account Token Holder
+* Belongs to a service provider account
+* Has an accessToken
+* Has an AccessTokenExpiry
+* Has a RefreshToken
+* Has a RefreshTokenExpiry
+
+For these models, there should be 
+* an interface
+* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Naming convention is AbstractModelEntity
+* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is ModelEntity
+
+Also, class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
+

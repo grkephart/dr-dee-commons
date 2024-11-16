@@ -37,12 +37,12 @@ This file contains the set of things that must be modeled in the system and the 
 - Organizations Module
 - - Company - an organization that is a company. The defining characteristic is that it has a legal entity.
 - - Customer - a customer of a company. Can be a person or an organization. Usually has an account with the company.
-- - Organization - a generic organization. Can be a company, a non-profit, a government, etc.
-- - Organization Account - an account for an organization. Can be for a company, a non-profit, a government, a person, a user, etc.
-- - Organization Account Holder - a person or organization that holds an organization account. Is this the same as a customer? 
-- - Organization Member - a member of an organization. Can be a person or another organization.
-- - Organization Member Role - a role that a member has within an organization. 
-- - Organization Role - a role within an organization.
+- - Organization - a generic organization. Can be a company, a non-profit, a government, etc. Has references to the accounts, members and roles. It can have a parent organization.
+- - Organization Account - an account for an organization. Can be for a company, a non-profit, a government, a person, a user, etc. Has a holder and a reference back to the organization.
+- - Organization Account Holder - a person or organization that holds an organization account. Is this the same as a customer? Has a reference back to the account
+- - Organization Member - a member of an organization. Can be a person or another organization.  Has a reference back to the account
+- - Organization Member Role - a role that a member has within an organization. Has a reference to the member and role
+- - Organization Role - a role within an organization.  Has a reference back to the account.
 - - Organization Type - a type of organization. Can be a company, a non-profit, a government, etc. A virtually unlimited list.  
 - - Vendor - an organization that provides goods or services to another organization. Differs from a service provider in that a vendor is not necessarily a service provider.
 - Security Module
@@ -53,6 +53,8 @@ This file contains the set of things that must be modeled in the system and the 
 - - User - A user of a system. Can be a person or a system.
 - Service Provider Module
 - - Service Provider - not necessarily an organization, but will be considered as one for simplicity
+- - Service Provider Account - is an organization account, but with a token holder
+- - Service Provider Account Holder - is an organization account holder
 - Identity Module
 - - Person - a person. Has a name and birthdate. Can be a user or a customer. Probably has a voter registration record, home address, phone numbers, email addresses, SSN, driver's license, etc.
  
