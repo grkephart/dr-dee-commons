@@ -9,6 +9,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 
 
 /**
+ * Represents an individual user that can log in to the system, with attributes like username, password, and account status.
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gary_kephart

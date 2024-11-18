@@ -5,7 +5,7 @@ package org.drdeesw.commons.common.models;
  * @author gary_kephart
  *
  */
-public interface NamedObject extends DataTransferObject
+public interface Named extends DataTransferObject
 {
   /**
    * Returns the name of the object.
@@ -22,6 +22,6 @@ public interface NamedObject extends DataTransferObject
    * @param name the name to set
    * @return the object
    */
-  <NO extends NamedObject> NO setName(
+  <NO extends Named> NO setName(
     String name);
 }

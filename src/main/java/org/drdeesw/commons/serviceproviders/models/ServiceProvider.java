@@ -5,15 +5,12 @@ package org.drdeesw.commons.serviceproviders.models;
 
 
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
 /**
  * 
  */
-public interface ServiceProvider
-    extends Organization<ServiceProviderAccount, OrganizationMember<?, ?>, OrganizationRole<?, ?>>
+public interface ServiceProvider extends Organization
 {
   /**
    * Returns the authentication type of the service provider.
@@ -36,7 +33,8 @@ public interface ServiceProvider
    * 
    * @param authenticationType the authentication type
    */
-  void setAuthenticationType(AuthenticationType authenticationType);
+  void setAuthenticationType(
+    AuthenticationType authenticationType);
 
 
   /**
@@ -45,6 +43,7 @@ public interface ServiceProvider
    * @param clientRegistrationId the OAuth2 client registration ID for the service
    *                             provider
    */
-  void setClientRegistrationId(String clientRegistrationId);
+  void setClientRegistrationId(
+    String clientRegistrationId);
 
 }

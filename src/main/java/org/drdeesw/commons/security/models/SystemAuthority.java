@@ -8,7 +8,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
 
 
 /**
- * 
+ * Represents the permissions or roles granted to a user, defining what actions or resources a user can access.
  */
 public interface SystemAuthority extends UniqueObject<Long>
 {
@@ -21,7 +21,7 @@ public interface SystemAuthority extends UniqueObject<Long>
 
 
   /**
-   * Returns the username.
+   * Returns the username. Ties the authority to a specific user.
    * 
    * @return the username
    */

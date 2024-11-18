@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-
 
 /**
  * 
@@ -19,6 +17,6 @@ import org.drdeesw.commons.organization.models.OrganizationAccount;
 @Entity
 @Table(name = "organizations")
 @AttributeOverride(name = "id", column = @Column(name = "organization_id"))
-public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationAccount<OrganizationEntity>>
+public class OrganizationEntity extends AbstractOrganizationEntity
 {
 }

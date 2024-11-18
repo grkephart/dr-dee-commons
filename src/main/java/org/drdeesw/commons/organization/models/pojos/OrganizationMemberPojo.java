@@ -67,7 +67,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public Set<OrganizationMemberRole> getRoles()
+  public Set<OrganizationMemberRole> getMemberRoles()
   {
     return this.roles.stream()//
         .map(member -> (OrganizationMemberRole)member)//
@@ -138,7 +138,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public void setRoles(
+  public void setMemberRoles(
     Set<OrganizationMemberRole> roles)
   {
     this.roles = roles.stream()//

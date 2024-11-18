@@ -1,28 +1,47 @@
+Commons Module:
+
+Auditable - a role interface that contains the following properties:
+* CreatedBy is the user who created the record
+* CreationDate
+* LastUpdateDate
+* LastUpdatedBy is the user who last updated the record
+
+Describable - a role interface that contains the following properties:
+* description, which is a string
+
+Enableable - a role interface that contains the following properties:
+* enabled, which is a boolean
+
+Named - a role interface that contains the following properties:
+* name, which is a string
+
+
 Organization Module:
 
-Organization
+Organization, which is named and describable
 * Can have a parent organization
 * Can be an account holder
-* Has a type, which there can be an unlimited set of values
+* Has a type, which there can be an unlimited set of values (not an enum)
 * Has a status, which is an enum
 * Has accounts
 * Has members
 * Has roles
 
-Organization Account
+Organization Account, which is auditable and enableable
 * Belongs to an organization
-* Has an internal ID
+* Has an internal ID. It could be an account number or a username or email or GUID.
 * Has a holder, which can be an organization (or subclass) or a person (or a subclass)
 
 Organization Account Holder
 * Is a person or an organization
+* Has accounts
 
 Organization Member
 * Belongs to an organization
 * Has member roles
-* Can be an organization (or subclass) or a person (or a subclass)
+* Has a user
 
-Organization Role
+Organization Role, which is named and describable
 * Belongs to an organization
 * Has member roles
 
@@ -30,9 +49,12 @@ Organization Member Role
 * Has a member
 * Has a role
 
+Organization Type, which is named and describable
+
+
 Service Provider Module:
 
-Service Provider - not necessarily an organization, but will be considered as one for simplicity
+Service Provider - not necessarily an organization, but will be considered as one for simplicity. It is named and describable
 * Has an AuthenticationType enum
 * Has a ClientRegistrationId
 
@@ -40,17 +62,56 @@ Service Provider Account - is an organization account
 * Belongs to a service provider
 * Has a token holder
 
-* Service Provider Account Token Holder
+Service Provider Account Token Holder
 * Belongs to a service provider account
 * Has an accessToken
 * Has an AccessTokenExpiry
 * Has a RefreshToken
 * Has a RefreshTokenExpiry
 
+
+Security Module:
+
+Authority, which represents the permissions or roles granted to a user, defining what actions or resources a user can access.. structured to work with JdbcUserDetailsManager.
+* Has a username, which links to a User
+* Has an authority (role) name
+
+Group, structured to work with JdbcUserDetailsManager.
+* Is named
+
+Group Authority, structured to work with JdbcUserDetailsManager.
+* Has an authority (role) name, which links to an Authority
+* Has a Group
+
+Group Member, structured to work with JdbcUserDetailsManager.
+* Has a Group
+* Has a username, which links to a User
+
+User, structured to work with JdbcUserDetailsManager.
+* Has a username
+* Is enableable
+
+
+Identity Module:
+
+Person, which is auditable
+* Has a name (first, middle, last)
+* Has a birth date
+* Can be an account holder, therefore can have accounts.
+* Can have contact information sets
+
+Person Contact Information
+* Belongs to a person
+* Has a type. Ex: home, work, other.
+* Has an email address
+* Has a street address
+* Has a phone number
+
+
 For these models, there should be 
-* an interface
-* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Naming convention is AbstractModelEntity
-* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is ModelEntity
+* an interface. Naming convention is {Model}
+* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Properties should have the appropriate Column or OneToMany, etc relationships. Naming convention is Abstract{Model}Entity
+* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is {Model}Entity
 
 Also, class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
-
+ServiceProvider.setAccounts() should be a generic method that accepts a Collection of ServiceProviderAccount or any subclass of it.  It should not accept OrganizationProviderAccount. The getter method should return a set of the same type of objects.

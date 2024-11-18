@@ -5,13 +5,10 @@ package org.drdeesw.commons.organization.models;
 
 import java.util.Set;
 
-import org.drdeesw.commons.common.models.UniqueObject;
-
 /**
  * Represents the account holder of an organization account.
  */
-public interface OrganizationAccountHolder<O extends Organization<?, ?, ?>, A extends OrganizationAccount<?, ?>>
-    extends UniqueObject<Long>
+public interface OrganizationAccountHolder
 {
   enum AccountHolderType
   {
@@ -28,11 +25,11 @@ public interface OrganizationAccountHolder<O extends Organization<?, ?, ?>, A ex
   /**
    * @return
    */
-  Set<A> getAccounts();
+  Set<OrganizationAccount> getAccounts();
 
   /**
    * @param accounts
    */
-  void setAccounts(Set<A> accounts);
+  void setAccounts(Set<OrganizationAccount> accounts);
 
 }

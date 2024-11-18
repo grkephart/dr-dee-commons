@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.security.models.SystemUser;
@@ -32,8 +31,8 @@ import org.drdeesw.commons.security.models.entities.SystemUserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity<?>> extends AbstractLongUniqueEntity
-    implements OrganizationMember
+public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity>
+    extends AbstractLongUniqueEntity implements OrganizationMember
 {
   @Column(name = "created_by_id", nullable = false)
   private Long                              createdById;
@@ -47,7 +46,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   private Long                              lastUpdateId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private O                organization;
+  private Organization                      organization;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRoleEntity> roles;
   @ManyToOne
@@ -92,14 +91,14 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public <A extends OrganizationAccount> Organization<A> getOrganization()
+  public Organization getOrganization()
   {
-    return (Organization<A>) this.organization;
+    return (Organization)this.organization;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getRoles()
+  public Set<OrganizationMemberRole> getMemberRoles()
   {
     return this.roles.stream()//
         .map(member -> (OrganizationMemberRole)member)//
@@ -162,15 +161,15 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public <A extends OrganizationAccount> void setOrganization(
-    Organization<A> organization)
+  public void setOrganization(
+    Organization organization)
   {
-    this.organization = (O)organization;
+    this.organization = organization;
   }
 
 
   @Override
-  public void setRoles(
+  public void setMemberRoles(
     Set<OrganizationMemberRole> roles)
   {
     this.roles = roles.stream()//

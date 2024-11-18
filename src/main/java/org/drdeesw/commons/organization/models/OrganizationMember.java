@@ -15,14 +15,14 @@ import org.drdeesw.commons.security.models.SystemUser;
 /**
  * Defines a user's membership in an organization.
  */
-public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends OrganizationMemberRole<?,?>> extends LongUniqueObject, Enableable, Auditable
+public interface OrganizationMember extends LongUniqueObject, Enableable, Auditable
 {
   /**
    * Returns the organization.
    * 
    * @return the organization
    */
-  public O getOrganization();
+  public Organization getOrganization();
 
 
   /**
@@ -30,7 +30,7 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
    * 
    * @return the organization roles for this member.
    */
-  public Set<R> getRoles();
+  public Set<OrganizationMemberRole> getMemberRoles();
 
 
   /**
@@ -47,16 +47,16 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
    * @param organization the organization to set
    */
   public void setOrganization(
-    O organization);
+    Organization organization);
 
 
   /**
-   * Sets the organization roles for this member.
+   * Sets the memberRoles for this member.
    * 
-   * @param roles the organization roles to set
+   * @param memberRoles the memberRoles to set
    */
-  public void setRoles(
-    Set<R> roles);
+  public void setMemberRoles(
+    Set<OrganizationMemberRole> memberRoles);
 
 
   /**

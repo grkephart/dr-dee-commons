@@ -25,16 +25,16 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organizations")
-public class OrganizationPojo<A extends OrganizationAccount> extends AbstractNamedLongUniquePojo implements Organization<A>
+public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Set<A> accounts;
+  private Set<OrganizationAccount> accounts;
   private Long                     createdById;
   private Instant                  creationDate;
   private String                   description;
   private Instant                  lastUpdateDate;
   private Long                     lastUpdateId;
   private Set<OrganizationMember>  members;
-  private Organization<?>          parent;
+  private Organization          parent;
   private Set<OrganizationRole>    roles;
   private OrganizationStatus       status;
   private OrganizationType         type;
@@ -46,7 +46,7 @@ public class OrganizationPojo<A extends OrganizationAccount> extends AbstractNam
   }
 
 
-  public Set<A> getAccounts()
+  public Set<OrganizationAccount> getAccounts()
   {
     return accounts;
   }
@@ -95,7 +95,7 @@ public class OrganizationPojo<A extends OrganizationAccount> extends AbstractNam
 
 
   @Override
-  public Organization<?> getParent()
+  public Organization getParent()
   {
     return parent;
   }
@@ -123,7 +123,7 @@ public class OrganizationPojo<A extends OrganizationAccount> extends AbstractNam
 
 
   public void setAccounts(
-    Set<A> accounts)
+    Set<OrganizationAccount> accounts)
   {
     this.accounts = accounts;
   }
@@ -179,7 +179,7 @@ public class OrganizationPojo<A extends OrganizationAccount> extends AbstractNam
 
   @Override
   public void setParent(
-    Organization<?> parent)
+    Organization parent)
   {
     this.parent = parent;
   }
