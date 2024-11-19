@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Represents the account holder of an organization account.
  */
-public interface OrganizationAccountHolder
+public interface OrganizationAccountHolder<A extends OrganizationAccount>
 {
   enum AccountHolderType
   {
@@ -25,11 +25,11 @@ public interface OrganizationAccountHolder
   /**
    * @return
    */
-  Set<OrganizationAccount> getAccounts();
+  Set<A> getAccounts();
 
   /**
    * @param accounts
    */
-  void setAccounts(Set<OrganizationAccount> accounts);
+  void setAccounts(Set<A> accounts);
 
 }

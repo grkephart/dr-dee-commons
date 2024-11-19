@@ -37,6 +37,8 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationAccountEntity> accounts;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+  private Set<OrganizationEntity>        children;
   @Column(name = "created_by_id", nullable = false)
   private Long                           createdById;
   @Column(name = "creation_date", nullable = false)
@@ -50,7 +52,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationMemberEntity>  members;
   @Column(name = "parent_id")
-  private AbstractOrganizationEntity             parent;
+  private AbstractOrganizationEntity     parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationRoleEntity>    roles;
   @Column(name = "status")
@@ -80,6 +82,15 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   {
     return this.accounts.stream()//
         .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<Organization> getChildren()
+  {
+    return this.children.stream()//
+        .map(child -> (Organization)child)//
         .collect(Collectors.toSet());
   }
 
@@ -172,11 +183,21 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
     Set<OrganizationAccount> accounts)
   {
     this.accounts = accounts.stream()//
-    .map(account -> (OrganizationAccountEntity)account)//
-    .collect(Collectors.toSet());
+        .map(account -> (OrganizationAccountEntity)account)//
+        .collect(Collectors.toSet());
 
   }
-  
+
+
+  @Override
+  public void setChildren(
+    Set<Organization> children)
+  {
+    this.children = children.stream()//
+        .map(child -> (OrganizationEntity)child)//
+        .collect(Collectors.toSet());
+  }
+
 
   @Override
   public void setCreatedById(

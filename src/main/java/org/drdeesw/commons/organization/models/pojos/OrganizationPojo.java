@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -27,17 +28,18 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @Table(name = "organizations")
 public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Set<OrganizationAccount> accounts;
-  private Long                     createdById;
-  private Instant                  creationDate;
-  private String                   description;
-  private Instant                  lastUpdateDate;
-  private Long                     lastUpdateId;
-  private Set<OrganizationMember>  members;
-  private Organization          parent;
-  private Set<OrganizationRole>    roles;
-  private OrganizationStatus       status;
-  private OrganizationType         type;
+  private Set<OrganizationAccountPojo> accounts;
+  private Set<Organization>            children;
+  private Long                         createdById;
+  private Instant                      creationDate;
+  private String                       description;
+  private Instant                      lastUpdateDate;
+  private Long                         lastUpdateId;
+  private Set<OrganizationMember>      members;
+  private Organization                 parent;
+  private Set<OrganizationRole>        roles;
+  private OrganizationStatus           status;
+  private OrganizationType             type;
 
   @Override
   public AccountHolderType getAccountHolderType()
@@ -46,9 +48,19 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
+  @Override
   public Set<OrganizationAccount> getAccounts()
   {
-    return accounts;
+    return this.accounts.stream()//
+        .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<Organization> getChildren()
+  {
+    return children;
   }
 
 
@@ -122,10 +134,21 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   }
 
 
+  @Override
   public void setAccounts(
     Set<OrganizationAccount> accounts)
   {
-    this.accounts = accounts;
+    this.accounts = accounts.stream()//
+        .map(account -> (OrganizationAccountPojo)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public void setChildren(
+    Set<Organization> children)
+  {
+    this.children = children;
   }
 
 

@@ -14,15 +14,16 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface Organization extends NamedLongUniqueObject, OrganizationAccountHolder, Auditable, Describable
+public interface Organization
+    extends NamedLongUniqueObject, OrganizationAccountHolder<OrganizationAccount>, Auditable, Describable
 {
 
   /**
-   * Returns the accounts.
+   * Returns the children organizations.
    * 
-   * @return the accounts
+   * @return the children organizations.
    */
-  Set<OrganizationAccount> getAccounts();
+  Set<Organization> getChildren();
 
 
   /**
@@ -30,7 +31,7 @@ public interface Organization extends NamedLongUniqueObject, OrganizationAccount
    * 
    * @return the organization members.
    */
-  public Set<OrganizationMember> getMembers();
+  Set<OrganizationMember> getMembers();
 
 
   /**
@@ -46,7 +47,7 @@ public interface Organization extends NamedLongUniqueObject, OrganizationAccount
    * 
    * @return the organization roles.
    */
-  public Set<OrganizationRole> getRoles();
+  Set<OrganizationRole> getRoles();
 
 
   /**
@@ -66,12 +67,12 @@ public interface Organization extends NamedLongUniqueObject, OrganizationAccount
 
 
   /**
-   * Sets the accounts.
+   * Sets the children organizations.
    * 
-   * @param accounts the accounts to set
+   * @param children the children organizations to set
    */
-  void setAccounts(
-    Set<OrganizationAccount> accounts);
+  void setChildren(
+    Set<Organization> children);
 
 
   /**
@@ -79,7 +80,7 @@ public interface Organization extends NamedLongUniqueObject, OrganizationAccount
    * 
    * @param members the organization members to set
    */
-  public void setMembers(
+  void setMembers(
     Set<OrganizationMember> members);
 
 
@@ -97,7 +98,7 @@ public interface Organization extends NamedLongUniqueObject, OrganizationAccount
    * 
    * @param roles the organization roles to set
    */
-  public void setRoles(
+  void setRoles(
     Set<OrganizationRole> roles);
 
 

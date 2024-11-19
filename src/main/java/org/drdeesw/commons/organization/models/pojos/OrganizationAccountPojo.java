@@ -22,8 +22,12 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 @Entity
 @Table(name = "organization_accounts")
 @AttributeOverride(name = "id", column = @Column(name = "organization_account_id"))
-public class OrganizationAccountPojo  extends AbstractLongUniquePojo implements OrganizationAccount
+public class OrganizationAccountPojo extends AbstractLongUniquePojo implements OrganizationAccount
 {
+
+  private String       description;
+  private String       internalId;
+  private Organization organization;
 
   public OrganizationAccountPojo()
   {
@@ -31,65 +35,65 @@ public class OrganizationAccountPojo  extends AbstractLongUniquePojo implements 
   }
 
 
-
   @Override
-  public String getDescription()
+  public OrganizationAccountHolder<OrganizationAccount> getAccountHolder()
   {
     // TODO Auto-generated method stub
     return null;
   }
+
+
+  @Override
+  public String getDescription()
+  {
+    return this.description;
+  }
+
+
+  @Override
+  public String getInternalId()
+  {
+    return this.internalId;
+  }
+
+
+  @Override
+  public Organization getOrganization()
+  {
+    return this.organization;
+  }
+
+
+  @Override
+  public void setAccountHolder(
+    OrganizationAccountHolder<OrganizationAccount> accountHolder)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
 
   @Override
   public void setDescription(
     String description)
   {
-    // TODO Auto-generated method stub
-    
+    this.description = description;
   }
 
-  @Override
-  public OrganizationAccountHolder getAccountHolder()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public String getInternalId()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Organization getOrganization()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public void setAccountHolder(
-    OrganizationAccountHolder accountHolder)
-  {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void setInternalId(
     String internalId)
   {
-    // TODO Auto-generated method stub
-    
+    this.internalId = internalId;
   }
+
 
   @Override
   public void setOrganization(
     Organization organization)
   {
-    // TODO Auto-generated method stub
-    
+    this.organization = organization;
   }
 
 }

@@ -3,14 +3,13 @@
  */
 package org.drdeesw.commons.serviceproviders.models;
 
-
-import org.drdeesw.commons.organization.models.Organization;
-
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Describable;
 
 /**
  * 
  */
-public interface ServiceProvider extends Organization
+public interface ServiceProvider extends ServiceProviderAccountHolder<ServiceProviderAccount>, Auditable, Describable
 {
   /**
    * Returns the authentication type of the service provider.
