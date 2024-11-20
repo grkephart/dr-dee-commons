@@ -12,6 +12,7 @@ import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 
 
 /**
@@ -28,6 +29,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   private String                          description;
   private Instant                         lastUpdateDate;
   private Long                            lastUpdateId;
+  private ServiceProviderTypePojo         type;
 
   @Override
   public AccountHolderType getAccountHolderType()
@@ -94,6 +96,12 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
+  public ServiceProviderType getType()
+  {
+    return type;
+  }
+
+
   @Override
   public void setAccounts(
     Set<ServiceProviderAccount> accounts)
@@ -157,6 +165,13 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
     Long lastUpdateId)
   {
     this.lastUpdateId = lastUpdateId;
+  }
+
+
+  public void setType(
+    ServiceProviderType type)
+  {
+    this.type = (ServiceProviderTypePojo)type;
   }
 
 }

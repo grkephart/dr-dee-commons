@@ -6,9 +6,6 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.pojos.OrganizationAccountPojo;
-import org.drdeesw.commons.organization.models.pojos.OrganizationPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,20 +38,15 @@ class ServiceProviderPojoTest
   @Test
   void testConstruction()
   {
-    OrganizationPojo parent = new OrganizationPojo();
-    ServiceProviderPojo org = new ServiceProviderPojo();
-    Set<OrganizationAccount> accounts = new HashSet<OrganizationAccount>();
-    OrganizationAccount account1 = new OrganizationAccountPojo();
-    ServiceProviderAccount account2 = new ServiceProviderAccountPojo();
+    ServiceProviderPojo serviceProvider = new ServiceProviderPojo();
+    Set<ServiceProviderAccount> accounts = new HashSet<ServiceProviderAccount>();
+    ServiceProviderAccount account = new ServiceProviderAccountPojo();
    
-    account1.setOrganization(org);
-    account2.setOrganization(org);
+    account.setServiceProvider(serviceProvider);
     
-    accounts.add(account1);
-    accounts.add(account2);
+    accounts.add(account);
     
-    org.setParent(parent);
-    org.setAccounts(accounts);
+    serviceProvider.setAccounts(accounts);
   }
 
 }

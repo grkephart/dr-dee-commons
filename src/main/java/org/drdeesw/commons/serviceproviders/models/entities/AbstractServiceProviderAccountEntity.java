@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.organization.models.entities.AbstractOrganizationAccountEntity;
+import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
@@ -23,7 +23,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderAccountEntity extends AbstractOrganizationAccountEntity
+public abstract class AbstractServiceProviderAccountEntity extends AbstractLongUniqueEntity
     implements ServiceProviderAccount
 {
   @Column(name = "account_holder_id")

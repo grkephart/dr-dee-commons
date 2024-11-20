@@ -19,6 +19,7 @@ import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 
 
 /**
@@ -46,6 +47,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   private Instant                           lastUpdateDate;
   @Column(name = "last_update_id")
   private Long                              lastUpdateId;
+  private ServiceProviderTypeEntity         type;
 
   /**
    * 
@@ -56,18 +58,18 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @Override
+  public AccountHolderType getAccountHolderType()
+  {
+    return AccountHolderType.ORGANIZATION;
+  }
+
+
   public Set<ServiceProviderAccount> getAccounts()
   {
     return this.accounts.stream()//
         .map(account -> (ServiceProviderAccount)account)//
         .collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public AccountHolderType getAccountHolderType()
-  {
-    return AccountHolderType.ORGANIZATION;
   }
 
 
@@ -117,6 +119,12 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public Long getLastUpdateId()
   {
     return lastUpdateId;
+  }
+
+
+  public ServiceProviderType getType()
+  {
+    return type;
   }
 
 
@@ -184,6 +192,13 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     Long lastUpdateId)
   {
     this.lastUpdateId = lastUpdateId;
+  }
+
+
+  public void setType(
+    ServiceProviderType type)
+  {
+    this.type = (ServiceProviderTypeEntity)type;
   }
 
 }
