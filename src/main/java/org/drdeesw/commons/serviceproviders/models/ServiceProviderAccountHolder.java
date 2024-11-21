@@ -26,13 +26,17 @@ public interface ServiceProviderAccountHolder<A extends ServiceProviderAccount>
 
 
   /**
-   * @return
+   * Returns the accounts.
+   * 
+   * @return the accounts
    */
   Set<A> getAccounts();
 
 
   /**
-   * @param accounts
+   * Sets the accounts.
+   * 
+   * @param accounts the accounts to set
    */
   void setAccounts(
     Set<A> accounts);

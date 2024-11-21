@@ -7,8 +7,8 @@ package org.drdeesw.commons.security.services.impl;
 import javax.annotation.PostConstruct;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
-import org.drdeesw.commons.security.models.entities.SystemUserEntity;
-import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
+import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.security.oauth2.client.registration.Oauth2SecurityConfiguration;
 import org.drdeesw.commons.security.repositories.SystemUserRepository;
 import org.drdeesw.commons.security.services.SystemUserService;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SystemUserServiceImpl extends
-    AbstractJpaCrudServiceImpl<SystemUserPojo, SystemUserEntity, Long> implements SystemUserService
+    AbstractJpaCrudServiceImpl<UserPojo, UserEntity, Long> implements SystemUserService
 {
 
   @Autowired
@@ -35,12 +35,12 @@ public class SystemUserServiceImpl extends
    */
   protected SystemUserServiceImpl()
   {
-    super(SystemUserPojo.class, SystemUserEntity.class);
+    super(UserPojo.class, UserEntity.class);
   }
 
 
   @Override
-  public SystemUserPojo findByUsername(
+  public UserPojo findByUsername(
     String username)
   {
     return convertEntityToPojo(this.systemUserRepository.findByUsername(username));
@@ -51,9 +51,9 @@ public class SystemUserServiceImpl extends
    *
    */
   @Override
-  public SystemUserPojo getCurrentUser()
+  public UserPojo getCurrentUser()
   {
-    SystemUserPojo user = null;
+    UserPojo user = null;
     String principalId = this.securityConfiguration.getPrincipalId();
 
     if (principalId != null)

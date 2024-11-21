@@ -31,7 +31,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProvider
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceProvider")
   private Set<ServiceProviderAccountEntity> accounts;
   @Column(name = "authentication_type")
   private AuthenticationType                authenticationType;
@@ -122,6 +122,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @Override
   public ServiceProviderType getType()
   {
     return type;
@@ -135,7 +136,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     this.accounts = accounts.stream()//
         .map(account -> (ServiceProviderAccountEntity)account)//
         .collect(Collectors.toSet());
-
   }
 
 
@@ -195,6 +195,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @Override
   public void setType(
     ServiceProviderType type)
   {

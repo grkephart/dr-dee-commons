@@ -15,23 +15,22 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "groups")
-@AttributeOverride(name = "name", column = @Column(name = "group_name"))
-public class SystemGroupEntity extends AbstractSystemGroupEntity
+@Table(name = "group_authorities")
+@AttributeOverride(name = "id", column = @Column(name = "group_authority_id"))
+public class GroupAuthorityEntity extends AbstractGroupAuthorityEntity
 {
-
   /**
    * Hibernate
    */
-  public SystemGroupEntity()
+  public GroupAuthorityEntity()
   {
   }
 
 
   /**
-   * @param id the id
+   * @param id The id of the entity
    */
-  public SystemGroupEntity(Long id)
+  public GroupAuthorityEntity(Long id)
   {
     super(id);
   }

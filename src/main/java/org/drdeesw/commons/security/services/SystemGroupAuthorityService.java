@@ -4,12 +4,12 @@
 package org.drdeesw.commons.security.services;
 
 import org.drdeesw.commons.common.services.CrudService;
-import org.drdeesw.commons.security.models.pojos.SystemGroupAuthorityPojo;
+import org.drdeesw.commons.security.models.pojos.GroupAuthorityPojo;
 
 /**
  * 
  */
-public interface SystemGroupAuthorityService extends CrudService<SystemGroupAuthorityPojo, Long>
+public interface SystemGroupAuthorityService extends CrudService<GroupAuthorityPojo, Long>
 {
 
 }

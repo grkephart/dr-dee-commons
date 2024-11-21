@@ -4,7 +4,7 @@
 package org.drdeesw.commons.security.repositories;
 
 import org.drdeesw.commons.common.repositories.QueryRepository;
-import org.drdeesw.commons.security.models.entities.SystemUserEntity;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *   public interface DemoUserRepository extends JpaRepository&lt;DemoUserEntity, Long&gt;, QueryRepository&lt;DemoUserEntity, Long&gt;, SystemUserRepository&lt;DemoUserEntity&gt;
  * </pre>
  */
-public interface SystemUserRepository extends JpaRepository<SystemUserEntity, Long>, QueryRepository<SystemUserEntity, Long>
+public interface SystemUserRepository extends JpaRepository<UserEntity, Long>, QueryRepository<UserEntity, Long>
 {
   /**
    * return the user by username
@@ -21,6 +21,6 @@ public interface SystemUserRepository extends JpaRepository<SystemUserEntity, Lo
    * @param username the username
    * @return the user
    */
-  SystemUserEntity findByUsername(
+  UserEntity findByUsername(
     String username);
 }

@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.pojos.SystemGroupMemberPojo;
+import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
 import org.drdeesw.commons.security.services.SystemGroupMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class GroupMemberController extends AbstractCrudController<SystemGroupMemberPojo, Long>
+public class GroupMemberController extends AbstractCrudController<GroupMemberPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/groupmembers";
   @Autowired
@@ -45,7 +45,7 @@ public class GroupMemberController extends AbstractCrudController<SystemGroupMem
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    SystemGroupMemberPojo groupMember,
+    GroupMemberPojo groupMember,
     BindingResult bindingResult) throws Exception
   {
     return super.create(groupMember, bindingResult);
@@ -71,7 +71,7 @@ public class GroupMemberController extends AbstractCrudController<SystemGroupMem
    * @throws Exception
    */
   @GetMapping("/dt" + MAPPING_PREFIX)
-  public QueryResults<SystemGroupMemberPojo> findByQuery(
+  public QueryResults<GroupMemberPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -87,7 +87,7 @@ public class GroupMemberController extends AbstractCrudController<SystemGroupMem
    * @return the group member with the given id
    */
   @GetMapping(value = MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<SystemGroupMemberPojo> get(
+  public ResponseEntity<GroupMemberPojo> get(
     @PathVariable
     Long id)
   {

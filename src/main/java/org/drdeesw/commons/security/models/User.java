@@ -5,6 +5,7 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
 
 
@@ -15,7 +16,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
  * @author gary_kephart
  *
  */
-public interface SystemUser extends LongUniqueObject, ServiceProviderAccountHolder
+public interface User extends LongUniqueObject, ServiceProviderAccountHolder<ServiceProviderAccount>
 {
 
 

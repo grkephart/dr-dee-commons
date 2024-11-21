@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
 /**
  * 
  */
-public interface SystemGroupAuthority extends UniqueObject<Long>
+public interface GroupAuthority extends UniqueObject<Long>
 {
   /**
    * Returns the authority granted to the group.
@@ -25,7 +25,7 @@ public interface SystemGroupAuthority extends UniqueObject<Long>
    * 
    * @return the group
    */
-  SystemGroup getSystemGroup();
+  Group getGroup();
 
 
   /**
@@ -40,8 +40,8 @@ public interface SystemGroupAuthority extends UniqueObject<Long>
   /**
    * Sets the group.
    * 
-   * @param systemGroup the group
+   * @param group the group
    */
-  void setSystemGroup(
-    SystemGroup systemGroup);
+  void setGroup(
+    Group group);
 }

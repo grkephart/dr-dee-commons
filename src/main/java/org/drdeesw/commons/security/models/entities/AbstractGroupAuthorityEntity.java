@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
-import org.drdeesw.commons.security.models.SystemGroup;
-import org.drdeesw.commons.security.models.SystemGroupAuthority;
+import org.drdeesw.commons.security.models.Group;
+import org.drdeesw.commons.security.models.GroupAuthority;
 
 
 /**
@@ -23,23 +23,24 @@ import org.drdeesw.commons.security.models.SystemGroupAuthority;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueEntity<Long> implements SystemGroupAuthority
+public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<Long>
+    implements GroupAuthority
 {
   @Column(name = "authority")
-  private String authority;
+  private String      authority;
   @ManyToOne
   @JoinColumn(name = "group_id")
-  private SystemGroupEntity systemGroup;
+  private GroupEntity group;
 
   /**
    * Hibernate
    */
-  protected AbstractSystemGroupAuthorityEntity()
+  protected AbstractGroupAuthorityEntity()
   {
   }
 
 
-  protected AbstractSystemGroupAuthorityEntity(Long id)
+  protected AbstractGroupAuthorityEntity(Long id)
   {
     super(id);
   }
@@ -53,9 +54,9 @@ public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueE
 
 
   @Override
-  public SystemGroup getSystemGroup()
+  public Group getGroup()
   {
-    return this.systemGroup;
+    return this.group;
   }
 
 
@@ -68,10 +69,10 @@ public abstract class AbstractSystemGroupAuthorityEntity extends AbstractUniqueE
 
 
   @Override
-  public void setSystemGroup(
-    SystemGroup systemGroup)
+  public void setGroup(
+    Group systemGroup)
   {
-    this.systemGroup = (SystemGroupEntity)systemGroup;
+    this.group = (GroupEntity)systemGroup;
   }
 
 }

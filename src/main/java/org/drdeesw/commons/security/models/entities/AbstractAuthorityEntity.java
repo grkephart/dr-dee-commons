@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
-import org.drdeesw.commons.security.models.SystemAuthority;
+import org.drdeesw.commons.security.models.Authority;
 
 
 /**
@@ -20,7 +20,7 @@ import org.drdeesw.commons.security.models.SystemAuthority;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemAuthorityEntity extends AbstractUniqueEntity<Long> implements SystemAuthority
+public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long> implements Authority
 {
   @Column(name = "authority")
   private String authority;
@@ -30,12 +30,12 @@ public abstract class AbstractSystemAuthorityEntity extends AbstractUniqueEntity
   /**
    * Hibernate
    */
-  protected AbstractSystemAuthorityEntity()
+  protected AbstractAuthorityEntity()
   {
   }
 
 
-  protected AbstractSystemAuthorityEntity(Long id)
+  protected AbstractAuthorityEntity(Long id)
   {
     super(id);
   }

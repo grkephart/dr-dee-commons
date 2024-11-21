@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "test_user_entities")
-public class TestUserEntity extends SystemUserEntity
+public class TestUserEntity extends UserEntity
 {
   @Override
   public AccountHolderType getAccountHolderType()

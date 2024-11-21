@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.security.models.SystemGroup;
-import org.drdeesw.commons.security.models.SystemGroupMember;
+import org.drdeesw.commons.security.models.Group;
+import org.drdeesw.commons.security.models.GroupMember;
 
 
 /**
@@ -26,35 +26,35 @@ import org.drdeesw.commons.security.models.SystemGroupMember;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUniqueEntity
-    implements SystemGroupMember
+public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
+    implements GroupMember
 {
   @ManyToOne
   @JoinColumn(name = "group_id")
-  private SystemGroupEntity systemGroup;
+  private GroupEntity group;
   @Column(name = "username")
-  private String            username;
+  private String      username;
 
   /**
    * Hibernate
    */
-  protected AbstractSystemGroupMemberEntity()
+  protected AbstractGroupMemberEntity()
   {
   }
 
 
-  protected AbstractSystemGroupMemberEntity(Long id)
+  protected AbstractGroupMemberEntity(Long id)
   {
     super(id);
   }
 
 
   /**
-   * @return the systemGroup
+   * @return the group
    */
-  public SystemGroup getSystemGroup()
+  public Group getGroup()
   {
-    return systemGroup;
+    return group;
   }
 
 
@@ -68,12 +68,12 @@ public abstract class AbstractSystemGroupMemberEntity extends AbstractLongUnique
 
 
   /**
-   * @param systemGroup the role to set
+   * @param group the role to set
    */
-  public void setSystemGroup(
-    SystemGroup systemGroup)
+  public void setGroup(
+    Group group)
   {
-    this.systemGroup = (SystemGroupEntity)systemGroup;
+    this.group = (GroupEntity)group;
   }
 
 

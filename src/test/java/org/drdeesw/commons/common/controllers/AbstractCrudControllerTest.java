@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.drdeesw.commons.common.queries.JpqlQuery;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.common.services.CrudService;
-import org.drdeesw.commons.security.models.pojos.SystemGroupMemberPojo;
+import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ class AbstractCrudControllerTest
 {
   private static final Long               ID = Long.valueOf(677);
   private TestableAbstractCrudController  objectUnderTest;
-  private CrudService<SystemGroupMemberPojo, Long> service;
+  private CrudService<GroupMemberPojo, Long> service;
 
   /**
    * @throws java.lang.Exception
@@ -65,7 +65,7 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePWithSuccess() throws Exception
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
 
     // Arrange
 
@@ -90,7 +90,7 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePWithException() throws Exception
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     Exception ex = new Exception();
 
     // Arrange
@@ -116,7 +116,7 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithSuccess() throws Exception
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 
     // Arrange
@@ -142,7 +142,7 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithException() throws Exception
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
     Exception ex = new Exception();
 
@@ -169,7 +169,7 @@ class AbstractCrudControllerTest
   @Test
   void testCreatePBindingResultWithBindingException() throws Exception
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 
     // Arrange
@@ -194,12 +194,12 @@ class AbstractCrudControllerTest
   @Test
   void testDelete()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
 
     // Arrange
 
     // Act
-    ResponseEntity<SystemGroupMemberPojo> actual = this.objectUnderTest.delete(pojo);
+    ResponseEntity<GroupMemberPojo> actual = this.objectUnderTest.delete(pojo);
 
     // Assert
 
@@ -216,7 +216,7 @@ class AbstractCrudControllerTest
   @Test
   void testFindByIdWithFound()
   {
-    SystemGroupMemberPojo expected = new SystemGroupMemberPojo();
+    GroupMemberPojo expected = new GroupMemberPojo();
 
     // Arrange
 
@@ -230,7 +230,7 @@ class AbstractCrudControllerTest
     Mockito.verify(this.service).findById(ID);
 
     Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-    SystemGroupMemberPojo actual = (SystemGroupMemberPojo)response.getBody();
+    GroupMemberPojo actual = (GroupMemberPojo)response.getBody();
     Assert.assertEquals(expected, actual);
   }
 
@@ -265,8 +265,8 @@ class AbstractCrudControllerTest
   @Test
   void testFindByQueryMultiValueMapOfStringStringWithSuccess()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
-    QueryResults<SystemGroupMemberPojo> expected = new QueryResults<>(Collections.singletonList(pojo));
+    GroupMemberPojo pojo = new GroupMemberPojo();
+    QueryResults<GroupMemberPojo> expected = new QueryResults<>(Collections.singletonList(pojo));
     MultiValueMap<String, String> parameterMap = new HttpHeaders();
 
     // Arrange
@@ -274,7 +274,7 @@ class AbstractCrudControllerTest
     Mockito.when(this.service.findByQuery(parameterMap)).thenReturn(expected);
 
     // Act
-    QueryResults<SystemGroupMemberPojo> actual = this.objectUnderTest.findByQuery(parameterMap);
+    QueryResults<GroupMemberPojo> actual = this.objectUnderTest.findByQuery(parameterMap);
 
     // Assert
 
@@ -290,16 +290,16 @@ class AbstractCrudControllerTest
   @Test
   void testFindByQueryQ()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
-    JpqlQuery<SystemGroupMemberPojo> query = new JpqlQuery<SystemGroupMemberPojo>(SystemGroupMemberPojo.class);
-    QueryResults<SystemGroupMemberPojo> expected = new QueryResults<>(Collections.singletonList(pojo));
+    GroupMemberPojo pojo = new GroupMemberPojo();
+    JpqlQuery<GroupMemberPojo> query = new JpqlQuery<GroupMemberPojo>(GroupMemberPojo.class);
+    QueryResults<GroupMemberPojo> expected = new QueryResults<>(Collections.singletonList(pojo));
 
     // Arrange
 
     Mockito.when(this.service.findByQuery(query)).thenReturn(expected);
 
     // Act
-    QueryResults<SystemGroupMemberPojo> actual = this.objectUnderTest.findByQuery(query);
+    QueryResults<GroupMemberPojo> actual = this.objectUnderTest.findByQuery(query);
 
     // Assert
 
@@ -315,14 +315,14 @@ class AbstractCrudControllerTest
   @Test
   void testGet()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
 
     // Arrange
 
     Mockito.when(this.service.get(ID)).thenReturn(pojo);
 
     // Act
-    ResponseEntity<SystemGroupMemberPojo> actual = this.objectUnderTest.get(ID);
+    ResponseEntity<GroupMemberPojo> actual = this.objectUnderTest.get(ID);
 
     // Assert
 
@@ -339,14 +339,14 @@ class AbstractCrudControllerTest
   @Test
   void testUpdateP()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
 
     // Arrange
 
     Mockito.when(this.service.update(pojo)).thenReturn(pojo);
 
     // Act
-    ResponseEntity<SystemGroupMemberPojo> actual = this.objectUnderTest.update(pojo);
+    ResponseEntity<GroupMemberPojo> actual = this.objectUnderTest.update(pojo);
 
     // Assert
 
@@ -363,7 +363,7 @@ class AbstractCrudControllerTest
   @Test
   void testUpdatePBindingResultWithSuccess()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 
     // Arrange
@@ -388,7 +388,7 @@ class AbstractCrudControllerTest
   @Test
   void testUpdatePBindingResultWithBindingException()
   {
-    SystemGroupMemberPojo pojo = new SystemGroupMemberPojo();
+    GroupMemberPojo pojo = new GroupMemberPojo();
     BindingResult bindingResult = new BeanPropertyBindingResult(null, null);
 
     // Arrange

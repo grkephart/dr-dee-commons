@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 import org.drdeesw.commons.common.queries.JpqlQuery;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.entities.SystemGroupMemberEntity;
+import org.drdeesw.commons.security.models.entities.GroupMemberEntity;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ class QueryRepositoryImplTest
   private static final Object                   NAME = "fhdrjrkj";
   private static final Long TOTAL_RECORDS = Long.valueOf(237899);
   private static final Long NO_RECORDS = Long.valueOf(0);
-  private QueryRepositoryImpl<SystemGroupMemberEntity, Long> objectUnderTest;
+  private QueryRepositoryImpl<GroupMemberEntity, Long> objectUnderTest;
   private EntityManager                         em;
 
   /**
@@ -39,7 +39,7 @@ class QueryRepositoryImplTest
   {
     this.em = Mockito.mock(EntityManager.class);
 
-    this.objectUnderTest = new QueryRepositoryImpl<SystemGroupMemberEntity, Long>(this.em);
+    this.objectUnderTest = new QueryRepositoryImpl<GroupMemberEntity, Long>(this.em);
   }
 
 
@@ -58,14 +58,14 @@ class QueryRepositoryImplTest
   @Test
   void testFindByQueryWithRecords()
   {
-    JpqlQuery<SystemGroupMemberEntity> query = new JpqlQuery<>(SystemGroupMemberEntity.class)//
+    JpqlQuery<GroupMemberEntity> query = new JpqlQuery<>(GroupMemberEntity.class)//
         .setPerformCount(true)//
         .setStart(0)//
         .setMaxResults(10)//
         .equals("name", NAME);
     Query cq = Mockito.mock(Query.class);
     Query q = Mockito.mock(Query.class);
-    List<SystemGroupMemberEntity> resultList = new ArrayList<SystemGroupMemberEntity>();
+    List<GroupMemberEntity> resultList = new ArrayList<GroupMemberEntity>();
 
     // Arrange
     
@@ -77,7 +77,7 @@ class QueryRepositoryImplTest
     Mockito.when(q.setMaxResults(Mockito.anyInt())).thenReturn(q);
 
     // Act
-    QueryResults<SystemGroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
+    QueryResults<GroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
 
     // Assert
     
@@ -100,14 +100,14 @@ class QueryRepositoryImplTest
   @Test
   void testFindByQueryWithNoRecords()
   {
-    JpqlQuery<SystemGroupMemberEntity> query = new JpqlQuery<>(SystemGroupMemberEntity.class)//
+    JpqlQuery<GroupMemberEntity> query = new JpqlQuery<>(GroupMemberEntity.class)//
         .setPerformCount(true)//
         .setStart(0)//
         .setMaxResults(10)//
         .equals("name", NAME);
     Query cq = Mockito.mock(Query.class);
     Query q = Mockito.mock(Query.class);
-    List<SystemGroupMemberEntity> resultList = new ArrayList<SystemGroupMemberEntity>();
+    List<GroupMemberEntity> resultList = new ArrayList<GroupMemberEntity>();
 
     // Arrange
     
@@ -119,7 +119,7 @@ class QueryRepositoryImplTest
     Mockito.when(q.setMaxResults(Mockito.anyInt())).thenReturn(q);
 
     // Act
-    QueryResults<SystemGroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
+    QueryResults<GroupMemberEntity> queryResults = this.objectUnderTest.findByQuery(query);
 
     // Assert
     

@@ -5,13 +5,13 @@ package org.drdeesw.commons.security.services;
 
 
 import org.drdeesw.commons.common.services.CrudService;
-import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
  * The system user service.
  */
-public interface SystemUserService extends CrudService<SystemUserPojo, Long>
+public interface SystemUserService extends CrudService<UserPojo, Long>
 {
 
   /**
@@ -20,7 +20,7 @@ public interface SystemUserService extends CrudService<SystemUserPojo, Long>
    * @param username the username
    * @return the user
    */
-  SystemUserPojo findByUsername(
+  UserPojo findByUsername(
     String username);
 
 
@@ -29,5 +29,5 @@ public interface SystemUserService extends CrudService<SystemUserPojo, Long>
    * 
    * @return the current user
    */
-  SystemUserPojo getCurrentUser();
+  UserPojo getCurrentUser();
 }

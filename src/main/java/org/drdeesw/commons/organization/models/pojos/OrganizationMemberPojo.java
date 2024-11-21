@@ -12,8 +12,8 @@ import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.security.models.SystemUser;
-import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
@@ -29,7 +29,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   private Long                            lastUpdateId;
   private OrganizationPojo                organization;
   private Set<OrganizationMemberRolePojo> roles;
-  private SystemUserPojo                  systemUser;
+  private UserPojo                  systemUser;
 
   @Override
   public Long getCreatedById()
@@ -76,7 +76,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public SystemUser getSystemUser()
+  public User getSystemUser()
   {
     return this.systemUser;
   }
@@ -149,9 +149,9 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
   @Override
   public void setSystemUser(
-    SystemUser systemUser)
+    User systemUser)
   {
-    this.systemUser = (SystemUserPojo)systemUser;
+    this.systemUser = (UserPojo)systemUser;
   }
 
 }

@@ -7,8 +7,8 @@ package org.drdeesw.commons.security.services.impl;
 import javax.annotation.PostConstruct;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
-import org.drdeesw.commons.security.models.entities.SystemGroupEntity;
-import org.drdeesw.commons.security.models.pojos.SystemGroupPojo;
+import org.drdeesw.commons.security.models.entities.GroupEntity;
+import org.drdeesw.commons.security.models.pojos.GroupPojo;
 import org.drdeesw.commons.security.repositories.SystemGroupRepository;
 import org.drdeesw.commons.security.services.SystemGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SystemGroupServiceImpl
-    extends AbstractJpaCrudServiceImpl<SystemGroupPojo, SystemGroupEntity, Long>
+    extends AbstractJpaCrudServiceImpl<GroupPojo, GroupEntity, Long>
     implements SystemGroupService
 {
 
@@ -32,7 +32,7 @@ public class SystemGroupServiceImpl
    */
   protected SystemGroupServiceImpl()
   {
-    super(SystemGroupPojo.class, SystemGroupEntity.class);
+    super(GroupPojo.class, GroupEntity.class);
   }
 
 

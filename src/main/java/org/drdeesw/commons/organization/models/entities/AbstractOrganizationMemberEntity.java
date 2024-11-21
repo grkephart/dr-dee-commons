@@ -21,8 +21,8 @@ import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.security.models.SystemUser;
-import org.drdeesw.commons.security.models.entities.SystemUserEntity;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -51,7 +51,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   private Set<OrganizationMemberRoleEntity> roles;
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private SystemUserEntity                  systemUser;
+  private UserEntity                  systemUser;
 
   /**
    * 
@@ -107,7 +107,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public SystemUser getSystemUser()
+  public User getSystemUser()
   {
     return this.systemUser;
   }
@@ -180,9 +180,9 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
   @Override
   public void setSystemUser(
-    SystemUser systemUser)
+    User systemUser)
   {
-    this.systemUser = (SystemUserEntity)systemUser;
+    this.systemUser = (UserEntity)systemUser;
   }
 
 }

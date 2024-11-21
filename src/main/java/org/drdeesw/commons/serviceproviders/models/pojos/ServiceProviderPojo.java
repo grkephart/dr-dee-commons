@@ -96,6 +96,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
+  @Override
   public ServiceProviderType getType()
   {
     return type;
@@ -168,6 +169,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   }
 
 
+  @Override
   public void setType(
     ServiceProviderType type)
   {

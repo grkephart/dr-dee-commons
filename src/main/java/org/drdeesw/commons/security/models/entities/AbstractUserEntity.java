@@ -4,13 +4,22 @@
 package org.drdeesw.commons.security.models.entities;
 
 
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 
 
 /**
@@ -23,29 +32,32 @@ import org.drdeesw.commons.security.models.SystemUser;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity implements SystemUser
+public abstract class AbstractUserEntity extends AbstractLongUniqueEntity implements User
 {
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceProvider")
+  private Set<ServiceProviderAccountEntity> accounts;
+
   /**
    * true if the user is enabled
    */
   @Column(name = "enabled")
-  private boolean enabled;
+  private boolean                           enabled;
 
   /**
    * perhaps the email address
    */
   @Column(name = "username")
-  private String  username;
+  private String                            username;
 
   /**
    * Hibernate
    */
-  protected AbstractSystemUserEntity()
+  protected AbstractUserEntity()
   {
   }
 
 
-  protected AbstractSystemUserEntity(Long id)
+  protected AbstractUserEntity(Long id)
   {
     super(id);
   }
@@ -56,7 +68,7 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
    * 
    * @param username perhaps the email address
    */
-  public AbstractSystemUserEntity(String username)
+  public AbstractUserEntity(String username)
   {
     this.username = username;
   }
@@ -68,7 +80,7 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
    * @param username the username of the user
    * @param enabled whether the user is enabled or not
    */
-  public AbstractSystemUserEntity(String username, boolean enabled)
+  public AbstractUserEntity(String username, boolean enabled)
   {
     this.enabled = enabled;
     this.username = username;
@@ -79,6 +91,17 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
   public AccountHolderType getAccountHolderType()
   {
     return AccountHolderType.USER;
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getAccounts()
+  {
+    return Optional.ofNullable(this.accounts)//
+        .orElse(Collections.emptySet())//
+        .stream()//
+        .map(account -> (ServiceProviderAccount) account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -100,6 +123,16 @@ public abstract class AbstractSystemUserEntity extends AbstractLongUniqueEntity 
   public boolean isEnabled()
   {
     return enabled;
+  }
+
+
+  @Override
+  public void setAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    this.accounts = accounts.stream()//
+        .map(account -> (ServiceProviderAccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 

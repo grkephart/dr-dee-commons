@@ -21,13 +21,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
-public class SystemUserEntity extends AbstractSystemUserEntity
+public class UserEntity extends AbstractUserEntity
 {
 
   /**
    * Hibernate
    */
-  public SystemUserEntity()
+  public UserEntity()
   {
   }
 
@@ -35,7 +35,7 @@ public class SystemUserEntity extends AbstractSystemUserEntity
   /**
    * @param id the id
    */
-  public SystemUserEntity(Long id)
+  public UserEntity(Long id)
   {
     super(id);
   }
@@ -46,7 +46,7 @@ public class SystemUserEntity extends AbstractSystemUserEntity
    * 
    * @param username perhaps the email address
    */
-  public SystemUserEntity(String username)
+  public UserEntity(String username)
   {
     super(username);
   }
@@ -58,7 +58,7 @@ public class SystemUserEntity extends AbstractSystemUserEntity
    * @param username the username
    * @param enabled whether the user is enabled
    */
-  public SystemUserEntity(String username, boolean enabled)
+  public UserEntity(String username, boolean enabled)
   {
     super(username, enabled);
   }

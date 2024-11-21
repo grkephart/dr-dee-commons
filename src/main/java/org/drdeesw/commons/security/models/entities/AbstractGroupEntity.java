@@ -6,7 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedUniqueEntity;
-import org.drdeesw.commons.security.models.SystemGroup;
+import org.drdeesw.commons.security.models.Group;
 
 
 /**
@@ -19,19 +19,19 @@ import org.drdeesw.commons.security.models.SystemGroup;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractSystemGroupEntity extends AbstractNamedUniqueEntity<Long>
-    implements SystemGroup
+public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long>
+    implements Group
 {
 
   /**
    * Hibernate
    */
-  protected AbstractSystemGroupEntity()
+  protected AbstractGroupEntity()
   {
   }
 
 
-  protected AbstractSystemGroupEntity(Long id)
+  protected AbstractGroupEntity(Long id)
   {
     super(id);
   }

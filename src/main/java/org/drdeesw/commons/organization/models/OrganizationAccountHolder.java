@@ -23,12 +23,16 @@ public interface OrganizationAccountHolder<A extends OrganizationAccount>
   AccountHolderType getAccountHolderType();
 
   /**
-   * @return
+   * Returns the accounts of the account holder.
+   * 
+   * @return the accounts
    */
   Set<A> getAccounts();
 
   /**
-   * @param accounts
+   * Sets the accounts of the account holder.
+   * 
+   * @param accounts the accounts to set
    */
   void setAccounts(Set<A> accounts);
 

@@ -9,7 +9,7 @@ import java.util.Set;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
@@ -38,7 +38,7 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * 
    * @return the system user
    */
-  public SystemUser getSystemUser();
+  public User getSystemUser();
 
 
   /**
@@ -65,5 +65,5 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * @param systemUser the systemUser to set
    */
   public void setSystemUser(
-    SystemUser systemUser);
+    User systemUser);
 }

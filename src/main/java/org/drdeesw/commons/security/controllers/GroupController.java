@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.pojos.SystemGroupPojo;
+import org.drdeesw.commons.security.models.pojos.GroupPojo;
 import org.drdeesw.commons.security.services.SystemGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class GroupController extends AbstractCrudController<SystemGroupPojo, Long>
+public class GroupController extends AbstractCrudController<GroupPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/groups";
   @Autowired
@@ -45,7 +45,7 @@ public class GroupController extends AbstractCrudController<SystemGroupPojo, Lon
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    SystemGroupPojo group,
+    GroupPojo group,
     BindingResult bindingResult) throws Exception
   {
     return super.create(group, bindingResult);
@@ -71,7 +71,7 @@ public class GroupController extends AbstractCrudController<SystemGroupPojo, Lon
    * @throws Exception
    */
   @GetMapping("/dt" + MAPPING_PREFIX)
-  public QueryResults<SystemGroupPojo> findByQuery(
+  public QueryResults<GroupPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -87,7 +87,7 @@ public class GroupController extends AbstractCrudController<SystemGroupPojo, Lon
    * @return the group with the given id
    */
   @GetMapping(value = MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<SystemGroupPojo> get(
+  public ResponseEntity<GroupPojo> get(
     @PathVariable
     Long id)
   {

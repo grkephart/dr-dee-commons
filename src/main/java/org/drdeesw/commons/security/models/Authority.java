@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
 /**
  * Represents the permissions or roles granted to a user, defining what actions or resources a user can access.
  */
-public interface SystemAuthority extends UniqueObject<Long>
+public interface Authority extends UniqueObject<Long>
 {
   /**
    * Returns the authority.

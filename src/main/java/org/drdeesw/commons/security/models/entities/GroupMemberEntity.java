@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package org.drdeesw.commons.security.models.entities;
 
 
@@ -10,26 +13,28 @@ import javax.persistence.Table;
 /**
  * Structured to work with JdbcUserDetailsManager.
  * 
- * @author gary_kephart
+ * @author gkephart
  *
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "authorities")
-@AttributeOverride(name = "id", column = @Column(name = "authority_id"))
-public class SystemAuthorityEntity extends AbstractSystemAuthorityEntity
+@Table(name = "group_members")
+@AttributeOverride(name = "id", column = @Column(name = "group_member_id"))
+public class GroupMemberEntity extends AbstractGroupMemberEntity
 {
 
   /**
    * Hibernate
    */
-  public SystemAuthorityEntity()
+  public GroupMemberEntity()
   {
-    super();
   }
 
 
-  public SystemAuthorityEntity(Long id)
+  /**
+   * @param id the id
+   */
+  public GroupMemberEntity(Long id)
   {
     super(id);
   }

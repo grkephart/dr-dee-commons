@@ -2,7 +2,7 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedUniquePojo;
-import org.drdeesw.commons.security.models.SystemAuthority;
+import org.drdeesw.commons.security.models.Authority;
 
 
 /**
@@ -12,7 +12,7 @@ import org.drdeesw.commons.security.models.SystemAuthority;
  *
  */
 @SuppressWarnings("serial")
-public class SystemAuthorityPojo extends AbstractNamedUniquePojo<Long> implements SystemAuthority
+public class AuthorityPojo extends AbstractNamedUniquePojo<Long> implements Authority
 {
   private String authority;
   private String username;
@@ -20,12 +20,12 @@ public class SystemAuthorityPojo extends AbstractNamedUniquePojo<Long> implement
   /**
    * Hibernate
    */
-  protected SystemAuthorityPojo()
+  protected AuthorityPojo()
   {
   }
 
 
-  protected SystemAuthorityPojo(Long id)
+  protected AuthorityPojo(Long id)
   {
     super(id);
   }
