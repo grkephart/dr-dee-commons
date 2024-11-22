@@ -1,3 +1,20 @@
+
+For the following models, there should be 
+* an interface. Naming convention is {Model}
+* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Properties should have the appropriate Column or OneToMany, etc relationships. Naming convention is Abstract{Model}Entity
+* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is {Model}Entity
+
+Class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
+As just one example, in the Organization class, the getAccounts() and setAccounts() methods should use the same generic type.
+Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes should reference other entity classes, not interfaces or generic parameters. 
+Entity relationships in interfaces should use only interfaces or generic parameters.
+
+Removing redundancies:
+Service provider does not need getAccounts() and setAccounts() methods since those are in the Organization class.
+Service provider account does not need get serviceProvider() and setServiceProvider() methods since those are in the Organization Account class as getOrganization() and setOrganization() methods,
+unless those methods simply delegate to the Organization Account class methods.
+
+
 Commons Module:
 
 Auditable - a role interface that contains the following properties:
@@ -23,7 +40,7 @@ Organization, which is named and describable
 * Can be an account holder
 * Has a type, which there can be an unlimited set of values (not an enum)
 * Has a status, which is an enum
-* Has accounts
+* Has accounts, which can be an Organization Account or a subclass
 * Has members
 * Has roles
 
@@ -57,6 +74,7 @@ Service Provider Module:
 Service Provider - not necessarily an organization, but will be considered as one for simplicity. It is named and describable
 * Has an AuthenticationType enum
 * Has a ClientRegistrationId
+* Has accounts, which can be a Service Provider Account or a subclass
 
 Service Provider Account - is an organization account
 * Belongs to a service provider
@@ -75,21 +93,30 @@ Security Module:
 Authority, which represents the permissions or roles granted to a user, defining what actions or resources a user can access.. structured to work with JdbcUserDetailsManager.
 * Has a username, which links to a User
 * Has an authority (role) name
+* Has a user
+* Has group authorities
 
 Group, structured to work with JdbcUserDetailsManager.
 * Is named
+* Has group members
+* Has group authorities
+* Is enableable
 
 Group Authority, structured to work with JdbcUserDetailsManager.
 * Has an authority (role) name, which links to an Authority
+* Has an Authority
 * Has a Group
 
 Group Member, structured to work with JdbcUserDetailsManager.
 * Has a Group
 * Has a username, which links to a User
+* Has a User
 
 User, structured to work with JdbcUserDetailsManager.
 * Has a username
 * Is enableable
+* Has group members
+* Has authorities
 
 
 Identity Module:
@@ -107,11 +134,8 @@ Person Contact Information
 * Has a street address
 * Has a phone number
 
-
-For these models, there should be 
-* an interface. Naming convention is {Model}
-* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Properties should have the appropriate Column or OneToMany, etc relationships. Naming convention is Abstract{Model}Entity
-* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is {Model}Entity
-
-Also, class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
-ServiceProvider.setAccounts() should be a generic method that accepts a Collection of ServiceProviderAccount or any subclass of it.  It should not accept OrganizationProviderAccount. The getter method should return a set of the same type of objects.
+I don't know if a person is a user or not, but I think it would be a good idea to have a separate user entity that links to a person. 
+This way, a person can be a user or not, and a user can be a person or not. 
+This way, we can have a user that is not a person, like a service account or a system account. 
+This way, we can have a person that is not a user, like a contact or a reference or a voter.
+ 
