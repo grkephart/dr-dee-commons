@@ -17,6 +17,8 @@ import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -28,16 +30,18 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongUniqueEntity
     implements OrganizationMemberRole
 {
-  @Column(name = "created_by_id", nullable = false)
-  private Long                     createdById;
+  @ManyToOne
+  @JoinColumn(name = "created_by_id", nullable = false)
+  private UserEntity               createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                  creationDate;
   @Column(name = "enabled")
   private boolean                  enabled;
   @Column(name = "last_update_date")
   private Instant                  lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                     lastUpdateId;
+  @ManyToOne
+  @JoinColumn(name = "last_update_id")
+  private UserEntity               lastUpdatedBy;
   @ManyToOne
   @JoinColumn(name = "role_id")
   private OrganizationRoleEntity   role;
@@ -55,9 +59,9 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public Long getCreatedById()
+  public User getCreatedBy()
   {
-    return createdById;
+    return createdBy;
   }
 
 
@@ -69,16 +73,16 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public Instant getLastUpdateDate()
+  public Instant getLastUpdatedDate()
   {
     return lastUpdateDate;
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public User getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return lastUpdatedBy;
   }
 
 
@@ -104,10 +108,10 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    User createdBy)
   {
-    this.createdById = createdById;
+    this.createdBy = (UserEntity)createdBy;
   }
 
 
@@ -128,7 +132,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public void setLastUpdateDate(
+  public void setLastUpdatedDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;
@@ -136,10 +140,10 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
 
 

@@ -24,6 +24,8 @@ import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -37,22 +39,25 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationAccountEntity> accounts;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
   private Set<OrganizationEntity>        children;
-  @Column(name = "created_by_id", nullable = false)
-  private Long                           createdById;
+  @ManyToOne
+  @JoinColumn(name = "created_by_id", nullable = false)
+  private UserEntity                           createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                        creationDate;
   @Column(name = "description")
   private String                         description;
-  @Column(name = "last_update_date")
-  private Instant                        lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                           lastUpdateId;
+  @Column(name = "last_updated_date")
+  private Instant                        lastUpdatedDate;
+  @ManyToOne
+  @JoinColumn(name = "last_updated_by_id")
+  private UserEntity                           lastUpdatedBy;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationMemberEntity>  members;
-  @Column(name = "parent_id")
-  private AbstractOrganizationEntity     parent;
+  @ManyToOne
+  @JoinColumn(name = "parent_id")
+  private OrganizationEntity     parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationRoleEntity>    roles;
   @Column(name = "status")
@@ -96,9 +101,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public Long getCreatedById()
+  public User getCreatedBy()
   {
-    return this.createdById;
+    return this.createdBy;
   }
 
 
@@ -117,16 +122,16 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public Instant getLastUpdateDate()
+  public Instant getLastUpdatedDate()
   {
-    return this.lastUpdateDate;
+    return this.lastUpdatedDate;
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public User getLastUpdatedBy()
   {
-    return this.lastUpdateId;
+    return this.lastUpdatedBy;
   }
 
 
@@ -200,10 +205,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    User createdBy)
   {
-    this.createdById = createdById;
+    this.createdBy = (UserEntity)createdBy;
   }
 
 
@@ -224,18 +229,18 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
-  public void setLastUpdateDate(
+  public void setLastUpdatedDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.lastUpdatedDate = lastUpdateDate;
   }
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
 
 
@@ -256,7 +261,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setParent(
     Organization parent)
   {
-    this.parent = (AbstractOrganizationEntity)parent;
+    this.parent = (OrganizationEntity)parent;
   }
 
 

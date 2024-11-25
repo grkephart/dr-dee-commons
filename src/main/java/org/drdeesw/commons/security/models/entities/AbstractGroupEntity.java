@@ -19,9 +19,10 @@ import org.drdeesw.commons.security.models.Group;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long>
-    implements Group
+public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long> implements Group
 {
+
+  private boolean enabled;
 
   /**
    * Hibernate
@@ -34,6 +35,21 @@ public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long
   protected AbstractGroupEntity(Long id)
   {
     super(id);
+  }
+
+
+  @Override
+  public boolean isEnabled()
+  {
+    return this.enabled;
+  }
+
+
+  @Override
+  public void setEnabled(
+    boolean enabled)
+  {
+    this.enabled = enabled;
   }
 
 }

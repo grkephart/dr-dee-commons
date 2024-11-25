@@ -34,24 +34,26 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity>
     extends AbstractLongUniqueEntity implements OrganizationMember
 {
-  @Column(name = "created_by_id", nullable = false)
-  private Long                              createdById;
+  @ManyToOne
+  @JoinColumn(name = "created_by_id", nullable = false)
+  private UserEntity                        createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                           creationDate;
   @Column(name = "enabled")
   private boolean                           enabled;
   @Column(name = "last_update_date")
   private Instant                           lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                              lastUpdateId;
+  @ManyToOne
+  @JoinColumn(name = "last_update_id")
+  private UserEntity                        lastUpdatedBy;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private Organization                      organization;
+  private OrganizationEntity                organization;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRoleEntity> roles;
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private UserEntity                  systemUser;
+  private UserEntity                        user;
 
   /**
    * 
@@ -63,9 +65,9 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public Long getCreatedById()
+  public User getCreatedBy()
   {
-    return createdById;
+    return createdBy;
   }
 
 
@@ -77,16 +79,16 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public Instant getLastUpdateDate()
+  public Instant getLastUpdatedDate()
   {
     return lastUpdateDate;
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public User getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return lastUpdatedBy;
   }
 
 
@@ -107,9 +109,9 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public User getSystemUser()
+  public User getUser()
   {
-    return this.systemUser;
+    return this.user;
   }
 
 
@@ -121,10 +123,10 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    User createdBy)
   {
-    this.createdById = createdById;
+    this.createdBy = (UserEntity)createdBy;
   }
 
 
@@ -145,7 +147,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setLastUpdateDate(
+  public void setLastUpdatedDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;
@@ -153,10 +155,10 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
 
 
@@ -164,7 +166,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   public void setOrganization(
     Organization organization)
   {
-    this.organization = organization;
+    this.organization = (OrganizationEntity)organization;
   }
 
 
@@ -179,10 +181,10 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setSystemUser(
-    User systemUser)
+  public void setUser(
+    User user)
   {
-    this.systemUser = (UserEntity)systemUser;
+    this.user = (UserEntity)user;
   }
 
 }

@@ -16,6 +16,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
+import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
@@ -38,7 +39,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   @Column(name = "client_registration_Id")
   private String                            clientRegistrationId;
   @Column(name = "created_by_id", nullable = false)
-  private Long                              createdById;
+  private User                              createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                           creationDate;
   @Column(name = "description")
@@ -46,7 +47,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   @Column(name = "last_update_date")
   private Instant                           lastUpdateDate;
   @Column(name = "last_update_id")
-  private Long                              lastUpdateId;
+  private User                              lastUpdatedBy;
   private ServiceProviderTypeEntity         type;
 
   /**
@@ -88,9 +89,9 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public Long getCreatedById()
+  public User getCreatedBy()
   {
-    return createdById;
+    return createdBy;
   }
 
 
@@ -109,16 +110,16 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public Instant getLastUpdateDate()
+  public Instant getLastUpdatedDate()
   {
     return lastUpdateDate;
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public User getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return lastUpdatedBy;
   }
 
 
@@ -156,10 +157,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    User createdBy)
   {
-    this.createdById = createdById;
+    this.createdBy = createdBy;
   }
 
 
@@ -180,7 +181,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public void setLastUpdateDate(
+  public void setLastUpdatedDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;
@@ -188,10 +189,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 

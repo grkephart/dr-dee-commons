@@ -11,6 +11,7 @@ import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
@@ -19,19 +20,19 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @SuppressWarnings("serial")
 public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements OrganizationRole
 {
-  private Long                        createdById;
+  private User                        createdBy;
   private Instant                     creationDate;
   private String                      description;
   private boolean                     enabled;
   private Instant                     lastUpdateDate;
-  private Long                        lastUpdateId;
+  private User                        lastUpdatedBy;
   private Set<OrganizationMemberRole> members;
   private OrganizationPojo            organization;
 
   @Override
-  public Long getCreatedById()
+  public User getCreatedBy()
   {
-    return this.createdById;
+    return this.createdBy;
   }
 
 
@@ -50,16 +51,16 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public Instant getLastUpdateDate()
+  public Instant getLastUpdatedDate()
   {
     return this.lastUpdateDate;
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public User getLastUpdatedBy()
   {
-    return this.lastUpdateId;
+    return this.lastUpdatedBy;
   }
 
 
@@ -85,10 +86,10 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    User createdBy)
   {
-    this.createdById = createdById;
+    this.createdBy = createdBy;
   }
 
 
@@ -117,7 +118,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setLastUpdateDate(
+  public void setLastUpdatedDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;
@@ -125,10 +126,10 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    User lastUpdateId)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.lastUpdatedBy = lastUpdateId;
   }
 
 

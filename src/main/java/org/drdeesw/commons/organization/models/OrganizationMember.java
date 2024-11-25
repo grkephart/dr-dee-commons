@@ -38,7 +38,7 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * 
    * @return the system user
    */
-  public User getSystemUser();
+  public User getUser();
 
 
   /**
@@ -64,6 +64,6 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * 
    * @param systemUser the systemUser to set
    */
-  public void setSystemUser(
+  public void setUser(
     User systemUser);
 }

@@ -1,21 +1,30 @@
+Write the following classes and interfaces in Java using JPA annotations. Ensure that the classes and interfaces follow all the rules below.
 
-For the following models, there should be 
+
+Rule 1: The classes and interfaces should be in separate packages based on the module they belong to. For example, all classes and interfaces related to the organization module should be in the organization package. 
+The base package should be org.drdeesw.commons.
+
+Rule 2: For the following models, there should be 
 * an interface. Naming convention is {Model}
 * an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Properties should have the appropriate Column or OneToMany, etc relationships. Naming convention is Abstract{Model}Entity
 * a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is {Model}Entity
 
-Class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
+Rule 3: Class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
 As just one example, in the Organization class, the getAccounts() and setAccounts() methods should use the same generic type.
-Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes should reference other entity classes, not interfaces or generic parameters. 
-Entity relationships in interfaces should use only interfaces or generic parameters.
+
+Rule 4: Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes should reference other entity classes, not interfaces or generic parameters.
+ 
+Rule 5: Entity relationships in interfaces should use only interfaces or generic parameters.
 
 Removing redundancies:
-Service provider does not need getAccounts() and setAccounts() methods since those are in the Organization class.
-Service provider account does not need get serviceProvider() and setServiceProvider() methods since those are in the Organization Account class as getOrganization() and setOrganization() methods,
+Rule 6: Service provider does not need getAccounts() and setAccounts() methods since those are in the Organization class.
+Rule 7: Service provider account does not need get serviceProvider() and setServiceProvider() methods since those are in the Organization Account class as getOrganization() and setOrganization() methods,
 unless those methods simply delegate to the Organization Account class methods.
 
+Rule 8: Use a generic parameter A that extends OrganizationAccount for OrganizationAccountHolder
 
-Commons Module:
+
+Common Module:
 
 Auditable - a role interface that contains the following properties:
 * CreatedBy is the user who created the record
@@ -37,6 +46,7 @@ Organization Module:
 
 Organization, which is named and describable
 * Can have a parent organization
+* Can have child organizations
 * Can be an account holder
 * Has a type, which there can be an unlimited set of values (not an enum)
 * Has a status, which is an enum

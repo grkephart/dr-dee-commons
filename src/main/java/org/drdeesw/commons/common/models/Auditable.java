@@ -6,6 +6,8 @@ package org.drdeesw.commons.common.models;
 
 import java.time.Instant;
 
+import org.drdeesw.commons.security.models.User;
+
 
 /**
  * 
@@ -14,37 +16,49 @@ import java.time.Instant;
 public interface Auditable
 {
   /**
-   * @return the ID of the user who created the object
+   * Returns the user who created the object.
+   * 
+   * @return the user who created the object
    */
-  Long getCreatedById();
+  User getCreatedBy();
 
 
   /**
+   * Returns the creation date of the object.
+   * 
    * @return the creation date of the object
    */
   Instant getCreationDate();
 
 
   /**
-   * @return the last update date of the object
+   * Returns the last updated date of the object.
+   * 
+   * @return the last updated date of the object
    */
-  Instant getLastUpdateDate();
+  Instant getLastUpdatedDate();
 
 
   /**
-   * @return the ID of the user who last updated the object
+   * Returns the user who last updated the object.
+   * 
+   * @return the user who last updated the object
    */
-  Long getLastUpdateId();
+  User getLastUpdatedBy();
 
 
   /**
-   * @param createdById the ID of the user who created the object
+   * Sets the user who created the object.
+   * 
+   * @param createdBy the user who created the object
    */
-  void setCreatedById(
-    Long createdById);
+  void setCreatedBy(
+    User createdBy);
 
 
   /**
+   * Sets the creation date of the object.
+   * 
    * @param creationDate the creation date of the object
    */
   void setCreationDate(
@@ -52,15 +66,19 @@ public interface Auditable
 
 
   /**
-   * @param lastUpdateDate the last update date of the object
+   * Sets the last updated date of the object.
+   * 
+   * @param lastUpdatedDate the last update date of the object
    */
-  void setLastUpdateDate(
-    Instant lastUpdateDate);
+  void setLastUpdatedDate(
+    Instant lastUpdatedDate);
 
 
   /**
-   * @param lastUpdateId the ID of the user who last updated the object
+   * Sets the user who last updated the object.
+   * 
+   * @param lastUpdatedBy the user who last updated the object
    */
-  void setLastUpdateId(
-    Long lastUpdateId);
+  void setLastUpdatedBy(
+    User lastUpdatedBy);
 }
