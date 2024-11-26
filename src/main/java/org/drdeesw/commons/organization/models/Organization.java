@@ -12,10 +12,17 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
+ * An organization is a group of people with a common purpose or goal. 
+ * The organization can have a parent organization and children organizations. 
+ * The organization can have members and roles. 
+ * The organization can have accounts.
  * 
+ * A design choice was made to ensure that all related organizations (parent and children) manage the same type of account
+ * instead of having different types of accounts for different related organizations.
+ * This maintains type safety and consistency within the hierarchy at the cost of flexibility.
  */
-public interface Organization
-    extends NamedLongUniqueObject, OrganizationAccountHolder<OrganizationAccount>, Auditable, Describable
+public interface Organization<A extends OrganizationAccount<?, ?>, R extends OrganizationRole<?>, M extends OrganizationMember<?>>
+    extends NamedLongUniqueObject, OrganizationAccountHolder<A>, Auditable, Describable
 {
 
   /**
@@ -23,7 +30,7 @@ public interface Organization
    * 
    * @return the children organizations.
    */
-  Set<Organization> getChildren();
+  Set<Organization<A,R,M>> getChildren();
 
 
   /**
@@ -31,7 +38,7 @@ public interface Organization
    * 
    * @return the organization members.
    */
-  Set<OrganizationMember> getMembers();
+  Set<M> getMembers();
 
 
   /**
@@ -39,7 +46,7 @@ public interface Organization
    * 
    * @return the parent
    */
-  Organization getParent();
+  Organization<A,R,M> getParent();
 
 
   /**
@@ -47,7 +54,7 @@ public interface Organization
    * 
    * @return the organization roles.
    */
-  Set<OrganizationRole> getRoles();
+  Set<R> getRoles();
 
 
   /**
@@ -72,7 +79,7 @@ public interface Organization
    * @param children the children organizations to set
    */
   void setChildren(
-    Set<Organization> children);
+    Set<Organization<A,R,M>> children);
 
 
   /**
@@ -81,7 +88,7 @@ public interface Organization
    * @param members the organization members to set
    */
   void setMembers(
-    Set<OrganizationMember> members);
+    Set<M> members);
 
 
   /**
@@ -90,7 +97,7 @@ public interface Organization
    * @param parent the parent to set
    */
   void setParent(
-    Organization parent);
+    Organization<A,R,M> parent);
 
 
   /**
@@ -99,7 +106,7 @@ public interface Organization
    * @param roles the organization roles to set
    */
   void setRoles(
-    Set<OrganizationRole> roles);
+    Set<R> roles);
 
 
   /**

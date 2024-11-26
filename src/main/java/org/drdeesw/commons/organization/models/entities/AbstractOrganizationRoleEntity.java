@@ -99,7 +99,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
-  public Organization getOrganization()
+  public Organization<?> getOrganization()
   {
     return organization;
   }

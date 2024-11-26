@@ -12,7 +12,13 @@ Rule 2: For the following models, there should be
 Rule 3: Class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
 As just one example, in the Organization class, the getAccounts() and setAccounts() methods should use the same generic type.
 
-Rule 4: Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes should reference other entity classes, not interfaces or generic parameters.
+Rule 4: Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes must reference mapped entity classes, not interfaces or generic parameters.
+Example: it would have to be
+  private Set<OrganizationAccountEntity> accounts;
+not
+  private Set<OrganizationAccount> accounts;
+or 
+  private Set<A> accounts;
  
 Rule 5: Entity relationships in interfaces should use only interfaces or generic parameters.
 
@@ -22,6 +28,8 @@ Rule 7: Service provider account does not need get serviceProvider() and setServ
 unless those methods simply delegate to the Organization Account class methods.
 
 Rule 8: Use a generic parameter A that extends OrganizationAccount for OrganizationAccountHolder
+
+Rule 9: minimize the use of raw types and unchecked casts
 
 
 Common Module:

@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Represents the account holder of an organization account.
  */
-public interface OrganizationAccountHolder<A extends OrganizationAccount>
+public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
 {
 
   /**
