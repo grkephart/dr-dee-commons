@@ -18,7 +18,7 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
    * 
    * @return the accountHolder
    */
-  OrganizationAccountHolder<OrganizationAccount> getAccountHolder();
+  OrganizationAccountHolder<OrganizationAccount> getHolder();
 
 
   /**
@@ -40,12 +40,12 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
 
 
   /**
-   * Sets the accountHolder.
+   * Sets the account holder.
    * 
-   * @param accountHolder  the accountHolder to set
+   * @param holder  the account holder to set
    */
-  void setAccountHolder(
-    OrganizationAccountHolder<OrganizationAccount> accountHolder);
+  void setHolder(
+    OrganizationAccountHolder<OrganizationAccount> holder);
 
 
   /**

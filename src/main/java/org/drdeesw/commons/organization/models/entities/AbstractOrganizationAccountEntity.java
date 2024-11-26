@@ -26,8 +26,8 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniqueEntity
     implements OrganizationAccount
 {
-  @Column(name = "account_holder_id")
-  private OrganizationAccountHolder accountHolder;
+  @ManyToOne
+  private OrganizationAccountHolderEntity  holder;
   @Column(name = "description")
   private String                    description;
   @Column(name = "internal_id")
@@ -46,9 +46,9 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
 
 
   @Override
-  public OrganizationAccountHolder getAccountHolder()
+  public OrganizationAccountHolder<OrganizationAccount> getHolder()
   {
-    return this.accountHolder;
+    return this.holder;
   }
 
 
@@ -74,10 +74,10 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
 
 
   @Override
-  public void setAccountHolder(
-    OrganizationAccountHolder accountHolder)
+  public void setHolder(
+    OrganizationAccountHolder holder)
   {
-    this.accountHolder = accountHolder;
+    this.holder = (OrganizationAccountHolderEntity)holder;
   }
 
 

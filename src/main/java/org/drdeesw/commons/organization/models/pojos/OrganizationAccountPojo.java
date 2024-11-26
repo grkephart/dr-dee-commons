@@ -36,7 +36,7 @@ public class OrganizationAccountPojo extends AbstractLongUniquePojo implements O
 
 
   @Override
-  public OrganizationAccountHolder<OrganizationAccount> getAccountHolder()
+  public OrganizationAccountHolder<OrganizationAccount> getHolder()
   {
     // TODO Auto-generated method stub
     return null;
@@ -65,7 +65,7 @@ public class OrganizationAccountPojo extends AbstractLongUniquePojo implements O
 
 
   @Override
-  public void setAccountHolder(
+  public void setHolder(
     OrganizationAccountHolder<OrganizationAccount> accountHolder)
   {
     // TODO Auto-generated method stub

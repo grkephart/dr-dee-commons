@@ -43,7 +43,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   private Set<OrganizationEntity>        children;
   @ManyToOne
   @JoinColumn(name = "created_by_id", nullable = false)
-  private UserEntity                           createdBy;
+  private UserEntity                     createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                        creationDate;
   @Column(name = "description")
@@ -52,12 +52,12 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   private Instant                        lastUpdatedDate;
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
-  private UserEntity                           lastUpdatedBy;
+  private UserEntity                     lastUpdatedBy;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationMemberEntity>  members;
   @ManyToOne
   @JoinColumn(name = "parent_id")
-  private OrganizationEntity     parent;
+  private OrganizationEntity             parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
   private Set<OrganizationRoleEntity>    roles;
   @Column(name = "status")
@@ -72,13 +72,6 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   protected AbstractOrganizationEntity()
   {
     super();
-  }
-
-
-  @Override
-  public AccountHolderType getAccountHolderType()
-  {
-    return AccountHolderType.ORGANIZATION;
   }
 
 
