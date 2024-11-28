@@ -4,23 +4,16 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.common.models.Describable;
-import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 
 
 /**
  * Represents a service provider account. Contains account information and tokens.
  */
-public interface ServiceProviderAccount extends LongUniqueObject, Describable
+public interface ServiceProviderAccount extends OrganizationAccount
 {
 
-  /**
-   * Returns the account holder's ID.
-   * 
-   * @return the account holder's ID
-   */
-  Long getAccountHolderId();
-
+ 
 
   /**
    * Returns the organization's internal ID of the account.
@@ -46,14 +39,6 @@ public interface ServiceProviderAccount extends LongUniqueObject, Describable
    */
   ServiceProviderAccountTokenHolder getTokenHolder();
 
-
-  /**
-   * Sets the account holder's ID.
-   * 
-   * @param accountHolderId the account holder's ID to set
-   */
-  void setAccountHolderId(
-    Long accountHolderId);
 
 
   /**

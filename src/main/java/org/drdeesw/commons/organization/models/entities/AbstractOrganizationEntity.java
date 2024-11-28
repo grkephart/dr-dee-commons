@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -34,10 +35,10 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity<A extends OrganizationAccount>
-    extends AbstractNamedLongUniqueEntity implements Organization<A>
+public abstract class AbstractOrganizationEntity
+    extends AbstractNamedLongUniqueEntity implements Organization
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity> accounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
   private Set<OrganizationEntity>        children;
@@ -77,20 +78,20 @@ public abstract class AbstractOrganizationEntity<A extends OrganizationAccount>
 
   @SuppressWarnings("unchecked")
   @Override
-  public Set<A> getAccounts()
+  public Set<OrganizationAccount> getAccounts()
   {
     return this.accounts.stream()//
-        .map(account -> (A)account)//
+        .map(account -> (OrganizationAccount)account)//
         .collect(Collectors.toSet());
   }
 
 
   @SuppressWarnings("unchecked")
   @Override
-  public Set<Organization<A>> getChildren()
+  public Set<Organization> getChildren()
   {
     return this.children.stream()//
-        .map(child -> (Organization<A>)child)//
+        .map(child -> (Organization)child)//
         .collect(Collectors.toSet());
   }
 
@@ -181,7 +182,7 @@ public abstract class AbstractOrganizationEntity<A extends OrganizationAccount>
 
   @Override
   public void setAccounts(
-    Set<A> accounts)
+    Set<OrganizationAccount> accounts)
   {
     this.accounts = accounts.stream()//
         .map(account -> (OrganizationAccountEntity)account)//

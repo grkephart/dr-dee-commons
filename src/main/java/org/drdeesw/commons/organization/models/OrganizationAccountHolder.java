@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Represents the account holder of an organization account.
  */
-public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
+public interface OrganizationAccountHolder
 {
 
   /**
@@ -18,7 +18,7 @@ public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
    * 
    * @return the accounts
    */
-  Set<A> getAccounts();
+  Set<OrganizationAccount> getAccounts();
 
 
   /**
@@ -27,6 +27,6 @@ public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
    * @param accounts the accounts to set
    */
   void setAccounts(
-    Set<A> accounts);
+    Set<OrganizationAccount> accounts);
 
 }

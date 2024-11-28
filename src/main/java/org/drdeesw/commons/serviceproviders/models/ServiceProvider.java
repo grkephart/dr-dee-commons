@@ -4,15 +4,13 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.common.models.Auditable;
-import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.organization.models.Organization;
 
 
 /**
  * 
  */
-public interface ServiceProvider
-    extends ServiceProviderAccountHolder<ServiceProviderAccount>, Auditable, Describable
+public interface ServiceProvider extends Organization
 {
   /**
    * Returns the authentication type of the service provider.
@@ -28,14 +26,6 @@ public interface ServiceProvider
    * @return the OAuth2 client registration ID for the service provider
    */
   String getClientRegistrationId();
-
-
-  /**
-   * Returns the type of the service provider.
-   * 
-   * @return the type
-   */
-  ServiceProviderType getType();
 
 
   /**
@@ -55,14 +45,5 @@ public interface ServiceProvider
    */
   void setClientRegistrationId(
     String clientRegistrationId);
-
-
-  /**
-   * Sets the type of the service provider.
-   * 
-   * @param type the type of the service provider
-   */
-  void setType(
-    ServiceProviderType type);
 
 }

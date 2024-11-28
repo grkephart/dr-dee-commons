@@ -21,8 +21,8 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * instead of having different types of accounts for different related organizations.
  * This maintains type safety and consistency within the hierarchy at the cost of flexibility.
  */
-public interface Organization<A extends OrganizationAccount<?, ?>, R extends OrganizationRole<?>, M extends OrganizationMember<?>>
-    extends NamedLongUniqueObject, OrganizationAccountHolder<A>, Auditable, Describable
+public interface Organization
+    extends NamedLongUniqueObject, OrganizationAccountHolder, Auditable, Describable
 {
 
   /**
@@ -30,7 +30,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * 
    * @return the children organizations.
    */
-  Set<Organization<A,R,M>> getChildren();
+  Set<Organization> getChildren();
 
 
   /**
@@ -38,7 +38,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * 
    * @return the organization members.
    */
-  Set<M> getMembers();
+  Set<OrganizationMember> getMembers();
 
 
   /**
@@ -46,7 +46,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * 
    * @return the parent
    */
-  Organization<A,R,M> getParent();
+  Organization getParent();
 
 
   /**
@@ -54,7 +54,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * 
    * @return the organization roles.
    */
-  Set<R> getRoles();
+  Set<OrganizationRole> getRoles();
 
 
   /**
@@ -79,7 +79,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * @param children the children organizations to set
    */
   void setChildren(
-    Set<Organization<A,R,M>> children);
+    Set<Organization> children);
 
 
   /**
@@ -88,7 +88,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * @param members the organization members to set
    */
   void setMembers(
-    Set<M> members);
+    Set<OrganizationMember> members);
 
 
   /**
@@ -97,7 +97,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * @param parent the parent to set
    */
   void setParent(
-    Organization<A,R,M> parent);
+    Organization parent);
 
 
   /**
@@ -106,7 +106,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, R extends Org
    * @param roles the organization roles to set
    */
   void setRoles(
-    Set<R> roles);
+    Set<OrganizationRole> roles);
 
 
   /**

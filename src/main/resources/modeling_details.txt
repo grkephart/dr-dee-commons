@@ -1,36 +1,86 @@
-Write the following classes and interfaces in Java using JPA annotations. Ensure that the classes and interfaces follow all the rules below.
+Design and Implementation Rules
 
 
-Rule 1: The classes and interfaces should be in separate packages based on the module they belong to. For example, all classes and interfaces related to the organization module should be in the organization package. 
+Section 1: Package Structure and Naming Conventions
+
+Rule 1:
+Classes and interfaces should be in separate packages based on the module they belong to. For example, all classes and interfaces related to the organization module should be in the organization package.
 The base package should be org.drdeesw.commons.
 
-Rule 2: For the following models, there should be 
-* an interface. Naming convention is {Model}
-* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Properties should have the appropriate Column or OneToMany, etc relationships. Naming convention is Abstract{Model}Entity
-* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is {Model}Entity
 
-Rule 3: Class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
-As just one example, in the Organization class, the getAccounts() and setAccounts() methods should use the same generic type.
+Section 2: Models and Entity Design
 
-Rule 4: Since I'm using JPA, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) in entity classes must reference mapped entity classes, not interfaces or generic parameters.
-Example: it would have to be
-  private Set<OrganizationAccountEntity> accounts;
-not
-  private Set<OrganizationAccount> accounts;
-or 
-  private Set<A> accounts;
- 
-Rule 5: Entity relationships in interfaces should use only interfaces or generic parameters.
+Rule 2:
 
-Removing redundancies:
-Rule 6: Service provider does not need getAccounts() and setAccounts() methods since those are in the Organization class.
-Rule 7: Service provider account does not need get serviceProvider() and setServiceProvider() methods since those are in the Organization Account class as getOrganization() and setOrganization() methods,
-unless those methods simply delegate to the Organization Account class methods.
+For the following models, create:
+* An interface: Naming convention: {Model}.
+* An abstract entity:
+  * Use the @MappedSuperclass annotation.
+  * Contain all properties, annotated appropriately (@Column, @OneToMany, etc.), and implement the interface.
+  * Naming convention: Abstract{Model}Entity.
+* A concrete entity:
+  * Extend the abstract entity.
+  * Use @Entity and @Table annotations.
+  * Naming convention: {Model}Entity.
+  
+Rule 3:
 
-Rule 8: Use a generic parameter A that extends OrganizationAccount for OrganizationAccountHolder
+In JPA entity classes, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) must reference mapped entity classes, not interfaces or generic parameters.
+Example:
 
-Rule 9: minimize the use of raw types and unchecked casts
+private Set<OrganizationAccountEntity> accounts;  // Correct
 
+private Set<OrganizationAccount> accounts;       // Incorrect
+private Set<A> accounts;                         // Incorrect
+
+Rule 4:
+
+Entity relationships in interfaces should reference interfaces or specific types where generics are not used. 
+Avoid defining generics in interfaces.
+
+
+Section 2: Generics and Type Safety
+
+Rule 5:
+
+Remove generics from interfaces to simplify design.
+* Relationships in interfaces should use well-defined interface types (e.g., OrganizationAccount).
+* Type handling and conversions should occur in abstract or concrete classes, using explicit casts or helper methods where necessary.
+
+Rule 6:
+
+Minimize the use of raw types and unchecked casts to ensure type safety and maintain clean code.
+
+
+Section 3: Simplifying Redundancies
+
+Rule 7:
+The ServiceProvider class does not need getAccounts() and setAccounts() methods, as these are defined in the Organization class.
+
+Rule 8:
+
+The ServiceProviderAccount class does not need getServiceProvider() and setServiceProvider() methods, 
+as these are in the OrganizationAccount class as getOrganization() and setOrganization().
+These methods should only exist if they delegate directly to the corresponding methods in OrganizationAccount.
+
+Section 4: Best Practices and Interface Design
+
+Rule 9:
+Follow industry standards and best practices. If a conflict arises between these standards and the rules outlined here, highlight it for resolution.
+
+Rule 10:
+
+Create interfaces only when there is a clear need for polymorphism, abstraction, or separation of concerns.
+* Avoid introducing unnecessary complexity into interfaces, such as generic parameters, unless there is a compelling reason.
+
+Rule 11: Use Lazy @OneToMany Relationships
+
+Default all @OneToMany relationships to lazy-loading.
+Use these relationships primarily to define mappings between entities rather than directly traversing them.
+When accessing the "many" side, write explicit queries to retrieve the data as needed.
+
+
+Model Definitions:
 
 Common Module:
 
