@@ -9,10 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 
 
 /**
@@ -22,12 +20,11 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 @Entity
 @Table(name = "organization_accounts")
 @AttributeOverride(name = "id", column = @Column(name = "organization_account_id"))
-public class OrganizationAccountPojo extends AbstractLongUniquePojo implements OrganizationAccount
+public class OrganizationAccountPojo extends AccountPojo implements OrganizationAccount
 {
 
-  private String       description;
-  private String       internalId;
-  private Organization organization;
+  private String           internalId;
+  private OrganizationPojo organization;
 
   public OrganizationAccountPojo()
   {
@@ -35,18 +32,10 @@ public class OrganizationAccountPojo extends AbstractLongUniquePojo implements O
   }
 
 
-  @Override
-  public OrganizationAccountHolder<OrganizationAccount> getHolder()
+  protected OrganizationAccountPojo(OrganizationPojo serviceProvider, String internalId)
   {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public String getDescription()
-  {
-    return this.description;
+    this.organization = serviceProvider;
+    this.internalId = internalId;
   }
 
 
@@ -65,23 +54,6 @@ public class OrganizationAccountPojo extends AbstractLongUniquePojo implements O
 
 
   @Override
-  public void setHolder(
-    OrganizationAccountHolder<OrganizationAccount> accountHolder)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
-  }
-
-
-  @Override
   public void setInternalId(
     String internalId)
   {
@@ -93,7 +65,7 @@ public class OrganizationAccountPojo extends AbstractLongUniquePojo implements O
   public void setOrganization(
     Organization organization)
   {
-    this.organization = organization;
+    this.organization = (OrganizationPojo)organization;
   }
 
 }

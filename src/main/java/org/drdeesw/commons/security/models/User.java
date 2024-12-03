@@ -5,18 +5,20 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountHolder;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 
 
 /**
- * Represents an individual user that can log in to the system, with attributes like username, password, and account status.
+ * Represents an entity interacting with your system.
+ * Can be a Person, a System, or a Bot. Includes authentication and authorization attributes (e.g., username, password, roles). 
+ * May integrate with external systems via OAuth2 or other APIs.
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gary_kephart
  *
  */
-public interface User extends LongUniqueObject, ServiceProviderAccountHolder<ServiceProviderAccount>
+public interface User extends LongUniqueObject, OrganizationAccountHolder
 {
 
 

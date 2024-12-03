@@ -22,7 +22,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * This maintains type safety and consistency within the hierarchy at the cost of flexibility.
  */
 public interface Organization
-    extends NamedLongUniqueObject, OrganizationAccountHolder, Auditable, Describable
+    extends NamedLongUniqueObject, AccountHolder, Auditable, Describable
 {
 
   /**

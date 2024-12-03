@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class OrganizationPojoTest
   {
     OrganizationPojo parent = new OrganizationPojo();
     OrganizationPojo org = new OrganizationPojo();
-    Set<OrganizationAccount> accounts = new HashSet<OrganizationAccount>();
+    Set<Account> accounts = new HashSet<Account>();
     OrganizationAccount account1 = new OrganizationAccountPojo();
    
     account1.setOrganization(org);

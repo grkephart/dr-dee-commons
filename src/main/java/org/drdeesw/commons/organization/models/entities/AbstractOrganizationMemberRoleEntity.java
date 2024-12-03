@@ -61,7 +61,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
   @Override
   public User getCreatedBy()
   {
-    return createdBy;
+    return (User)createdBy;
   }
 
 
@@ -82,7 +82,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
   @Override
   public User getLastUpdatedBy()
   {
-    return lastUpdatedBy;
+    return (User)lastUpdatedBy;
   }
 
 

@@ -18,9 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
+import org.drdeesw.commons.common.models.Named;
+import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
@@ -35,37 +35,39 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity
-    extends AbstractNamedLongUniqueEntity implements Organization
+public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEntity
+    implements Organization
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<OrganizationAccountEntity> accounts;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-  private Set<OrganizationEntity>        children;
+  private Set<AccountEntity>            accounts;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationEntity>       children;
   @ManyToOne
   @JoinColumn(name = "created_by_id", nullable = false)
-  private UserEntity                     createdBy;
+  private UserEntity                    createdBy;
   @Column(name = "creation_date", nullable = false)
-  private Instant                        creationDate;
+  private Instant                       creationDate;
   @Column(name = "description")
-  private String                         description;
-  @Column(name = "last_updated_date")
-  private Instant                        lastUpdatedDate;
+  private String                        description;
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
-  private UserEntity                     lastUpdatedBy;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationMemberEntity>  members;
+  private UserEntity                    lastUpdatedBy;
+  @Column(name = "last_updated_date")
+  private Instant                       lastUpdatedDate;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationMemberEntity> members;
+  @Column(name = "name")
+  private String                        name;
   @ManyToOne
   @JoinColumn(name = "parent_id")
-  private OrganizationEntity             parent;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationRoleEntity>    roles;
+  private OrganizationEntity            parent;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
-  private OrganizationStatus             status;
+  private OrganizationStatus            status;
   @ManyToOne
   @JoinColumn(name = "type_id")
-  private OrganizationTypeEntity         type;
+  private OrganizationTypeEntity        type;
 
   /**
    * 
@@ -76,17 +78,15 @@ public abstract class AbstractOrganizationEntity
   }
 
 
-  @SuppressWarnings("unchecked")
   @Override
-  public Set<OrganizationAccount> getAccounts()
+  public Set<Account> getAccounts()
   {
     return this.accounts.stream()//
-        .map(account -> (OrganizationAccount)account)//
+        .map(child -> (Account)child)//
         .collect(Collectors.toSet());
   }
 
 
-  @SuppressWarnings("unchecked")
   @Override
   public Set<Organization> getChildren()
   {
@@ -99,7 +99,7 @@ public abstract class AbstractOrganizationEntity
   @Override
   public User getCreatedBy()
   {
-    return this.createdBy;
+    return (User)this.createdBy;
   }
 
 
@@ -118,16 +118,16 @@ public abstract class AbstractOrganizationEntity
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public User getLastUpdatedBy()
   {
-    return this.lastUpdatedDate;
+    return (User)this.lastUpdatedBy;
   }
 
 
   @Override
-  public User getLastUpdatedBy()
+  public Instant getLastUpdatedDate()
   {
-    return this.lastUpdatedBy;
+    return this.lastUpdatedDate;
   }
 
 
@@ -140,14 +140,20 @@ public abstract class AbstractOrganizationEntity
   }
 
 
+  @Override
+  public String getName()
+  {
+    return this.name;
+  }
+
+
   /**
    * @return the parent
    */
-  @SuppressWarnings("unchecked")
   @Override
-  public Organization<A> getParent()
+  public Organization getParent()
   {
-    return (Organization<A>)parent;
+    return (Organization)parent;
   }
 
 
@@ -155,7 +161,7 @@ public abstract class AbstractOrganizationEntity
   public Set<OrganizationRole> getRoles()
   {
     return this.roles.stream()//
-        .map(member -> (OrganizationRole)member)//
+        .map(role -> (OrganizationRole)role)//
         .collect(Collectors.toSet());
   }
 
@@ -182,18 +188,17 @@ public abstract class AbstractOrganizationEntity
 
   @Override
   public void setAccounts(
-    Set<OrganizationAccount> accounts)
+    Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
-        .map(account -> (OrganizationAccountEntity)account)//
+        .map(account -> (AccountEntity)account)//
         .collect(Collectors.toSet());
-
   }
 
 
   @Override
   public void setChildren(
-    Set<Organization<A>> children)
+    Set<Organization> children)
   {
     this.children = children.stream()//
         .map(child -> (OrganizationEntity)child)//
@@ -226,18 +231,18 @@ public abstract class AbstractOrganizationEntity
 
 
   @Override
-  public void setLastUpdatedDate(
-    Instant lastUpdateDate)
-  {
-    this.lastUpdatedDate = lastUpdateDate;
-  }
-
-
-  @Override
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
+  }
+
+
+  @Override
+  public void setLastUpdatedDate(
+    Instant lastUpdateDate)
+  {
+    this.lastUpdatedDate = lastUpdateDate;
   }
 
 
@@ -251,12 +256,22 @@ public abstract class AbstractOrganizationEntity
   }
 
 
+  @Override
+  public <NO extends Named> NO setName(
+    String name)
+  {
+    this.name = name;
+
+    return (NO)this;
+  }
+
+
   /**
    * @param parent the parent to set
    */
   @Override
   public void setParent(
-    Organization<A> parent)
+    Organization parent)
   {
     this.parent = (OrganizationEntity)parent;
   }

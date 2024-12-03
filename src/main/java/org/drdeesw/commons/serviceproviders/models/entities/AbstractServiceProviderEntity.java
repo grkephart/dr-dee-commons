@@ -5,22 +5,16 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
+import org.drdeesw.commons.organization.models.entities.AbstractOrganizationEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 
 
 /**
@@ -29,26 +23,23 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderType;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
+public abstract class AbstractServiceProviderEntity extends AbstractOrganizationEntity
     implements ServiceProvider
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "serviceProvider")
-  private Set<ServiceProviderAccountEntity> accounts;
   @Column(name = "authentication_type")
-  private AuthenticationType                authenticationType;
+  private AuthenticationType authenticationType;
   @Column(name = "client_registration_Id")
-  private String                            clientRegistrationId;
+  private String             clientRegistrationId;
   @Column(name = "created_by_id", nullable = false)
-  private User                              createdBy;
+  private User               createdBy;
   @Column(name = "creation_date", nullable = false)
-  private Instant                           creationDate;
+  private Instant            creationDate;
   @Column(name = "description")
-  private String                            description;
+  private String             description;
   @Column(name = "last_update_date")
-  private Instant                           lastUpdateDate;
+  private Instant            lastUpdateDate;
   @Column(name = "last_update_id")
-  private User                              lastUpdatedBy;
-  private ServiceProviderTypeEntity         type;
+  private User               lastUpdatedBy;
 
   /**
    * 
@@ -56,21 +47,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   protected AbstractServiceProviderEntity()
   {
     super();
-  }
-
-
-  @Override
-  public AccountHolderType getAccountHolderType()
-  {
-    return AccountHolderType.ORGANIZATION;
-  }
-
-
-  public Set<ServiceProviderAccount> getAccounts()
-  {
-    return this.accounts.stream()//
-        .map(account -> (ServiceProviderAccount)account)//
-        .collect(Collectors.toSet());
   }
 
 
@@ -110,13 +86,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public Instant getLastUpdatedDate()
-  {
-    return lastUpdateDate;
-  }
-
-
-  @Override
   public User getLastUpdatedBy()
   {
     return lastUpdatedBy;
@@ -124,19 +93,9 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public ServiceProviderType getType()
+  public Instant getLastUpdatedDate()
   {
-    return type;
-  }
-
-
-  @Override
-  public void setAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    this.accounts = accounts.stream()//
-        .map(account -> (ServiceProviderAccountEntity)account)//
-        .collect(Collectors.toSet());
+    return lastUpdateDate;
   }
 
 
@@ -181,14 +140,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public void setLastUpdatedDate(
-    Instant lastUpdateDate)
-  {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-
-  @Override
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
@@ -197,10 +148,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public void setType(
-    ServiceProviderType type)
+  public void setLastUpdatedDate(
+    Instant lastUpdateDate)
   {
-    this.type = (ServiceProviderTypeEntity)type;
+    this.lastUpdateDate = lastUpdateDate;
   }
 
 }

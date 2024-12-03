@@ -78,7 +78,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
   @Override
   public User getUser()
   {
-    return this.user;
+    return (User)this.user;
   }
 
 

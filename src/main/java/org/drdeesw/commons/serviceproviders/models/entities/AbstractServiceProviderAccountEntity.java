@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.organization.models.entities.AbstractOrganizationAccountEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
@@ -23,13 +23,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderAccountEntity extends AbstractLongUniqueEntity
+public abstract class AbstractServiceProviderAccountEntity extends AbstractOrganizationAccountEntity
     implements ServiceProviderAccount
 {
-  @Column(name = "account_holder_id")
-  private Long                                    accountHolderId;
-  @Column(name = "description")
-  private String                                  description;
   @Column(name = "internal_id")
   private String                                  internalId;
   @ManyToOne
@@ -45,20 +41,6 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractLongU
   protected AbstractServiceProviderAccountEntity()
   {
 
-  }
-
-
-  @Override
-  public Long getAccountHolderId()
-  {
-    return this.accountHolderId;
-  }
-
-
-  @Override
-  public String getDescription()
-  {
-    return description;
   }
 
 
@@ -80,22 +62,6 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractLongU
   public ServiceProviderAccountTokenHolder getTokenHolder()
   {
     return this.tokenHolder;
-  }
-
-
-  @Override
-  public void setAccountHolderId(
-    Long accountHolderId)
-  {
-    this.accountHolderId = accountHolderId;
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
   }
 
 

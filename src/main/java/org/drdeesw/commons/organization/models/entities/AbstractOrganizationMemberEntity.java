@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -47,12 +48,12 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   @JoinColumn(name = "last_update_id")
   private UserEntity                        lastUpdatedBy;
   @ManyToOne
-  @JoinColumn(name = "organization_id")
+  @JoinColumn(name = "organization_id", nullable = false)
   private OrganizationEntity                organization;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-  private Set<OrganizationMemberRoleEntity> roles;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationMemberRoleEntity> memberRoles;
   @ManyToOne
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "user_id", nullable = false)
   private UserEntity                        user;
 
   /**
@@ -67,7 +68,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   @Override
   public User getCreatedBy()
   {
-    return createdBy;
+    return (User)createdBy;
   }
 
 
@@ -88,7 +89,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   @Override
   public User getLastUpdatedBy()
   {
-    return lastUpdatedBy;
+    return (User)lastUpdatedBy;
   }
 
 
@@ -102,7 +103,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   @Override
   public Set<OrganizationMemberRole> getMemberRoles()
   {
-    return this.roles.stream()//
+    return this.memberRoles.stream()//
         .map(member -> (OrganizationMemberRole)member)//
         .collect(Collectors.toSet());
   }
@@ -111,7 +112,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   @Override
   public User getUser()
   {
-    return this.user;
+    return (User)this.user;
   }
 
 
@@ -174,7 +175,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   public void setMemberRoles(
     Set<OrganizationMemberRole> roles)
   {
-    this.roles = roles.stream()//
+    this.memberRoles = roles.stream()//
         .map(role -> (OrganizationMemberRoleEntity)role)//
         .collect(Collectors.toSet());
   }

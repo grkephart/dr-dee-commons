@@ -32,7 +32,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   @Column(name = "access_token_expiry")
   private Instant                      accessTokenExpiry;
   @ManyToOne
-  @JoinColumn(name = "account_id")
+  @JoinColumn(name = "account_id", nullable = false)
   private ServiceProviderAccountEntity account;
   @Column(name = "refresh_token")
   private String                       refreshToken;

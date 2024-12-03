@@ -23,7 +23,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * 
    * @return the organization members for this role.
    */
-  public Set<OrganizationMemberRole> getMembers();
+  public Set<OrganizationMemberRole> getMemberRoles();
 
 
   /**
@@ -39,7 +39,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * 
    * @param memberRoles the member roles to set
    */
-  public void setMembers(
+  public void setMemberRoles(
     Set<OrganizationMemberRole> memberRoles);
 
 

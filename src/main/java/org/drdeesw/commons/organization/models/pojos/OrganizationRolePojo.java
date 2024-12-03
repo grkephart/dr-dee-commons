@@ -65,7 +65,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public Set<OrganizationMemberRole> getMembers()
+  public Set<OrganizationMemberRole> getMemberRoles()
   {
     return members;
   }
@@ -134,7 +134,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setMembers(
+  public void setMemberRoles(
     Set<OrganizationMemberRole> members)
   {
     this.members = members;

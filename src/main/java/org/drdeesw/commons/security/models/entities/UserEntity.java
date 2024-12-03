@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.security.models.User;
+
 
 /**
  * Structured to work with JdbcUserDetailsManager.
@@ -21,46 +23,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
-public class UserEntity extends AbstractUserEntity
+public class UserEntity extends AbstractUserEntity implements User
 {
-
-  /**
-   * Hibernate
-   */
-  public UserEntity()
-  {
-  }
-
-
-  /**
-   * @param id the id
-   */
-  public UserEntity(Long id)
-  {
-    super(id);
-  }
-
-
-  /**
-   * For testing.
-   * 
-   * @param username perhaps the email address
-   */
-  public UserEntity(String username)
-  {
-    super(username);
-  }
-
-
-  /**
-   * For when logging in reveals a new user.
-   * 
-   * @param username the username
-   * @param enabled whether the user is enabled
-   */
-  public UserEntity(String username, boolean enabled)
-  {
-    super(username, enabled);
-  }
-
 }

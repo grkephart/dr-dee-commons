@@ -11,10 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 
 
 /**
@@ -23,18 +21,14 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniqueEntity
+public abstract class AbstractOrganizationAccountEntity extends AbstractAccountEntity
     implements OrganizationAccount
 {
-  @ManyToOne
-  private OrganizationAccountHolderEntity  holder;
   @Column(name = "description")
-  private String                    description;
-  @Column(name = "internal_id")
-  private String                    internalId;
+  private String                          internalId;
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationEntity        organization;
+  private OrganizationEntity              organization;
 
   /**
    * 
@@ -44,19 +38,6 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
 
   }
 
-
-  @Override
-  public OrganizationAccountHolder<OrganizationAccount> getHolder()
-  {
-    return this.holder;
-  }
-
-
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
 
 
   @Override
@@ -69,24 +50,9 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractLongUniq
   @Override
   public Organization getOrganization()
   {
-    return this.organization;
+    return (Organization)this.organization;
   }
 
-
-  @Override
-  public void setHolder(
-    OrganizationAccountHolder holder)
-  {
-    this.holder = (OrganizationAccountHolderEntity)holder;
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
-  }
 
 
   @Override

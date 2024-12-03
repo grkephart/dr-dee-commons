@@ -3,23 +3,12 @@
  */
 package org.drdeesw.commons.organization.models;
 
-
-import org.drdeesw.commons.common.models.Describable;
-import org.drdeesw.commons.common.models.LongUniqueObject;
-
-
 /**
  * Represents a organization account. Contains account information and tokens.
  */
-public interface OrganizationAccount extends LongUniqueObject, Describable
+public interface OrganizationAccount extends Account
 {
-  /**
-   * Returns the accountHolder, either an organization or a user.
-   * 
-   * @return the accountHolder
-   */
-  OrganizationAccountHolder getHolder();
-
+ 
 
   /**
    * Returns the organization's internal ID of the account.
@@ -37,15 +26,6 @@ public interface OrganizationAccount extends LongUniqueObject, Describable
    */
   Organization getOrganization();
 
-
-
-  /**
-   * Sets the account holder.
-   * 
-   * @param holder  the account holder to set
-   */
-  void setHolder(
-    OrganizationAccountHolder holder);
 
 
   /**

@@ -13,15 +13,12 @@ import javax.persistence.Table;
 /**
  * 
  */
+
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "service_provider_types")
-@AttributeOverride(name = "id", column = @Column(name = "service_provider_type_id"))
-public class ServiceProviderTypeEntity extends AbstractServiceProviderTypeEntity
+@Table(name = "service_provider_account_holders")
+@AttributeOverride(name = "id", column = @Column(name = "service_provider_account_holder_id"))
+public class ServiceProviderAccountHolderEntity extends AbstractServiceProviderAccountHolderEntity
 {
-  
-  public ServiceProviderTypeEntity()
-  {
-    super();
-  }
+
 }

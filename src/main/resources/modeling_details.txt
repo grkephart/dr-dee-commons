@@ -25,7 +25,11 @@ For the following models, create:
   
 Rule 3:
 
-In JPA entity classes, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) must reference mapped entity classes, not interfaces or generic parameters.
+In JPA entity classes, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) must reference concrete, mapped entity classes, not interfaces or generic parameters.
+* Avoid: Using generics directly in entity relationship fields.
+* Abstract Classes: May define generics in method signatures to support flexibility.
+* Concrete Classes: Must resolve generics to specific entity types and ensure proper mapping of relationships.
+* These rules apply specifically to entity fields using JPA annotations.
 Example:
 
 private Set<OrganizationAccountEntity> accounts;  // Correct
@@ -78,9 +82,28 @@ Rule 11: Use Lazy @OneToMany Relationships
 Default all @OneToMany relationships to lazy-loading.
 Use these relationships primarily to define mappings between entities rather than directly traversing them.
 When accessing the "many" side, write explicit queries to retrieve the data as needed.
+Explicit queries should be written in the service layer to fetch related entities on the 'many' side as needed
+
+Rule 12: Propagate Generics in Abstract Classes
+
+When an interface defines generic parameters, any abstract class implementing the interface must:
+* Declare and Propagate:
+  Declare and propagate the same generic parameters to maintain consistency with the interface contract.
+* Abstract Class Implementation:
+  Use the generic parameters in properties and methods where applicable to ensure alignment with the interface.
+* Concrete Class Binding:
+  Explicitly bind the generic parameters in concrete classes to avoid type mismatches.
+Purpose: This ensures type safety, prevents runtime errors, and maintains clarity in the class hierarchy.
+
+Rule 13: Concrete Types for Persistent Relationships
+
+JPA-mapped fields must always use concrete entity types. 
+Avoid using generics (T, A, ?) in JPA entity fields, especially in relationships such as @OneToMany, @ManyToOne, @OneToOne, or @ManyToMany.
 
 
 Model Definitions:
+
+Note: all entity classes are JPA entity classes.
 
 Common Module:
 

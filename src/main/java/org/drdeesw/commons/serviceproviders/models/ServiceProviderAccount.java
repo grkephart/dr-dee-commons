@@ -4,25 +4,14 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.Account;
 
 
 /**
  * Represents a service provider account. Contains account information and tokens.
  */
-public interface ServiceProviderAccount extends OrganizationAccount
+public interface ServiceProviderAccount extends Account 
 {
-
- 
-
-  /**
-   * Returns the organization's internal ID of the account.
-   * It could be an account number or a username or email or GUID.
-   * 
-   * @return  the organization's internal ID of the account
-   */
-  String getInternalId();
-
 
   /**
    * Returns the serviceProvider.
@@ -38,17 +27,6 @@ public interface ServiceProviderAccount extends OrganizationAccount
    * @return the serviceProviderAccountTokenHolder
    */
   ServiceProviderAccountTokenHolder getTokenHolder();
-
-
-
-  /**
-   * Sets the organization's internal ID of the account.
-   * It could be an account number or a username or email or GUID.
-   * 
-   * @param internalId the organization's internal ID of the account to set
-   */
-  void setInternalId(
-    String internalId);
 
 
   /**

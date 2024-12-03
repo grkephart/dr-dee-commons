@@ -52,7 +52,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @JoinColumn(name = "organization_id")
   private OrganizationEntity                organization;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-  private Set<OrganizationMemberRoleEntity> members;
+  private Set<OrganizationMemberRoleEntity> memberRoles;
 
   /**
    * 
@@ -66,7 +66,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @Override
   public User getCreatedBy()
   {
-    return createdBy;
+    return (User)createdBy;
   }
 
 
@@ -94,21 +94,21 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @Override
   public User getLastUpdatedBy()
   {
-    return lastUpdatedBy;
+    return (User)lastUpdatedBy;
   }
 
 
   @Override
-  public Organization<?> getOrganization()
+  public Organization getOrganization()
   {
     return organization;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getMembers()
+  public Set<OrganizationMemberRole> getMemberRoles()
   {
-    return this.members.stream()//
+    return this.memberRoles.stream()//
         .map(member -> (OrganizationMemberRole)member)//
         .collect(Collectors.toSet());
   }
@@ -178,10 +178,10 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
-  public void setMembers(
+  public void setMemberRoles(
     Set<OrganizationMemberRole> members)
   {
-    this.members = members.stream()//
+    this.memberRoles = members.stream()//
         .map(member -> (OrganizationMemberRoleEntity)member)//
         .collect(Collectors.toSet());
   }

@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.common.models.Named;
+import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
@@ -27,7 +27,7 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organizations")
-public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
+public class OrganizationPojo extends AccountHolderPojo implements Organization
 {
   private Set<OrganizationAccountPojo> accounts;
   private Set<Organization>            children;
@@ -37,23 +37,17 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   private Instant                      lastUpdateDate;
   private User                         lastUpdatedBy;
   private Set<OrganizationMember>      members;
+  private String                       name;
   private Organization                 parent;
   private Set<OrganizationRole>        roles;
   private OrganizationStatus           status;
   private OrganizationType             type;
 
   @Override
-  public AccountHolderType getAccountHolderType()
-  {
-    return AccountHolderType.ORGANIZATION;
-  }
-
-
-  @Override
-  public Set<OrganizationAccount> getAccounts()
+  public Set<Account> getAccounts()
   {
     return this.accounts.stream()//
-        .map(account -> (OrganizationAccount)account)//
+        .map(account -> (Account)account)//
         .collect(Collectors.toSet());
   }
 
@@ -87,13 +81,6 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
-  public Instant getLastUpdatedDate()
-  {
-    return this.lastUpdateDate;
-  }
-
-
-  @Override
   public User getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
@@ -101,9 +88,23 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
+  public Instant getLastUpdatedDate()
+  {
+    return this.lastUpdateDate;
+  }
+
+
+  @Override
   public Set<OrganizationMember> getMembers()
   {
     return members;
+  }
+
+
+  @Override
+  public String getName()
+  {
+    return name;
   }
 
 
@@ -137,7 +138,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
   @Override
   public void setAccounts(
-    Set<OrganizationAccount> accounts)
+    Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
         .map(account -> (OrganizationAccountPojo)account)//
@@ -178,14 +179,6 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
-  public void setLastUpdatedDate(
-    Instant lastUpdateDate)
-  {
-    this.lastUpdateDate = lastUpdateDate;
-  }
-
-
-  @Override
   public void setLastUpdatedBy(
     User lastUpdateId)
   {
@@ -194,10 +187,27 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
+  public void setLastUpdatedDate(
+    Instant lastUpdateDate)
+  {
+    this.lastUpdateDate = lastUpdateDate;
+  }
+
+
+  @Override
   public void setMembers(
     Set<OrganizationMember> members)
   {
     this.members = members;
+  }
+
+
+  @Override
+  public <NO extends Named> NO setName(
+    String name)
+  {
+    this.name = name;
+    return (NO)this;
   }
 
 

@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
+import org.drdeesw.commons.organization.models.Account;
+import org.drdeesw.commons.organization.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 
 
@@ -22,7 +22,7 @@ import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountP
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractLongUniquePojo implements User
+public class UserPojo extends AccountHolderPojo implements User
 {
   private Set<ServiceProviderAccountPojo> accounts;
   private boolean                         enabled;
@@ -53,20 +53,14 @@ public class UserPojo extends AbstractLongUniquePojo implements User
   }
 
 
-  @Override
-  public AccountHolderType getAccountHolderType()
-  {
-    return AccountHolderType.USER;
-  }
-
 
   @Override
-  public Set<ServiceProviderAccount> getAccounts()
+  public Set<Account> getAccounts()
   {
     return Optional.ofNullable(this.accounts)//
         .orElse(Collections.emptySet())//
         .stream()
-        .map(account -> (ServiceProviderAccount)account)//
+        .map(account -> (Account)account)//
         .collect(Collectors.toSet());
   }
 
@@ -94,7 +88,7 @@ public class UserPojo extends AbstractLongUniquePojo implements User
 
   @Override
   public void setAccounts(
-    Set<ServiceProviderAccount> accounts)
+    Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
         .map(account -> (ServiceProviderAccountPojo)account)//
