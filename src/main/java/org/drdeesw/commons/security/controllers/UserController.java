@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
-import org.drdeesw.commons.security.services.SystemUserService;
+import org.drdeesw.commons.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class UserController extends AbstractCrudController<UserPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/users";
   @Autowired
-  private SystemUserService service;
+  private UserService service;
 
   /**
    * Creates a new user.

@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.security.models.pojos.GroupPojo;
-import org.drdeesw.commons.security.services.SystemGroupService;
+import org.drdeesw.commons.security.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class GroupController extends AbstractCrudController<GroupPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/groups";
   @Autowired
-  private SystemGroupService service;
+  private GroupService service;
 
   /**
    * Creates a new user.

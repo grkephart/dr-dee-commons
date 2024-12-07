@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * This must be used to extend an actual concrete JPA repository. Example:
  * <pre>
- *   public interface DemoUserRepository extends JpaRepository&lt;DemoUserEntity, Long&gt;, QueryRepository&lt;DemoUserEntity, Long&gt;, SystemUserRepository&lt;DemoUserEntity&gt;
+ *   public interface DemoUserRepository extends JpaRepository&lt;DemoUserEntity, Long&gt;, QueryRepository&lt;DemoUserEntity, Long&gt;, UserRepository&lt;DemoUserEntity&gt;
  * </pre>
  */
-public interface SystemUserRepository extends JpaRepository<UserEntity, Long>, QueryRepository<UserEntity, Long>
+public interface UserRepository extends JpaRepository<UserEntity, Long>, QueryRepository<UserEntity, Long>
 {
   /**
    * return the user by username

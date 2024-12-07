@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
 import org.drdeesw.commons.security.models.entities.AuthorityEntity;
 import org.drdeesw.commons.security.models.pojos.AuthorityPojo;
-import org.drdeesw.commons.security.repositories.SystemAuthorityRepository;
-import org.drdeesw.commons.security.services.SystemAuthorityService;
+import org.drdeesw.commons.security.repositories.AuthorityRepository;
+import org.drdeesw.commons.security.services.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +19,18 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class SystemAuthorityServiceImpl
+public class AuthorityServiceImpl
     extends AbstractJpaCrudServiceImpl<AuthorityPojo, AuthorityEntity, Long>
-    implements SystemAuthorityService
+    implements AuthorityService
 {
 
   @Autowired
-  private SystemAuthorityRepository systemAuthorityRepository;
+  private AuthorityRepository authorityRepository;
 
   /**
    * 
    */
-  protected SystemAuthorityServiceImpl()
+  protected AuthorityServiceImpl()
   {
     super(AuthorityPojo.class, AuthorityEntity.class);
   }
@@ -42,7 +42,7 @@ public class SystemAuthorityServiceImpl
   @PostConstruct
   public void init()
   {
-    super.init(this.systemAuthorityRepository);
+    super.init(this.authorityRepository);
   }
 
 }

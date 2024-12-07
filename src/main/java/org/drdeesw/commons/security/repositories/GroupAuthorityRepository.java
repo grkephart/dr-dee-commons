@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  */
-public interface SystemGroupAuthorityRepository extends JpaRepository<GroupAuthorityEntity, Long>, QueryRepository<GroupAuthorityEntity, Long>
+public interface GroupAuthorityRepository extends JpaRepository<GroupAuthorityEntity, Long>, QueryRepository<GroupAuthorityEntity, Long>
 {
 
 }

@@ -9,7 +9,7 @@ import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
 /**
  * 
  */
-public interface SystemGroupMemberService extends CrudService<GroupMemberPojo, Long>
+public interface GroupMemberService extends CrudService<GroupMemberPojo, Long>
 {
 
 }

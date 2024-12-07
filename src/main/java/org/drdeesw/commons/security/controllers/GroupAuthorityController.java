@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.security.models.pojos.GroupAuthorityPojo;
-import org.drdeesw.commons.security.services.SystemGroupAuthorityService;
+import org.drdeesw.commons.security.services.GroupAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class GroupAuthorityController extends AbstractCrudController<GroupAuthor
 {
   private static final String         MAPPING_PREFIX = "/security/groupauthorities";
   @Autowired
-  private SystemGroupAuthorityService service;
+  private GroupAuthorityService service;
 
   /**
    * Creates a new groupAuthority.

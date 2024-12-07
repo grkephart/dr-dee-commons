@@ -4,6 +4,7 @@
 package org.drdeesw.commons.organization.models.entities;
 
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,6 +50,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractLongUniqueEnti
   {
   }
 
+
   public AbstractAccountHolderEntity(Long id)
   {
     super(id);
@@ -58,6 +60,11 @@ public abstract class AbstractAccountHolderEntity extends AbstractLongUniqueEnti
   @Override
   public Set<Account> getAccounts()
   {
+    if (this.accounts == null)
+    {
+      return Collections.emptySet();
+    }
+
     return this.accounts.stream()//
         .map(account -> (Account)account)//
         .collect(Collectors.toSet());

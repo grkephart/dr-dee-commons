@@ -11,7 +11,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 /**
  * The system user service.
  */
-public interface SystemUserService extends CrudService<UserPojo, Long>
+public interface UserService extends CrudService<UserPojo, Long>
 {
 
   /**

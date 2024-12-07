@@ -9,7 +9,7 @@ import org.drdeesw.commons.security.models.pojos.AuthorityPojo;
 /**
  * 
  */
-public interface SystemAuthorityService extends CrudService<AuthorityPojo, Long>
+public interface AuthorityService extends CrudService<AuthorityPojo, Long>
 {
 
 }

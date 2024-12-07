@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
 import org.drdeesw.commons.security.models.entities.GroupMemberEntity;
 import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
-import org.drdeesw.commons.security.repositories.SystemGroupMemberRepository;
-import org.drdeesw.commons.security.services.SystemGroupMemberService;
+import org.drdeesw.commons.security.repositories.GroupMemberRepository;
+import org.drdeesw.commons.security.services.GroupMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +19,18 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class SystemGroupMemberServiceImpl
+public class GroupMemberServiceImpl
     extends AbstractJpaCrudServiceImpl<GroupMemberPojo, GroupMemberEntity, Long>
-    implements SystemGroupMemberService
+    implements GroupMemberService
 {
 
   @Autowired
-  private SystemGroupMemberRepository systemGroupMemberRepository;
+  private GroupMemberRepository groupMemberRepository;
 
   /**
    * 
    */
-  protected SystemGroupMemberServiceImpl()
+  protected GroupMemberServiceImpl()
   {
     super(GroupMemberPojo.class, GroupMemberEntity.class);
   }
@@ -42,7 +42,7 @@ public class SystemGroupMemberServiceImpl
   @PostConstruct
   public void init()
   {
-    super.init(this.systemGroupMemberRepository);
+    super.init(this.groupMemberRepository);
   }
 
 }

@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.security.models.pojos.AuthorityPojo;
-import org.drdeesw.commons.security.services.SystemAuthorityService;
+import org.drdeesw.commons.security.services.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class AuthorityController extends AbstractCrudController<AuthorityPojo, L
 {
   private static final String MAPPING_PREFIX        = "/security/authorities";
   @Autowired
-  private SystemAuthorityService service;
+  private AuthorityService service;
 
   /**
    * Creates a new authority.

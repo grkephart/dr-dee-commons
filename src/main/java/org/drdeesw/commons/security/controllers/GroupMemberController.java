@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
 import org.drdeesw.commons.security.models.pojos.GroupMemberPojo;
-import org.drdeesw.commons.security.services.SystemGroupMemberService;
+import org.drdeesw.commons.security.services.GroupMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class GroupMemberController extends AbstractCrudController<GroupMemberPoj
 {
   private static final String MAPPING_PREFIX        = "/security/groupmembers";
   @Autowired
-  private SystemGroupMemberService service;
+  private GroupMemberService service;
 
   /**
    * Creates a new group member.

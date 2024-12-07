@@ -10,8 +10,8 @@ import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.security.oauth2.client.registration.Oauth2SecurityConfiguration;
-import org.drdeesw.commons.security.repositories.SystemUserRepository;
-import org.drdeesw.commons.security.services.SystemUserService;
+import org.drdeesw.commons.security.repositories.UserRepository;
+import org.drdeesw.commons.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +20,20 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class SystemUserServiceImpl extends
-    AbstractJpaCrudServiceImpl<UserPojo, UserEntity, Long> implements SystemUserService
+public class UserServiceImpl extends
+    AbstractJpaCrudServiceImpl<UserPojo, UserEntity, Long> implements UserService
 {
 
   @Autowired
   private Oauth2SecurityConfiguration securityConfiguration;
 
   @Autowired
-  private SystemUserRepository        systemUserRepository;
+  private UserRepository        userRepository;
 
   /**
    * 
    */
-  protected SystemUserServiceImpl()
+  protected UserServiceImpl()
   {
     super(UserPojo.class, UserEntity.class);
   }
@@ -43,7 +43,7 @@ public class SystemUserServiceImpl extends
   public UserPojo findByUsername(
     String username)
   {
-    return convertEntityToPojo(this.systemUserRepository.findByUsername(username));
+    return convertEntityToPojo(this.userRepository.findByUsername(username));
   }
 
 
@@ -58,7 +58,7 @@ public class SystemUserServiceImpl extends
 
     if (principalId != null)
     {
-      user = convertEntityToPojo(this.systemUserRepository.findByUsername(principalId));
+      user = convertEntityToPojo(this.userRepository.findByUsername(principalId));
     }
 
     return user;
@@ -71,7 +71,7 @@ public class SystemUserServiceImpl extends
   @PostConstruct
   public void init()
   {
-    super.init(this.systemUserRepository);
+    super.init(this.userRepository);
   }
 
 }
