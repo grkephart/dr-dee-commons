@@ -23,7 +23,6 @@ import org.drdeesw.commons.organization.models.OrganizationAccount;
 public class OrganizationAccountPojo extends AccountPojo implements OrganizationAccount
 {
 
-  private String           internalId;
   private OrganizationPojo organization;
 
   public OrganizationAccountPojo()
@@ -34,15 +33,8 @@ public class OrganizationAccountPojo extends AccountPojo implements Organization
 
   protected OrganizationAccountPojo(OrganizationPojo serviceProvider, String internalId)
   {
+    super(internalId);
     this.organization = serviceProvider;
-    this.internalId = internalId;
-  }
-
-
-  @Override
-  public String getInternalId()
-  {
-    return this.internalId;
   }
 
 
@@ -50,14 +42,6 @@ public class OrganizationAccountPojo extends AccountPojo implements Organization
   public Organization getOrganization()
   {
     return this.organization;
-  }
-
-
-  @Override
-  public void setInternalId(
-    String internalId)
-  {
-    this.internalId = internalId;
   }
 
 

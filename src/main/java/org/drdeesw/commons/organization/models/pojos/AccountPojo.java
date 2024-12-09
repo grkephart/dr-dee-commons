@@ -30,13 +30,18 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   private UserPojo          createdBy;
   private Instant           creationDate;
   private String            description;
+  private String            internalId;
   private Instant           lastUpdateDate;
   private UserPojo          lastUpdatedBy;
 
-  @Override
-  public AccountHolder getHolder()
+  public AccountPojo()
   {
-    return accountHolder;
+  }
+
+
+  public AccountPojo(String internalId)
+  {
+    this.internalId = internalId;
   }
 
 
@@ -58,6 +63,20 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   public String getDescription()
   {
     return this.description;
+  }
+
+
+  @Override
+  public AccountHolder getHolder()
+  {
+    return accountHolder;
+  }
+
+
+  @Override
+  public String getInternalId()
+  {
+    return this.internalId;
   }
 
 
@@ -92,14 +111,6 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setHolder(
-    AccountHolder accountHolder)
-  {
-    this.accountHolder = (AccountHolderPojo)accountHolder;
-  }
-
-
-  @Override
   public void setActive(
     boolean active)
   {
@@ -128,6 +139,22 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
     String description)
   {
     this.description = description;
+  }
+
+
+  @Override
+  public void setHolder(
+    AccountHolder accountHolder)
+  {
+    this.accountHolder = (AccountHolderPojo)accountHolder;
+  }
+
+
+  @Override
+  public void setInternalId(
+    String internalId)
+  {
+    this.internalId = internalId;
   }
 
 

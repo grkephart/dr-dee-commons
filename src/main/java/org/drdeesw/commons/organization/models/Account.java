@@ -23,11 +23,27 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
+   * Returns the organization's internal ID of the account.
+   * It could be an account number or a username or email or GUID.
+   * 
+   * @return  the organization's internal ID of the account
+   */
+  String getInternalId();
+
+
+  /**
    * Checks if the account is active.
    * 
    * @return true if the account is active, false otherwise
    */
   boolean isActive();
+
+
+  /**
+   * @param active
+   */
+  void setActive(
+    boolean active);
 
 
   /**
@@ -38,8 +54,11 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
-   * @param active
+   * Sets the organization's internal ID of the account.
+   * It could be an account number or a username or email or GUID.
+   * 
+   * @param internalId the organization's internal ID of the account to set
    */
-  void setActive(
-    boolean active);
+  void setInternalId(
+    String internalId);
 }

@@ -125,9 +125,18 @@ Named - a role interface that contains the following properties:
 
 Organization Module:
 
+Account, is an auditable, describable, enableable entity
+* Issued by an account provider, such as a bank or other organization
+* Has an internal ID which is unique across an account provider. It could be an account number or a username or email or GUID. It is not guaranteed to be unique across all account providers and in fact probably isn't.
+* Has a holder, which can be an organization (or subclass) or a person (or a subclass) or a service provider (or a subclass)
+
+Account Holder
+* Is a person, organization or integrating system
+* Has accounts. Could be multiple accounts with one organization or multiple organizations.
+
 Organization, which is named and describable
 * Can have a parent organization
-* Can have child organizations
+* Can have child organizations, none of which can be the parent organization
 * Can be an account holder
 * Has a type, which there can be an unlimited set of values (not an enum)
 * Has a status, which is an enum
@@ -136,21 +145,18 @@ Organization, which is named and describable
 * Has roles
 
 Organization Account, which is auditable and enableable
-* Belongs to an organization
-* Has an internal ID. It could be an account number or a username or email or GUID.
-* Has a holder, which can be an organization (or subclass) or a person (or a subclass)
+* The account provider is an organization
 
-Organization Account Holder
-* Is a person or an organization
-* Has accounts
+Organization Account Holder is an account holder
+* Belongs to an organization account
 
 Organization Member
-* Belongs to an organization
+* Belongs to an organization and not shared with other organizations
 * Has member roles
 * Has a user
 
 Organization Role, which is named and describable
-* Belongs to an organization
+* Belongs to an organization and not shared with other organizations
 * Has member roles
 
 Organization Member Role
@@ -163,13 +169,16 @@ Organization Type, which is named and describable
 Service Provider Module:
 
 Service Provider - not necessarily an organization, but will be considered as one for simplicity. It is named and describable
-* Has an AuthenticationType enum
+* Has an AuthenticationType enum, which includes, but is not limited to, NONE, API_KEY BASIC_AUTH, OAUTH1, OAUTH2, JWT, SAML, OPENID_CONNECT, DIGITAL_SIGNATURE, LDAP, SESSION
 * Has a ClientRegistrationId
 * Has accounts, which can be a Service Provider Account or a subclass
 
 Service Provider Account - is an organization account
-* Belongs to a service provider
+* The account provider is an service provider
 * Has a token holder
+
+Service Provider Account Holder is an account holder
+* Belongs to an account provider account
 
 Service Provider Account Token Holder
 * Belongs to a service provider account
@@ -203,7 +212,8 @@ Group Member, structured to work with JdbcUserDetailsManager.
 * Has a username, which links to a User
 * Has a User
 
-User, structured to work with JdbcUserDetailsManager.
+User, structured to work with JdbcUserDetailsManager. It is not a person.
+A user is simply an authentication method for an account holder to access their account in an organization.
 * Has a username
 * Is enableable
 * Has group members
@@ -212,7 +222,7 @@ User, structured to work with JdbcUserDetailsManager.
 
 Identity Module:
 
-Person, which is auditable
+Person, is a real life entity, which is auditable. It is not a user.
 * Has a name (first, middle, last)
 * Has a birth date
 * Can be an account holder, therefore can have accounts.
@@ -224,9 +234,4 @@ Person Contact Information
 * Has an email address
 * Has a street address
 * Has a phone number
-
-I don't know if a person is a user or not, but I think it would be a good idea to have a separate user entity that links to a person. 
-This way, a person can be a user or not, and a user can be a person or not. 
-This way, we can have a user that is not a person, like a service account or a system account. 
-This way, we can have a person that is not a user, like a contact or a reference or a voter.
  

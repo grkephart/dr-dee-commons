@@ -45,19 +45,15 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Column(name = "description", nullable = false)
   private String              description;
 
+  @Column(name = "internal_id")
+  private String              internalId;
+
   @Column(name = "last_update_date", nullable = false)
   private Instant             lastUpdateDate;
 
   @ManyToOne
   @JoinColumn(name = "last_updated_by", nullable = false)
   private UserEntity          lastUpdatedBy;
-
-  @Override
-  public AccountHolder getHolder()
-  {
-    return accountHolder;
-  }
-
 
   @Override
   public User getCreatedBy()
@@ -77,6 +73,20 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public String getDescription()
   {
     return this.description;
+  }
+
+
+  @Override
+  public AccountHolder getHolder()
+  {
+    return accountHolder;
+  }
+
+
+  @Override
+  public String getInternalId()
+  {
+    return this.internalId;
   }
 
 
@@ -107,14 +117,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public boolean isActive()
   {
     return this.active;
-  }
-
-
-  @Override
-  public void setHolder(
-    AccountHolder accountHolder)
-  {
-    this.accountHolder = (AccountHolderEntity)accountHolder;
   }
 
 
@@ -157,6 +159,22 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
     String description)
   {
     this.description = description;
+  }
+
+
+  @Override
+  public void setHolder(
+    AccountHolder accountHolder)
+  {
+    this.accountHolder = (AccountHolderEntity)accountHolder;
+  }
+
+
+  @Override
+  public void setInternalId(
+    String internalId)
+  {
+    this.internalId = internalId;
   }
 
 
