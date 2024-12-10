@@ -22,6 +22,7 @@ For the following models, create:
   * Extend the abstract entity.
   * Use @Entity and @Table annotations.
   * Naming convention: {Model}Entity.
+  * Determine the best Hibernate inheritance mapping strategy for the concrete entity based on the model requirements.
   
 Rule 3:
 
@@ -30,7 +31,7 @@ In JPA entity classes, all entity relationships (e.g., @OneToMany, @ManyToOne, @
 * Abstract Classes: May define generics in method signatures to support flexibility.
 * Concrete Classes: Must resolve generics to specific entity types and ensure proper mapping of relationships.
 * These rules apply specifically to entity fields using JPA annotations.
-Example:
+Example for OrganizationEntity:
 
 private Set<OrganizationAccountEntity> accounts;  // Correct
 
@@ -108,63 +109,68 @@ Note: all entity classes are JPA entity classes.
 Common Module:
 
 Auditable - a role interface that contains the following properties:
-* CreatedBy is the user who created the record
-* CreationDate
-* LastUpdateDate
-* LastUpdatedBy is the user who last updated the record
+- CreatedBy is the user who created the record
+- CreationDate
+- LastUpdateDate
+- LastUpdatedBy is the user who last updated the record
 
 Describable - a role interface that contains the following properties:
-* description, which is a string
+- description, which is a string
 
 Enableable - a role interface that contains the following properties:
-* enabled, which is a boolean
+- enabled, which is a boolean
 
 Named - a role interface that contains the following properties:
-* name, which is a string
+- name, which is a string
 
 
 Organization Module:
 
 Account, is an auditable, describable, enableable entity
-* Issued by an Account Provider, such as a bank or other Organization
-* Has an internal ID which is unique across an Account Provider. It could be an account number or a username or email or GUID. It is not guaranteed to be unique across all Account Providers and in fact probably isn't.
-* Has an Account Holder
+- Issued by an Account Provider, such as a bank or other Organization
+- Has an internal ID which is unique across an Account Provider. It could be an account number or a username or email or GUID. It is not guaranteed to be unique across all Account Providers and in fact probably isn't.
+- Has an Account Holder
 
 Account Provider, which is named and describable
-* Provides Accounts to its Account Holders
+- Provides Accounts to its Account Holders
+- Provided accounts should be managed through `getProvidedAccounts()` and `setProvidedAccounts()`.
 
 Account Holder
-* Is a Person, Organization, Service Provider or integrating system (or a subclass of any of those)
-* Has Accounts. Could be multiple accounts with one organization or multiple organizations.
+- Is a Person, Organization, Service Provider or integrating system (or a subclass of any of those)
+- Holds accounts from various account providers.
+- Held accounts should be managed through `getHeldAccounts()` and `setHeldAccounts()`.
 
 Organization, which is named and describable
-* Can have a parent organization
-* Can have child organizations, none of which can be the parent or other ancestor Organization
-* Can be an account holder, with accounts from various account providers
-* Is an account provider of Organization Accounts (or subclasses) to Organization Account Holders (or subclasses) for this Organization
-* Has a type, which there can be an unlimited set of values (not an enum)
-* Has a status, which is an enum
-* Has members
-* Has roles
+- Can act as both an `AccountProvider` and an `AccountHolder`.
+    - **Accounts Provided**: Organization Accounts (or subclasses) issued by the organization as an account provider (e.g., organization memberships, service provider accounts).
+    - **Accounts Held**: Organization Accounts (or subclasses) held by the organization as an account holder (e.g., bank accounts or subscriptions held with another organization).
+- Use `getProvidedAccounts()` and `setProvidedAccounts()` for managing accounts the organization provides.
+- Use `getHeldAccounts()` and `setHeldAccounts()` for managing accounts the organization holds.
+- Can have a parent organization
+- Can have child organizations, none of which can be the parent or other ancestor Organization
+- Has a type, which there can be an unlimited set of values (not an enum)
+- Has a status, which is an enum
+- Has members
+- Has roles
 
 Organization Account - is an Account and is auditable and enableable
-* The Account Provider is an Organization (or a subclass)
+- The Account Provider is an Organization (or a subclass)
 
 Organization Account Holder - an Account Holder for an Account Provider that is an organization or a subclass
-* Belongs to an Organization Account
+- Belongs to an Organization Account
 
 Organization Member
-* Belongs to an Organization and not shared with other Organizations
-* Has member roles
-* Has a user
+- Belongs to an Organization and not shared with other Organizations
+- Has member roles
+- Has a user
 
 Organization Role - is named and describable
-* Belongs to an Organization and not shared with other Organizations
-* Has member roles
+- Belongs to an Organization and not shared with other Organizations
+- Has member roles
 
 Organization Member Role
-* Has a member
-* Has a role
+- Has a member
+- Has a role
 
 Organization Type - is named and describable
 
@@ -172,69 +178,77 @@ Organization Type - is named and describable
 Service Provider Module:
 
 Service Provider - not necessarily an Organization in real life, but will be considered as one here for simplicity. It is named and describable
-* Has an AuthenticationType enum, which includes, but is not limited to, NONE, API_KEY BASIC_AUTH, OAUTH1, OAUTH2, JWT, SAML, OPENID_CONNECT, DIGITAL_SIGNATURE, LDAP, SESSION
-* Has a ClientRegistrationId
-* Is an account provider of Service Provider Accounts (or subclasses) to Service Provider Account Holders (or subclasses) for this Service Provider
+- Has an AuthenticationType enum, which includes, but is not limited to, NONE, API_KEY BASIC_AUTH, OAUTH1, OAUTH2, JWT, SAML, OPENID_CONNECT, DIGITAL_SIGNATURE, LDAP, SESSION
+- Has a ClientRegistrationId
+- Can act as both an `AccountProvider` and an `AccountHolder`.
+    - **Accounts Provided**: Service Provider Accounts (or subclasses) issued by the Service Provider as an account provider
+    - **Accounts Held**: Organization Accounts (or subclasses) held by the Service Provider as an account holder (e.g., bank accounts or subscriptions held with another organization).
+- Use `getProvidedAccounts()` and `setProvidedAccounts()` for managing accounts the Service Provider provides.
+- Use `getHeldAccounts()` and `setHeldAccounts()` for managing accounts the Service Provider holds.
 
 Service Provider Account - is an Organization Account
-* The Account Provider is a Service Provider (or a subclass)
-* Has a Token Holder
+- The Account Provider is a Service Provider (or a subclass)
+- Has a Token Holder
 
 Service Provider Account Holder is an Organization Account Holder
-* Belongs to a Service Provider Account
+- Belongs to a Service Provider Account
 
 Service Provider Account Token Holder
-* Belongs to a Service Provider Account
-* Has an accessToken
-* Has an AccessTokenExpiry
-* Has a RefreshToken
-* Has a RefreshTokenExpiry
+- Belongs to a Service Provider Account
+- Has an accessToken
+- Has an AccessTokenExpiry
+- Has a RefreshToken
+- Has a RefreshTokenExpiry
 
 
 Security Module:
 
-Authority, which represents the permissions or roles granted to a user, defining what actions or resources a user can access.. structured to work with JdbcUserDetailsManager.
-* Has a username, which links to a User
-* Has an authority (role) name
-* Has a user
-* Has group authorities
+Authority - represents the permissions or roles granted to a user, defining what actions or resources a user can access.
+- Structured to work with JdbcUserDetailsManager.
+- Has a username, which links to a User
+- Has an authority (role) name
+- Has a user
+- Has group authorities
 
-Group, structured to work with JdbcUserDetailsManager.
-* Is named
-* Has group members
-* Has group authorities
-* Is enableable
+Group,
+- Structured to work with JdbcUserDetailsManager.
+- Is named
+- Has group members
+- Has group authorities
+- Is enableable
 
-Group Authority, structured to work with JdbcUserDetailsManager.
-* Has an authority (role) name, which links to an Authority
-* Has an Authority
-* Has a Group
+Group Authority
+- Structured to work with JdbcUserDetailsManager.
+- Has an authority (role) name, which links to an Authority
+- Has an Authority
+- Has a Group
 
-Group Member, structured to work with JdbcUserDetailsManager.
-* Has a Group
-* Has a username, which links to a User
-* Has a User
+Group Member
+- Structured to work with JdbcUserDetailsManager.
+- Has a Group
+- Has a username, which links to a User
+- Has a User
 
-User, structured to work with JdbcUserDetailsManager. It is not a person.
-A user is simply an authentication method for an account holder to access their account in an organization.
-* Has a username
-* Is enableable
-* Has group members
-* Has authorities
+User - It is not a person. A user is simply an authentication method for an account holder to access their account in an organization.
+- Structured to work with JdbcUserDetailsManager.
+- Has a username
+- Is enableable
+- Has group members
+- Has authorities
 
 
 Identity Module:
 
-Person, is a real life entity, which is auditable. It is not a user.
-* Has a name (first, middle, last)
-* Has a birth date
-* Can be an account holder, therefore can have accounts.
-* Can have contact information sets
+Person - is a real life entity, which is auditable. It is not a user.
+- Has a name (first, middle, last)
+- Has a birth date
+- Can be an account holder, therefore can have accounts.
+- Can have contact information sets
 
 Person Contact Information
-* Belongs to a person
-* Has a type. Ex: home, work, other.
-* Has an email address
-* Has a street address
-* Has a phone number
+- Belongs to a person
+- Has a type. Ex: home, work, other.
+- Has an email address
+- Has a street address
+- Has a phone number
  

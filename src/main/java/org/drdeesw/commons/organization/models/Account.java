@@ -14,6 +14,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  */
 public interface Account extends NamedLongUniqueObject, Describable, Auditable
 {
+
   /**
    * Gets the holder of the account.
    * 
@@ -32,6 +33,14 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
+   * Returns the account provider.
+   * 
+   * @return the accountProvider
+   */
+  AccountProvider getProvider();
+
+
+  /**
    * Checks if the account is active.
    * 
    * @return true if the account is active, false otherwise
@@ -40,6 +49,8 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
+   * Sets the account active or inactive.
+   * 
    * @param active
    */
   void setActive(
@@ -47,6 +58,8 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
+   * Sets the holder of the account.
+   * 
    * @param accountHolder
    */
   void setHolder(
@@ -61,4 +74,13 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    */
   void setInternalId(
     String internalId);
+
+
+  /**
+   * Sets the account provider.
+   * 
+   * @param accountProvider the account provider to set
+   */
+  void setProvider(
+    AccountProvider accountProvider);
 }
