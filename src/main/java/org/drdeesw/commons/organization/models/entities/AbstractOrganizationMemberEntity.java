@@ -80,7 +80,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
@@ -148,7 +148,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

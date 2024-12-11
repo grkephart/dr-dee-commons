@@ -85,7 +85,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
@@ -154,7 +154,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

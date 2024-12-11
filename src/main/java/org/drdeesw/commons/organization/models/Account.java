@@ -27,7 +27,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * Returns the organization's internal ID of the account.
    * It could be an account number or a username or email or GUID.
    * 
-   * @return  the organization's internal ID of the account
+   * @return the account's internal ID
    */
   String getInternalId();
 
@@ -67,10 +67,10 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
 
 
   /**
-   * Sets the organization's internal ID of the account.
+   * Sets the account's internal ID.
    * It could be an account number or a username or email or GUID.
    * 
-   * @param internalId the organization's internal ID of the account to set
+   * @param internalId the account's internal ID to set
    */
   void setInternalId(
     String internalId);

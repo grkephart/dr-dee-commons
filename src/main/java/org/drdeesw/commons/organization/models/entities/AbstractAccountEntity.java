@@ -107,7 +107,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return this.lastUpdateDate;
   }
@@ -197,7 +197,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdatedDate)
   {
     this.lastUpdateDate = lastUpdatedDate;

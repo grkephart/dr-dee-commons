@@ -15,16 +15,12 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * An organization is a group of people with a common purpose or goal. 
  * The organization can have a parent organization and children organizations. 
  * The organization can have members and roles. 
- * The organization can have accounts.
+ * The organization can provide accounts and hold accounts.
  * 
- * A design choice was made to ensure that all related organizations (parent and children) manage the same type of account
- * instead of having different types of accounts for different related organizations.
- * This maintains type safety and consistency within the hierarchy at the cost of flexibility.
  */
 public interface Organization
-    extends NamedLongUniqueObject, AccountHolder, Auditable, Describable
+    extends NamedLongUniqueObject, AccountProvider, AccountHolder, Auditable, Describable
 {
-
   /**
    * Returns the children organizations.
    * 

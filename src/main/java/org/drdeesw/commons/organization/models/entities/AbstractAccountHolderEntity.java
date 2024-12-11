@@ -58,7 +58,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractLongUniqueEnti
 
 
   @Override
-  public Set<Account> getAccounts()
+  public Set<Account> getHeldAccounts()
   {
     if (this.accounts == null)
     {
@@ -93,7 +93,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractLongUniqueEnti
 
 
   @Override
-  public void setAccounts(
+  public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.accounts = accounts.stream()//

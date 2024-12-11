@@ -49,7 +49,7 @@ class OrganizationPojoTest
     accounts.add(account1);
     
     org.setParent(parent);
-    org.setAccounts(accounts);
+    org.setHeldAccounts(accounts);
   }
 
 }

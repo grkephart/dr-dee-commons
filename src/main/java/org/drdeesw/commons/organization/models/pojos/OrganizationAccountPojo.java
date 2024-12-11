@@ -31,10 +31,10 @@ public class OrganizationAccountPojo extends AccountPojo implements Organization
   }
 
 
-  protected OrganizationAccountPojo(OrganizationPojo serviceProvider, String internalId)
+  protected OrganizationAccountPojo(OrganizationPojo organization, String internalId)
   {
-    super(internalId);
-    this.organization = serviceProvider;
+    super(organization, internalId);
+    this.organization = organization;
   }
 
 

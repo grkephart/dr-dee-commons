@@ -57,7 +57,7 @@ public class AccountHolderPojo extends AbstractLongUniquePojo implements Account
 
 
   @Override
-  public Set<Account> getAccounts()
+  public Set<Account> getHeldAccounts()
   {
     return this.accounts.stream()//
         .map(account -> (Account)account)//
@@ -87,7 +87,7 @@ public class AccountHolderPojo extends AbstractLongUniquePojo implements Account
 
 
   @Override
-  public void setAccounts(
+  public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.accounts = accounts.stream()//

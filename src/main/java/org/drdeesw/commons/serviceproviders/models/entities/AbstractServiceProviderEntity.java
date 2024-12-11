@@ -93,7 +93,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractOrganization
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
@@ -148,7 +148,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractOrganization
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

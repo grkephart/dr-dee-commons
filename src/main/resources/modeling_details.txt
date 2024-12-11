@@ -177,7 +177,7 @@ Organization Type - is named and describable
 
 Service Provider Module:
 
-Service Provider - not necessarily an Organization in real life, but will be considered as one here for simplicity. It is named and describable
+Service Provider - close but not quite an organization. It's the same in that they manage provided and held accounts. It is named and describable
 - Has an AuthenticationType enum, which includes, but is not limited to, NONE, API_KEY BASIC_AUTH, OAUTH1, OAUTH2, JWT, SAML, OPENID_CONNECT, DIGITAL_SIGNATURE, LDAP, SESSION
 - Has a ClientRegistrationId
 - Can act as both an `AccountProvider` and an `AccountHolder`.
@@ -186,7 +186,7 @@ Service Provider - not necessarily an Organization in real life, but will be con
 - Use `getProvidedAccounts()` and `setProvidedAccounts()` for managing accounts the Service Provider provides.
 - Use `getHeldAccounts()` and `setHeldAccounts()` for managing accounts the Service Provider holds.
 
-Service Provider Account - is an Organization Account
+Service Provider Account - is not an Organization Account. That would add too much complexity. It is an Account and is auditable and enableable.
 - The Account Provider is a Service Provider (or a subclass)
 - Has a Token Holder
 

@@ -44,7 +44,7 @@ public class OrganizationPojo extends AccountHolderPojo implements Organization
   private OrganizationType             type;
 
   @Override
-  public Set<Account> getAccounts()
+  public Set<Account> getHeldAccounts()
   {
     return this.accounts.stream()//
         .map(account -> (Account)account)//
@@ -88,7 +88,7 @@ public class OrganizationPojo extends AccountHolderPojo implements Organization
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return this.lastUpdateDate;
   }
@@ -137,7 +137,7 @@ public class OrganizationPojo extends AccountHolderPojo implements Organization
 
 
   @Override
-  public void setAccounts(
+  public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
@@ -187,7 +187,7 @@ public class OrganizationPojo extends AccountHolderPojo implements Organization
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

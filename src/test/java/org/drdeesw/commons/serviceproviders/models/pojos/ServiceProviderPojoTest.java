@@ -54,7 +54,7 @@ class ServiceProviderPojoTest
     
     accounts.add(account);
     
-    serviceProvider.setAccounts(accounts);
+    serviceProvider.setHeldAccounts(accounts);
   }
 
 }

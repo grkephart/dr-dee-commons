@@ -79,7 +79,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public Set<Account> getAccounts()
+  public Set<Account> getHeldAccounts()
   {
     return this.accounts.stream()//
         .map(child -> (Account)child)//
@@ -125,7 +125,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return this.lastUpdatedDate;
   }
@@ -187,7 +187,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public void setAccounts(
+  public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
@@ -239,7 +239,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdatedDate = lastUpdateDate;

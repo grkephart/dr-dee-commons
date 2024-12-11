@@ -32,11 +32,11 @@ public interface Auditable
 
 
   /**
-   * Returns the last updated date of the object.
+   * Returns the last update date of the object.
    * 
-   * @return the last updated date of the object
+   * @return the last update date of the object
    */
-  Instant getLastUpdatedDate();
+  Instant getLastUpdateDate();
 
 
   /**
@@ -66,12 +66,12 @@ public interface Auditable
 
 
   /**
-   * Sets the last updated date of the object.
+   * Sets the last update date of the object.
    * 
-   * @param lastUpdatedDate the last update date of the object
+   * @param lastUpdateDate the last update date of the object
    */
-  void setLastUpdatedDate(
-    Instant lastUpdatedDate);
+  void setLastUpdateDate(
+    Instant lastUpdateDate);
 
 
   /**

@@ -43,7 +43,7 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
@@ -102,7 +102,7 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

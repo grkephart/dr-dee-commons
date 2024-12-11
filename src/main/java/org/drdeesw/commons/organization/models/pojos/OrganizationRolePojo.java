@@ -51,7 +51,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
     return this.lastUpdateDate;
   }
@@ -118,7 +118,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
     this.lastUpdateDate = lastUpdateDate;

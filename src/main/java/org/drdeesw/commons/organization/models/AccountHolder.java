@@ -4,71 +4,33 @@
 package org.drdeesw.commons.organization.models;
 
 
-import java.util.Optional;
 import java.util.Set;
-
-import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.identity.models.Person;
-import org.drdeesw.commons.security.models.User;
 
 
 /**
  * Represents any entity that can hold accounts, such as:
  *  Person
- *  User
  *  Organization
+ *  Integrating system
  *  
- *  An AccountHolder can be a Person, a User, or an Organization, but not all at once.
+ *  An AccountHolder can be a Person or an Organization or an integrating system, but not all at once.
  */
-public interface AccountHolder extends LongUniqueObject
+public interface AccountHolder
 {
   /**
-   * @return
+   * Returns the accounts held by the AccountHolder.
+   * 
+   * @return the accounts held by the AccountHolder
    */
-  Set<Account> getAccounts();
+  Set<Account> getHeldAccounts();
 
 
   /**
-   * @return
+   * Sets the accounts held by the AccountHolder.
+   * 
+   * @param accounts the accounts held by the AccountHolder
    */
-  Optional<Organization> getOrganization();
-
-
-  /**
-   * @return
-   */
-  Optional<Person> getPerson();
-
-
-  /**
-   * @return
-   */
-  Optional<User> getUser();
-
-
-  /**
-   * @param accounts
-   */
-  void setAccounts(
+  void setHeldAccounts(
     Set<Account> accounts);
-  
-  /**
-   * @param organization
-   */
-  void setOrganization(
-    Organization organization);
 
-
-  /**
-   * @param person
-   */
-  void setPerson(
-    Person person);
-
-
-  /**
-   * @param user
-   */
-  void setUser(
-    User user);
 }

@@ -13,6 +13,7 @@ import javax.persistence.MappedSuperclass;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.AccountHolder;
+import org.drdeesw.commons.organization.models.AccountProvider;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
@@ -31,8 +32,9 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   private Instant           creationDate;
   private String            description;
   private String            internalId;
-  private Instant           lastUpdateDate;
+  private Instant           lastUpdatedDate;
   private UserPojo          lastUpdatedBy;
+  private AccountProvider   provider;
 
   public AccountPojo()
   {
@@ -41,6 +43,14 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
 
   public AccountPojo(String internalId)
   {
+    this.internalId = internalId;
+  }
+
+
+
+  public AccountPojo(AccountProvider provider, String internalId)
+  {
+    this.provider = provider;
     this.internalId = internalId;
   }
 
@@ -85,7 +95,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
    */
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return lastUpdatedDate;
   }
 
 
@@ -97,9 +107,15 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public Instant getLastUpdatedDate()
+  public Instant getLastUpdateDate()
   {
-    return this.lastUpdateDate;
+    return this.lastUpdatedDate;
+  }
+
+
+  public AccountProvider getProvider()
+  {
+    return provider;
   }
 
 
@@ -107,6 +123,13 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   public boolean isActive()
   {
     return this.active;
+  }
+
+
+  public void setAccountHolder(
+    AccountHolderPojo accountHolder)
+  {
+    this.accountHolder = accountHolder;
   }
 
 
@@ -123,6 +146,13 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
     User createdBy)
   {
     this.createdBy = (UserPojo)createdBy;
+  }
+
+
+  public void setCreatedBy(
+    UserPojo createdBy)
+  {
+    this.createdBy = createdBy;
   }
 
 
@@ -164,7 +194,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.lastUpdatedDate = lastUpdateDate;
   }
 
 
@@ -176,11 +206,19 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   }
 
 
+
   @Override
-  public void setLastUpdatedDate(
+  public void setLastUpdateDate(
     Instant lastUpdatedDate)
   {
-    this.lastUpdateDate = lastUpdatedDate;
+    this.lastUpdatedDate = lastUpdatedDate;
+  }
+
+
+  public void setProvider(
+    AccountProvider provider)
+  {
+    this.provider = provider;
   }
 
 }

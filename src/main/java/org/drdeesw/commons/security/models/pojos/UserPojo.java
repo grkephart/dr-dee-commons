@@ -55,7 +55,7 @@ public class UserPojo extends AccountHolderPojo implements User
 
 
   @Override
-  public Set<Account> getAccounts()
+  public Set<Account> getHeldAccounts()
   {
     return Optional.ofNullable(this.accounts)//
         .orElse(Collections.emptySet())//
@@ -87,7 +87,7 @@ public class UserPojo extends AccountHolderPojo implements User
 
 
   @Override
-  public void setAccounts(
+  public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.accounts = accounts.stream()//
