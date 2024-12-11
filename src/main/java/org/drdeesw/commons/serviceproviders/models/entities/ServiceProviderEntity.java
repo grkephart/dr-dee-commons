@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @AttributeOverride(name = "id", column = @Column(name = "service_provider_id"))
 public class ServiceProviderEntity extends AbstractServiceProviderEntity
 {
-  
+
   public ServiceProviderEntity()
   {
     super();

@@ -26,7 +26,7 @@ public interface ServiceProviderAccountRepository
    * @param internalId the internalId of the account
    * @return the service provider account
    */
-  Optional<ServiceProviderAccountPojo> findByServiceProviderAndInternalId(
+  Optional<ServiceProviderAccountPojo> findByProviderAndInternalId(
     ServiceProviderPojo serviceProvider,
     String internalId);
 
@@ -37,7 +37,7 @@ public interface ServiceProviderAccountRepository
    * @param internalId the internalId
    * @return the service provider account
    */
-  Optional<ServiceProviderAccountPojo> findByServiceProviderClientRegistrationIdAndInternalId(
+  Optional<ServiceProviderAccountPojo> findByProviderClientRegistrationIdAndInternalId(
     String clientRegistrationId,
     String internalId);
 

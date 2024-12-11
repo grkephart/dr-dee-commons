@@ -4,13 +4,17 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 import org.drdeesw.commons.organization.models.AccountProvider;
 
 
 /**
  * 
  */
-public interface ServiceProvider extends AccountProvider
+public interface ServiceProvider
+    extends NamedLongUniqueObject, AccountProvider, Auditable, Describable
 {
   /**
    * Returns the authentication type of the service provider.

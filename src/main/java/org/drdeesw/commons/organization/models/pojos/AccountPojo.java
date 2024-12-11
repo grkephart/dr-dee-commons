@@ -6,10 +6,6 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import java.time.Instant;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.MappedSuperclass;
-
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.AccountHolder;
@@ -22,19 +18,17 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements Account
+public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 {
-  private AccountHolderPojo accountHolder;
-  private boolean           active;
-  private UserPojo          createdBy;
-  private Instant           creationDate;
-  private String            description;
-  private String            internalId;
-  private Instant           lastUpdatedDate;
-  private UserPojo          lastUpdatedBy;
-  private AccountProvider   provider;
+  private AccountHolder   accountHolder;
+  private boolean         active;
+  private UserPojo        createdBy;
+  private Instant         creationDate;
+  private String          description;
+  private String          internalId;
+  private Instant         lastUpdatedDate;
+  private UserPojo        lastUpdatedBy;
+  private AccountProvider provider;
 
   public AccountPojo()
   {
@@ -45,7 +39,6 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   {
     this.internalId = internalId;
   }
-
 
 
   public AccountPojo(AccountProvider provider, String internalId)
@@ -103,13 +96,6 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   public User getLastUpdatedBy()
   {
     return (User)this.lastUpdatedBy;
-  }
-
-
-  @Override
-  public Instant getLastUpdateDate()
-  {
-    return this.lastUpdatedDate;
   }
 
 
@@ -176,7 +162,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   public void setHolder(
     AccountHolder accountHolder)
   {
-    this.accountHolder = (AccountHolderPojo)accountHolder;
+    this.accountHolder = (AccountHolder)accountHolder;
   }
 
 
@@ -188,23 +174,12 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo implements
   }
 
 
-  /**
-   * @param lastUpdateDate the lastUpdateDate to set
-   */
-  public void setLastUpdateDate(
-    Instant lastUpdateDate)
-  {
-    this.lastUpdatedDate = lastUpdateDate;
-  }
-
-
   @Override
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
   }
-
 
 
   @Override

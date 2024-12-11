@@ -49,7 +49,7 @@ public class ServiceProviderAccountServiceImpl extends
     String internalId)
   {
     return this.serviceProviderAccountRepository
-        .findByServiceProviderAndInternalId(serviceProvider, internalId);
+        .findByProviderAndInternalId(serviceProvider, internalId);
   }
 
 
@@ -59,7 +59,7 @@ public class ServiceProviderAccountServiceImpl extends
     String internalId)
   {
     return this.serviceProviderAccountRepository
-        .findByServiceProviderClientRegistrationIdAndInternalId(clientRegistrationId, internalId);
+        .findByProviderClientRegistrationIdAndInternalId(clientRegistrationId, internalId);
   }
 
 
@@ -71,7 +71,7 @@ public class ServiceProviderAccountServiceImpl extends
     ServiceProviderPojo serviceProvider = this.serviceProviderService
         .findOrCreate(clientRegistrationId);
     Optional<ServiceProviderAccountPojo> serviceProviderAccountOpt = this.serviceProviderAccountRepository
-        .findByServiceProviderAndInternalId(serviceProvider, internalId);
+        .findByProviderAndInternalId(serviceProvider, internalId);
     ServiceProviderAccountPojo serviceProviderAccount;
 
     if (serviceProviderAccountOpt.isEmpty())
@@ -79,7 +79,7 @@ public class ServiceProviderAccountServiceImpl extends
       serviceProviderAccount = new ServiceProviderAccountPojo();
 
       serviceProviderAccount.setInternalId(internalId);
-      serviceProviderAccount.setServiceProvider(serviceProvider);
+      serviceProviderAccount.setProvider(serviceProvider);
 
       serviceProviderAccount = super.create(serviceProviderAccount);
     }

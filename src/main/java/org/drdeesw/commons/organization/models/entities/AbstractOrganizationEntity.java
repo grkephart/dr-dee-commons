@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.Named;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
@@ -35,9 +35,10 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEntity
+public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
     implements Organization
 {
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity>            accounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -49,6 +50,8 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   private Instant                       creationDate;
   @Column(name = "description")
   private String                        description;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Account>                  heldAccounts;
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
   private UserEntity                    lastUpdatedBy;
@@ -56,11 +59,11 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   private Instant                       lastUpdatedDate;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationMemberEntity> members;
-  @Column(name = "name")
-  private String                        name;
   @ManyToOne
   @JoinColumn(name = "parent_id")
   private OrganizationEntity            parent;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Account>                  providedAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
@@ -68,22 +71,12 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   @ManyToOne
   @JoinColumn(name = "type_id")
   private OrganizationTypeEntity        type;
-
   /**
    * 
    */
   protected AbstractOrganizationEntity()
   {
     super();
-  }
-
-
-  @Override
-  public Set<Account> getHeldAccounts()
-  {
-    return this.accounts.stream()//
-        .map(child -> (Account)child)//
-        .collect(Collectors.toSet());
   }
 
 
@@ -118,9 +111,11 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public User getLastUpdatedBy()
+  public Set<Account> getHeldAccounts()
   {
-    return (User)this.lastUpdatedBy;
+    return this.accounts.stream()//
+        .map(child -> (Account)child)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -128,6 +123,13 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   public Instant getLastUpdateDate()
   {
     return this.lastUpdatedDate;
+  }
+
+
+  @Override
+  public User getLastUpdatedBy()
+  {
+    return (User)this.lastUpdatedBy;
   }
 
 
@@ -140,13 +142,6 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   }
 
 
-  @Override
-  public String getName()
-  {
-    return this.name;
-  }
-
-
   /**
    * @return the parent
    */
@@ -154,6 +149,13 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   public Organization getParent()
   {
     return (Organization)parent;
+  }
+
+
+  @Override
+  public Set<Account> getProvidedAccounts()
+  {
+    return this.providedAccounts;
   }
 
 
@@ -183,16 +185,6 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   public OrganizationType getType()
   {
     return type;
-  }
-
-
-  @Override
-  public void setHeldAccounts(
-    Set<Account> accounts)
-  {
-    this.accounts = accounts.stream()//
-        .map(account -> (AccountEntity)account)//
-        .collect(Collectors.toSet());
   }
 
 
@@ -231,10 +223,12 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
 
 
   @Override
-  public void setLastUpdatedBy(
-    User lastUpdatedBy)
+  public void setHeldAccounts(
+    Set<Account> accounts)
   {
-    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
+    this.accounts = accounts.stream()//
+        .map(account -> (AccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -243,6 +237,14 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
     Instant lastUpdateDate)
   {
     this.lastUpdatedDate = lastUpdateDate;
+  }
+
+
+  @Override
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
+  {
+    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
 
 
@@ -256,16 +258,6 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
   }
 
 
-  @Override
-  public <NO extends Named> NO setName(
-    String name)
-  {
-    this.name = name;
-
-    return (NO)this;
-  }
-
-
   /**
    * @param parent the parent to set
    */
@@ -274,6 +266,14 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountHolderEn
     Organization parent)
   {
     this.parent = (OrganizationEntity)parent;
+  }
+
+
+  @Override
+  public void setProvidedAccounts(
+    Set<Account> providedAccounts)
+  {
+    this.providedAccounts = providedAccounts;
   }
 
 

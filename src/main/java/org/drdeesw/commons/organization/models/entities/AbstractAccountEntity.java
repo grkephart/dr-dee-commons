@@ -16,6 +16,7 @@ import javax.persistence.MappedSuperclass;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.AccountHolder;
+import org.drdeesw.commons.organization.models.AccountProvider;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 
@@ -29,31 +30,36 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntity implements Account
 {
 
-  @ManyToOne
-  @JoinColumn(name = "holder_id", nullable = false)
-  private AccountHolderEntity accountHolder;
-
-  private boolean             active;
+  @Column(name = "is_active", nullable = false)
+  private boolean               active;
 
   @ManyToOne
   @JoinColumn(name = "created_by", nullable = false)
-  private UserEntity          createdBy;
+  private UserEntity            createdBy;
 
   @Column(name = "creation_date", nullable = false)
-  private Instant             creationDate;
+  private Instant               creationDate;
 
   @Column(name = "description", nullable = false)
-  private String              description;
+  private String                description;
+
+  @ManyToOne
+  @JoinColumn(name = "holder_id", nullable = false)
+  private AccountHolderEntity   holder;
 
   @Column(name = "internal_id")
-  private String              internalId;
+  private String                internalId;
 
   @Column(name = "last_update_date", nullable = false)
-  private Instant             lastUpdateDate;
+  private Instant               lastUpdateDate;
 
   @ManyToOne
   @JoinColumn(name = "last_updated_by", nullable = false)
-  private UserEntity          lastUpdatedBy;
+  private UserEntity            lastUpdatedBy;
+
+  @ManyToOne
+  @JoinColumn(name = "provider_id", nullable = false)
+  private AccountProviderEntity provider;
 
   @Override
   public User getCreatedBy()
@@ -79,7 +85,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   public AccountHolder getHolder()
   {
-    return accountHolder;
+    return holder;
   }
 
 
@@ -87,22 +93,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public String getInternalId()
   {
     return this.internalId;
-  }
-
-
-  /**
-   * @return the lastUpdateDate
-   */
-  public Instant getLastUpdateDate()
-  {
-    return lastUpdateDate;
-  }
-
-
-  @Override
-  public User getLastUpdatedBy()
-  {
-    return (User)this.lastUpdatedBy;
   }
 
 
@@ -114,19 +104,23 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
-  public boolean isActive()
+  public User getLastUpdatedBy()
   {
-    return this.active;
+    return (User)this.lastUpdatedBy;
   }
 
 
-  /**
-   * @param accountHolder the accountHolder to set
-   */
-  public void setAccountHolder(
-    AccountHolderEntity accountHolder)
+  @Override
+  public AccountProvider getProvider()
   {
-    this.accountHolder = accountHolder;
+    return this.provider;
+  }
+
+
+  @Override
+  public boolean isActive()
+  {
+    return this.active;
   }
 
 
@@ -166,7 +160,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setHolder(
     AccountHolder accountHolder)
   {
-    this.accountHolder = (AccountHolderEntity)accountHolder;
+    this.holder = (AccountHolderEntity)accountHolder;
   }
 
 
@@ -178,13 +172,11 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   }
 
 
-  /**
-   * @param lastUpdateDate the lastUpdateDate to set
-   */
+  @Override
   public void setLastUpdateDate(
-    Instant lastUpdateDate)
+    Instant lastUpdatedDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.lastUpdateDate = lastUpdatedDate;
   }
 
 
@@ -196,11 +188,21 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   }
 
 
-  @Override
-  public void setLastUpdateDate(
-    Instant lastUpdatedDate)
+  /**
+   * @param lastUpdatedBy the lastUpdatedBy to set
+   */
+  public void setLastUpdatedBy(
+    UserEntity lastUpdatedBy)
   {
-    this.lastUpdateDate = lastUpdatedDate;
+    this.lastUpdatedBy = lastUpdatedBy;
+  }
+
+
+  @Override
+  public void setProvider(
+    AccountProvider accountProvider)
+  {
+    this.provider = (AccountProviderEntity)accountProvider;
   }
 
 }
