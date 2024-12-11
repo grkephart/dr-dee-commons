@@ -6,7 +6,6 @@ package org.drdeesw.commons.organization.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.identity.models.entities.PersonEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
@@ -47,7 +46,7 @@ class OrganizationEntityTest
     OrganizationAccount heldAccount1 = new OrganizationAccountEntity();
     Set<Account> providedAccounts = new HashSet<Account>();
     OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
-    Person person = new PersonEntity();
+    PersonEntity person = new PersonEntity();
     
     heldAccount1.setHolder(person);
     heldAccount1.setProvider(org);
