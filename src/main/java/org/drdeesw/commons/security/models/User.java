@@ -5,8 +5,7 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
+import org.drdeesw.commons.organization.models.AccountHolder;
 
 
 /**
@@ -18,7 +17,7 @@ import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
  * @author gary_kephart
  *
  */
-public interface User extends LongUniqueObject, OrganizationAccountHolder
+public interface User extends LongUniqueObject, AccountHolder
 {
 
 

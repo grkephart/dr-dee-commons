@@ -39,8 +39,6 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
     implements Organization
 {
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>            accounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationEntity>       children;
   @ManyToOne
@@ -51,7 +49,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Column(name = "description")
   private String                        description;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Account>                  heldAccounts;
+  private Set<AccountEntity>            heldAccounts;
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
   private UserEntity                    lastUpdatedBy;
@@ -63,7 +61,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @JoinColumn(name = "parent_id")
   private OrganizationEntity            parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Account>                  providedAccounts;
+  private Set<AccountEntity>            providedAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
@@ -113,8 +111,8 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<Account> getHeldAccounts()
   {
-    return this.accounts.stream()//
-        .map(child -> (Account)child)//
+    return this.heldAccounts.stream()//
+        .map(heldAccount -> (Account)heldAccount)//
         .collect(Collectors.toSet());
   }
 
@@ -155,7 +153,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return this.providedAccounts;
+     return this.providedAccounts.stream()//
+        .map(providedAccount -> (Account)providedAccount)//
+        .collect(Collectors.toSet());
+  
   }
 
 
@@ -224,10 +225,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
   @Override
   public void setHeldAccounts(
-    Set<Account> accounts)
+    Set<Account> heldAccounts)
   {
-    this.accounts = accounts.stream()//
-        .map(account -> (AccountEntity)account)//
+    this.heldAccounts = heldAccounts.stream()//
+        .map(heldAccount -> (AccountEntity)heldAccount)//
         .collect(Collectors.toSet());
   }
 
@@ -273,7 +274,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setProvidedAccounts(
     Set<Account> providedAccounts)
   {
-    this.providedAccounts = providedAccounts;
+    this.providedAccounts = providedAccounts.stream()//
+        .map(providedAccount -> (AccountEntity)providedAccount)//
+        .collect(Collectors.toSet());
   }
 
 

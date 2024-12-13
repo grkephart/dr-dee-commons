@@ -251,4 +251,34 @@ Person Contact Information
 - Has an email address
 - Has a street address
 - Has a phone number
- 
+
+Layer 1 - Basic Interfaces:
+Account - extends NamedLongUniqueObject, has "AccountHolder getHolder()" and "setHolder(AccountHolder)" and "AccountProvider getProvider()" and "setProvider(AccountProvider)"
+AccountProvider - extends NamedLongUniqueObject, has "Set<Account> getProvidedAccounts()" and "setProvidedAccounts(Set<Account>)"
+AccountHolder - extends NamedLongUniqueObject, has "getHeldAccounts(Set<Account>)" and "setHeldAccounts(Set<Account>)"
+
+Layer 2 - Specific Interfaces:
+Organization - extends AccountHolder,AccountProvider
+ServiceProvider - extends AccountProvider
+Person - extends AccountHolder
+
+Layer 3 - Abstract JPA Entities (MappedSuperclasses):
+AbstractNamedLongUniqueEntity - implements NamedLongUniqueObject
+AbstractAccountEntity - extends AbstractNamedLongUniqueEntity implements Account
+AbstractAccountHolderEntity - extends AbstractNamedLongUniqueEntity implements AccountHolder
+AbstractAccountProviderEntity - extends AbstractNamedLongUniqueEntity implements AccountProvider
+
+Layer 4 - Concrete JPA Entities:
+AccountEntity - extends AbstractAccountEntity, has "AccountProviderEntity provider" and "AccountHolderEntity holder"
+AccountProviderEntity - extends AbstractAccountProviderEntity, has "Set<AccountEntity> providedAccounts"
+AccountHolderEntity - extends AbstractAccountHolderEntity, has "Set<AccountEntity> heldAccounts"
+
+Layer 4 - More Abstract JPA Entities (MappedSuperclasses):
+AbstractOrganizationEntity - extends AccountProviderEntity AND AccountHolderEntity implements Organization (needs to extend AccountProviderEntity AND AccountHolderEntity because AccountEntity has a reference to AccountProvider AND AccountHolder) (wrong because Java forbids multiple inheritance of classes)
+AbstractServiceProviderEntity - extends AccountProviderEntity, AbstractAccountHolderEntity implements ServiceProvider (needs to extend AccountProviderEntity because AccountEntity has a reference to AccountProvider)
+AbstractPersonEntity - extends AccountHolderEntity implements Person (needs to extend AccountHolderEntity because AccountEntity has a reference to AccountHolder)
+
+Layer 5 - More Concrete JPA Entities:
+OrganizationEntity - extends AbstractOrganizationEntity
+ServiceProviderEntity - extends AbstractServiceProviderEntity
+PersonEntity - extends AbstractPersonEntity

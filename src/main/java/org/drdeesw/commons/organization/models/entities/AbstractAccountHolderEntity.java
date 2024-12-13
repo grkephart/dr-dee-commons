@@ -15,7 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.AccountHolder;
 
@@ -26,7 +26,7 @@ import org.drdeesw.commons.organization.models.AccountHolder;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractAccountHolderEntity extends AbstractLongUniqueEntity
+public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqueEntity
     implements AccountHolder
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
