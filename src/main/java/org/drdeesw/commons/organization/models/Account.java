@@ -7,6 +7,7 @@ package org.drdeesw.commons.organization.models;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
@@ -38,6 +39,14 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * @return the accountProvider
    */
   AccountProvider getProvider();
+
+
+  /**
+   * Returns the user of the account.
+   * 
+   * @return the user of the account
+   */
+  User getUser();
 
 
   /**
@@ -74,8 +83,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    */
   void setInternalId(
     String internalId);
-
-
+  
   /**
    * Sets the account provider.
    * 
@@ -83,4 +91,12 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    */
   void setProvider(
     AccountProvider accountProvider);
+  
+  /**
+   * Sets the user of the account.
+   * 
+   * @param user the user to set
+   */
+  void setUser(User user);
+  
 }

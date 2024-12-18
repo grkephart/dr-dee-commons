@@ -26,24 +26,25 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   private Instant         creationDate;
   private String          description;
   private String          internalId;
-  private Instant         lastUpdatedDate;
   private UserPojo        lastUpdatedBy;
+  private Instant         lastUpdatedDate;
   private AccountProvider provider;
+  private UserPojo        user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(String internalId)
+  public AccountPojo(AccountProvider provider, String internalId)
   {
+    this.provider = provider;
     this.internalId = internalId;
   }
 
 
-  public AccountPojo(AccountProvider provider, String internalId)
+  public AccountPojo(String internalId)
   {
-    this.provider = provider;
     this.internalId = internalId;
   }
 
@@ -102,6 +103,13 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   public AccountProvider getProvider()
   {
     return provider;
+  }
+
+
+  @Override
+  public User getUser()
+  {
+    return this.user;
   }
 
 
@@ -175,14 +183,6 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
 
   @Override
-  public void setLastUpdatedBy(
-    User lastUpdatedBy)
-  {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
-  }
-
-
-  @Override
   public void setLastUpdateDate(
     Instant lastUpdatedDate)
   {
@@ -190,10 +190,26 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   }
 
 
+  @Override
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
+  {
+    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+  }
+
+
   public void setProvider(
     AccountProvider provider)
   {
     this.provider = provider;
+  }
+
+
+  @Override
+  public void setUser(
+    User user)
+  {
+    this.user = (UserPojo)user;
   }
 
 }

@@ -15,8 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
+import org.drdeesw.commons.organization.models.entities.AbstractAccountProviderEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
@@ -28,7 +28,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
+public abstract class AbstractServiceProviderEntity extends AbstractAccountProviderEntity
     implements ServiceProvider
 {
   @Column(name = "authentication_type")

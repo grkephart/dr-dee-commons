@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
@@ -31,35 +32,39 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 {
 
   @Column(name = "is_active", nullable = false)
-  private boolean               active;
+  private boolean                       active;
 
   @ManyToOne
   @JoinColumn(name = "created_by", nullable = false)
-  private UserEntity            createdBy;
+  private UserEntity                    createdBy;
 
   @Column(name = "creation_date", nullable = false)
-  private Instant               creationDate;
+  private Instant                       creationDate;
 
   @Column(name = "description", nullable = false)
-  private String                description;
+  private String                        description;
 
-  @ManyToOne
+  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
   @JoinColumn(name = "holder_id", nullable = false)
-  private AccountHolderEntity   holder;
+  private AbstractAccountHolderEntity   holder;
 
   @Column(name = "internal_id")
-  private String                internalId;
+  private String                        internalId;
 
   @Column(name = "last_update_date", nullable = false)
-  private Instant               lastUpdateDate;
+  private Instant                       lastUpdateDate;
 
   @ManyToOne
   @JoinColumn(name = "last_updated_by", nullable = false)
-  private UserEntity            lastUpdatedBy;
+  private UserEntity                    lastUpdatedBy;
 
-  @ManyToOne
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
   @JoinColumn(name = "provider_id", nullable = false)
-  private AccountProviderEntity provider;
+  private AbstractAccountProviderEntity provider;
+
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  private UserEntity                    user;
 
   @Override
   public User getCreatedBy()
@@ -118,6 +123,13 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  public User getUser()
+  {
+    return user;
+  }
+
+
+  @Override
   public boolean isActive()
   {
     return this.active;
@@ -160,7 +172,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setHolder(
     AccountHolder accountHolder)
   {
-    this.holder = (AccountHolderEntity)accountHolder;
+    this.holder = (AbstractAccountHolderEntity)accountHolder;
   }
 
 
@@ -202,7 +214,15 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setProvider(
     AccountProvider accountProvider)
   {
-    this.provider = (AccountProviderEntity)accountProvider;
+    this.provider = (AbstractAccountProviderEntity)accountProvider;
+  }
+
+
+  @Override
+  public void setUser(
+    User user)
+  {
+    this.user = (UserEntity)user;
   }
 
 }

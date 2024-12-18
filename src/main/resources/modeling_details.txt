@@ -284,188 +284,62 @@ ServiceProviderEntity - extends AbstractServiceProviderEntity
 PersonEntity - extends AbstractPersonEntity
 
 
-Given entity class A that has a ManyToOne relationship with abstract MappedSuperclass B which has Entity C and D as concrete entities, how can I get that to work given JPAs restrictions. I want only one table.Example:
+Current situation:
 
-@Entity
-@Table(name = "examples")
-public class A
-{
-  @ManyToOne 
-  @JoinColumn(name="b_id")
-  private B something;
-}
-ChatGPT said:
-ChatGPT
+- AccountEntity, a JPA entity, extends AbstractAccountEntity. It has its own table, "accounts".
+- AbstractAccountEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements Account. 
+  It has a ManyToOne relationship to an AccountProviderEntity, column "provider_id", (it can't be AbstractAccountProviderEntity or AccountProvider due to JPA restrictions)
+  It has a ManyToOne relationship to an AccountHolderEntity, column "holder_id", (it can't be AbstractAccountHolderEntity or AccountHolder due to JPA restrictions)
+- Account, an interface, has a reference to AccountProvider AND AccountHolder via getter and setter methods
 
-To achieve your requirement of using a @ManyToOne relationship to an abstract @MappedSuperclass while persisting all instances of its concrete subclasses (C and D) into a single table, you need to adjust your design to align with JPA's inheritance strategy. JPA does not allow direct relationships to a @MappedSuperclass, as it does not have its own table and exists only to provide reusable mappings.
+- AccountProviderEntity, a JPA entity, extends AbstractAccountProviderEntity. It has its own table, "account_providers".
+- AbstractAccountProviderEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements AccountProvider
+  It has a OneToMany relationship to AccountEntity, mapped by "provider" (it can't be AbstractAccountEntity or Account due to JPA restrictions)
+- AccountProvider, an interface, has a reference to Set<Account> via getter and setter methods
 
-Here is how you can do this:
-Use @Inheritance and @DiscriminatorColumn with SINGLE_TABLE Strategy
+- AccountHolderEntity, a JPA entity, extends AbstractAccountHolderEntity. It has its own table, "account_holders".
+- AbstractAccountHolderEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements AccountHolder
+  It has a OneToMany relationship to AccountEntity, mapped by "holder" (it can't be AbstractAccountEntity or Account due to JPA restrictions)
+- AccountHolder, an interface, has a reference to Set<Account> via getter and setter methods
 
-Instead of @MappedSuperclass, make B an abstract @Entity with the SINGLE_TABLE inheritance strategy. This allows all instances of C and D to share the same table, with a discriminator column indicating the concrete type.
+- OrganizationEntity, a JPA entity, extends AbstractOrganizationEntity. It has its own table, "organizations".
+- AbstractOrganizationEntity, an abstract JPA entity, should but cannot extend both AccountProviderEntity AND AccountHolderEntity and implements Organization
+- Organization, an interface, has a reference to AccountProvider AND AccountHolder via getter and setter methods
 
-Here's the revised code:
+- ServiceProviderEntity, a JPA entity, extends AbstractServiceProviderEntity. It has its own table, "service_providers".
+- AbstractServiceProviderEntity, an abstract JPA entity, extends AbstractAccountProviderEntity and implements ServiceProvider
+- ServiceProvider, an interface, has a reference to AccountProvider via getter and setter methods
 
-@Entity
-@Table(name = "examples")
-public class A {
-    @ManyToOne
-    @JoinColumn(name = "b_id", nullable = false)
-    private B something;
+- PersonEntity, a JPA entity, extends AbstractPersonEntity. It has its own table, "persons".
+- AbstractPersonEntity, an abstract JPA entity, extends AbstractAccountHolderEntity and implements Person
+- Person, an interface, has a reference to AccountHolder via getter and setter methods
 
-    // Getters and Setters
-}
+Goal:
+Make it all compilable. The current situation is not compilable because of the mentioned restrictions.
+Make the following test pass as-is:
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "b_entities")
-public abstract class B {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // Common fields and methods
-}
-
-@Entity
-@DiscriminatorValue("C")
-public class C extends B {
-    // Fields specific to C
-}
-
-@Entity
-@DiscriminatorValue("D")
-public class D extends B {
-    // Fields specific to D
-}
-
-Explanation of Key Components
-
-    @Inheritance(strategy = InheritanceType.SINGLE_TABLE):
-        Specifies that all entities in the hierarchy (B, C, and D) will be stored in a single table (b_entities).
-
-    @DiscriminatorColumn and @DiscriminatorValue:
-        The type column is added to the table to indicate which subclass (C or D) an entry belongs to.
-
-    Concrete Relationships:
-        A now references B through the @ManyToOne relationship. When persisting an instance of A, you can assign either a C or D instance to the something field.
-
-Benefits of This Approach
-
-    All entities (B, C, and D) share the same table, as per your requirement.
-    The discriminator column ensures proper distinction between subclasses.
-    JPA supports relationships and polymorphic queries using B as the base type.
-
-Querying
-
-JPA queries automatically handle polymorphism:
-
-A a = entityManager.find(A.class, 1L);
-B b = a.getSomething();
-if (b instanceof C) {
-    System.out.println("This is C");
-} else if (b instanceof D) {
-    System.out.println("This is D");
-}
-
-This approach ensures a clean and JPA-compliant solution for your use case.
-
-You said:
-I have to change the problem. A, C and D have their own tables.
-
-ChatGPT said:
-ChatGPT
-
-If A, C, and D must each have their own tables, and A has a @ManyToOne relationship to an abstract @MappedSuperclass B, then the correct approach is to use table-per-class inheritance. This way, C and D will have their own tables, but B will still serve as the polymorphic base type.
-
-Here’s how to adjust the setup:
-Updated Code
-Entity A:
-
-@Entity
-@Table(name = "examples")
-public class A {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "b_id", nullable = false)
-    private B something;
-
-    // Getters and Setters
-}
-
-Abstract Class B:
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED) // Use JOINED for normalization or TABLE_PER_CLASS for separate tables
-public abstract class B {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // Common fields and methods
-}
-
-Concrete Class C:
-
-@Entity
-@Table(name = "c_entities")
-public class C extends B {
-    // Fields specific to C
-}
-
-Concrete Class D:
-
-@Entity
-@Table(name = "d_entities")
-public class D extends B {
-    // Fields specific to D
-}
-
-Explanation of the Approach
-
-    @Inheritance(strategy = InheritanceType.JOINED) or TABLE_PER_CLASS:
-        Use @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) to store each subclass (C, D) in its own table without a shared table for B.
-        Alternatively, use @Inheritance(strategy = InheritanceType.JOINED) if you want a normalized schema where a shared table (B) contains the common fields, and C and D tables only hold subclass-specific data.
-
-    Relationships in A:
-        The @ManyToOne mapping in A allows it to reference any subclass (C or D) of B.
-        Polymorphism is supported automatically by JPA.
-
-    Table Design:
-        A will have a foreign key column (b_id) referencing the primary key in the tables of C or D.
-
-    Querying:
-        You can query B polymorphically. JPA will automatically retrieve the correct subclass instance:
-
-        A a = entityManager.find(A.class, someId);
-        B b = a.getSomething();
-        if (b instanceof C) {
-            System.out.println("This is C");
-        } else if (b instanceof D) {
-            System.out.println("This is D");
-        }
-
-Table Structure for TABLE_PER_CLASS
-
-If using TABLE_PER_CLASS, JPA creates separate tables for C and D without a shared table for B. Each table will have its own set of columns for the fields in B and the subclass-specific fields.
-
-For example:
-
-    Table c_entities: Columns for fields in B + fields in C.
-    Table d_entities: Columns for fields in B + fields in D.
-    Table examples: Foreign key b_id referencing either c_entities or d_entities.
-
-Considerations
-
-    JOINED Strategy:
-        Suitable if you want normalized tables. Queries will use joins to fetch subclass-specific fields.
-    TABLE_PER_CLASS Strategy:
-        Suitable for complete separation of subclass data but may lead to schema redundancy.
-    Discriminator Column:
-        Not applicable in TABLE_PER_CLASS strategy but available in SINGLE_TABLE or JOINED.
-
-This design respects the requirement for separate tables while allowing polymorphic behavior and proper foreign key relationships.
+  @Test
+  void testConstruction()
+  {
+    OrganizationEntity parent = new OrganizationEntity();
+    OrganizationEntity org = new OrganizationEntity();
+    Set<Account> heldAccounts = new HashSet<Account>();
+    OrganizationAccount heldAccount1 = new OrganizationAccountEntity();
+    Set<Account> providedAccounts = new HashSet<Account>();
+    OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
+    PersonEntity person = new PersonEntity();
+    
+    heldAccount1.setHolder(person);
+    heldAccount1.setProvider(org);
+    
+    heldAccounts.add(heldAccount1);
+    
+    providedAccounts1.setHolder(person);
+    providedAccounts1.setProvider(org);
+    
+    providedAccounts.add(providedAccounts1);
+    
+    org.setParent(parent);
+    org.setHeldAccounts(heldAccounts);
+    org.setProvidedAccounts(providedAccounts);
+  }

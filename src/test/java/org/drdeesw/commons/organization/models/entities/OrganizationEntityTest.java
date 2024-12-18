@@ -48,7 +48,7 @@ class OrganizationEntityTest
     OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
     PersonEntity person = new PersonEntity();
     
-//    heldAccount1.setHolder(person);
+    heldAccount1.setHolder(person);
     heldAccount1.setProvider(org);
     
     heldAccounts.add(heldAccount1);

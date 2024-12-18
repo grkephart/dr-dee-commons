@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
@@ -35,7 +34,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
+public abstract class AbstractOrganizationEntity extends AbstractAccountProviderEntity
     implements Organization
 {
 
@@ -46,10 +45,8 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   private UserEntity                    createdBy;
   @Column(name = "creation_date", nullable = false)
   private Instant                       creationDate;
-  @Column(name = "description")
-  private String                        description;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>            heldAccounts;
+  private Set<AbstractAccountEntity>    heldAccounts;
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
   private UserEntity                    lastUpdatedBy;
@@ -61,7 +58,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @JoinColumn(name = "parent_id")
   private OrganizationEntity            parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>            providedAccounts;
+  private Set<AbstractAccountEntity>    providedAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
@@ -98,13 +95,6 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public Instant getCreationDate()
   {
     return this.creationDate;
-  }
-
-
-  @Override
-  public String getDescription()
-  {
-    return description;
   }
 
 
@@ -153,10 +143,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<Account> getProvidedAccounts()
   {
-     return this.providedAccounts.stream()//
+    return this.providedAccounts.stream()//
         .map(providedAccount -> (Account)providedAccount)//
         .collect(Collectors.toSet());
-  
+
   }
 
 
@@ -212,14 +202,6 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
     Instant creationDate)
   {
     this.creationDate = creationDate;
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
   }
 
 

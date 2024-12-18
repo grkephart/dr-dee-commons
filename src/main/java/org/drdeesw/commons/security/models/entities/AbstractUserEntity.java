@@ -7,9 +7,13 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
+import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.entities.AbstractAccountHolderEntity;
+import org.drdeesw.commons.organization.models.entities.AccountEntity;
 import org.drdeesw.commons.security.models.User;
 
 
@@ -26,6 +30,10 @@ import org.drdeesw.commons.security.models.User;
 public abstract class AbstractUserEntity extends AbstractAccountHolderEntity implements User
 {
 
+  @OneToOne
+  @JoinColumn(name = "account_id")
+  private AccountEntity account;
+  
   /**
    * true if the user is enabled
    */
@@ -110,6 +118,27 @@ public abstract class AbstractUserEntity extends AbstractAccountHolderEntity imp
     String email)
   {
     this.username = email;
+  }
+
+
+  /**
+   * @return the account
+   */
+  @Override
+  public Account getAccount()
+  {
+    return account;
+  }
+
+
+  /**
+   * @param account the account to set
+   */
+  @Override
+  public void setAccount(
+    Account account)
+  {
+    this.account = (AccountEntity)account;
   }
 
 }

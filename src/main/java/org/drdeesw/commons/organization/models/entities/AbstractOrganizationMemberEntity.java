@@ -32,7 +32,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity>
+public abstract class AbstractOrganizationMemberEntity
     extends AbstractLongUniqueEntity implements OrganizationMember
 {
   @ManyToOne

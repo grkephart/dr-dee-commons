@@ -4,15 +4,10 @@
 package org.drdeesw.commons.security.models.pojos;
 
 
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.pojos.AccountHolderPojo;
+import org.drdeesw.commons.organization.models.pojos.AccountPojo;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 
 
 /**
@@ -22,11 +17,11 @@ import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountP
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AccountHolderPojo implements User
+public class UserPojo extends AbstractLongUniquePojo implements User
 {
-  private Set<ServiceProviderAccountPojo> accounts;
-  private boolean                         enabled;
-  private String                          username;
+  private AccountPojo account;
+  private boolean     enabled;
+  private String      username;
 
   /**
    * Hibernate
@@ -53,15 +48,10 @@ public class UserPojo extends AccountHolderPojo implements User
   }
 
 
-
   @Override
-  public Set<Account> getHeldAccounts()
+  public Account getAccount()
   {
-    return Optional.ofNullable(this.accounts)//
-        .orElse(Collections.emptySet())//
-        .stream()
-        .map(account -> (Account)account)//
-        .collect(Collectors.toSet());
+    return this.account;
   }
 
 
@@ -87,12 +77,10 @@ public class UserPojo extends AccountHolderPojo implements User
 
 
   @Override
-  public void setHeldAccounts(
-    Set<Account> accounts)
+  public void setAccount(
+    Account account)
   {
-    this.accounts = accounts.stream()//
-        .map(account -> (ServiceProviderAccountPojo)account)//
-        .collect(Collectors.toSet());
+    this.account = (AccountPojo)account;
   }
 
 

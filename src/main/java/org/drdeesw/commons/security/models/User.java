@@ -5,20 +5,27 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.organization.models.AccountHolder;
+import org.drdeesw.commons.organization.models.Account;
 
 
 /**
  * Represents an entity interacting with your system.
- * Can be a Person, a System, or a Bot. Includes authentication and authorization attributes (e.g., username, password, roles). 
+ * It allows an entity to access a service provider through its account.
+ * Includes authentication and authorization attributes (e.g., username, password, roles). 
  * May integrate with external systems via OAuth2 or other APIs.
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gary_kephart
  *
  */
-public interface User extends LongUniqueObject, AccountHolder
+public interface User extends LongUniqueObject
 {
+
+  /** Returns the account associated with the user.
+   * 
+   * @return the account associated with the user
+   */
+  Account getAccount();
 
 
   /**
@@ -38,13 +45,21 @@ public interface User extends LongUniqueObject, AccountHolder
 
 
   /**
+   * Sets the account associated with the user.
+   * 
+   * @param account the account to set
+   */
+  void setAccount(
+    Account account);
+
+
+  /**
    * Sets the enabled status of the user.
    * 
    * @param enabled the enabled to set
    */
   public void setEnabled(
     boolean enabled);
-
 
 
   /**
