@@ -7,8 +7,6 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.OneToMany;
-
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.AccountHolder;
@@ -20,7 +18,6 @@ import org.drdeesw.commons.organization.models.AccountHolder;
 @SuppressWarnings("serial")
 public class AccountHolderPojo extends AbstractLongUniquePojo implements AccountHolder
 {
-  @OneToMany
   private Set<AccountPojo> heldAccounts;
 
   public AccountHolderPojo()
