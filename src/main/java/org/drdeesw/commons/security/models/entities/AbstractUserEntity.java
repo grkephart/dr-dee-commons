@@ -11,8 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.entities.AbstractAccountHolderEntity;
+import org.drdeesw.commons.organization.models.entities.AbstractAccountEntity;
 import org.drdeesw.commons.organization.models.entities.AccountEntity;
 import org.drdeesw.commons.security.models.User;
 
@@ -27,12 +28,12 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractUserEntity extends AbstractAccountHolderEntity implements User
+public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity implements User
 {
 
-  @OneToOne
+  @OneToOne(targetEntity = AccountEntity.class, optional = false)
   @JoinColumn(name = "account_id")
-  private AccountEntity account;
+  private AbstractAccountEntity account;
   
   /**
    * true if the user is enabled
@@ -138,7 +139,7 @@ public abstract class AbstractUserEntity extends AbstractAccountHolderEntity imp
   public void setAccount(
     Account account)
   {
-    this.account = (AccountEntity)account;
+    this.account = (AbstractAccountEntity)account;
   }
 
 }

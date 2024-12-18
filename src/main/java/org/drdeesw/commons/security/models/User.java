@@ -10,7 +10,8 @@ import org.drdeesw.commons.organization.models.Account;
 
 /**
  * Represents an entity interacting with your system.
- * It allows an entity to access a service provider through its account.
+ * It allows an entity to access a service through its account.
+ * A user must have an account, but an account may not have a user.
  * Includes authentication and authorization attributes (e.g., username, password, roles). 
  * May integrate with external systems via OAuth2 or other APIs.
  * Structured to work with JdbcUserDetailsManager.

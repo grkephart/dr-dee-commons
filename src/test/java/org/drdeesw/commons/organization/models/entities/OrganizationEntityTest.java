@@ -9,6 +9,7 @@ import java.util.Set;
 import org.drdeesw.commons.identity.models.entities.PersonEntity;
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,9 +48,13 @@ class OrganizationEntityTest
     Set<Account> providedAccounts = new HashSet<Account>();
     OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
     PersonEntity person = new PersonEntity();
+    UserEntity user= new UserEntity();
     
     heldAccount1.setHolder(person);
     heldAccount1.setProvider(org);
+    heldAccount1.setUser(user);
+    
+    user.setAccount(heldAccount1);
     
     heldAccounts.add(heldAccount1);
     
