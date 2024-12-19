@@ -11,4 +11,5 @@ import javax.persistence.MappedSuperclass;
 @Access(AccessType.FIELD)
 public abstract class AbstractOrganizationAccountHolderEntity extends AbstractAccountHolderEntity
 {
+
 }

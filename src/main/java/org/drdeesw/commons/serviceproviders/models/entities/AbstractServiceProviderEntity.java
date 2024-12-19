@@ -5,7 +5,9 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -17,6 +19,7 @@ import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.entities.AbstractAccountProviderEntity;
+import org.drdeesw.commons.organization.models.entities.AccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
@@ -46,7 +49,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractAccountProvi
   @Column(name = "last_update_id")
   private User               lastUpdatedBy;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Account>       providedAccounts;
+  private Set<AccountEntity> providedAccounts;
 
   /**
    * 
@@ -109,7 +112,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractAccountProvi
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return this.providedAccounts;
+    return new HashSet<>(providedAccounts);
   }
 
 
@@ -173,7 +176,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractAccountProvi
   public void setProvidedAccounts(
     Set<Account> providedAccounts)
   {
-    this.providedAccounts = providedAccounts;
+    this.providedAccounts = providedAccounts//
+        .stream()//
+        .map(account -> (AccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 }

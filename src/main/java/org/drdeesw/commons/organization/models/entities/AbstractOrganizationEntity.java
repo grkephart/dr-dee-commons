@@ -58,7 +58,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountProvider
   @JoinColumn(name = "parent_id")
   private OrganizationEntity            parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AbstractAccountEntity>    providedAccounts;
+  private Set<AccountEntity>            providedAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationRoleEntity>   roles;
   @Column(name = "status")
@@ -66,6 +66,7 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountProvider
   @ManyToOne
   @JoinColumn(name = "type_id")
   private OrganizationTypeEntity        type;
+
   /**
    * 
    */
@@ -140,7 +141,6 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountProvider
   }
 
 
-  @Override
   public Set<Account> getProvidedAccounts()
   {
     return this.providedAccounts.stream()//
@@ -256,8 +256,9 @@ public abstract class AbstractOrganizationEntity extends AbstractAccountProvider
   public void setProvidedAccounts(
     Set<Account> providedAccounts)
   {
-    this.providedAccounts = providedAccounts.stream()//
-        .map(providedAccount -> (AccountEntity)providedAccount)//
+    this.providedAccounts = providedAccounts//
+        .stream()//
+        .map(account -> (AccountEntity)account)//
         .collect(Collectors.toSet());
   }
 
