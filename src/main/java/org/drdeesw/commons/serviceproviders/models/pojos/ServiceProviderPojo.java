@@ -7,8 +7,8 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
@@ -22,13 +22,27 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;
-
   private User               createdBy;
   private Instant            creationDate;
   private String             description;
+  private boolean            enabled;
   private Instant            lastUpdateDate;
   private User               lastUpdatedBy;
   private Set<Account>       providedAccounts;
+
+  @Override
+  public AuthenticationType getAuthenticationType()
+  {
+    return authenticationType;
+  }
+
+
+  @Override
+  public String getClientRegistrationId()
+  {
+    return this.clientRegistrationId;
+  }
+
 
   @Override
   public User getCreatedBy()
@@ -73,6 +87,29 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
 
 
   @Override
+  public boolean isEnabled()
+  {
+    return this.enabled;
+  }
+
+
+  @Override
+  public void setAuthenticationType(
+    AuthenticationType authenticationType)
+  {
+    this.authenticationType = authenticationType;
+  }
+
+
+  @Override
+  public void setClientRegistrationId(
+    String clientRegistrationId)
+  {
+    this.clientRegistrationId = clientRegistrationId;
+  }
+
+
+  @Override
   public void setCreatedBy(
     User createdBy)
   {
@@ -97,6 +134,14 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
 
 
   @Override
+  public void setEnabled(
+    boolean enabled)
+  {
+    this.enabled = enabled;
+  }
+
+
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -117,36 +162,6 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
     Set<Account> providedAccounts)
   {
     this.providedAccounts = providedAccounts;
-  }
-
-
-  @Override
-  public AuthenticationType getAuthenticationType()
-  {
-    return authenticationType;
-  }
-
-
-  @Override
-  public String getClientRegistrationId()
-  {
-    return this.clientRegistrationId;
-  }
-
-
-  @Override
-  public void setAuthenticationType(
-    AuthenticationType authenticationType)
-  {
-    this.authenticationType = authenticationType;
-  }
-
-
-  @Override
-  public void setClientRegistrationId(
-    String clientRegistrationId)
-  {
-    this.clientRegistrationId = clientRegistrationId;
   }
 
 }

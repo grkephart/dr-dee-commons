@@ -6,9 +6,8 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.identity.models.entities.PersonEntity;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,7 @@ class ServiceProviderEntityTest
   {
     ServiceProviderEntity serviceProvider = new ServiceProviderEntity();
     Set<Account> providedAccounts = new HashSet<Account>();
-    ServiceProviderAccount providedAccount = new ServiceProviderAccountEntity();
+    ServiceProviderAccountEntity providedAccount = new ServiceProviderAccountEntity();
     PersonEntity person = new PersonEntity();
     
     providedAccount.setHolder(person);

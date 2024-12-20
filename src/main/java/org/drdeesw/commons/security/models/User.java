@@ -4,8 +4,8 @@
 package org.drdeesw.commons.security.models;
 
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.organization.models.Account;
 
 
 /**

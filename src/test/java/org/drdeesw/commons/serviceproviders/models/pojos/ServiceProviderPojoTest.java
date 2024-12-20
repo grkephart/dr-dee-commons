@@ -6,9 +6,9 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.identity.models.pojos.PersonPojo;
-import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

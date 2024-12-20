@@ -1,10 +1,15 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models;
+package org.drdeesw.commons.accounting.models;
 
 
 import java.util.Set;
+
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.common.models.Enableable;
+import org.drdeesw.commons.common.models.Named;
 
 
 /**
@@ -15,7 +20,7 @@ import java.util.Set;
  *  
  *  An AccountHolder can be a Person or an Organization or an integrating system, but not all at once.
  */
-public interface AccountHolder
+public interface AccountHolder extends Named, Auditable, Describable, Enableable
 {
   /**
    * Returns the accounts held by the AccountHolder.

@@ -16,7 +16,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.organization.models.Account;
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 
 
 /**

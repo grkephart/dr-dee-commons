@@ -8,14 +8,16 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.Account;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
@@ -24,24 +26,27 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Set<Organization>            children;
-  private User                         createdBy;
+  private Set<OrganizationPojo>        children;
+  private UserPojo                     createdBy;
   private Instant                      creationDate;
   private String                       description;
+  private boolean                      enabled;
   private Set<OrganizationAccountPojo> heldAccounts;
   private Instant                      lastUpdateDate;
-  private User                         lastUpdatedBy;
-  private Set<OrganizationMember>      members;
-  private Organization                 parent;
-  private Set<Account>                 providedAccounts;
-  private Set<OrganizationRole>        roles;
+  private UserPojo                     lastUpdatedBy;
+  private Set<OrganizationMemberPojo>  members;
+  private OrganizationPojo             parent;
+  private Set<AccountPojo>             providedAccounts;
+  private Set<OrganizationRolePojo>    roles;
   private OrganizationStatus           status;
   private OrganizationType             type;
 
   @Override
   public Set<Organization> getChildren()
   {
-    return children;
+    return this.children.stream()//
+        .map(account -> (Organization)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -92,7 +97,9 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   @Override
   public Set<OrganizationMember> getMembers()
   {
-    return members;
+    return this.members.stream()//
+        .map(account -> (OrganizationMember)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -106,14 +113,18 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return this.providedAccounts;
+    return this.providedAccounts.stream()//
+        .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
   }
 
 
   @Override
   public Set<OrganizationRole> getRoles()
   {
-    return this.roles;
+    return this.roles.stream()//
+        .map(account -> (OrganizationRole)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -132,10 +143,19 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
+  public boolean isEnabled()
+  {
+    return this.enabled;
+  }
+
+
+  @Override
   public void setChildren(
     Set<Organization> children)
   {
-    this.children = children;
+    this.children = children.stream()//
+        .map(account -> (OrganizationPojo)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -143,7 +163,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setCreatedBy(
     User createdBy)
   {
-    this.createdBy = createdBy;
+    this.createdBy = (UserPojo)createdBy;
   }
 
 
@@ -160,6 +180,14 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
     String description)
   {
     this.description = description;
+  }
+
+
+  @Override
+  public void setEnabled(
+    boolean enabled)
+  {
+    this.enabled = enabled;
   }
 
 
@@ -185,7 +213,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setLastUpdatedBy(
     User lastUpdateId)
   {
-    this.lastUpdatedBy = lastUpdateId;
+    this.lastUpdatedBy = (UserPojo)lastUpdateId;
   }
 
 
@@ -193,7 +221,9 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setMembers(
     Set<OrganizationMember> members)
   {
-    this.members = members;
+    this.members = members.stream()//
+        .map(account -> (OrganizationMemberPojo)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -201,7 +231,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setParent(
     Organization parent)
   {
-    this.parent = parent;
+    this.parent = (OrganizationPojo)parent;
   }
 
 
@@ -209,7 +239,9 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setProvidedAccounts(
     Set<Account> providedAccounts)
   {
-    this.providedAccounts = providedAccounts;
+    this.providedAccounts = providedAccounts.stream()//
+        .map(account -> (AccountPojo)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -217,7 +249,9 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   public void setRoles(
     Set<OrganizationRole> roles)
   {
-    this.roles = roles;
+    this.roles = roles.stream()//
+        .map(account -> (OrganizationRolePojo)account)//
+        .collect(Collectors.toSet());
   }
 
 

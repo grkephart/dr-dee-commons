@@ -5,7 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.organization.models.entities.AbstractAccountHolderEntity;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
 
 
 @SuppressWarnings("serial")

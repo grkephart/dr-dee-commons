@@ -11,10 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
+import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.entities.AbstractAccountEntity;
-import org.drdeesw.commons.organization.models.entities.AccountEntity;
 import org.drdeesw.commons.security.models.User;
 
 

@@ -4,9 +4,9 @@
 package org.drdeesw.commons.security.models.pojos;
 
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.pojos.AccountPojo;
 import org.drdeesw.commons.security.models.User;
 
 

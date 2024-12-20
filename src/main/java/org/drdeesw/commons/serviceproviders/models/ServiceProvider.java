@@ -4,10 +4,10 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-import org.drdeesw.commons.organization.models.AccountProvider;
 
 
 /**

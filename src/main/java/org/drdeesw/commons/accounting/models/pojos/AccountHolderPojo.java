@@ -1,42 +1,68 @@
 /**
  * 
  */
-package org.drdeesw.commons.identity.models.pojos;
+package org.drdeesw.commons.accounting.models.pojos;
 
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-@Entity
-@Table(name = "organizations")
-public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
+public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements AccountHolder
 {
-  private UserPojo     createdBy;
-  private Instant      creationDate;
-  private String       description;
-  private boolean      enabled;
-  private Set<Account> heldAccounts;
-  private Instant      lastUpdateDate;
-  private UserPojo     lastUpdatedBy;
+  @ManyToOne
+  @JoinColumn(name = "created_by", nullable = false)
+  private UserEntity createdBy;
+
+  @Column(name = "creation_date", nullable = false)
+  private Instant    creationDate;
+
+  @Column(name = "description", nullable = false)
+  private String     description;
+
+  @Column(name = "is_enabled", nullable = false)
+  private boolean    enabled;
+
+  private Set<AccountPojo> heldAccounts;
+
+  @Column(name = "last_update_date", nullable = false)
+  private Instant    lastUpdateDate;
+
+  @ManyToOne
+  @JoinColumn(name = "last_updated_by", nullable = false)
+  private UserEntity lastUpdatedBy;
+
+  public AccountHolderPojo()
+  {
+    super();
+  }
+
+
+  public AccountHolderPojo(Long id)
+  {
+    super(id);
+  }
+
 
   /**
    * @return the createdBy
    */
-  public User getCreatedBy()
+  public UserEntity getCreatedBy()
   {
     return createdBy;
   }
@@ -63,7 +89,9 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
   @Override
   public Set<Account> getHeldAccounts()
   {
-    return this.heldAccounts;
+    return this.heldAccounts.stream()//
+        .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -79,7 +107,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
   /**
    * @return the lastUpdatedBy
    */
-  public User getLastUpdatedBy()
+  public UserEntity getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
@@ -100,7 +128,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
   public void setCreatedBy(
     User createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = (UserEntity)createdBy;
   }
 
 
@@ -136,9 +164,11 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
 
   @Override
   public void setHeldAccounts(
-    Set<Account> heldAccounts)
+    Set<Account> accounts)
   {
-    this.heldAccounts = heldAccounts;
+    this.heldAccounts = accounts.stream()//
+        .map(account -> (AccountPojo)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -158,7 +188,8 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
+
 
 }

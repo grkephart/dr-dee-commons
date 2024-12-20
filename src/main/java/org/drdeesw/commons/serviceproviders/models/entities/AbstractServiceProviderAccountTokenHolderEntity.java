@@ -65,7 +65,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   @Override
   public ServiceProviderAccount getAccount()
   {
-    return account;
+    return (ServiceProviderAccount)account;
   }
 
 

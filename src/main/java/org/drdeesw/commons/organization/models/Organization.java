@@ -6,8 +6,8 @@ package org.drdeesw.commons.organization.models;
 
 import java.util.Set;
 
-import org.drdeesw.commons.common.models.Auditable;
-import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
@@ -19,7 +19,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * 
  */
 public interface Organization
-    extends NamedLongUniqueObject, AccountProvider, AccountHolder, Auditable, Describable
+    extends NamedLongUniqueObject, AccountProvider, AccountHolder
 {
   /**
    * Returns the children organizations.

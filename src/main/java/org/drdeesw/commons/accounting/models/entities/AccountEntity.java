@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.entities;
+package org.drdeesw.commons.accounting.models.entities;
 
 
 import javax.persistence.AttributeOverride;

@@ -1,10 +1,11 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.entities;
+package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.organization.models.Account;
+import org.drdeesw.commons.accounting.models.Account;
 
 
 /**
@@ -24,13 +25,15 @@ import org.drdeesw.commons.organization.models.Account;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "account_holders")
-@AttributeOverride(name = "id", column = @Column(name = "account_holder_id"))
-public class AccountHolderEntity extends AbstractAccountHolderEntity
+@Table(name = "account_providers")
+@AttributeOverride(name = "id", column = @Column(name = "account_provider_id"))
+public class AccountProviderHolderEntity extends AbstractAccountProviderHolderEntity
 {
-
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity> heldAccounts;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<AccountEntity> providedAccounts;
 
   @Override
   public Set<Account> getHeldAccounts()
@@ -39,17 +42,36 @@ public class AccountHolderEntity extends AbstractAccountHolderEntity
     {
       return Collections.emptySet();
     }
-  
+
     return this.heldAccounts.stream()//
         .map(account -> (Account)account)//
         .collect(Collectors.toSet());
   }
+
+
+  @Override
+  public Set<Account> getProvidedAccounts()
+  {
+    return new HashSet<>(providedAccounts);
+  }
+
 
   @Override
   public void setHeldAccounts(
     Set<Account> accounts)
   {
     this.heldAccounts = accounts.stream()//
+        .map(account -> (AccountEntity)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public void setProvidedAccounts(
+    Set<Account> providedAccounts)
+  {
+    this.providedAccounts = providedAccounts//
+        .stream()//
         .map(account -> (AccountEntity)account)//
         .collect(Collectors.toSet());
   }

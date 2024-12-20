@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.entities;
+package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
@@ -14,10 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.AccountHolder;
-import org.drdeesw.commons.organization.models.AccountProvider;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 
@@ -199,15 +199,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
     this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
 
-
-  /**
-   * @param lastUpdatedBy the lastUpdatedBy to set
-   */
-  public void setLastUpdatedBy(
-    UserEntity lastUpdatedBy)
-  {
-    this.lastUpdatedBy = lastUpdatedBy;
-  }
 
 
   @Override

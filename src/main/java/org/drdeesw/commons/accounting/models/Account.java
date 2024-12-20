@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models;
+package org.drdeesw.commons.accounting.models;
 
 
 import org.drdeesw.commons.common.models.Auditable;

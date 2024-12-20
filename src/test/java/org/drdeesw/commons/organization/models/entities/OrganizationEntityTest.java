@@ -6,9 +6,8 @@ package org.drdeesw.commons.organization.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.identity.models.entities.PersonEntity;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,30 +41,38 @@ class OrganizationEntityTest
   void testConstruction()
   {
     OrganizationEntity parent = new OrganizationEntity();
-    OrganizationEntity org = new OrganizationEntity();
+    OrganizationEntity providerOrg = new OrganizationEntity();
+    OrganizationEntity holderOrg = new OrganizationEntity();
     Set<Account> heldAccounts = new HashSet<Account>();
-    OrganizationAccount heldAccount1 = new OrganizationAccountEntity();
+    OrganizationAccountEntity heldAccount1 = new OrganizationAccountEntity();
+    OrganizationAccountEntity heldAccount2 = new OrganizationAccountEntity();
     Set<Account> providedAccounts = new HashSet<Account>();
-    OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
+    OrganizationAccountEntity providedAccounts1 = new OrganizationAccountEntity();
     PersonEntity person = new PersonEntity();
     UserEntity user= new UserEntity();
     
     heldAccount1.setHolder(person);
-    heldAccount1.setProvider(org);
+    heldAccount1.setProvider(providerOrg);
     heldAccount1.setUser(user);
     
+    //heldAccount2.setHolder(holderOrg); // class OrganizationEntity cannot be cast to class AbstractAccountHolderEntity. but can be cast to AbstractAccountProviderHolderEntity
+    heldAccount2.setProvider(providerOrg);
+    heldAccount2.setUser(user);
+    
     user.setAccount(heldAccount1);
+    user.setAccount(heldAccount2);
     
     heldAccounts.add(heldAccount1);
+    heldAccounts.add(heldAccount2);
     
     providedAccounts1.setHolder(person);
-    providedAccounts1.setProvider(org);
+    providedAccounts1.setProvider(providerOrg);
     
     providedAccounts.add(providedAccounts1);
     
-    org.setParent(parent);
-    org.setHeldAccounts(heldAccounts);
-    org.setProvidedAccounts(providedAccounts);
+    providerOrg.setParent(parent);
+    providerOrg.setHeldAccounts(heldAccounts);
+    providerOrg.setProvidedAccounts(providedAccounts);
   }
 
 }

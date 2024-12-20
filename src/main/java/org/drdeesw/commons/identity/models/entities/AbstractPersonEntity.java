@@ -15,10 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
+import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.identity.models.Person;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.entities.AbstractAccountHolderEntity;
-import org.drdeesw.commons.organization.models.entities.AccountEntity;
 
 
 /**

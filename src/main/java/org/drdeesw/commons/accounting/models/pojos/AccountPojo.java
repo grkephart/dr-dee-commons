@@ -1,15 +1,15 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.pojos;
+package org.drdeesw.commons.accounting.models.pojos;
 
 
 import java.time.Instant;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.AccountHolder;
-import org.drdeesw.commons.organization.models.AccountProvider;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 

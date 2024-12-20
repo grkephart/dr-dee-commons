@@ -4,7 +4,7 @@
 package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
-import org.drdeesw.commons.organization.models.pojos.AccountPojo;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 

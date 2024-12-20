@@ -1,14 +1,14 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.pojos;
+package org.drdeesw.commons.accounting.models.pojos;
 
 
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Account;
-import org.drdeesw.commons.organization.models.AccountProvider;
 
 
 /**

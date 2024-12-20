@@ -4,7 +4,7 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.organization.models.Account;
+import org.drdeesw.commons.accounting.models.Account;
 
 
 /**
