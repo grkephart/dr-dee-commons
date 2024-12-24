@@ -15,8 +15,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
@@ -44,10 +42,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Column(name = "description", nullable = false)
   private String                        description;
 
-  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
-  @JoinColumn(name = "holder_id", nullable = false)
-  private AbstractAccountHolderEntity   holder;
-
   @Column(name = "internal_id")
   private String                        internalId;
 
@@ -57,10 +51,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @ManyToOne
   @JoinColumn(name = "last_updated_by", nullable = false)
   private UserEntity                    lastUpdatedBy;
-
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false)
-  private AbstractAccountProviderEntity provider;
 
   @OneToOne
   @JoinColumn(name = "user_id")
@@ -88,13 +78,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
-  public AccountHolder getHolder()
-  {
-    return holder;
-  }
-
-
-  @Override
   public String getInternalId()
   {
     return this.internalId;
@@ -112,13 +95,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public User getLastUpdatedBy()
   {
     return (User)this.lastUpdatedBy;
-  }
-
-
-  @Override
-  public AccountProvider getProvider()
-  {
-    return this.provider;
   }
 
 
@@ -169,14 +145,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
-  public void setHolder(
-    AccountHolder accountHolder)
-  {
-    this.holder = (AbstractAccountHolderEntity)accountHolder;
-  }
-
-
-  @Override
   public void setInternalId(
     String internalId)
   {
@@ -197,15 +165,6 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
     User lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
-  }
-
-
-
-  @Override
-  public void setProvider(
-    AccountProvider accountProvider)
-  {
-    this.provider = (AbstractAccountProviderEntity)accountProvider;
   }
 
 

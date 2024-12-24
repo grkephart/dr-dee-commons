@@ -5,7 +5,6 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,7 +51,14 @@ public class AccountProviderHolderEntity extends AbstractAccountProviderHolderEn
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return new HashSet<>(providedAccounts);
+    if (this.providedAccounts == null)
+    {
+      return Collections.emptySet();
+    }
+
+    return this.providedAccounts.stream()//
+        .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
   }
 
 

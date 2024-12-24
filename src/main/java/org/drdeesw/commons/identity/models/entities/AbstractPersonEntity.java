@@ -27,6 +27,7 @@ import org.drdeesw.commons.identity.models.Person;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
+@Deprecated
 public abstract class AbstractPersonEntity extends AbstractAccountHolderEntity implements Person
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)

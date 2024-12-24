@@ -8,6 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
+import org.drdeesw.commons.identity.models.Person;
+
 /**
  * 
  */
@@ -15,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "persons")
 @AttributeOverride(name = "id", column = @Column(name = "person_id"))
-public class PersonEntity extends AbstractPersonEntity
+public class PersonEntity extends AccountHolderEntity implements Person
 {
 
 }
