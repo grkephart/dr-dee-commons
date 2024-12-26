@@ -4,7 +4,7 @@
 package org.drdeesw.commons.serviceproviders.models.entities;
 
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,8 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -36,7 +36,7 @@ public class ServiceProviderEntity extends AbstractServiceProviderEntity
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity> providedAccounts;
+  private Set<ServiceProviderAccountEntity> providedAccounts;
 
   public ServiceProviderEntity()
   {
@@ -61,7 +61,14 @@ public class ServiceProviderEntity extends AbstractServiceProviderEntity
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return new HashSet<>(providedAccounts);
+    if (this.providedAccounts == null)
+    {
+      return Collections.emptySet();
+    }
+
+    return this.providedAccounts.stream()//
+        .map(account -> (ServiceProviderAccount)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -87,7 +94,7 @@ public class ServiceProviderEntity extends AbstractServiceProviderEntity
   {
     this.providedAccounts = providedAccounts//
         .stream()//
-        .map(account -> (AccountEntity)account)//
+        .map(account -> (ServiceProviderAccountEntity)account)//
         .collect(Collectors.toSet());
   }
 

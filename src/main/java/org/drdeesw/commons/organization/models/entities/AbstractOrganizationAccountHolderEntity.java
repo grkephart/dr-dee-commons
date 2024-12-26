@@ -14,4 +14,12 @@ import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntit
 public abstract class AbstractOrganizationAccountHolderEntity extends AbstractAccountHolderEntity
 {
 
+  /**
+   * Hibernate constructor
+   */
+  protected AbstractOrganizationAccountHolderEntity()
+  {
+
+  }
+
 }

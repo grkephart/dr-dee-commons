@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
-import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 
 
 /**
@@ -28,7 +27,7 @@ import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 public class ServiceProviderAccountEntity extends AbstractServiceProviderAccountEntity
 {
   private AccountHolderEntity   holder;
-  private AccountProviderEntity provider;
+  private ServiceProviderEntity provider;
 
   /**
    * Hibernate constructor
@@ -65,7 +64,7 @@ public class ServiceProviderAccountEntity extends AbstractServiceProviderAccount
   public void setProvider(
     AccountProvider accountProvider)
   {
-    this.provider = (AccountProviderEntity)accountProvider;
+    this.provider = (ServiceProviderEntity)accountProvider;
   }
 
 }

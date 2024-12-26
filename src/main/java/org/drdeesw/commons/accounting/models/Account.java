@@ -11,7 +11,30 @@ import org.drdeesw.commons.security.models.User;
 
 
 /**
+ * An Account is a structured record that represents the formal relationship 
+ * between an {@link Account Holder} and an {@link Account Provider}, enabling the holder to 
+ * access specific services, resources, or privileges offered by the provider.
  * 
+ * <p>Accounts may serve diverse purposes, such as:</p>
+ * <ul>
+ *   <li>Grant access to services (e.g., a Google account for using YouTube APIs).</li>
+ *   <li>Manage financial records (e.g., a bank account for transactions).</li>
+ *   <li>Establish identity (e.g., user authentication systems).</li>
+ * </ul>
+ * 
+ * <p>An account has the following key participants:</p>
+ * <ul>
+ *   <li><b>Provider:</b> The entity (service provider, financial institution, or organization) that issues and manages the account.</li>
+ *   <li><b>Holder:</b> The entity (individual, organization, or system) that owns or has access to the account.</li>
+ * </ul>
+ * 
+ * An account typically includes the following properties:
+ * <ul>
+ *   <li>A unique (internal) identifier (e.g., username, email, or GUID) specific to the provider.</li>
+ *   <li>A status (e.g., active, suspended, or terminated).</li>
+ *   <li>A set of privileges defining allowable actions or services.</li>
+ *   <li>A user, an authentication method which allows the holder to access online services provided by the account provider.</li>
+ * </ul>
  */
 public interface Account extends NamedLongUniqueObject, Describable, Auditable
 {

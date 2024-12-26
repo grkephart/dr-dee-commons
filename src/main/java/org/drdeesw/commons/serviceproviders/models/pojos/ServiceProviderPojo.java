@@ -6,12 +6,14 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -20,15 +22,15 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 @SuppressWarnings("serial")
 public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements ServiceProvider
 {
-  private AuthenticationType authenticationType;
-  private String             clientRegistrationId;
-  private User               createdBy;
-  private Instant            creationDate;
-  private String             description;
-  private boolean            enabled;
-  private Instant            lastUpdateDate;
-  private User               lastUpdatedBy;
-  private Set<Account>       providedAccounts;
+  private AuthenticationType          authenticationType;
+  private String                      clientRegistrationId;
+  private User                        createdBy;
+  private Instant                     creationDate;
+  private String                      description;
+  private boolean                     enabled;
+  private Instant                     lastUpdateDate;
+  private User                        lastUpdatedBy;
+  private Set<ServiceProviderAccount> providedAccounts;
 
   @Override
   public AuthenticationType getAuthenticationType()
@@ -82,7 +84,9 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return this.providedAccounts;
+    return this.providedAccounts.stream()//
+        .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -161,7 +165,10 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
   public void setProvidedAccounts(
     Set<Account> providedAccounts)
   {
-    this.providedAccounts = providedAccounts;
+     this.providedAccounts = providedAccounts.stream()//
+        .map(account -> (ServiceProviderAccount)account)//
+        .collect(Collectors.toSet());
+  
   }
 
 }

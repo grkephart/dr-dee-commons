@@ -5,7 +5,6 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,8 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 
@@ -36,26 +35,34 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @Table(name = "organizations")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "organization_id"))
-public class OrganizationEntity extends AbstractOrganizationEntity
+public class OrganizationEntity
+    extends AbstractOrganizationEntity
 {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Organization>       children;
+  private Set<OrganizationEntity>        children;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>      heldAccounts;
+  private Set<OrganizationAccountEntity> heldAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<OrganizationMember> members;
+  private Set<OrganizationMember>        members;
   @ManyToOne
   @JoinColumn(name = "parent_id")
-  private OrganizationEntity      parent;
+  private OrganizationEntity             parent;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>      providedAccounts;
+  private Set<OrganizationAccountEntity> providedAccounts;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<OrganizationRole>   roles;
+  private Set<OrganizationRole>          roles;
 
   @Override
   public Set<Organization> getChildren()
   {
-    return this.children;
+    if (this.children == null)
+    {
+      return Collections.emptySet();
+    }
+
+    return this.children.stream()//
+        .map(account -> (OrganizationEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -68,7 +75,7 @@ public class OrganizationEntity extends AbstractOrganizationEntity
     }
 
     return this.heldAccounts.stream()//
-        .map(account -> (Account)account)//
+        .map(account -> (OrganizationAccount)account)//
         .collect(Collectors.toSet());
   }
 
@@ -90,7 +97,14 @@ public class OrganizationEntity extends AbstractOrganizationEntity
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return new HashSet<>(providedAccounts);
+    if (this.providedAccounts == null)
+    {
+      return Collections.emptySet();
+    }
+
+    return this.providedAccounts.stream()//
+        .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -105,7 +119,9 @@ public class OrganizationEntity extends AbstractOrganizationEntity
   public void setChildren(
     Set<Organization> children)
   {
-    this.children = children;
+    this.children = children.stream()//
+        .map(account -> (OrganizationEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -114,7 +130,7 @@ public class OrganizationEntity extends AbstractOrganizationEntity
     Set<Account> accounts)
   {
     this.heldAccounts = accounts.stream()//
-        .map(account -> (AccountEntity)account)//
+        .map(account -> (OrganizationAccountEntity)account)//
         .collect(Collectors.toSet());
   }
 
@@ -141,7 +157,7 @@ public class OrganizationEntity extends AbstractOrganizationEntity
   {
     this.providedAccounts = providedAccounts//
         .stream()//
-        .map(account -> (AccountEntity)account)//
+        .map(account -> (OrganizationAccountEntity)account)//
         .collect(Collectors.toSet());
   }
 
