@@ -11,7 +11,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
+import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
+import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 
 
 /**
@@ -22,12 +25,47 @@ import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 @Table(name = "organization_accounts")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "organization_account_id"))
-public class OrganizationAccountEntity extends AccountEntity
+public class OrganizationAccountEntity extends AbstractOrganizationAccountEntity
 {
+  private AccountHolderEntity   holder;
+  private AccountProviderEntity provider;
 
+  /**
+   * Hibernate constructor
+   */
   public OrganizationAccountEntity()
   {
 
+  }
+
+
+  @Override
+  public AccountHolder getHolder()
+  {
+    return this.holder;
+  }
+
+
+  @Override
+  public AccountProvider getProvider()
+  {
+    return this.provider;
+  }
+
+
+  @Override
+  public void setHolder(
+    AccountHolder accountHolder)
+  {
+    this.holder = (AccountHolderEntity)accountHolder;
+  }
+
+
+  @Override
+  public void setProvider(
+    AccountProvider accountProvider)
+  {
+    this.provider = (AccountProviderEntity)accountProvider;
   }
 
 }

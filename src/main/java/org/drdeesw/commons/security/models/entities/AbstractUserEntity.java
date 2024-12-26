@@ -12,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
 import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
@@ -33,19 +32,19 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
 
   @OneToOne(targetEntity = AccountEntity.class, optional = false)
   @JoinColumn(name = "account_id")
-  private AbstractAccountEntity account;
-  
+  private AccountEntity account;
+
   /**
    * true if the user is enabled
    */
   @Column(name = "enabled")
-  private boolean enabled;
+  private boolean       enabled;
 
   /**
    * perhaps the email address
    */
   @Column(name = "username")
-  private String  username;
+  private String        username;
 
   /**
    * Hibernate
@@ -58,6 +57,15 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   protected AbstractUserEntity(Long id)
   {
     super(id);
+  }
+
+
+  protected AbstractUserEntity(User that)
+  {
+    super(that);
+    this.account = (AccountEntity)that.getAccount();
+    this.enabled = that.isEnabled();
+    this.username = that.getUsername();
   }
 
 
@@ -139,7 +147,7 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   public void setAccount(
     Account account)
   {
-    this.account = (AbstractAccountEntity)account;
+    this.account = (AccountEntity)account;
   }
 
 }

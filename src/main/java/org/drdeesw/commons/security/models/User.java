@@ -5,7 +5,7 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
@@ -19,7 +19,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
  * @author gary_kephart
  *
  */
-public interface User extends LongUniqueObject
+public interface User extends NamedLongUniqueObject
 {
 
   /** Returns the account associated with the user.

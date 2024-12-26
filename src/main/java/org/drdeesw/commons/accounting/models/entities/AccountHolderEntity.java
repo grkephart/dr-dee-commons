@@ -31,7 +31,6 @@ public class AccountHolderEntity extends AbstractAccountHolderEntity
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity> heldAccounts;
-  @Column(name = "last_update_date")
 
   @Override
   public Set<Account> getHeldAccounts()

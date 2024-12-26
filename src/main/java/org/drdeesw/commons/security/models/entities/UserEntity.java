@@ -25,4 +25,22 @@ import org.drdeesw.commons.security.models.User;
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 public class UserEntity extends AbstractUserEntity implements User
 {
+  /**
+   * Hibernate
+   */
+  public UserEntity()
+  {
+    
+  }
+  
+  
+  /**
+   * Copy constructor.
+   * 
+   * @param that
+   */
+  public UserEntity(UserEntity that)
+  {
+    super(that);
+  }
 }

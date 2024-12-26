@@ -17,8 +17,6 @@ import org.drdeesw.commons.common.models.Named;
  *  Person
  *  Organization
  *  Integrating system
- *  
- *  An AccountHolder can be a Person or an Organization or an integrating system, but not all at once.
  */
 public interface AccountHolder extends Named, Auditable, Describable, Enableable
 {
