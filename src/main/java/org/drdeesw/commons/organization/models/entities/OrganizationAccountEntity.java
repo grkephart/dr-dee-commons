@@ -9,11 +9,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
+import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 
 
 /**
@@ -26,8 +29,13 @@ import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
 @AttributeOverride(name = "id", column = @Column(name = "organization_account_id"))
 public class OrganizationAccountEntity extends AbstractOrganizationAccountEntity
 {
-  private AccountHolderEntity   holder;
-  private OrganizationEntity provider;
+  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
+  @JoinColumn(name = "holder_id", nullable = false)
+  private AccountHolderEntity holder;
+
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
+  @JoinColumn(name = "provider_id", nullable = false)
+  private OrganizationEntity  provider;
 
   /**
    * Hibernate constructor
