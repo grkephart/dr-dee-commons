@@ -15,8 +15,10 @@ import javax.persistence.ManyToOne;
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -27,25 +29,29 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
 {
   @ManyToOne
   @JoinColumn(name = "created_by", nullable = false)
-  private UserEntity createdBy;
+  private UserEntity                  createdBy;
 
   @Column(name = "creation_date", nullable = false)
-  private Instant    creationDate;
+  private Instant                     creationDate;
 
   @Column(name = "description", nullable = false)
-  private String     description;
+  private String                      description;
 
   @Column(name = "is_enabled", nullable = false)
-  private boolean    enabled;
+  private boolean                     enabled;
 
-  private Set<AccountPojo> heldAccounts;
+  private Set<AccountPojo>            heldAccounts;
+
+  private Set<OrganizationAccount>    heldOrganizationAccounts;
+
+  private Set<ServiceProviderAccount> heldServiceProviderAccounts;
 
   @Column(name = "last_update_date", nullable = false)
-  private Instant    lastUpdateDate;
+  private Instant                     lastUpdateDate;
 
   @ManyToOne
   @JoinColumn(name = "last_updated_by", nullable = false)
-  private UserEntity lastUpdatedBy;
+  private UserEntity                  lastUpdatedBy;
 
   public AccountHolderPojo()
   {
@@ -59,27 +65,21 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @return the createdBy
-   */
+  @Override
   public UserEntity getCreatedBy()
   {
     return createdBy;
   }
 
 
-  /**
-   * @return the creationDate
-   */
+  @Override
   public Instant getCreationDate()
   {
     return creationDate;
   }
 
 
-  /**
-   * @return the description
-   */
+  @Override
   public String getDescription()
   {
     return description;
@@ -95,36 +95,42 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @return the lastUpdateDate
-   */
+  @Override
+  public Set<OrganizationAccount> getHeldOrganizationAccounts()
+  {
+    return this.heldOrganizationAccounts;
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
+  {
+    return this.heldServiceProviderAccounts;
+  }
+
+
+  @Override
   public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
 
 
-  /**
-   * @return the lastUpdatedBy
-   */
+  @Override
   public UserEntity getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
 
 
-  /**
-   * @return the enabled
-   */
+  @Override
   public boolean isEnabled()
   {
     return enabled;
   }
 
 
-  /**
-   * @param createdBy the createdBy to set
-   */
+  @Override
   public void setCreatedBy(
     User createdBy)
   {
@@ -132,9 +138,7 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @param creationDate the creationDate to set
-   */
+  @Override
   public void setCreationDate(
     Instant creationDate)
   {
@@ -142,9 +146,7 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @param description the description to set
-   */
+  @Override
   public void setDescription(
     String description)
   {
@@ -152,9 +154,7 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @param enabled the enabled to set
-   */
+  @Override
   public void setEnabled(
     boolean enabled)
   {
@@ -172,9 +172,23 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @param lastUpdateDate the lastUpdateDate to set
-   */
+  @Override
+  public void setHeldOrganizationAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    this.heldOrganizationAccounts = accounts;
+  }
+
+
+  @Override
+  public void setHeldServiceProviderAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    this.heldServiceProviderAccounts = accounts;
+  }
+
+
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -182,14 +196,11 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-  /**
-   * @param lastUpdatedBy the lastUpdatedBy to set
-   */
+  @Override
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }
-
 
 }

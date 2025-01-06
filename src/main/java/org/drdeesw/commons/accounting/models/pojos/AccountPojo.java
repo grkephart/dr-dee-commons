@@ -84,9 +84,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   }
 
 
-  /**
-   * @return the lastUpdateDate
-   */
+  @Override
   public Instant getLastUpdateDate()
   {
     return lastUpdatedDate;
@@ -100,6 +98,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   }
 
 
+  @Override
   public AccountProvider getProvider()
   {
     return provider;
@@ -120,13 +119,6 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   }
 
 
-  public void setAccountHolder(
-    AccountHolderPojo accountHolder)
-  {
-    this.accountHolder = accountHolder;
-  }
-
-
   @Override
   public void setActive(
     boolean active)
@@ -140,13 +132,6 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
     User createdBy)
   {
     this.createdBy = (UserPojo)createdBy;
-  }
-
-
-  public void setCreatedBy(
-    UserPojo createdBy)
-  {
-    this.createdBy = createdBy;
   }
 
 
@@ -198,6 +183,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
   }
 
 
+  @Override
   public void setProvider(
     AccountProvider provider)
   {

@@ -4,14 +4,25 @@
 package org.drdeesw.commons.accounting.models.entities;
 
 
+import java.time.Instant;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 
@@ -21,24 +32,98 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
+@DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.FIELD)
-public abstract class AbstractAccountEntity extends AbstractAccountableEntity implements Account
+public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntity implements Account
 {
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "account_holder_id", nullable = false)
+  private AccountHolder   accountHolder;
+
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "account_provider_id", nullable = false)
+  private AccountProvider accountProvider;
 
   @Column(name = "is_active", nullable = false)
-  private boolean                       active;
+  private boolean         active;
+
+  @Column(name = "created_by_id", updatable = false, nullable = false)
+  private User            createdBy;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "creation_date", updatable = false, nullable = false)
+  private Instant         creationDate;
+
+  @Column(name = "description", length = 255)
+  private String          description;
 
   @Column(name = "internal_id")
-  private String                        internalId;
+  private String          internalId;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "last_update_date", nullable = false)
+  private Instant         lastUpdateDate;
+
+  @Column(name = "last_updated_by_id", nullable = false)
+  private User            lastUpdatedBy;
 
   @OneToOne
   @JoinColumn(name = "user_id")
-  private UserEntity                    user;
+  private UserEntity      user;
+
+  @Override
+  public User getCreatedBy()
+  {
+    return createdBy;
+  }
+
+
+  @Override
+  public Instant getCreationDate()
+  {
+    return creationDate;
+  }
+
+
+  @Override
+  public String getDescription()
+  {
+    return description;
+  }
+
+
+  @Override
+  public AccountHolder getHolder()
+  {
+    return accountHolder;
+  }
+
 
   @Override
   public String getInternalId()
   {
     return this.internalId;
+  }
+
+
+  @Override
+  public Instant getLastUpdateDate()
+  {
+    return lastUpdateDate;
+  }
+
+
+  @Override
+  public User getLastUpdatedBy()
+  {
+    return lastUpdatedBy;
+  }
+
+
+  @Override
+  public AccountProvider getProvider()
+  {
+    return accountProvider;
   }
 
 
@@ -65,10 +150,66 @@ public abstract class AbstractAccountEntity extends AbstractAccountableEntity im
 
 
   @Override
+  public void setCreatedBy(
+    User createdById)
+  {
+    this.createdBy = createdBy;
+  }
+
+
+  @Override
+  public void setCreationDate(
+    Instant creationDate)
+  {
+    this.creationDate = creationDate;
+  }
+
+
+  @Override
+  public void setDescription(
+    String description)
+  {
+    this.description = description;
+  }
+
+
+  @Override
+  public void setHolder(
+    AccountHolder accountHolder)
+  {
+    this.accountHolder = accountHolder;
+  }
+
+
+  @Override
   public void setInternalId(
     String internalId)
   {
     this.internalId = internalId;
+  }
+
+
+  @Override
+  public void setLastUpdateDate(
+    Instant lastUpdateDate)
+  {
+    this.lastUpdateDate = lastUpdateDate;
+  }
+
+
+  @Override
+  public void setLastUpdatedBy(
+    User lastUpdatedBy)
+  {
+    this.lastUpdatedBy = lastUpdatedBy;
+  }
+
+
+  @Override
+  public void setProvider(
+    AccountProvider accountProvider)
+  {
+    this.accountProvider = accountProvider;
   }
 
 
@@ -78,5 +219,4 @@ public abstract class AbstractAccountEntity extends AbstractAccountableEntity im
   {
     this.user = (UserEntity)user;
   }
-
 }

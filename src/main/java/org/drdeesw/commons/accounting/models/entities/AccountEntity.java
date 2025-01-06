@@ -24,41 +24,6 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
 @AttributeOverride(name = "id", column = @Column(name = "account_id"))
 public class AccountEntity extends AbstractAccountEntity
 {
-  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
-  @JoinColumn(name = "holder_id", nullable = false)
-  private AccountHolderEntity   holder;
 
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false)
-  private AccountProviderEntity provider;
-
-  @Override
-  public AccountHolder getHolder()
-  {
-    return holder;
-  }
-
-
-  @Override
-  public AccountProvider getProvider()
-  {
-    return this.provider;
-  }
-
-
-  @Override
-  public void setHolder(
-    AccountHolder accountHolder)
-  {
-    this.holder = (AccountHolderEntity)accountHolder;
-  }
-
-
-  @Override
-  public void setProvider(
-    AccountProvider accountProvider)
-  {
-    this.provider = (AccountProviderEntity)accountProvider;
-  }
 
 }
