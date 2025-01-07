@@ -4,13 +4,13 @@
 package org.drdeesw.commons.security.models;
 
 
-import org.drdeesw.commons.common.models.UniqueObject;
+import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
  * 
  */
-public interface GroupAuthority extends UniqueObject<Long>
+public interface GroupAuthority extends LongUniqueObject
 {
   /**
    * Returns the authority granted to the group.

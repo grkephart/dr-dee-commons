@@ -2,7 +2,7 @@ package org.drdeesw.commons.security.models;
 
 
 import org.drdeesw.commons.common.models.Enableable;
-import org.drdeesw.commons.common.models.NamedUniqueObject;
+import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
@@ -12,7 +12,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  * @author gary_kephart
  *
  */
-public interface Group extends NamedUniqueObject<Long>, Enableable
+public interface Group extends NamedLongUniqueObject, Enableable
 {
 
 }

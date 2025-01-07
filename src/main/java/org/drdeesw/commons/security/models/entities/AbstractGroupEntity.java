@@ -3,6 +3,7 @@ package org.drdeesw.commons.security.models.entities;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractNamedUniqueEntity;
@@ -22,6 +23,7 @@ import org.drdeesw.commons.security.models.Group;
 public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long> implements Group
 {
 
+  @Column(name = "is_enabled", nullable = false)
   private boolean enabled;
 
   /**

@@ -15,14 +15,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
@@ -41,17 +41,13 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqueEntity
     implements AccountHolder
 {
-  @Column(name = "created_by_id", updatable = false, nullable = false)
-  private User                              createdBy;
-
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "creation_date", updatable = false, nullable = false)
-  private Instant                           creationDate;
+  @Embedded
+  private EmbeddedAuditable                 audit;
 
   @Column(name = "description", length = 255)
   private String                            description;
 
-  @Column(name = "enabled")
+  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
 
   @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,13 +58,6 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
   @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts = new HashSet<>();
-
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "last_update_date", nullable = false)
-  private Instant                           lastUpdateDate;
-
-  @Column(name = "last_updated_by_id", nullable = false)
-  private User                              lastUpdatedBy;
 
   public AbstractAccountHolderEntity()
   {
@@ -84,14 +73,14 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   @Override
   public User getCreatedBy()
   {
-    return createdBy;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return creationDate;
+    return this.audit.getCreationDate();
   }
 
 
@@ -142,14 +131,14 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   @Override
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
   public User getLastUpdatedBy()
   {
-    return lastUpdatedBy;
+    return this.audit.getLastUpdatedBy();
   }
 
 
@@ -164,7 +153,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   public void setCreatedBy(
     User createdBy)
   {
-    this.createdBy = createdBy;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -172,7 +161,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -230,7 +219,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
@@ -238,6 +227,6 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.lastUpdatedBy = lastUpdatedBy;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 }

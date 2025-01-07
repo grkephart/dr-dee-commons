@@ -11,17 +11,17 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
@@ -36,6 +36,9 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Access(AccessType.FIELD)
 public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntity implements Account
 {
+  @Embedded
+  private EmbeddedAuditable                 audit;
+
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_holder_id", nullable = false)
   private AccountHolder   accountHolder;
@@ -47,25 +50,11 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Column(name = "is_active", nullable = false)
   private boolean         active;
 
-  @Column(name = "created_by_id", updatable = false, nullable = false)
-  private User            createdBy;
-
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "creation_date", updatable = false, nullable = false)
-  private Instant         creationDate;
-
   @Column(name = "description", length = 255)
   private String          description;
 
   @Column(name = "internal_id")
   private String          internalId;
-
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "last_update_date", nullable = false)
-  private Instant         lastUpdateDate;
-
-  @Column(name = "last_updated_by_id", nullable = false)
-  private User            lastUpdatedBy;
 
   @OneToOne
   @JoinColumn(name = "user_id")
@@ -74,14 +63,14 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   public User getCreatedBy()
   {
-    return createdBy;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return creationDate;
+    return this.audit.getCreationDate();
   }
 
 
@@ -109,14 +98,14 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
   public User getLastUpdatedBy()
   {
-    return lastUpdatedBy;
+    return this.audit.getLastUpdatedBy();
   }
 
 
@@ -151,9 +140,9 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
   @Override
   public void setCreatedBy(
-    User createdById)
+    User createdBy)
   {
-    this.createdBy = createdBy;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -161,7 +150,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -193,7 +182,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
@@ -201,7 +190,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.lastUpdatedBy = lastUpdatedBy;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 

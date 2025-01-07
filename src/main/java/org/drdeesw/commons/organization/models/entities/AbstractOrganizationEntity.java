@@ -13,6 +13,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +22,7 @@ import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.entities.AccountEntity;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
@@ -29,7 +31,6 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 
@@ -43,15 +44,11 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
     implements Organization
 {
+  @Embedded
+  private EmbeddedAuditable                 audit;
+
   @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationEntity>           children;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "created_by_id", nullable = false, updatable = false)
-  private UserEntity                        createdBy;
-
-  @Column(name = "creation_date", nullable = false, updatable = false)
-  private Instant                           creationDate;
 
   // Describable property
   @Column(name = "description", length = 255)
@@ -69,13 +66,6 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
   @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts     = new HashSet<>();
-
-  @Column(name = "last_update_date")
-  private Instant                           lastUpdateDate;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "last_updated_by_id")
-  private UserEntity                        lastUpdatedBy;
 
   @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationMemberEntity>     members                         = new HashSet<>();
@@ -121,14 +111,14 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public User getCreatedBy()
   {
-    return this.createdBy;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return this.creationDate;
+    return this.audit.getCreationDate();
   }
 
 
@@ -163,14 +153,14 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Instant getLastUpdateDate()
   {
-    return this.lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
   public User getLastUpdatedBy()
   {
-    return this.lastUpdatedBy;
+    return this.audit.getLastUpdatedBy();
   }
 
 
@@ -250,7 +240,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setCreatedBy(
     User createdBy)
   {
-    this.createdBy = (UserEntity)createdBy;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -258,7 +248,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -309,7 +299,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
@@ -317,7 +307,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 

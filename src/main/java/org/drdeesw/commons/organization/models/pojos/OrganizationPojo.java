@@ -18,29 +18,31 @@ import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationPojo extends AbstractNamedLongUniquePojo
-    implements Organization
+public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization
 {
-  private Set<Organization>  children;
+  private Set<Organization>        children;
   private UserPojo                 createdBy;
   private Instant                  creationDate;
   private String                   description;
   private boolean                  enabled;
-  private Set<OrganizationAccount> heldAccounts;
+  private Set<Account> heldAccounts;
   private Instant                  lastUpdateDate;
   private UserPojo                 lastUpdatedBy;
   private Set<OrganizationMember>  members;
-  private Organization       parent;
-  private Set<OrganizationAccount> providedAccounts;
+  private Organization             parent;
+  private Set<Account> providedAccounts;
   private Set<OrganizationRole>    roles;
   private OrganizationStatus       status;
   private OrganizationType         type;
+  private Set<OrganizationAccount> heldOrganizationAccounts;
+  private Set<ServiceProviderAccount> heldServiceProviderAccounts;
 
   @Override
   public Set<Organization> getChildren()
@@ -75,6 +77,24 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
   {
     return this.heldAccounts.stream()//
         .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<OrganizationAccount> getHeldOrganizationAccounts()
+  {
+    return this.heldOrganizationAccounts.stream()//
+        .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
+  {
+    return this.heldServiceProviderAccounts.stream()//
+        .map(account -> (ServiceProviderAccount)account)//
         .collect(Collectors.toSet());
   }
 
@@ -115,6 +135,22 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
     return this.providedAccounts.stream()//
         .map(account -> (Account)account)//
         .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<OrganizationAccount> getProvidedOrganizationAccounts()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
+  {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 
@@ -199,6 +235,24 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
+  public void setHeldOrganizationAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+
+  @Override
+  public void setHeldServiceProviderAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -239,6 +293,24 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
     this.providedAccounts = providedAccounts.stream()//
         .map(account -> (OrganizationAccount)account)//
         .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public void setProvidedOrganizationAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+
+  @Override
+  public void setProvidedServiceProviderAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+
   }
 
 

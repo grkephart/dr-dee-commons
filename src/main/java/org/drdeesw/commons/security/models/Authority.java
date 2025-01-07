@@ -4,13 +4,13 @@
 package org.drdeesw.commons.security.models;
 
 
-import org.drdeesw.commons.common.models.UniqueObject;
+import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
  * Represents the permissions or roles granted to a user, defining what actions or resources a user can access.
  */
-public interface Authority extends UniqueObject<Long>
+public interface Authority extends LongUniqueObject
 {
   /**
    * Returns the authority.

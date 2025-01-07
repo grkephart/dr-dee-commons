@@ -13,14 +13,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.entities.AccountEntity;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
@@ -36,23 +36,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @Access(AccessType.FIELD)
 public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity implements Person
 {
-  @ManyToOne
-  @JoinColumn(name = "created_by_id")
-  private User               createdBy;
-  @Column(name = "creation_date")
-  private Instant            creationDate;
+  @Embedded
+  private EmbeddedAuditable                 audit;
   @Column(name = "description")
   private String             description;
-  @Column(name = "enabled")
+  @Column(name = "is_enabled", nullable = false)
   private boolean            enabled;
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity> heldAccounts;
-  @Column(name = "last_update_date")
-  private Instant            lastUpdateDate;
-
-  @ManyToOne
-  @JoinColumn(name = "last_updated_by_id")
-  private User               lastUpdatedBy;
 
   /**
    * Hibernate constructor
@@ -66,14 +57,14 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   @Override
   public User getCreatedBy()
   {
-    return this.createdBy;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return this.creationDate;
+    return this.audit.getCreationDate();
   }
 
 
@@ -117,14 +108,14 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   @Override
   public Instant getLastUpdateDate()
   {
-    return this.lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
   public User getLastUpdatedBy()
   {
-    return this.lastUpdatedBy;
+    return this.audit.getLastUpdatedBy();
   }
 
 
@@ -139,7 +130,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setCreatedBy(
     User createdBy)
   {
-    this.createdBy = createdBy;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -147,7 +138,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -199,7 +190,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
@@ -207,7 +198,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.lastUpdatedBy = lastUpdatedBy;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 }

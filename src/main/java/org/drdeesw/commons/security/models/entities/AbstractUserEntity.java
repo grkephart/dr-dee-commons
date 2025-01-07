@@ -37,7 +37,7 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   /**
    * true if the user is enabled
    */
-  @Column(name = "enabled")
+  @Column(name = "is_enabled", nullable = false)
   private boolean       enabled;
 
   /**

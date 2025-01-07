@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
@@ -169,6 +170,40 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
         .map(account -> (ServiceProviderAccount)account)//
         .collect(Collectors.toSet());
   
+  }
+
+
+  @Override
+  public Set<OrganizationAccount> getProvidedOrganizationAccounts()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public void setProvidedOrganizationAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void setProvidedServiceProviderAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    // TODO Auto-generated method stub
+    
   }
 
 }

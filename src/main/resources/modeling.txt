@@ -54,7 +54,7 @@ This file contains the set of things that must be modeled in the system and the 
 - Service Provider Module
 - - Service Provider - not necessarily an organization, but will be considered as one for simplicity
 - - Service Provider Account - is an organization account, but with a token holder
-- - Service Provider Account Holder - is an organization account holder
+- - Service Provider Account Holder - is an service provider account holder
 - Identity Module
 - - Person - a person. Has a name and birthdate. Can be a user or a customer. Probably has a voter registration record, home address, phone numbers, email addresses, SSN, driver's license, etc.
  
