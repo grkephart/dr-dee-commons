@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.accounting.models.entities.AbstractAccountableEntity;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
@@ -22,7 +22,7 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberRoleEntity extends AbstractAccountableEntity
+public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationMemberRole
 {
   @ManyToOne

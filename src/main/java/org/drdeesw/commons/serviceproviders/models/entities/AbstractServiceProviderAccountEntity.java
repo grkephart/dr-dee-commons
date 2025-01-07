@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-import org.drdeesw.commons.accounting.models.entities.AbstractAccountableEntity;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
@@ -25,7 +25,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderAccountEntity extends AbstractAccountableEntity
+public abstract class AbstractServiceProviderAccountEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProviderAccount
 {
 

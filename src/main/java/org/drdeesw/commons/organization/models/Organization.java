@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
-import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
@@ -18,8 +17,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * The organization can provide accounts and hold accounts.
  * 
  */
-public interface Organization
-    extends NamedLongUniqueObject, AccountProvider, AccountHolder
+public interface Organization extends AccountProvider, AccountHolder
 {
   /**
    * Returns the children organizations.

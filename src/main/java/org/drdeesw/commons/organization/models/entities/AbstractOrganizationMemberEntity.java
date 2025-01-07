@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.accounting.models.entities.AbstractAccountableEntity;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
@@ -30,7 +30,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberEntity extends AbstractAccountableEntity
+public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationMember
 {
   @ManyToOne

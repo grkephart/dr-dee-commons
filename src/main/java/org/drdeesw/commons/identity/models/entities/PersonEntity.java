@@ -27,29 +27,5 @@ import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 @AttributeOverride(name = "id", column = @Column(name = "person_id"))
 public class PersonEntity extends AbstractPersonEntity
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity> heldAccounts;
-
-  @Override
-  public Set<Account> getHeldAccounts()
-  {
-    if (this.heldAccounts == null)
-    {
-      return Collections.emptySet();
-    }
-
-    return this.heldAccounts.stream()//
-        .map(account -> (Account)account)//
-        .collect(Collectors.toSet());
-  }
-
-  @Override
-  public void setHeldAccounts(
-    Set<Account> accounts)
-  {
-    this.heldAccounts = accounts.stream()//
-        .map(account -> (AccountEntity)account)//
-        .collect(Collectors.toSet());
-  }
 
 }

@@ -9,7 +9,7 @@ import java.util.Set;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
-import org.drdeesw.commons.common.models.Named;
+import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
@@ -17,7 +17,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 /**
  * 
  */
-public interface AccountProvider extends Named, Auditable, Describable, Enableable
+public interface AccountProvider extends NamedLongUniqueObject, Auditable, Describable, Enableable
 {
   /**
    * Returns the accounts provided by the AccountProvider.
