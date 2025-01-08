@@ -6,15 +6,21 @@ package org.drdeesw.commons.identity.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.identity.models.Person;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.pojos.OrganizationAccountPojo;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 
 
 /**
@@ -22,16 +28,18 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "organizations")
+@Table(name = "persons")
 public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
 {
-  private UserPojo     createdBy;
-  private Instant      creationDate;
-  private String       description;
-  private boolean      enabled;
-  private Set<Account> heldAccounts;
-  private Instant      lastUpdateDate;
-  private UserPojo     lastUpdatedBy;
+  private UserPojo                        createdBy;
+  private Instant                         creationDate;
+  private String                          description;
+  private boolean                         enabled;
+  private Set<AccountPojo>                heldAccounts;
+  private Set<OrganizationAccountPojo>    heldOrganizationAccounts;
+  private Set<ServiceProviderAccountPojo> heldServiceProviderAccounts;
+  private Instant                         lastUpdateDate;
+  private UserPojo                        lastUpdatedBy;
 
   /**
    * @return the createdBy
@@ -63,7 +71,27 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
   @Override
   public Set<Account> getHeldAccounts()
   {
-    return this.heldAccounts;
+    return this.heldAccounts.stream()//
+        .map(account -> (Account)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<OrganizationAccount> getHeldOrganizationAccounts()
+  {
+    return this.heldOrganizationAccounts.stream()//
+        .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
+  {
+    return this.heldServiceProviderAccounts.stream()//
+        .map(account -> (ServiceProviderAccount)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -136,9 +164,31 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person
 
   @Override
   public void setHeldAccounts(
-    Set<Account> heldAccounts)
+    Set<Account> accounts)
   {
-    this.heldAccounts = heldAccounts;
+    this.heldAccounts = accounts.stream()//
+        .map(account -> (AccountPojo)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public void setHeldOrganizationAccounts(
+    Set<OrganizationAccount> accounts)
+  {
+    this.heldOrganizationAccounts = accounts.stream()//
+        .map(account -> (OrganizationAccountPojo)account)//
+        .collect(Collectors.toSet());
+  }
+
+
+  @Override
+  public void setHeldServiceProviderAccounts(
+    Set<ServiceProviderAccount> accounts)
+  {
+    this.heldServiceProviderAccounts = accounts.stream()//
+        .map(account -> (ServiceProviderAccountPojo)account)//
+        .collect(Collectors.toSet());
   }
 
 

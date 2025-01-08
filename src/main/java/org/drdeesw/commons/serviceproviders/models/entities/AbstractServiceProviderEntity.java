@@ -12,15 +12,17 @@ import java.util.stream.Collectors;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
@@ -36,14 +38,29 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProvider
 {
-  private AuthenticationType                      authenticationType;
+  @Embedded
+  private EmbeddedAuditable                 audit;
 
-  private String                                  clientRegistrationId;
+  @Column(name = "authentication_type")
+  private AuthenticationType                authenticationType;
+
+  @Column(name = "client_registration_id", length = 255)
+  private String                            clientRegistrationId;
+
+  @Column(name = "description", length = 255)
+  private String                            description;
+
+  @Column(name = "is_enabled", nullable = false)
+  private boolean                           enabled;
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<ServiceProviderAccountEntity>       providedAccounts;
-  @ManyToOne
-  @JoinColumn(name = "token_holder_id")
-  private ServiceProviderAccountTokenHolderEntity tokenHolder;
+  private Set<ServiceProviderAccountEntity> providedAccounts;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationAccountEntity>    providedOrganizationAccounts;
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts;
 
   /**
    * Hibernate constructor
@@ -71,40 +88,35 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   @Override
   public User getCreatedBy()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.audit.getCreationDate();
   }
 
 
   @Override
   public String getDescription()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return description;
   }
 
 
   @Override
   public Instant getLastUpdateDate()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
   public User getLastUpdatedBy()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.audit.getLastUpdatedBy();
   }
 
 
@@ -125,33 +137,35 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   @Override
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
-    // TODO Auto-generated method stub
-    return null;
+    if (this.providedOrganizationAccounts == null)
+    {
+      return Collections.emptySet();
+    }
+
+    return this.providedOrganizationAccounts.stream()//
+        .map(account -> (OrganizationAccount)account)//
+        .collect(Collectors.toSet());
   }
 
 
   @Override
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
-    // TODO Auto-generated method stub
-    return null;
-  }
+    if (this.providedServiceProviderAccounts == null)
+    {
+      return Collections.emptySet();
+    }
 
-
-  /**
-   * @return the tokenHolder
-   */
-  public ServiceProviderAccountTokenHolderEntity getTokenHolder()
-  {
-    return tokenHolder;
+    return this.providedServiceProviderAccounts.stream()//
+        .map(account -> (ServiceProviderAccount)account)//
+        .collect(Collectors.toSet());
   }
 
 
   @Override
   public boolean isEnabled()
   {
-    // TODO Auto-generated method stub
-    return false;
+    return this.enabled;
   }
 
 
@@ -175,8 +189,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setCreatedBy(
     User createdBy)
   {
-    // TODO Auto-generated method stub
-
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -184,8 +197,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setCreationDate(
     Instant creationDate)
   {
-    // TODO Auto-generated method stub
-
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -193,8 +205,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setDescription(
     String description)
   {
-    // TODO Auto-generated method stub
-
+    this.description = description;
   }
 
 
@@ -202,8 +213,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setEnabled(
     boolean enabled)
   {
-    // TODO Auto-generated method stub
-
+    this.enabled = enabled;
   }
 
 
@@ -211,8 +221,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    // TODO Auto-generated method stub
-
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
@@ -220,8 +229,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    // TODO Auto-generated method stub
-
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 
@@ -240,8 +248,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setProvidedOrganizationAccounts(
     Set<OrganizationAccount> accounts)
   {
-    // TODO Auto-generated method stub
-
+    this.providedOrganizationAccounts = accounts//
+        .stream()//
+        .map(account -> (OrganizationAccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -249,18 +259,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setProvidedServiceProviderAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    // TODO Auto-generated method stub
-
-  }
-
-
-  /**
-   * @param tokenHolder the tokenHolder to set
-   */
-  public void setTokenHolder(
-    ServiceProviderAccountTokenHolderEntity tokenHolder)
-  {
-    this.tokenHolder = tokenHolder;
+    this.providedServiceProviderAccounts = accounts//
+        .stream()//
+        .map(account -> (ServiceProviderAccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 }
