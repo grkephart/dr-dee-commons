@@ -27,6 +27,7 @@ public interface AccountHolder extends NamedLongUniqueObject, Auditable, Describ
    * 
    * @return the accounts held by the AccountHolder
    */
+  @Deprecated // Use typed methods instead
   Set<Account> getHeldAccounts();
 
 
@@ -51,6 +52,7 @@ public interface AccountHolder extends NamedLongUniqueObject, Auditable, Describ
    * 
    * @param accounts the accounts held by the AccountHolder
    */
+  @Deprecated // Use typed methods instead
   void setHeldAccounts(
     Set<Account> accounts);
 

@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -101,6 +102,15 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
+  /**
+   * Unit test constructor
+   */
+  protected AbstractOrganizationEntity(EmbeddedAuditable audit)
+  {
+    this.audit = audit;
+  }
+
+
   @Override
   public Set<Organization> getChildren()
   {
@@ -132,21 +142,21 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<Account> getHeldAccounts()
   {
-    return new HashSet<>(heldAccounts);
+    return heldAccounts == null ? null : new HashSet<>(heldAccounts);
   }
 
 
   @Override
   public Set<OrganizationAccount> getHeldOrganizationAccounts()
   {
-    return new HashSet<>(heldOrganizationAccounts);
+    return heldOrganizationAccounts == null ? null : new HashSet<>(heldOrganizationAccounts);
   }
 
 
   @Override
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
-    return new HashSet<>(heldServiceProviderAccounts);
+    return heldServiceProviderAccounts == null ? null : new HashSet<>(heldServiceProviderAccounts);
   }
 
 
@@ -167,7 +177,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   public Set<OrganizationMember> getMembers()
   {
-    return new HashSet<>(members);
+    return members == null ? null : new HashSet<>(members);
   }
 
 
@@ -178,31 +188,32 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
+  @Deprecated // Use typed methods instead
   @Override
   public Set<Account> getProvidedAccounts()
   {
-    return new HashSet<>(this.providedAccounts);
+    return providedAccounts == null ? null : new HashSet<>(this.providedAccounts);
   }
 
 
   @Override
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
-    return new HashSet<>(this.providedOrganizationAccounts);
+    return providedOrganizationAccounts == null ? null : new HashSet<>(this.providedOrganizationAccounts);
   }
 
 
   @Override
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
-    return new HashSet<>(this.providedServiceProviderAccounts);
+    return providedServiceProviderAccounts == null ? null : new HashSet<>(this.providedServiceProviderAccounts);
   }
 
 
   @Override
   public Set<OrganizationRole> getRoles()
   {
-    return new HashSet<>(this.roles);
+    return roles == null ? null : new HashSet<>(this.roles);
   }
 
 
@@ -231,8 +242,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setChildren(
     Set<Organization> children)
   {
-    this.children = children.stream().map(account -> (OrganizationEntity)account)
-        .collect(Collectors.toSet());
+    this.children = Optional.ofNullable(children)
+        .map(a -> a.stream().map(OrganizationEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -268,12 +280,14 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
+  @Deprecated // Use typed methods instead
   @Override
   public void setHeldAccounts(
     Set<Account> accounts)
   {
-    this.heldAccounts = accounts.stream().map(account -> (AccountEntity)account)
-        .collect(Collectors.toSet());
+    this.heldAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(AccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -281,8 +295,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setHeldOrganizationAccounts(
     Set<OrganizationAccount> accounts)
   {
-    this.heldOrganizationAccounts = accounts.stream()
-        .map(account -> (OrganizationAccountEntity)account).collect(Collectors.toSet());
+    this.heldOrganizationAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(OrganizationAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -290,8 +305,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setHeldServiceProviderAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    this.heldServiceProviderAccounts = accounts.stream()
-        .map(account -> (ServiceProviderAccountEntity)account).collect(Collectors.toSet());
+    this.heldServiceProviderAccounts = Optional.ofNullable(accounts)
+        .map(
+          a -> a.stream().map(ServiceProviderAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -315,8 +332,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setMembers(
     Set<OrganizationMember> members)
   {
-    this.members = members.stream().map(member -> (OrganizationMemberEntity)member)
-        .collect(Collectors.toSet());
+    this.members = Optional.ofNullable(members)
+        .map(a -> a.stream().map(OrganizationMemberEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -332,8 +350,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setProvidedAccounts(
     Set<Account> accounts)
   {
-    this.providedAccounts = accounts.stream().map(account -> (AccountEntity)account)
-        .collect(Collectors.toSet());
+    this.providedAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(AccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -341,8 +360,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setProvidedOrganizationAccounts(
     Set<OrganizationAccount> accounts)
   {
-    this.providedOrganizationAccounts = accounts.stream()
-        .map(account -> (OrganizationAccountEntity)account).collect(Collectors.toSet());
+    this.providedOrganizationAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(OrganizationAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -350,8 +370,10 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setProvidedServiceProviderAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    this.providedServiceProviderAccounts = accounts.stream()
-        .map(account -> (ServiceProviderAccountEntity)account).collect(Collectors.toSet());
+    this.providedServiceProviderAccounts = Optional.ofNullable(accounts)
+        .map(
+          a -> a.stream().map(ServiceProviderAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -359,8 +381,9 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   public void setRoles(
     Set<OrganizationRole> roles)
   {
-    this.roles = roles.stream().map(role -> (OrganizationRoleEntity)role)
-        .collect(Collectors.toSet());
+    this.roles = Optional.ofNullable(roles)
+        .map(a -> a.stream().map(OrganizationRoleEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 

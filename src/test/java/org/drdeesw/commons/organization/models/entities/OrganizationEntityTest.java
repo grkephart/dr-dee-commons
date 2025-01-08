@@ -3,15 +3,23 @@
  */
 package org.drdeesw.commons.organization.models.entities;
 
-import java.util.HashSet;
+
+import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.identity.models.entities.PersonEntity;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
+import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 /**
  * 
@@ -37,43 +45,143 @@ class OrganizationEntityTest
   }
 
 
+  /**
+   * 
+   */
   @Test
-  void testConstruction()
+  void testConstructionWithNullSets()
   {
+    EmbeddedAuditable audit = new EmbeddedAuditable();
     OrganizationEntity parent = new OrganizationEntity();
-    OrganizationEntity providerOrg = new OrganizationEntity();
-    OrganizationEntity holderOrg = new OrganizationEntity();
-    Set<Account> heldAccounts = new HashSet<Account>();
-    OrganizationAccountEntity heldAccount1 = new OrganizationAccountEntity();
-    OrganizationAccountEntity heldAccount2 = new OrganizationAccountEntity();
-    Set<Account> providedAccounts = new HashSet<Account>();
-    OrganizationAccountEntity providedAccounts1 = new OrganizationAccountEntity();
-    PersonEntity person = new PersonEntity();
-    UserEntity user= new UserEntity();
-    
-    //heldAccount1.setHolder(person);
-    heldAccount1.setProvider(providerOrg); // TODO java.lang.ClassCastException: class OrganizationEntity cannot be cast to class AccountProviderEntity
+    OrganizationEntity organization = new OrganizationEntity(audit);
+    Set<Organization> children = Set.of(organization);
+    UserEntity createdBy = new UserEntity();
+    Instant creationDate = Instant.now();
+    String description = "toy7 o56ybo7yo  hkghgy";
+    boolean enabled = true;
+    UserEntity lastUpdatedBy = new UserEntity();
+    Instant lastUpdateDate = Instant.now();
+    String name = "tjttkyyryju6";
+    OrganizationStatus status = OrganizationStatus.ACTIVE;
+    OrganizationTypeEntity type = new OrganizationTypeEntity();
 
-    heldAccount1.setUser(user);
-    
-    //heldAccount2.setHolder(holderOrg); // TODO class OrganizationEntity cannot be cast to class AbstractAccountHolderEntity. but can be cast to AbstractAccountProviderHolderEntity
-    heldAccount2.setProvider(providerOrg); // TODO java.lang.ClassCastException: class OrganizationEntity cannot be cast to class AccountProviderEntity
-    heldAccount2.setUser(user);
-    
-    user.setAccount(heldAccount1);
-    user.setAccount(heldAccount2);
-    
-    heldAccounts.add(heldAccount1);
-    heldAccounts.add(heldAccount2);
-    
-    providedAccounts1.setHolder(person);
-    //providedAccounts1.setProvider(providerOrg); // TODO java.lang.ClassCastException: class OrganizationEntity cannot be cast to class AccountProviderEntity
-    
-    providedAccounts.add(providedAccounts1);
-    
-    providerOrg.setParent(parent);
-    providerOrg.setHeldAccounts(heldAccounts);
-    providerOrg.setProvidedAccounts(providedAccounts);
+    organization.setChildren(children);
+    organization.setCreatedBy(createdBy);
+    organization.setCreationDate(creationDate);
+    organization.setDescription(description);
+    organization.setEnabled(enabled);
+    //organization.setHeldAccounts(null);
+    organization.setHeldOrganizationAccounts(null);
+    organization.setHeldServiceProviderAccounts(null);
+    organization.setLastUpdatedBy(lastUpdatedBy);
+    organization.setLastUpdateDate(lastUpdateDate);
+    organization.setMembers(null);
+    organization.setName(name);
+    organization.setParent(parent);
+    organization.setProvidedAccounts(null);
+    organization.setProvidedOrganizationAccounts(null);
+    organization.setProvidedServiceProviderAccounts(null);
+    organization.setRoles(null);
+    organization.setStatus(status);
+    organization.setType(type);
+
+    organization.getChildren();
+    organization.getCreatedBy();
+    organization.getCreationDate();
+    organization.getDescription();
+    organization.isEnabled();
+    organization.getHeldAccounts();
+    organization.getHeldOrganizationAccounts();
+    organization.getHeldServiceProviderAccounts();
+    organization.getLastUpdateDate();
+    organization.getLastUpdatedBy();
+    organization.getMembers();
+    organization.getName();
+    organization.getParent();
+    //organization.getProvidedAccounts();
+    organization.getProvidedOrganizationAccounts();
+    organization.getProvidedServiceProviderAccounts();
+    organization.getRoles();
+    organization.getStatus();
+    organization.getType();
+  }
+
+
+  /**
+   * 
+   */
+  @Test
+  void testConstructionWithBasicSets()
+  {
+    EmbeddedAuditable audit = new EmbeddedAuditable();
+    UserEntity createdBy = new UserEntity();
+    Instant creationDate = Instant.now();
+    String description = "toy7 o56ybo7yo  hkghgy";
+    boolean enabled = true;
+    UserEntity lastUpdatedBy = new UserEntity();
+    Instant lastUpdateDate = Instant.now();
+    OrganizationMemberEntity member = new OrganizationMemberEntity();
+    Set<OrganizationMember> members = Set.of(member);
+    OrganizationEntity parent = new OrganizationEntity();
+    OrganizationEntity organization = new OrganizationEntity(audit);
+    Set<Organization> children = Set.of(organization);
+    String name = "tjttkyyryju6";
+    OrganizationAccountEntity heldOrganizationAccount = new OrganizationAccountEntity();
+    Set<OrganizationAccount> heldOrganizationAccounts = Set.of(heldOrganizationAccount);
+    ServiceProviderAccountEntity heldServiceProviderAccount = new ServiceProviderAccountEntity();
+    Set<ServiceProviderAccount> heldServiceProviderAccounts = Set.of(heldServiceProviderAccount);
+    //AccountEntity heldAccount = new AccountEntity();
+    //Set<Account> heldAccounts = Set.of(heldAccount, heldOrganizationAccount, heldServiceProviderAccount);
+    //AccountEntity providedAccount = new AccountEntity();
+    //Set<Account> providedAccounts = Set.of(providedAccount);
+    OrganizationAccountEntity providedOrganizationAccount = new OrganizationAccountEntity();
+    Set<OrganizationAccount> providedOrganizationAccounts = Set.of(providedOrganizationAccount);
+    ServiceProviderAccountEntity providedServiceProviderAccount = new ServiceProviderAccountEntity();
+    Set<ServiceProviderAccount> providedServiceProviderAccounts = Set.of(providedServiceProviderAccount);
+    OrganizationRoleEntity role = new OrganizationRoleEntity();
+    Set<OrganizationRole> roles = Set.of(role);
+    OrganizationStatus status = OrganizationStatus.ACTIVE;
+    OrganizationTypeEntity type = new OrganizationTypeEntity();
+
+    organization.setChildren(children);
+    organization.setCreatedBy(createdBy);
+    organization.setCreationDate(creationDate);
+    organization.setDescription(description);
+    organization.setEnabled(enabled);
+    //organization.setHeldAccounts(heldAccounts);
+    organization.setHeldOrganizationAccounts(heldOrganizationAccounts);
+    organization.setHeldServiceProviderAccounts(heldServiceProviderAccounts);
+    organization.setLastUpdatedBy(lastUpdatedBy);
+    organization.setLastUpdateDate(lastUpdateDate);
+    organization.setMembers(members);
+    organization.setName(name);
+    organization.setParent(parent);
+    //organization.setProvidedAccounts(providedAccounts);
+    organization.setProvidedOrganizationAccounts(providedOrganizationAccounts);
+    organization.setProvidedServiceProviderAccounts(providedServiceProviderAccounts);
+    organization.setRoles(roles);
+    organization.setStatus(status);
+    organization.setType(type);
+
+    organization.getChildren();
+    organization.getCreatedBy();
+    organization.getCreationDate();
+    organization.getDescription();
+    organization.isEnabled();
+    //organization.getHeldAccounts();
+    organization.getHeldOrganizationAccounts();
+    organization.getHeldServiceProviderAccounts();
+    organization.getLastUpdateDate();
+    organization.getLastUpdatedBy();
+    organization.getMembers();
+    organization.getName();
+    organization.getParent();
+    //organization.getProvidedAccounts();
+    organization.getProvidedOrganizationAccounts();
+    organization.getProvidedServiceProviderAccounts();
+    organization.getRoles();
+    organization.getStatus();
+    organization.getType();
   }
 
 }

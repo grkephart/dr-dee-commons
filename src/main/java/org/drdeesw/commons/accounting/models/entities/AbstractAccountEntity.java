@@ -41,11 +41,11 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_holder_id", nullable = false)
-  private AccountHolder   accountHolder;
+  private AccountHolderEntity   holder;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_provider_id", nullable = false)
-  private AccountProvider accountProvider;
+  private AccountProviderEntity provider;
 
   @Column(name = "is_active", nullable = false)
   private boolean         active;
@@ -84,7 +84,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   public AccountHolder getHolder()
   {
-    return accountHolder;
+    return holder;
   }
 
 
@@ -112,7 +112,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   public AccountProvider getProvider()
   {
-    return accountProvider;
+    return provider;
   }
 
 
@@ -166,7 +166,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setHolder(
     AccountHolder accountHolder)
   {
-    this.accountHolder = accountHolder;
+    this.holder = (AccountHolderEntity)accountHolder;
   }
 
 
@@ -198,7 +198,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   public void setProvider(
     AccountProvider accountProvider)
   {
-    this.accountProvider = accountProvider;
+    this.provider = (AccountProviderEntity)accountProvider;
   }
 
 

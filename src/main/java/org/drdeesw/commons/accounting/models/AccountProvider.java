@@ -24,6 +24,7 @@ public interface AccountProvider extends NamedLongUniqueObject, Auditable, Descr
    * 
    * @return the accounts provided by the AccountProvider
    */
+  @Deprecated // Use typed methods instead
   Set<Account> getProvidedAccounts();
 
 
@@ -48,6 +49,7 @@ public interface AccountProvider extends NamedLongUniqueObject, Auditable, Descr
    * 
    * @param providedAccounts the accounts provided by the AccountProvider.
    */
+  @Deprecated // Use typed methods instead
   void setProvidedAccounts(
     Set<Account> providedAccounts);
 

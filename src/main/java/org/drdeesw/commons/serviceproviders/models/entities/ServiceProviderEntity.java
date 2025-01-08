@@ -11,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
+
 
 /**
  * 
@@ -22,4 +24,16 @@ import javax.persistence.Table;
 @AttributeOverride(name = "id", column = @Column(name = "service_provider_id"))
 public class ServiceProviderEntity extends AbstractServiceProviderEntity
 {
+
+  /**
+   * Hibernate
+   */
+  public ServiceProviderEntity()
+  {
+  }
+
+  public ServiceProviderEntity(EmbeddedAuditable audit)
+  {
+    super(audit);
+  }
 }

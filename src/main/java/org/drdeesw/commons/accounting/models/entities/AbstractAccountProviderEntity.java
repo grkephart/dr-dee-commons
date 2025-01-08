@@ -51,7 +51,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
   private boolean                           enabled;
 
   @OneToMany(mappedBy = "accountProvider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AbstractAccountEntity>        providedAccounts;
+  private Set<AccountEntity>        providedAccounts;
 
   @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
@@ -198,7 +198,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
     }
     else
     {
-      this.providedAccounts = accounts.stream().map(account -> (AbstractAccountEntity)account)
+      this.providedAccounts = accounts.stream().map(account -> (AccountEntity)account)
           .collect(Collectors.toSet());
     }
   }

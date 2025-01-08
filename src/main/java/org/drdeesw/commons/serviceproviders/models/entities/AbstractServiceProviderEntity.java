@@ -6,6 +6,7 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 import java.time.Instant;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
@@ -54,7 +56,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   private boolean                           enabled;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<ServiceProviderAccountEntity> providedAccounts;
+  private Set<AccountEntity> providedAccounts;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts;
@@ -68,6 +70,17 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   protected AbstractServiceProviderEntity()
   {
 
+  }
+
+
+  /**
+   * Unit testing constructor.
+   * 
+   * @param audit
+   */
+  protected AbstractServiceProviderEntity(EmbeddedAuditable audit)
+  {
+    this.audit = audit;
   }
 
 
@@ -120,6 +133,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @Deprecated // Use typed methods instead
   @Override
   public Set<Account> getProvidedAccounts()
   {
@@ -129,7 +143,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     }
 
     return this.providedAccounts.stream()//
-        .map(account -> (ServiceProviderAccount)account)//
+        .map(account -> (Account)account)//
         .collect(Collectors.toSet());
   }
 
@@ -233,14 +247,14 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @Deprecated // Use typed methods instead
   @Override
   public void setProvidedAccounts(
-    Set<Account> providedAccounts)
+    Set<Account> accounts)
   {
-    this.providedAccounts = providedAccounts//
-        .stream()//
-        .map(account -> (ServiceProviderAccountEntity)account)//
-        .collect(Collectors.toSet());
+    this.providedAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(AccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -248,10 +262,9 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setProvidedOrganizationAccounts(
     Set<OrganizationAccount> accounts)
   {
-    this.providedOrganizationAccounts = accounts//
-        .stream()//
-        .map(account -> (OrganizationAccountEntity)account)//
-        .collect(Collectors.toSet());
+    this.providedOrganizationAccounts = Optional.ofNullable(accounts)
+        .map(a -> a.stream().map(OrganizationAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 
@@ -259,10 +272,10 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setProvidedServiceProviderAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    this.providedServiceProviderAccounts = accounts//
-        .stream()//
-        .map(account -> (ServiceProviderAccountEntity)account)//
-        .collect(Collectors.toSet());
+    this.providedServiceProviderAccounts = Optional.ofNullable(accounts)
+        .map(
+          a -> a.stream().map(ServiceProviderAccountEntity.class::cast).collect(Collectors.toSet()))
+        .orElse(null);
   }
 
 }
