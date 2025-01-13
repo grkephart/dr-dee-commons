@@ -7,8 +7,6 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
@@ -20,7 +18,6 @@ import org.drdeesw.commons.common.models.EmbeddedAuditable;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "service_providers")
-@Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "service_provider_id"))
 public class ServiceProviderEntity extends AbstractServiceProviderEntity
 {

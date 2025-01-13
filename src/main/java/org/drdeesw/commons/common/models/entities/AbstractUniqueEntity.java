@@ -32,8 +32,8 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
   @Id
   @GenericGenerator(name = "native", strategy = "native")
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-  @Column(name="id")
-  private ID                id;
+  @Column(name = "id") // default column name. Subclasses can redefine getId() instead of using @AttributeOverride
+  private ID id;
 
   /**
    * The default constructor.
