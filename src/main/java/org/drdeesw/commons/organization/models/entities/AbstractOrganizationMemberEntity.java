@@ -121,7 +121,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
   public void setCreatedBy(
     User createdBy)
   {
-    this.audit.setCreatedBy(createdBy);
+    this.audit.setCreatedBy((UserEntity)createdBy);
   }
 
 
@@ -153,7 +153,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy(lastUpdatedBy);
+    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }
 
 

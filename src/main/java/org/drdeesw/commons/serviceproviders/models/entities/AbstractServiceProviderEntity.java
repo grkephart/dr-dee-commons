@@ -26,6 +26,7 @@ import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
@@ -203,7 +204,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setCreatedBy(
     User createdBy)
   {
-    this.audit.setCreatedBy(createdBy);
+    this.audit.setCreatedBy((UserEntity)createdBy);
   }
 
 
@@ -243,7 +244,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy(lastUpdatedBy);
+    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }
 
 

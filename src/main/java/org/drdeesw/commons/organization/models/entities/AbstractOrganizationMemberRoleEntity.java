@@ -20,6 +20,7 @@ import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -104,7 +105,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
   public void setCreatedBy(
     User createdBy)
   {
-    this.audit.setCreatedBy(createdBy);
+    this.audit.setCreatedBy((UserEntity)createdBy);
   }
 
 
@@ -136,7 +137,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
   public void setLastUpdatedBy(
     User lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy(lastUpdatedBy);
+    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }
 
 
