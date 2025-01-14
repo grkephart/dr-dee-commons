@@ -51,13 +51,13 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
 
-  @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity>        heldAccounts;
 
-  @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    heldOrganizationAccounts    = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts = new HashSet<>();
 
   public AbstractAccountHolderEntity()

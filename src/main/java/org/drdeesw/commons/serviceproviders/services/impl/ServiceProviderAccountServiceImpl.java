@@ -70,7 +70,7 @@ public class ServiceProviderAccountServiceImpl extends
   {
     ServiceProviderPojo serviceProvider = this.serviceProviderService
         .findOrCreate(clientRegistrationId);
-    Optional<ServiceProviderAccountPojo> serviceProviderAccountOpt = this.serviceProviderAccountRepository
+    Optional<ServiceProviderAccountEntity> serviceProviderAccountOpt = this.serviceProviderAccountRepository
         .findByProviderAndInternalId(serviceProvider, internalId);
     ServiceProviderAccountPojo serviceProviderAccount;
 
@@ -85,7 +85,7 @@ public class ServiceProviderAccountServiceImpl extends
     }
     else
     {
-      serviceProviderAccount = serviceProviderAccountOpt.get();
+      serviceProviderAccount = super.getModelMapper().map(serviceProviderAccountOpt.get(), ServiceProviderAccountPojo.class) ;
     }
 
     return serviceProviderAccount;

@@ -6,12 +6,14 @@ package org.drdeesw.commons.organization.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organization_accounts")
-//@AttributeOverride(name = "id", column = @Column(name = "organization_account_id"))
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class OrganizationAccountEntity extends AbstractOrganizationAccountEntity
 {
 

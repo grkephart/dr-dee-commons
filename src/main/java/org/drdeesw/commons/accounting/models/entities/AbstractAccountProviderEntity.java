@@ -51,13 +51,13 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
   @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
 
-  @OneToMany(mappedBy = "accountProvider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity>        providedAccounts;
 
-  @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountHolder", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
 
   @Override

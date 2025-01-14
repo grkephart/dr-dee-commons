@@ -4,9 +4,10 @@
 package org.drdeesw.commons.organization.models.entities;
 
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
@@ -18,7 +19,7 @@ import org.drdeesw.commons.common.models.EmbeddedAuditable;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "organizations")
-@AttributeOverride(name = "id", column = @Column(name = "organization_id"))
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class OrganizationEntity extends AbstractOrganizationEntity
 {
 
@@ -37,6 +38,14 @@ public class OrganizationEntity extends AbstractOrganizationEntity
   public OrganizationEntity(EmbeddedAuditable audit)
   {
     super(audit);
+  }
+
+
+  @Override
+  @Column(name = "organization_id")
+  public Long getId()
+  {
+    return super.getId();
   }
 
 }

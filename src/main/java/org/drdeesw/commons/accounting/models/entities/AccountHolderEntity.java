@@ -4,9 +4,10 @@
 package org.drdeesw.commons.accounting.models.entities;
 
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 
@@ -16,7 +17,14 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "account_holders")
-@AttributeOverride(name = "id", column = @Column(name = "account_holder_id"))
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class AccountHolderEntity extends AbstractAccountHolderEntity
 {
+
+  @Override
+  @Column(name="account_holder_id")
+  public Long getId()
+  {
+    return super.getId();
+  }
 }

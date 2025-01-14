@@ -60,13 +60,13 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled                         = true;
 
-  @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<AccountEntity>                heldAccounts                    = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationAccountEntity>    heldOrganizationAccounts        = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts     = new HashSet<>();
 
   @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -76,13 +76,13 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @JoinColumn(name = "parent_organization_id")
   private OrganizationEntity                parent;
 
-  @OneToMany(mappedBy = "accountProvider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<AccountEntity>                providedAccounts                = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountProvider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
 
-  @OneToMany(mappedBy = "accountProvider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
 
   @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
