@@ -48,8 +48,9 @@ public class ServiceProviderAccountServiceImpl extends
     ServiceProviderPojo serviceProvider,
     String internalId)
   {
-    return this.serviceProviderAccountRepository
-        .findByProviderAndInternalId(serviceProvider, internalId);
+    return null;
+//    return this.serviceProviderAccountRepository
+//        .findByProviderAndInternalId(serviceProvider, internalId);
   }
 
 
@@ -58,8 +59,9 @@ public class ServiceProviderAccountServiceImpl extends
     String clientRegistrationId,
     String internalId)
   {
-    return this.serviceProviderAccountRepository
-        .findByProviderClientRegistrationIdAndInternalId(clientRegistrationId, internalId);
+    return null;
+//    return this.serviceProviderAccountRepository
+//        .findByProviderClientRegistrationIdAndInternalId(clientRegistrationId, internalId);
   }
 
 
@@ -68,27 +70,28 @@ public class ServiceProviderAccountServiceImpl extends
     String clientRegistrationId,
     String internalId) throws Exception
   {
-    ServiceProviderPojo serviceProvider = this.serviceProviderService
-        .findOrCreate(clientRegistrationId);
-    Optional<ServiceProviderAccountEntity> serviceProviderAccountOpt = this.serviceProviderAccountRepository
-        .findByProviderAndInternalId(serviceProvider, internalId);
-    ServiceProviderAccountPojo serviceProviderAccount;
-
-    if (serviceProviderAccountOpt.isEmpty())
-    {
-      serviceProviderAccount = new ServiceProviderAccountPojo();
-
-      serviceProviderAccount.setInternalId(internalId);
-      serviceProviderAccount.setProvider(serviceProvider);
-
-      serviceProviderAccount = super.create(serviceProviderAccount);
-    }
-    else
-    {
-      serviceProviderAccount = super.getModelMapper().map(serviceProviderAccountOpt.get(), ServiceProviderAccountPojo.class) ;
-    }
-
-    return serviceProviderAccount;
+//    ServiceProviderPojo serviceProvider = this.serviceProviderService
+//        .findOrCreate(clientRegistrationId);
+//    Optional<ServiceProviderAccountEntity> serviceProviderAccountOpt = this.serviceProviderAccountRepository
+//        .findByProviderAndInternalId(serviceProvider, internalId);
+//    ServiceProviderAccountPojo serviceProviderAccount;
+//
+//    if (serviceProviderAccountOpt.isEmpty())
+//    {
+//      serviceProviderAccount = new ServiceProviderAccountPojo();
+//
+//      serviceProviderAccount.setInternalId(internalId);
+//      serviceProviderAccount.setProvider(serviceProvider);
+//
+//      serviceProviderAccount = super.create(serviceProviderAccount);
+//    }
+//    else
+//    {
+//      serviceProviderAccount = super.getModelMapper().map(serviceProviderAccountOpt.get(), ServiceProviderAccountPojo.class) ;
+//    }
+//
+//    return serviceProviderAccount;
+    return null;
   }
 
 
