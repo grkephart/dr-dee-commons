@@ -56,6 +56,13 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   @JoinColumn(name = "provider_id", nullable = false)
   private AccountProviderEntity  provider;
 
+  /**
+   * Note same column as for provider, but different mapping.
+   */
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
+  @JoinColumn(name = "provider_id", nullable = false, insertable = false, updatable = false)
+  private ServiceProviderEntity  serviceProvider;
+
   @ManyToOne
   @JoinColumn(name = "token_holder_id", nullable = false)
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
@@ -126,6 +133,16 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   public AccountProvider getProvider()
   {
     return this.provider;
+  }
+
+
+  /**
+   * @return the serviceProvider
+   */
+  @Override
+  public ServiceProviderEntity getServiceProvider()
+  {
+    return serviceProvider;
   }
 
 
@@ -220,6 +237,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   {
     this.provider = (AccountProviderEntity)accountProvider;
   }
+
 
 
   @Override

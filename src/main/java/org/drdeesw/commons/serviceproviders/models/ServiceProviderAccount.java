@@ -14,6 +14,13 @@ public interface ServiceProviderAccount extends Account
 {
 
   /**
+   * Returns the service provider.
+   * Useful when just getting a more generic AccountProvider is not enough, like for JPA repository queries.
+   * 
+   * @return the serviceProvider
+   */
+  ServiceProvider getServiceProvider();
+  /**
    * Returns the token holder for the account.
    * 
    * @return the serviceProviderAccountTokenHolder

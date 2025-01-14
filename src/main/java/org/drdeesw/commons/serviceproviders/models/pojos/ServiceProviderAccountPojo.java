@@ -5,6 +5,7 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
+import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
@@ -32,6 +33,13 @@ public class ServiceProviderAccountPojo extends AccountPojo implements ServicePr
   public ServiceProviderAccountPojo(ServiceProviderPojo serviceProvider, String internalId)
   {
     super(serviceProvider, internalId);
+  }
+
+
+  @Override
+  public ServiceProvider getServiceProvider()
+  {
+    return (ServiceProvider)super.getProvider();
   }
 
 
