@@ -20,6 +20,8 @@ public interface ServiceProviderAccount extends Account
    * @return the serviceProvider
    */
   ServiceProvider getServiceProvider();
+  
+  
   /**
    * Returns the token holder for the account.
    * 

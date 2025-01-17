@@ -36,8 +36,8 @@ public interface ServiceProviderAccountRepository
    * @param internalId the internalId
    * @return the service provider account
    */
-  Optional<ServiceProviderAccountEntity> findByServiceProviderClientRegistrationIdAndInternalId(
-    String clientRegistrationId,
-    String internalId);
+//  Optional<ServiceProviderAccountEntity> findByServiceProviderClientRegistrationIdAndInternalId(
+//    String clientRegistrationId,
+//    String internalId);
 
 }
