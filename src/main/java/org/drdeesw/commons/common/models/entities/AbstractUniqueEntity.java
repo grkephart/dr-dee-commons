@@ -26,13 +26,9 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(value = AccessType.FIELD)
+@Access(AccessType.PROPERTY) // Use getter/setter for access
 public abstract class AbstractUniqueEntity<ID extends Serializable> implements UniqueEntity<ID>
 {
-  @Id
-  @GenericGenerator(name = "native", strategy = "native")
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-  @Column(name = "id") // default column name. Subclasses can redefine getId() instead of using @AttributeOverride
   private ID id;
 
   /**
@@ -118,14 +114,15 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
 
   /**
    * Returns the ID of the object.
-   * Subclasses need to specify the Column annotation.
-   * The ID annotation is necessary:
-   * "You cannot override the [id] non-identifier property from the [...AbstractUniqueObject] base class or MappedSuperclass and make it an identifier in the subclass!"
-   * So we should not need it in the subclasses.
+   * Subclasses need to specify the Column annotation in their getId() method.
    * 
    * @return the unique id of the object.
    */
   @Override
+  @Id
+  @GenericGenerator(name = "native", strategy = "native")
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+  @Column(name = "id")
   public ID getId()
   {
     return this.id;

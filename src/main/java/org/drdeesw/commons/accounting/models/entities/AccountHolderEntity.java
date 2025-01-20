@@ -4,6 +4,8 @@
 package org.drdeesw.commons.accounting.models.entities;
 
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "account_holders")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
 public class AccountHolderEntity extends AbstractAccountHolderEntity
 {
 

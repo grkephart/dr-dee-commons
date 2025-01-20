@@ -16,11 +16,11 @@ BEGIN
       
     CREATE TABLE service_provider_account_token_holders (
       service_provider_account_token_holder_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
-      account_id          BIGINT       UNSIGNED NOT NULL,
-      access_token        VARCHAR(255) NOT NULL,
-      access_token_expiry TIMESTAMP    NULL,
-      refresh_token       VARCHAR(255) NOT NULL,
-      refreshTokenExpiry  TIMESTAMP    UNSIGNED NOT NULL,
+      account_id            BIGINT       UNSIGNED NOT NULL,
+      access_token          VARCHAR(255) NOT NULL,
+      access_token_expiry   TIMESTAMP    NULL DEFAULT NOW(),
+      refresh_token         VARCHAR(255) NOT NULL,
+      refresh_token_expiry  TIMESTAMP    NOT NULL DEFAULT NOW(),
       
       PRIMARY KEY           (service_provider_account_token_holder_id),
       UNIQUE  KEY sp_id_uq  (service_provider_account_token_holder_id),
@@ -28,7 +28,7 @@ BEGIN
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
     SET logMessage = CONCAT('Table "', @table_name, '" was created.');
-  ELSE
+  ELSE	
     SET logMessage = CONCAT('Table "', @table_name, '" already exists.');
   END IF;
     

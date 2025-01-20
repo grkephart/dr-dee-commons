@@ -15,11 +15,19 @@ BEGIN
   IF table_exists = 0 THEN
       
     CREATE TABLE service_providers (
-      service_provider_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
-      name                VARCHAR(255) NOT NULL,
-      description         VARCHAR(255) NULL,
-      type_id             BIGINT       UNSIGNED,
+      service_provider_id    BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
+      name                   VARCHAR(255) NOT NULL,
+      description            VARCHAR(255) NULL,
+      type_id                BIGINT       UNSIGNED,
+      authentication_type    TINYINT      UNSIGNED,
+      client_registration_id BIGINT       UNSIGNED,
+      is_enabled             TINYINT(1),
       
+      created_by_id          BIGINT       UNSIGNED NOT NULL,
+      creation_date          TIMESTAMP    NOT NULL,
+      last_update_date       TIMESTAMP    NULL,
+      last_update_id         BIGINT       UNSIGNED,
+
       PRIMARY KEY           (service_provider_id),
       UNIQUE  KEY sp_id_uq  (service_provider_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

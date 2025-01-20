@@ -4,6 +4,8 @@
 package org.drdeesw.commons.organization.models.entities;
 
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -20,6 +22,7 @@ import org.drdeesw.commons.common.models.EmbeddedAuditable;
 @Entity
 @Table(name = "organizations")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
 public class OrganizationEntity extends AbstractOrganizationEntity
 {
 

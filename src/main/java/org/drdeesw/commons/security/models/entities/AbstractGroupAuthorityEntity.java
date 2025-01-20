@@ -22,14 +22,11 @@ import org.drdeesw.commons.security.models.GroupAuthority;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<Long>
     implements GroupAuthority
 {
-  @Column(name = "authority")
   private String      authority;
-  @ManyToOne
-  @JoinColumn(name = "group_id")
   private GroupEntity group;
 
   /**
@@ -47,6 +44,7 @@ public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<
 
 
   @Override
+  @Column(name = "authority")
   public String getAuthority()
   {
     return this.authority;
@@ -54,6 +52,8 @@ public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "group_id")
   public Group getGroup()
   {
     return this.group;

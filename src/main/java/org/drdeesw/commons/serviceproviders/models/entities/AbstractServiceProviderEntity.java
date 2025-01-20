@@ -37,32 +37,18 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProvider
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-
-  @Column(name = "authentication_type")
   private AuthenticationType                authenticationType;
-
-  @Column(name = "client_registration_id", length = 255)
   private String                            clientRegistrationId;
-
-  @Column(name = "description", length = 255)
   private String                            description;
-
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity> providedAccounts;
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts;
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts;
 
   /**
@@ -86,6 +72,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "authentication_type")
   public AuthenticationType getAuthenticationType()
   {
     return this.authenticationType;
@@ -93,6 +80,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "client_registration_id", length = 255)
   public String getClientRegistrationId()
   {
     return this.clientRegistrationId;
@@ -114,6 +102,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return description;
@@ -136,6 +125,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
   @Deprecated // Use typed methods instead
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getProvidedAccounts()
   {
     if (this.providedAccounts == null)
@@ -150,6 +140,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
     if (this.providedOrganizationAccounts == null)
@@ -164,6 +155,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
     if (this.providedServiceProviderAccounts == null)
@@ -178,6 +170,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;

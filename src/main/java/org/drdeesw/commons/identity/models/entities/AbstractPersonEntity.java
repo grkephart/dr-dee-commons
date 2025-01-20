@@ -6,6 +6,7 @@ package org.drdeesw.commons.identity.models.entities;
 
 import java.time.Instant;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,11 @@ import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 
 
 /**
@@ -34,17 +37,16 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity implements Person
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-  @Column(name = "description")
-  private String             description;
-  @Column(name = "is_enabled", nullable = false)
-  private boolean            enabled;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity> heldAccounts;
+  private String                            description;
+  private boolean                           enabled;
+  private Set<AccountEntity>                heldAccounts                = new HashSet<>();
+  private Set<OrganizationAccountEntity>    heldOrganizationAccounts    = new HashSet<>();
+  private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts = new HashSet<>();
 
   /**
    * Hibernate constructor
@@ -70,6 +72,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
 
 
   @Override
+  @Column(name = "description")
   public String getDescription()
   {
     return this.description;
@@ -77,32 +80,34 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
 
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getHeldAccounts()
   {
-    if (this.heldAccounts == null)
-    {
-      return Collections.emptySet();
-    }
-
-    return this.heldAccounts.stream()//
-        .map(account -> (Account)account)//
-        .collect(Collectors.toSet());
+    return this.heldAccounts == null ? Collections.emptySet()
+                                     : this.heldAccounts.stream()//
+                                         .map(account -> (Account)account)//
+                                         .collect(Collectors.toSet());
   }
 
 
   @Override
   public Set<OrganizationAccount> getHeldOrganizationAccounts()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.heldOrganizationAccounts == null ? Collections.emptySet()
+                                                 : this.heldOrganizationAccounts.stream()//
+                                                     .map(account -> (OrganizationAccount)account)//
+                                                     .collect(Collectors.toSet());
   }
 
 
   @Override
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
-    // TODO Auto-generated method stub
-    return null;
+    return this.heldServiceProviderAccounts == null ? Collections.emptySet()
+                                                    : this.heldServiceProviderAccounts.stream()//
+                                                        .map(
+                                                          account -> (ServiceProviderAccount)account)//
+                                                        .collect(Collectors.toSet());
   }
 
 
@@ -121,6 +126,7 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;
@@ -173,8 +179,9 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setHeldOrganizationAccounts(
     Set<OrganizationAccount> accounts)
   {
-    // TODO Auto-generated method stub
-
+    this.heldOrganizationAccounts = accounts.stream()//
+        .map(account -> (OrganizationAccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -182,8 +189,9 @@ public abstract class AbstractPersonEntity extends AbstractNamedLongUniqueEntity
   public void setHeldServiceProviderAccounts(
     Set<ServiceProviderAccount> accounts)
   {
-    // TODO Auto-generated method stub
-
+    this.heldServiceProviderAccounts = accounts.stream()//
+        .map(account -> (ServiceProviderAccountEntity)account)//
+        .collect(Collectors.toSet());
   }
 
 

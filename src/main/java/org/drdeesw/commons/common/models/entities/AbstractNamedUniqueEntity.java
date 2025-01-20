@@ -19,11 +19,10 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(value = AccessType.FIELD)
+@Access(value = AccessType.PROPERTY)
 public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
     AbstractUniqueEntity<ID> implements Comparable<Named>, NamedUniqueObject<ID>, UniqueEntity<ID>
 {
-  @Column(name="name")
   private String            name;
 
 
@@ -123,9 +122,10 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * Subclasses should specify the Column annotation.
+   * Subclasses can specify the Column annotation.
    */
   @Override
+  @Column(name="name")
   public String getName()
   {
     return this.name;

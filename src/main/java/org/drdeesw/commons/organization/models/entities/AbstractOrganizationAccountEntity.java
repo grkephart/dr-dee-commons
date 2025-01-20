@@ -31,33 +31,17 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationAccount
 {
   @Embedded
-  private EmbeddedAuditable                 audit;
-
-
-  @Column(name = "is_active", nullable = false)
+  private EmbeddedAuditable   audit;
   private boolean             active;
-
-  @Column(name = "description", length = 255)
   private String              description;
-
-  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
-  @JoinColumn(name = "holder_id", nullable = false)
   private AccountHolderEntity holder;
-
-  @Column(name = "internal_id")
   private String              internalId;
-
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false)
   private OrganizationEntity  provider;
-
-  @OneToOne
-  @JoinColumn(name = "user_id")
   private UserEntity          user;
 
   /**
@@ -84,6 +68,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return this.description;
@@ -91,6 +76,8 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
+  @JoinColumn(name = "holder_id", nullable = false)
   public AccountHolder getHolder()
   {
     return this.holder;
@@ -98,6 +85,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @Column(name = "internal_id")
   public String getInternalId()
   {
     return this.internalId;
@@ -119,6 +107,8 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
+  @JoinColumn(name = "provider_id", nullable = false)
   public AccountProvider getProvider()
   {
     return this.provider;
@@ -126,6 +116,8 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @OneToOne
+  @JoinColumn(name = "user_id")
   public User getUser()
   {
     return user;
@@ -133,6 +125,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
+  @Column(name = "is_active", nullable = false)
   public boolean isActive()
   {
     return this.active;

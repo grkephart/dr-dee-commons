@@ -38,26 +38,21 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 @SuppressWarnings("serial")
 @MappedSuperclass
 @DiscriminatorColumn(name = "provider_type", discriminatorType = DiscriminatorType.STRING)
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUniqueEntity
     implements AccountProvider
 {
   @Embedded
   private EmbeddedAuditable                 audit;
 
-  @Column(name = "description", length = 255)
   private String                            description;
 
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
 
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity>        providedAccounts;
 
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
 
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
 
   @Override
@@ -75,6 +70,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return description;
@@ -96,6 +92,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getProvidedAccounts()
   {
     if (providedAccounts == null)
@@ -107,6 +104,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
 
@@ -121,6 +119,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
 
@@ -135,6 +134,7 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return enabled;

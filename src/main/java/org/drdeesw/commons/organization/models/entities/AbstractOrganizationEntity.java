@@ -42,56 +42,25 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationEntity extends AbstractNamedLongUniqueEntity
     implements Organization
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-
-  @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationEntity>           children;
-
-  // Describable property
-  @Column(name = "description", length = 255)
   private String                            description;
-
-  // Enableable property
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled                         = true;
-
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<AccountEntity>                heldAccounts                    = new HashSet<>();
-
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationAccountEntity>    heldOrganizationAccounts        = new HashSet<>();
-
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts     = new HashSet<>();
-
-  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationMemberEntity>     members                         = new HashSet<>();
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "parent_organization_id")
   private OrganizationEntity                parent;
-
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<AccountEntity>                providedAccounts                = new HashSet<>();
-
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
-
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
-
-  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<OrganizationRoleEntity>       roles                           = new HashSet<>();
-
-  @Column(name = "status")
   private OrganizationStatus                status;
-
-  @Column(name = "type")
   private OrganizationType                  type;
 
   /**
@@ -113,6 +82,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<Organization> getChildren()
   {
     return new HashSet<>(children);
@@ -134,6 +104,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return this.description;
@@ -141,6 +112,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<Account> getHeldAccounts()
   {
     return heldAccounts == null ? null : new HashSet<>(heldAccounts);
@@ -148,6 +120,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationAccount> getHeldOrganizationAccounts()
   {
     return heldOrganizationAccounts == null ? null : new HashSet<>(heldOrganizationAccounts);
@@ -155,6 +128,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
     return heldServiceProviderAccounts == null ? null : new HashSet<>(heldServiceProviderAccounts);
@@ -176,6 +150,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationMember> getMembers()
   {
     return members == null ? null : new HashSet<>(members);
@@ -183,6 +158,8 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "parent_organization_id")
   public Organization getParent()
   {
     return this.parent;
@@ -191,6 +168,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
   @Deprecated // Use typed methods instead
   @Override
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<Account> getProvidedAccounts()
   {
     return providedAccounts == null ? null : new HashSet<>(this.providedAccounts);
@@ -198,6 +176,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
     return providedOrganizationAccounts == null ? null : new HashSet<>(this.providedOrganizationAccounts);
@@ -205,6 +184,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
     return providedServiceProviderAccounts == null ? null : new HashSet<>(this.providedServiceProviderAccounts);
@@ -212,6 +192,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationRole> getRoles()
   {
     return roles == null ? null : new HashSet<>(this.roles);
@@ -219,6 +200,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @Column(name = "status")
   public OrganizationStatus getStatus()
   {
     return this.status;
@@ -226,6 +208,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @Column(name = "type")
   public OrganizationType getType()
   {
     return this.type;
@@ -233,6 +216,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;

@@ -18,12 +18,11 @@ import org.drdeesw.commons.measurement.models.MeasurableQuantity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractMeasurableQuantityEntity extends AbstractNamedLongUniqueEntity
     implements MeasurableQuantity
 {
 
-  @Column(name = "fundamental")
   private boolean fundamental;
 
   /**
@@ -36,6 +35,7 @@ public abstract class AbstractMeasurableQuantityEntity extends AbstractNamedLong
 
 
   @Override
+  @Column(name = "fundamental")
   public boolean isFundamental()
   {
     return fundamental;

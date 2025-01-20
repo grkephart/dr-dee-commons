@@ -19,7 +19,7 @@ BEGIN
       name VARCHAR(255)        NOT NULL,
       
       PRIMARY KEY           (service_provider_type_id),
-      UNIQUE  KEY sp_id_uq  (service_provider_type_id),
+      UNIQUE  KEY sp_id_uq  (service_provider_type_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
     SET logMessage = CONCAT('Table "', @table_name, '" was created.');

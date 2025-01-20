@@ -33,21 +33,15 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationMember
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<OrganizationMemberRoleEntity> memberRoles;
-  @ManyToOne
-  @JoinColumn(name = "organization_id", nullable = false)
   private OrganizationEntity                organization;
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
   private UserEntity                        user;
 
   /**
@@ -88,6 +82,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationMemberRole> getMemberRoles()
   {
     return this.memberRoles.stream()//
@@ -97,6 +92,8 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "organization_id", nullable = false)
   public Organization getOrganization()
   {
     return (Organization)this.organization;
@@ -104,6 +101,8 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
   public User getUser()
   {
     return (User)this.user;
@@ -111,6 +110,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;

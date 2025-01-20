@@ -10,7 +10,7 @@ import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntit
 
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationAccountHolderEntity extends AbstractAccountHolderEntity
 {
 

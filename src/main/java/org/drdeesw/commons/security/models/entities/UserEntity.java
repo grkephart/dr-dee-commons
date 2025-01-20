@@ -4,9 +4,12 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.AttributeOverride;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.security.models.User;
@@ -22,7 +25,8 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "users")
-@AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
 public class UserEntity extends AbstractUserEntity implements User
 {
   /**
@@ -43,4 +47,12 @@ public class UserEntity extends AbstractUserEntity implements User
   {
     super(that);
   }
+
+  @Override
+  @Column(name="user_id")
+  public Long getId()
+  {
+    return super.getId();
+  }
+
 }

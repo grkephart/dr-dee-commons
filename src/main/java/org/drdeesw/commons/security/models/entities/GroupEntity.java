@@ -1,9 +1,12 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.AttributeOverride;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 
@@ -16,7 +19,8 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "groups")
-@AttributeOverride(name = "name", column = @Column(name = "group_name"))
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
 public class GroupEntity extends AbstractGroupEntity
 {
 
@@ -35,5 +39,13 @@ public class GroupEntity extends AbstractGroupEntity
   {
     super(id);
   }
+
+  @Override
+  @Column(name="group_name")
+  public Long getId()
+  {
+    return super.getId();
+  }
+
 
 }

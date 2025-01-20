@@ -28,19 +28,14 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationMemberRole
 {
   @Embedded
   private EmbeddedAuditable        audit;
-  @Column(name = "is_enabled", nullable = false)
   private boolean                  enabled = true;
-  @ManyToOne
-  @JoinColumn(name = "member_id")
   private OrganizationMemberEntity member;
-  @ManyToOne
-  @JoinColumn(name = "role_id")
   private OrganizationRoleEntity   role;
 
   /**
@@ -81,6 +76,8 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "member_id")
   public OrganizationMember getMember()
   {
     return this.member;
@@ -88,6 +85,8 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "role_id")
   public OrganizationRole getRole()
   {
     return this.role;
@@ -95,6 +94,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;

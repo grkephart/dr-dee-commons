@@ -20,38 +20,35 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Embeddable
 public class EmbeddedAuditable
 {
+  private UserEntity createdBy;
+  private Instant    creationDate;
+  private Instant    lastUpdateDate;
+  private UserEntity lastUpdatedBy;
+
   @ManyToOne
   @JoinColumn(name = "created_by_id", nullable = false, updatable = false)
-  private UserEntity    createdBy;
-
-  @Column(name = "creation_date")
-  private Instant creationDate;
-
-  @Column(name = "last_update_date")
-  private Instant lastUpdateDate;
-
-  @ManyToOne
-  @JoinColumn(name = "last_updated_by_id")
-  private UserEntity    lastUpdatedBy;
-
   public UserEntity getCreatedBy()
   {
     return createdBy;
   }
 
 
+  @Column(name = "creation_date")
   public Instant getCreationDate()
   {
     return creationDate;
   }
 
 
+  @Column(name = "last_update_date")
   public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
   }
 
 
+  @ManyToOne
+  @JoinColumn(name = "last_updated_by_id")
   public UserEntity getLastUpdatedBy()
   {
     return lastUpdatedBy;

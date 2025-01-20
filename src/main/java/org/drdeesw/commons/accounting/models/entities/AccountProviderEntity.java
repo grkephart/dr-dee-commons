@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,9 +29,9 @@ import org.drdeesw.commons.accounting.models.Account;
 @Entity
 @Table(name = "account_providers")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
 public class AccountProviderEntity extends AbstractAccountProviderEntity
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AccountEntity> providedAccounts;
 
   @Override
@@ -40,6 +42,7 @@ public class AccountProviderEntity extends AbstractAccountProviderEntity
   }
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getProvidedAccounts()
   {
     return new HashSet<>(providedAccounts);

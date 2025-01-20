@@ -32,20 +32,15 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUniqueEntity
     implements OrganizationRole
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-  @Column(name = "description", length = 255)
   private String          description;
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled                         = true;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   private Set<OrganizationMemberRoleEntity> memberRoles;
-  @ManyToOne
-  @JoinColumn(name = "organization_id")
   private OrganizationEntity                organization;
 
   /**
@@ -72,6 +67,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return this.description;
@@ -93,6 +89,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
   public Set<OrganizationMemberRole> getMemberRoles()
   {
     return this.memberRoles.stream()//
@@ -102,6 +99,8 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "organization_id")
   public Organization getOrganization()
   {
     return (Organization)organization;
@@ -109,6 +108,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
      return this.enabled;

@@ -33,33 +33,19 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntity implements Account
 {
+  private boolean               active;
   @Embedded
-  private EmbeddedAuditable                 audit;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_holder_id", nullable = false)
+  private EmbeddedAuditable     audit;
+  private String                description;
   private AccountHolderEntity   holder;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_provider_id", nullable = false)
+  private String                internalId;
   private AccountProviderEntity provider;
-
-  @Column(name = "is_active", nullable = false)
-  private boolean         active;
-
-  @Column(name = "description", length = 255)
-  private String          description;
-
-  @Column(name = "internal_id")
-  private String          internalId;
-
-  @OneToOne
-  @JoinColumn(name = "user_id")
-  private UserEntity      user;
-
+  private UserEntity            user;
+  
+  
   @Override
   public User getCreatedBy()
   {
@@ -75,6 +61,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return description;
@@ -82,6 +69,8 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "account_holder_id", nullable = false)
   public AccountHolder getHolder()
   {
     return holder;
@@ -89,6 +78,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @Column(name = "internal_id")
   public String getInternalId()
   {
     return this.internalId;
@@ -110,6 +100,8 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "account_provider_id", nullable = false)
   public AccountProvider getProvider()
   {
     return provider;
@@ -117,6 +109,8 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @OneToOne
+  @JoinColumn(name = "user_id")
   public User getUser()
   {
     return user;
@@ -124,6 +118,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
 
   @Override
+  @Column(name = "is_active", nullable = false)
   public boolean isActive()
   {
     return this.active;

@@ -26,24 +26,19 @@ import org.drdeesw.commons.security.models.User;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity implements User
 {
-
-  @OneToOne(targetEntity = AccountEntity.class, optional = false)
-  @JoinColumn(name = "account_id")
   private AccountEntity account;
 
   /**
    * true if the user is enabled
    */
-  @Column(name = "is_enabled", nullable = false)
   private boolean       enabled;
 
   /**
    * perhaps the email address
    */
-  @Column(name = "username")
   private String        username;
 
   /**
@@ -57,15 +52,6 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   protected AbstractUserEntity(Long id)
   {
     super(id);
-  }
-
-
-  protected AbstractUserEntity(User that)
-  {
-    super(that);
-    this.account = (AccountEntity)that.getAccount();
-    this.enabled = that.isEnabled();
-    this.username = that.getUsername();
   }
 
 
@@ -93,6 +79,27 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   }
 
 
+  protected AbstractUserEntity(User that)
+  {
+    super(that);
+    this.account = (AccountEntity)that.getAccount();
+    this.enabled = that.isEnabled();
+    this.username = that.getUsername();
+  }
+
+
+  /**
+   * @return the account
+   */
+  @Override
+  @OneToOne(targetEntity = AccountEntity.class, optional = false)
+  @JoinColumn(name = "account_id")
+  public Account getAccount()
+  {
+    return account;
+  }
+
+
   @Override
   public Long getId()
   {
@@ -101,6 +108,7 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
 
 
   @Override
+  @Column(name = "username")
   public String getUsername()
   {
     return username;
@@ -108,9 +116,21 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return enabled;
+  }
+
+
+  /**
+   * @param account the account to set
+   */
+  @Override
+  public void setAccount(
+    Account account)
+  {
+    this.account = (AccountEntity)account;
   }
 
 
@@ -127,27 +147,6 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
     String email)
   {
     this.username = email;
-  }
-
-
-  /**
-   * @return the account
-   */
-  @Override
-  public Account getAccount()
-  {
-    return account;
-  }
-
-
-  /**
-   * @param account the account to set
-   */
-  @Override
-  public void setAccount(
-    Account account)
-  {
-    this.account = (AccountEntity)account;
   }
 
 }

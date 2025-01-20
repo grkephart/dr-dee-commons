@@ -38,26 +38,16 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 @SuppressWarnings("serial")
 @MappedSuperclass
 @DiscriminatorColumn(name = "holder_type", discriminatorType = DiscriminatorType.STRING)
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqueEntity
     implements AccountHolder
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-
-  @Column(name = "description", length = 255)
   private String                            description;
-
-  @Column(name = "is_enabled", nullable = false)
   private boolean                           enabled;
-
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<AccountEntity>        heldAccounts;
-
-  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<AccountEntity>                heldAccounts;
   private Set<OrganizationAccountEntity>    heldOrganizationAccounts    = new HashSet<>();
-
-  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts = new HashSet<>();
 
   public AbstractAccountHolderEntity()
@@ -86,6 +76,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return description;
@@ -93,6 +84,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
 
   @Override
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getHeldAccounts()
   {
     if (heldAccounts == null)
@@ -104,6 +96,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
 
   @Override
+  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationAccount> getHeldOrganizationAccounts()
   {
     if (heldOrganizationAccounts == null)
@@ -117,6 +110,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
 
   @Override
+  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
 
@@ -144,6 +138,7 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return enabled;

@@ -25,14 +25,11 @@ import org.drdeesw.commons.security.models.GroupMember;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
     implements GroupMember
 {
-  @ManyToOne
-  @JoinColumn(name = "group_id")
   private GroupEntity group;
-  @Column(name = "username")
   private String      username;
 
   /**
@@ -52,6 +49,8 @@ public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
   /**
    * @return the group
    */
+  @ManyToOne
+  @JoinColumn(name = "group_id")
   public Group getGroup()
   {
     return group;
@@ -61,6 +60,7 @@ public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
   /**
    * @return the username
    */
+  @Column(name = "username")
   public String getUsername()
   {
     return username;

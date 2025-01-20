@@ -32,44 +32,20 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderAccountEntity extends AbstractNamedLongUniqueEntity
     implements ServiceProviderAccount
 {
-  @Column(name = "is_active", nullable = false)
-  private boolean                           active;
-
+  private boolean                                 active;
   @Embedded
-  private EmbeddedAuditable                 audit;
-
-  @Column(name = "description", length = 255)
-  private String                            description;
-
-  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
-  @JoinColumn(name = "holder_id", nullable = false)
-  private AccountHolderEntity holder;
-
-  @Column(name = "internal_id")
-  private String                            internalId;
-
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false)
-  private AccountProviderEntity  provider;
-
-  /**
-   * Note same column as for provider, but different mapping.
-   */
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false, insertable = false, updatable = false)
-  private ServiceProviderEntity  serviceProvider;
-
-  @ManyToOne
-  @JoinColumn(name = "token_holder_id", nullable = false)
+  private EmbeddedAuditable                       audit;
+  private String                                  description;
+  private AccountHolderEntity                     holder;
+  private String                                  internalId;
+  private AccountProviderEntity                   provider;
+  private ServiceProviderEntity                   serviceProvider; //  Note same column as for provider, but different mapping.
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
-
-  @OneToOne
-  @JoinColumn(name = "user_id")
-  private UserEntity                        user;
+  private UserEntity                              user;
 
   /**
    * Hibernate constructor
@@ -95,6 +71,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
     return this.description;
@@ -102,6 +79,8 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
+  @JoinColumn(name = "account_holder_id", nullable = false)
   public AccountHolder getHolder()
   {
     return this.holder;
@@ -109,6 +88,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @Column(name = "internal_id")
   public String getInternalId()
   {
     return this.internalId;
@@ -130,6 +110,8 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
+  @JoinColumn(name = "account_provider_id", nullable = false)
   public AccountProvider getProvider()
   {
     return this.provider;
@@ -140,6 +122,8 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
    * @return the serviceProvider
    */
   @Override
+  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
+  @JoinColumn(name = "provider_id", nullable = false, insertable = false, updatable = false)
   public ServiceProviderEntity getServiceProvider()
   {
     return serviceProvider;
@@ -147,6 +131,8 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "token_holder_id", nullable = false)
   public ServiceProviderAccountTokenHolder getTokenHolder()
   {
     return this.tokenHolder;
@@ -154,6 +140,8 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @OneToOne
+  @JoinColumn(name = "user_id")
   public User getUser()
   {
     return user;
@@ -161,6 +149,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
 
 
   @Override
+  @Column(name = "is_active", nullable = false)
   public boolean isActive()
   {
     return this.active;
@@ -203,7 +192,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   public void setHolder(
     AccountHolder accountHolder)
   {
-   this.holder = (AccountHolderEntity)accountHolder;
+    this.holder = (AccountHolderEntity)accountHolder;
   }
 
 
@@ -237,7 +226,6 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   {
     this.provider = (AccountProviderEntity)accountProvider;
   }
-
 
 
   @Override

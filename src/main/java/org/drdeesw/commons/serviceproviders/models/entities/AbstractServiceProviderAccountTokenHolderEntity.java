@@ -23,20 +23,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderAccountTokenHolderEntity
     extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder
 {
-  @Column(name = "access_token")
   private String                       accessToken;
-  @Column(name = "access_token_expiry")
   private Instant                      accessTokenExpiry;
-  @ManyToOne
-  @JoinColumn(name = "account_id", nullable = false)
   private ServiceProviderAccountEntity account;
-  @Column(name = "refresh_token")
   private String                       refreshToken;
-  @Column(name = "refresh_token_expiry")
   private Instant                      refreshTokenExpiry;
 
   /**
@@ -49,6 +43,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "access_token")
   public String getAccessToken()
   {
     return accessToken;
@@ -56,6 +51,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "access_token_expiry")
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
@@ -63,6 +59,8 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "account_id", nullable = false)
   public ServiceProviderAccount getAccount()
   {
     return (ServiceProviderAccount)account;
@@ -70,6 +68,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "refresh_token")
   public String getRefreshToken()
   {
     return refreshToken;
@@ -77,6 +76,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "refresh_token_expiry")
   public Instant getRefreshTokenExpiry()
   {
     return refreshTokenExpiry;

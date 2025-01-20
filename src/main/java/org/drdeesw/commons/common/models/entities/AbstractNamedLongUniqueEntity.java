@@ -63,23 +63,4 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
   }
 
 
-  /**
-   *
-   */
-  @Override
-  public Long getId()
-  {
-    return super.getId();
-  }
-
-
-  /**
-   *
-   */
-  @Override
-  public void setId(
-    Long id)
-  {
-    super.setId(id);
-  }
 }

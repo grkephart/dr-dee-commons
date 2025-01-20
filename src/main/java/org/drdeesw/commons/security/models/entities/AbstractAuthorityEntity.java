@@ -19,12 +19,10 @@ import org.drdeesw.commons.security.models.Authority;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long> implements Authority
 {
-  @Column(name = "authority")
   private String authority;
-  @Column(name = "username")
   private String username;
 
   /**
@@ -42,6 +40,7 @@ public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long>
 
 
   @Override
+  @Column(name = "authority")
   public String getAuthority()
   {
     return this.authority;
@@ -49,6 +48,7 @@ public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long>
 
 
   @Override
+  @Column(name = "username")
   public String getUsername()
   {
     return this.username;
