@@ -51,7 +51,7 @@ public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
    */
   @ManyToOne
   @JoinColumn(name = "group_id")
-  public Group getGroup()
+  public GroupEntity getGroup()
   {
     return group;
   }

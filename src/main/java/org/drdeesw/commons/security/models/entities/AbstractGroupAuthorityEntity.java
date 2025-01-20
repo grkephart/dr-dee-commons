@@ -54,7 +54,7 @@ public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<
   @Override
   @ManyToOne
   @JoinColumn(name = "group_id")
-  public Group getGroup()
+  public GroupEntity getGroup()
   {
     return this.group;
   }

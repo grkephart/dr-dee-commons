@@ -61,9 +61,9 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
   @Override
   @ManyToOne
   @JoinColumn(name = "account_id", nullable = false)
-  public ServiceProviderAccount getAccount()
+  public ServiceProviderAccountEntity getAccount()
   {
-    return (ServiceProviderAccount)account;
+    return account;
   }
 
 

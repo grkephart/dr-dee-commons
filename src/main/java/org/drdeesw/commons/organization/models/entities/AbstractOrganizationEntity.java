@@ -160,7 +160,7 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   @Override
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "parent_organization_id")
-  public Organization getParent()
+  public OrganizationEntity getParent()
   {
     return this.parent;
   }

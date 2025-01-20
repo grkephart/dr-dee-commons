@@ -44,8 +44,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   private String                internalId;
   private AccountProviderEntity provider;
   private UserEntity            user;
-  
-  
+
   @Override
   public User getCreatedBy()
   {
@@ -71,7 +70,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_holder_id", nullable = false)
-  public AccountHolder getHolder()
+  public AccountHolderEntity getHolder()
   {
     return holder;
   }
@@ -102,7 +101,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_provider_id", nullable = false)
-  public AccountProvider getProvider()
+  public AccountProviderEntity getProvider()
   {
     return provider;
   }
@@ -111,7 +110,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   @Override
   @OneToOne
   @JoinColumn(name = "user_id")
-  public User getUser()
+  public UserEntity getUser()
   {
     return user;
   }

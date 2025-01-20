@@ -94,18 +94,18 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
   @Override
   @ManyToOne
   @JoinColumn(name = "organization_id", nullable = false)
-  public Organization getOrganization()
+  public OrganizationEntity getOrganization()
   {
-    return (Organization)this.organization;
+    return this.organization;
   }
 
 
   @Override
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
-  public User getUser()
+  public UserEntity getUser()
   {
-    return (User)this.user;
+    return this.user;
   }
 
 

@@ -81,7 +81,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   @Override
   @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
   @JoinColumn(name = "account_holder_id", nullable = false)
-  public AccountHolder getHolder()
+  public AccountHolderEntity getHolder()
   {
     return this.holder;
   }
@@ -112,7 +112,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   @Override
   @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
   @JoinColumn(name = "account_provider_id", nullable = false)
-  public AccountProvider getProvider()
+  public AccountProviderEntity getProvider()
   {
     return this.provider;
   }
@@ -133,7 +133,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   @Override
   @ManyToOne
   @JoinColumn(name = "token_holder_id", nullable = false)
-  public ServiceProviderAccountTokenHolder getTokenHolder()
+  public ServiceProviderAccountTokenHolderEntity getTokenHolder()
   {
     return this.tokenHolder;
   }
@@ -142,7 +142,7 @@ public abstract class AbstractServiceProviderAccountEntity extends AbstractNamed
   @Override
   @OneToOne
   @JoinColumn(name = "user_id")
-  public User getUser()
+  public UserEntity getUser()
   {
     return user;
   }

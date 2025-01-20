@@ -94,7 +94,7 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   @Override
   @OneToOne(targetEntity = AccountEntity.class, optional = false)
   @JoinColumn(name = "account_id")
-  public Account getAccount()
+  public AccountEntity getAccount()
   {
     return account;
   }

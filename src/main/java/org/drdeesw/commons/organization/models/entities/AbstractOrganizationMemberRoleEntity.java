@@ -78,7 +78,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
   @Override
   @ManyToOne
   @JoinColumn(name = "member_id")
-  public OrganizationMember getMember()
+  public OrganizationMemberEntity getMember()
   {
     return this.member;
   }
@@ -87,7 +87,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
   @Override
   @ManyToOne
   @JoinColumn(name = "role_id")
-  public OrganizationRole getRole()
+  public OrganizationRoleEntity getRole()
   {
     return this.role;
   }

@@ -101,9 +101,9 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @Override
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  public Organization getOrganization()
+  public OrganizationEntity getOrganization()
   {
-    return (Organization)organization;
+    return organization;
   }
 
 

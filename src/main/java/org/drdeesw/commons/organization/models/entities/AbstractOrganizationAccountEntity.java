@@ -78,7 +78,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
   @Override
   @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
   @JoinColumn(name = "holder_id", nullable = false)
-  public AccountHolder getHolder()
+  public AccountHolderEntity getHolder()
   {
     return this.holder;
   }
@@ -109,7 +109,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
   @Override
   @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
   @JoinColumn(name = "provider_id", nullable = false)
-  public AccountProvider getProvider()
+  public OrganizationEntity getProvider()
   {
     return this.provider;
   }
@@ -118,7 +118,7 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
   @Override
   @OneToOne
   @JoinColumn(name = "user_id")
-  public User getUser()
+  public UserEntity getUser()
   {
     return user;
   }

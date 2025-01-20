@@ -91,7 +91,9 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
     {
       return Set.of();
     }
-    return heldAccounts.stream().map(account -> (Account)account).collect(Collectors.toSet());
+
+    // Return as a set of Account (interface)
+    return new HashSet<>(heldAccounts);
   }
 
 
