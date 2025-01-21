@@ -83,17 +83,23 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   }
 
 
-  @Override
+  /**
+   * This exists solely to satisfy Hibernate's requirement for a concrete relationship mapping.
+   * The business logic does not use it.
+   * 
+   * @return the held accounts
+   */
   @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<AccountEntity> getHeldAccountsInternal()
+  {
+    return heldAccounts;
+  }
+
+
+  @Override
   public Set<Account> getHeldAccounts()
   {
-    if (heldAccounts == null)
-    {
-      return Set.of();
-    }
-
-    // Return as a set of Account (interface)
-    return new HashSet<>(heldAccounts);
+    return heldAccounts == null ? Set.of() : new HashSet<>(heldAccounts);
   }
 
 
@@ -181,17 +187,13 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
   @Override
   public void setHeldAccounts(
-    Set<Account> accounts)
+    Set<Account> heldAccounts)
   {
-    if (accounts == null)
-    {
-      this.heldAccounts = null;
-    }
-    else
-    {
-      this.heldAccounts = accounts.stream().map(account -> (AccountEntity)account)
-          .collect(Collectors.toSet());
-    }
+    // Convert Set<Account> to Set<AccountEntity>
+    this.heldAccounts = heldAccounts == null ? null
+                                             : heldAccounts.stream()
+                                                 .map(account -> (AccountEntity)account) // Ensure each item is cast to AccountEntity
+                                                 .collect(Collectors.toSet());
   }
 
 
