@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -82,12 +83,16 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationMemberRole> getMemberRoles()
   {
-    return this.memberRoles.stream()//
-        .map(member -> (OrganizationMemberRole)member)//
-        .collect(Collectors.toSet());
+    return memberRoles == null ? Set.of() : new HashSet<>(this.memberRoles);
+  }
+
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
+  {
+    return this.memberRoles;
   }
 
 

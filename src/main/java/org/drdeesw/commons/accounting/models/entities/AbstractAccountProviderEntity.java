@@ -44,15 +44,10 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-
   private String                            description;
-
   private boolean                           enabled;
-
-  private Set<AccountEntity>        providedAccounts;
-
+  private Set<AccountEntity>                providedAccounts;
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
-
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
 
   @Override
@@ -92,44 +87,46 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getProvidedAccounts()
   {
-    if (providedAccounts == null)
-    {
-      return Set.of();
-    }
-    return providedAccounts.stream().map(account -> (Account)account).collect(Collectors.toSet());
+    return providedAccounts == null ? Set.of() : new HashSet<>(providedAccounts);
+  }
+
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<AccountEntity> getProvidedAccountsInternal()
+  {
+    return providedAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
+    return providedOrganizationAccounts == null ? Set.of()
+                                                : new HashSet<>(providedOrganizationAccounts);
+  }
 
-    if (providedOrganizationAccounts == null)
-    {
-      return Set.of();
-    }
 
-    return providedOrganizationAccounts.stream().map(account -> (OrganizationAccount)account)
-        .collect(Collectors.toSet());
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<OrganizationAccountEntity> getProvidedOrganizationAccountsInternal()
+  {
+    return providedOrganizationAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
+    return providedServiceProviderAccounts == null ? Set.of()
+                                                   : new HashSet<>(providedServiceProviderAccounts);
+  }
 
-    if (providedServiceProviderAccounts == null)
-    {
-      return Set.of();
-    }
 
-    return providedServiceProviderAccounts.stream().map(account -> (ServiceProviderAccount)account)
-        .collect(Collectors.toSet());
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<ServiceProviderAccountEntity> getProvidedServiceProviderAccountsInternal()
+  {
+    return providedServiceProviderAccounts;
   }
 
 

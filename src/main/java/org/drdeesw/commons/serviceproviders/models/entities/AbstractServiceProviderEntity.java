@@ -5,7 +5,7 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.time.Instant;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,7 +47,7 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   private String                            clientRegistrationId;
   private String                            description;
   private boolean                           enabled;
-  private Set<AccountEntity> providedAccounts;
+  private Set<AccountEntity>                providedAccounts;
   private Set<OrganizationAccountEntity>    providedOrganizationAccounts;
   private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts;
 
@@ -123,49 +123,48 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<AccountEntity> getProvidedAccountsInternal()
+  {
+    return this.providedAccounts;
+  }
+
+
   @Deprecated // Use typed methods instead
   @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<Account> getProvidedAccounts()
   {
-    if (this.providedAccounts == null)
-    {
-      return Collections.emptySet();
-    }
+    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
+  }
 
-    return this.providedAccounts.stream()//
-        .map(account -> (Account)account)//
-        .collect(Collectors.toSet());
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<OrganizationAccountEntity> getProvidedOrganizationAccountsInternal()
+  {
+    return this.providedOrganizationAccounts;
   }
 
 
   @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
-    if (this.providedOrganizationAccounts == null)
-    {
-      return Collections.emptySet();
-    }
+    return providedOrganizationAccounts == null ? Set.of()
+                                                : new HashSet<>(providedOrganizationAccounts);
+  }
 
-    return this.providedOrganizationAccounts.stream()//
-        .map(account -> (OrganizationAccount)account)//
-        .collect(Collectors.toSet());
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<ServiceProviderAccountEntity> getProvidedServiceProviderAccountsInternal()
+  {
+    return this.providedServiceProviderAccounts;
   }
 
 
   @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
-    if (this.providedServiceProviderAccounts == null)
-    {
-      return Collections.emptySet();
-    }
-
-    return this.providedServiceProviderAccounts.stream()//
-        .map(account -> (ServiceProviderAccount)account)//
-        .collect(Collectors.toSet());
+    return providedServiceProviderAccounts == null ? Set.of()
+                                                   : new HashSet<>(providedServiceProviderAccounts);
   }
 
 

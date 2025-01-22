@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,8 +39,8 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 {
   @Embedded
   private EmbeddedAuditable                 audit;
-  private String          description;
-  private boolean                           enabled                         = true;
+  private String                            description;
+  private boolean                           enabled = true;
   private Set<OrganizationMemberRoleEntity> memberRoles;
   private OrganizationEntity                organization;
 
@@ -88,13 +89,17 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  @Override
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+  public Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
+  {
+    return this.memberRoles;
+  }
+
+
+  @Override
   public Set<OrganizationMemberRole> getMemberRoles()
   {
-    return this.memberRoles.stream()//
-        .map(member -> (OrganizationMemberRole)member)//
-        .collect(Collectors.toSet());
+    return memberRoles == null ? Set.of() : new HashSet<>(this.memberRoles);
   }
 
 
@@ -111,7 +116,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
-     return this.enabled;
+    return this.enabled;
   }
 
 

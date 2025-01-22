@@ -103,31 +103,38 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   }
 
 
-  @Override
+  /**
+   * This exists solely to satisfy Hibernate's requirement for a concrete relationship mapping.
+   * The business logic does not use it.
+   * 
+   * @return the held accounts
+   */
   @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<OrganizationAccount> getHeldOrganizationAccounts()
+  public Set<OrganizationAccountEntity> getHeldOrganizationAccountsInternal()
   {
-    if (heldOrganizationAccounts == null)
-    {
-      return Set.of();
-    }
-    return heldOrganizationAccounts.stream().map(account -> (OrganizationAccount)account)
-        .collect(Collectors.toSet());
-
+    return heldOrganizationAccounts;
   }
 
 
   @Override
+  public Set<OrganizationAccount> getHeldOrganizationAccounts()
+  {
+    return heldOrganizationAccounts == null ? Set.of() : new HashSet<>(heldOrganizationAccounts);
+  }
+
+
   @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<ServiceProviderAccountEntity> getHeldServiceProviderAccountsInternal()
+  {
+    return heldServiceProviderAccounts;
+  }
+
+
+  @Override
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
-
-    if (heldServiceProviderAccounts == null)
-    {
-      return Set.of();
-    }
-    return heldServiceProviderAccounts.stream().map(account -> (ServiceProviderAccount)account)
-        .collect(Collectors.toSet());
+    return heldServiceProviderAccounts == null ? Set.of()
+                                               : new HashSet<>(heldServiceProviderAccounts);
   }
 
 

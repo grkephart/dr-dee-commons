@@ -81,11 +81,17 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
-  @Override
   @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<OrganizationEntity> getChildrenInternal()
+  {
+    return children;
+  }
+
+
+  @Override
   public Set<Organization> getChildren()
   {
-    return new HashSet<>(children);
+    return children == null ? Set.of() : new HashSet<>(children);
   }
 
 
@@ -111,27 +117,45 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
-  @Override
   @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<AccountEntity> getHeldAccountsInternal()
+  {
+    return heldAccounts;
+  }
+
+
+  @Override
   public Set<Account> getHeldAccounts()
   {
-    return heldAccounts == null ? null : new HashSet<>(heldAccounts);
+    return heldAccounts == null ? Set.of() : new HashSet<>(heldAccounts);
+  }
+
+
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<OrganizationAccountEntity> getHeldOrganizationAccountsInternal()
+  {
+    return heldOrganizationAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationAccount> getHeldOrganizationAccounts()
   {
-    return heldOrganizationAccounts == null ? null : new HashSet<>(heldOrganizationAccounts);
+    return heldOrganizationAccounts == null ? Set.of() : new HashSet<>(heldOrganizationAccounts);
+  }
+
+
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<ServiceProviderAccountEntity> getHeldServiceProviderAccountsInternal()
+  {
+    return heldServiceProviderAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
   {
-    return heldServiceProviderAccounts == null ? null : new HashSet<>(heldServiceProviderAccounts);
+    return heldServiceProviderAccounts == null ? Set.of() : new HashSet<>(heldServiceProviderAccounts);
   }
 
 
@@ -149,11 +173,17 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
   }
 
 
-  @Override
   @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<OrganizationMemberEntity> getMembersInternal()
+  {
+    return members;
+  }
+
+
+  @Override
   public Set<OrganizationMember> getMembers()
   {
-    return members == null ? null : new HashSet<>(members);
+    return members == null ? Set.of() : new HashSet<>(members);
   }
 
 
@@ -167,35 +197,60 @@ public abstract class AbstractOrganizationEntity extends AbstractNamedLongUnique
 
 
   @Deprecated // Use typed methods instead
-  @Override
   @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<AccountEntity> getProvidedAccountsInternal()
+  {
+    return providedAccounts;
+  }
+
+
+  @Deprecated // Use typed methods instead
+  @Override
   public Set<Account> getProvidedAccounts()
   {
-    return providedAccounts == null ? null : new HashSet<>(this.providedAccounts);
+    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
+  }
+
+
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<OrganizationAccountEntity> getProvidedOrganizationAccountsInternal()
+  {
+    return providedOrganizationAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationAccount> getProvidedOrganizationAccounts()
   {
-    return providedOrganizationAccounts == null ? null : new HashSet<>(this.providedOrganizationAccounts);
+    return providedOrganizationAccounts == null ? Set.of() : new HashSet<>(this.providedOrganizationAccounts);
+  }
+
+
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<ServiceProviderAccountEntity> getProvidedServiceProviderAccountsInternal()
+  {
+    return providedServiceProviderAccounts;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
   {
-    return providedServiceProviderAccounts == null ? null : new HashSet<>(this.providedServiceProviderAccounts);
+    return providedServiceProviderAccounts == null ? Set.of() : new HashSet<>(this.providedServiceProviderAccounts);
+  }
+
+
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<OrganizationRoleEntity> getRolesInternal()
+  {
+    return roles;
   }
 
 
   @Override
-  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationRole> getRoles()
   {
-    return roles == null ? null : new HashSet<>(this.roles);
+    return roles == null ? Set.of() : new HashSet<>(this.roles);
   }
 
 
