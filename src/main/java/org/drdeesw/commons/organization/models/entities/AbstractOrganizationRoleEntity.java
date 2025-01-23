@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.FetchType;
@@ -89,7 +90,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   }
 
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   public Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
   {
     return this.memberRoles;

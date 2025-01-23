@@ -89,8 +89,8 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
   }
 
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
   {
     return this.memberRoles;
   }
@@ -163,12 +163,10 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
 
   @Override
-  public void setMemberRoles(
-    Set<OrganizationMemberRole> roles)
-  {
-    this.memberRoles = roles.stream()//
-        .map(role -> (OrganizationMemberRoleEntity)role)//
-        .collect(Collectors.toSet());
+  public void setMemberRoles(Set<OrganizationMemberRole> roles) {
+      this.memberRoles = roles.stream()
+          .map(role -> (OrganizationMemberRoleEntity) role)
+          .collect(Collectors.toSet());
   }
 
 
