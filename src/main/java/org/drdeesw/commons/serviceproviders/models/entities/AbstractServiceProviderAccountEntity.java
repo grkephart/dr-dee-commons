@@ -10,8 +10,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.AccountHolder;
@@ -21,7 +19,6 @@ import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
 /**
@@ -30,15 +27,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderAccountEntity<H extends AccountHolder<?>, P extends ServiceProvider<?>, U extends User>
+public abstract class AbstractServiceProviderAccountEntity<H extends AccountHolder<?>, P extends ServiceProvider<?>, U extends User<?>>
     extends AbstractNamedLongUniqueEntity implements ServiceProviderAccount<H, P, U>
 {
-  private boolean                                 active;
+  private boolean           active;
   @Embedded
-  private EmbeddedAuditable                       audit;
-  private String                                  description;
-  private String                                  internalId;
-  private ServiceProviderAccountTokenHolderEntity tokenHolder;
+  private EmbeddedAuditable audit;
+  private String            description;
+  private String            internalId;
 
   /**
    * Hibernate constructor
@@ -50,7 +46,7 @@ public abstract class AbstractServiceProviderAccountEntity<H extends AccountHold
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -87,18 +83,9 @@ public abstract class AbstractServiceProviderAccountEntity<H extends AccountHold
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "token_holder_id", nullable = false)
-  public ServiceProviderAccountTokenHolderEntity getTokenHolder()
-  {
-    return this.tokenHolder;
   }
 
 
@@ -120,7 +107,7 @@ public abstract class AbstractServiceProviderAccountEntity<H extends AccountHold
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -160,17 +147,9 @@ public abstract class AbstractServiceProviderAccountEntity<H extends AccountHold
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setTokenHolder(
-    ServiceProviderAccountTokenHolder tokenHolder)
-  {
-    this.tokenHolder = (ServiceProviderAccountTokenHolderEntity)tokenHolder;
   }
 
 }

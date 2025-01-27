@@ -11,14 +11,14 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
  * @author gkephart
  *
  */
-public interface GroupMember extends LongUniqueObject
+public interface GroupMember<G extends Group> extends LongUniqueObject
 {
 
 
   /**
    * @return the system group
    */
-  public Group getGroup();
+  public G getGroup();
 
 
   /**
@@ -31,7 +31,7 @@ public interface GroupMember extends LongUniqueObject
    * @param group the group to set
    */
   public void setGroup(
-    Group group);
+    G group);
 
 
 

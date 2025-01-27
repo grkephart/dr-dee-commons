@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -24,8 +26,10 @@ import javax.persistence.Table;
 @Table(name = "group_members")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class GroupMemberEntity extends AbstractGroupMemberEntity
+public class GroupMemberEntity extends AbstractGroupMemberEntity<GroupEntity>
 {
+
+  private GroupEntity group;
 
   /**
    * Hibernate
@@ -43,12 +47,33 @@ public class GroupMemberEntity extends AbstractGroupMemberEntity
     super(id);
   }
 
+
   @Override
-  @Column(name="group_member_id")
+  @Column(name = "group_member_id")
   public Long getId()
   {
     return super.getId();
   }
 
+
+  /**
+   * @return the group
+   */
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  public GroupEntity getGroup()
+  {
+    return group;
+  }
+
+
+  /**
+   * @param group the role to set
+   */
+  public void setGroup(
+    GroupEntity group)
+  {
+    this.group = group;
+  }
 
 }

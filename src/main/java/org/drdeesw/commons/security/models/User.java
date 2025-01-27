@@ -19,14 +19,14 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * @author gary_kephart
  *
  */
-public interface User extends NamedLongUniqueObject
+public interface User<A extends Account<?,?,?>> extends NamedLongUniqueObject
 {
 
   /** Returns the account associated with the user.
    * 
    * @return the account associated with the user
    */
-  Account getAccount();
+  A getAccount();
 
 
   /**
@@ -51,7 +51,7 @@ public interface User extends NamedLongUniqueObject
    * @param account the account to set
    */
   void setAccount(
-    Account account);
+    A account);
 
 
   /**

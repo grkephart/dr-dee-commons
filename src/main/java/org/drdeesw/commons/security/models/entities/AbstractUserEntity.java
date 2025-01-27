@@ -7,12 +7,9 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 
@@ -27,10 +24,8 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity implements User
+public abstract class AbstractUserEntity<A extends Account<?,?,?>> extends AbstractNamedLongUniqueEntity implements User<A>
 {
-  private AccountEntity account;
-
   /**
    * true if the user is enabled
    */
@@ -79,24 +74,11 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   }
 
 
-  protected AbstractUserEntity(User that)
+  protected AbstractUserEntity(User<?> that)
   {
     super(that);
-    this.account = (AccountEntity)that.getAccount();
     this.enabled = that.isEnabled();
     this.username = that.getUsername();
-  }
-
-
-  /**
-   * @return the account
-   */
-  @Override
-  @OneToOne(targetEntity = AccountEntity.class, optional = false)
-  @JoinColumn(name = "account_id")
-  public AccountEntity getAccount()
-  {
-    return account;
   }
 
 
@@ -120,17 +102,6 @@ public abstract class AbstractUserEntity extends AbstractNamedLongUniqueEntity i
   public boolean isEnabled()
   {
     return enabled;
-  }
-
-
-  /**
-   * @param account the account to set
-   */
-  @Override
-  public void setAccount(
-    Account account)
-  {
-    this.account = (AccountEntity)account;
   }
 
 

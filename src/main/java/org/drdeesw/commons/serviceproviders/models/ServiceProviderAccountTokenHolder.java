@@ -12,7 +12,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 /**
  * 
  */
-public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
+public interface ServiceProviderAccountTokenHolder<A extends ServiceProviderAccount<?,?,?>> extends LongUniqueObject
 {
   /**
    * Returns the accessToken.
@@ -35,7 +35,7 @@ public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
    * 
    * @return the serviceProviderAccount
    */
-  ServiceProviderAccount<?,?,?> getAccount();
+  A getAccount();
 
 
   /**
@@ -78,7 +78,7 @@ public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
    * @param account the serviceProviderAccount
    */
   void setAccount(
-    ServiceProviderAccount<?,?,?> account);
+    A account);
 
 
   /**

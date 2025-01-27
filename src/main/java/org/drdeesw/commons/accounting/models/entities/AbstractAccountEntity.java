@@ -12,11 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
@@ -34,16 +30,14 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @MappedSuperclass
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User> extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
+public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User>
+    extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
 {
-  private boolean               active;
+  private boolean           active;
   @Embedded
-  private EmbeddedAuditable     audit;
-  private String                description;
-  private AccountHolderEntity   holder;
-  private String                internalId;
-  private AccountProviderEntity provider;
-  private UserEntity            user;
+  private EmbeddedAuditable audit;
+  private String            description;
+  private String            internalId;
 
   @Override
   public User getCreatedBy()
@@ -67,16 +61,6 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
   }
 
 
-  @SuppressWarnings("unchecked")
-  @Override
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_holder_id", nullable = false)
-  public H getHolder()
-  {
-    return (H)holder;
-  }
-
-
   @Override
   @Column(name = "internal_id")
   public String getInternalId()
@@ -96,26 +80,6 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
   public User getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @SuppressWarnings("unchecked")
-  @Override
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_provider_id", nullable = false)
-  public P getProvider()
-  {
-    return (P)provider;
-  }
-
-
-  @SuppressWarnings("unchecked")
-  @Override
-  @OneToOne
-  @JoinColumn(name = "user_id")
-  public U getUser()
-  {
-    return (U)user;
   }
 
 
@@ -160,14 +124,6 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
 
   @Override
-  public void setHolder(
-    H accountHolder)
-  {
-    this.holder = (AccountHolderEntity)accountHolder;
-  }
-
-
-  @Override
   public void setInternalId(
     String internalId)
   {
@@ -188,21 +144,5 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setProvider(
-    P accountProvider)
-  {
-    this.provider = (AccountProviderEntity)accountProvider;
-  }
-
-
-  @Override
-  public void setUser(
-    User user)
-  {
-    this.user = (UserEntity)user;
   }
 }

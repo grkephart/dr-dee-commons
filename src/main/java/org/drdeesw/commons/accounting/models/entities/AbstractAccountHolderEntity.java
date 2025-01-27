@@ -5,18 +5,14 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
-import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
-import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
@@ -40,8 +36,8 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
   private EmbeddedAuditable audit;
   private String            description;
   private boolean           enabled;
-  private Set<A>            heldAccounts;
-
+  
+  
   public AbstractAccountHolderEntity()
   {
   }
@@ -72,14 +68,6 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
   public String getDescription()
   {
     return description;
-  }
-
-
-  @Override
-  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<A> getHeldAccounts()
-  {
-    return heldAccounts;
   }
 
 
@@ -134,14 +122,6 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  @Override
-  public void setHeldAccounts(
-    Set<A> heldAccounts)
-  {
-    this.heldAccounts = heldAccounts;
   }
 
 

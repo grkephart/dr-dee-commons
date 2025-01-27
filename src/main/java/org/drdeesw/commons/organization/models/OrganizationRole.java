@@ -15,7 +15,8 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enableable, Describable
+public interface OrganizationRole<O extends Organization<?>, MR extends OrganizationMemberRole<?, ?>>
+    extends NamedLongUniqueObject, Auditable, Enableable, Describable
 {
 
   /**
@@ -23,7 +24,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * 
    * @return the organization members for this role.
    */
-  public Set<OrganizationMemberRole> getMemberRoles();
+  public Set<MR> getMemberRoles();
 
 
   /**
@@ -31,7 +32,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * 
    * @return the organization associated with this role
    */
-  Organization<?> getOrganization();
+  O getOrganization();
 
 
   /**
@@ -40,7 +41,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * @param memberRoles the member roles to set
    */
   public void setMemberRoles(
-    Set<OrganizationMemberRole> memberRoles);
+    Set<MR> memberRoles);
 
 
   /**
@@ -49,5 +50,5 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * @param organization the new organization associated with this role
    */
   void setOrganization(
-    Organization<?> organization);
+    O organization);
 }

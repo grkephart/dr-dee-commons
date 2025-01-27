@@ -20,7 +20,7 @@ public interface Auditable
    * 
    * @return the user who created the object
    */
-  User getCreatedBy();
+  User<?> getCreatedBy();
 
 
   /**
@@ -44,7 +44,7 @@ public interface Auditable
    * 
    * @return the user who last updated the object
    */
-  User getLastUpdatedBy();
+  User<?> getLastUpdatedBy();
 
 
   /**
@@ -53,7 +53,7 @@ public interface Auditable
    * @param createdBy the user who created the object
    */
   void setCreatedBy(
-    User createdBy);
+    User<?> createdBy);
 
 
   /**
@@ -80,5 +80,5 @@ public interface Auditable
    * @param lastUpdatedBy the user who last updated the object
    */
   void setLastUpdatedBy(
-    User lastUpdatedBy);
+    User<?> lastUpdatedBy);
 }

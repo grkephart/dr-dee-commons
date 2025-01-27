@@ -10,8 +10,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
@@ -29,15 +27,12 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationMemberRole
+public abstract class AbstractOrganizationMemberRoleEntity<M extends OrganizationMember<?,?,?>, R extends OrganizationRole> extends AbstractNamedLongUniqueEntity
+    implements OrganizationMemberRole<M, R>
 {
   @Embedded
   private EmbeddedAuditable        audit;
   private boolean                  enabled = true;
-  private OrganizationMemberEntity member;
-  private OrganizationRoleEntity   role;
-
   /**
    * 
    */
@@ -72,24 +67,6 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
   public User getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "member_id")
-  public OrganizationMemberEntity getMember()
-  {
-    return this.member;
-  }
-
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "role_id")
-  public OrganizationRoleEntity getRole()
-  {
-    return this.role;
   }
 
 
@@ -138,22 +115,6 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractNamed
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setMember(
-    OrganizationMember member)
-  {
-    this.member = (OrganizationMemberEntity)member;
-  }
-
-
-  @Override
-  public void setRole(
-    OrganizationRole role)
-  {
-    this.role = (OrganizationRoleEntity)role;
   }
 
 }

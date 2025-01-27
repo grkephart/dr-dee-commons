@@ -5,20 +5,12 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
@@ -35,16 +27,12 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationMember
+public abstract class AbstractOrganizationMemberEntity<R extends OrganizationMemberRole, O extends Organization<?>, U extends User> extends AbstractNamedLongUniqueEntity
+    implements OrganizationMember<R, O, U>
 {
   @Embedded
   private EmbeddedAuditable                 audit;
   private boolean                           enabled;
-  private Set<OrganizationMemberRoleEntity> memberRoles;
-  private OrganizationEntity                organization;
-  private UserEntity                        user;
-
   /**
    * 
    */
@@ -79,38 +67,6 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
   public User getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  public Set<OrganizationMemberRole> getMemberRoles()
-  {
-    return memberRoles == null ? Set.of() : new HashSet<>(this.memberRoles);
-  }
-
-
-  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<OrganizationMemberRoleEntity> getMemberRolesInternal()
-  {
-    return this.memberRoles;
-  }
-
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "organization_id", nullable = false)
-  public OrganizationEntity getOrganization()
-  {
-    return this.organization;
-  }
-
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  public UserEntity getUser()
-  {
-    return this.user;
   }
 
 
@@ -159,30 +115,6 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setMemberRoles(Set<OrganizationMemberRole> roles) {
-      this.memberRoles = roles.stream()
-          .map(role -> (OrganizationMemberRoleEntity) role)
-          .collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public void setOrganization(
-    Organization<?> organization)
-  {
-    this.organization = (OrganizationEntity)organization;
-  }
-
-
-  @Override
-  public void setUser(
-    User user)
-  {
-    this.user = (UserEntity)user;
   }
 
 }

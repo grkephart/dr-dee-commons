@@ -11,15 +11,8 @@ import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntit
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountHolderEntity extends AbstractAccountHolderEntity
+public abstract class AbstractOrganizationAccountHolderEntity<A extends OrganizationAccountEntity>
+    extends AbstractAccountHolderEntity<A>
 {
-
-  /**
-   * Hibernate constructor
-   */
-  protected AbstractOrganizationAccountHolderEntity()
-  {
-
-  }
 
 }

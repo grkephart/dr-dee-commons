@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
 import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
 /**
@@ -31,17 +32,10 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 public class ServiceProviderAccountEntity extends
     AbstractServiceProviderAccountEntity<AccountHolderEntity, ServiceProviderEntity, UserEntity>
 {
-  private AccountHolderEntity   holder;
-  private ServiceProviderEntity provider;
-  private UserEntity            user;
-
-  @Override
-  @Column(name = "service_provider_account_id")
-  public Long getId()
-  {
-    return super.getId();
-  }
-
+  private AccountHolderEntity                     holder;
+  private ServiceProviderEntity                   provider;
+  private ServiceProviderAccountTokenHolderEntity tokenHolder;
+  private UserEntity                              user;
 
   @Override
   @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
@@ -53,11 +47,28 @@ public class ServiceProviderAccountEntity extends
 
 
   @Override
+  @Column(name = "service_provider_account_id")
+  public Long getId()
+  {
+    return super.getId();
+  }
+
+
+  @Override
   @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
   @JoinColumn(name = "account_provider_id", nullable = false)
   public ServiceProviderEntity getProvider()
   {
     return this.provider;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "token_holder_id", nullable = false)
+  public ServiceProviderAccountTokenHolderEntity getTokenHolder()
+  {
+    return this.tokenHolder;
   }
 
 
@@ -87,10 +98,25 @@ public class ServiceProviderAccountEntity extends
 
 
   @Override
+  public void setTokenHolder(
+    ServiceProviderAccountTokenHolder<?> tokenHolder)
+  {
+    this.tokenHolder = (ServiceProviderAccountTokenHolderEntity)tokenHolder;
+  }
+
+
+  @Override
   public void setUser(
     UserEntity user)
   {
     this.user = user;
+  }
+
+
+  @Override
+  public ServiceProviderEntity getServiceProvider()
+  {
+    return this.provider;
   }
 
 }

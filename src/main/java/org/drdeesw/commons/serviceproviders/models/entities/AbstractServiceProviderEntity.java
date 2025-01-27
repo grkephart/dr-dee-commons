@@ -12,13 +12,13 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -27,7 +27,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
+public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAccount<?, ?, ?>>
     extends AbstractNamedLongUniqueEntity implements ServiceProvider<A>
 {
   @Embedded
@@ -74,7 +74,7 @@ public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -103,7 +103,7 @@ public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -135,7 +135,7 @@ public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -175,7 +175,7 @@ public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

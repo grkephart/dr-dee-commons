@@ -5,18 +5,14 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
-import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
-import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
@@ -40,7 +36,6 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
   private EmbeddedAuditable audit;
   private String            description;
   private boolean           enabled;
-  private Set<A>            providedAccounts;
 
   @Override
   public User getCreatedBy()
@@ -75,14 +70,6 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
   public User getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<A> getProvidedAccounts()
-  {
-    return providedAccounts;
   }
 
 
@@ -139,14 +126,6 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setProvidedAccounts(
-    Set<A> accounts)
-  {
-    this.providedAccounts = accounts;
   }
 
 }

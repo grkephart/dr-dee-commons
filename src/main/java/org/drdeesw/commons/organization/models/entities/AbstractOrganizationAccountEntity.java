@@ -10,15 +10,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
-import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
-import org.drdeesw.commons.accounting.models.entities.AccountProviderEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
@@ -32,18 +27,16 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationAccount
+public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User> extends AbstractNamedLongUniqueEntity
+    implements OrganizationAccount<H, P, U>
 {
   @Embedded
   private EmbeddedAuditable   audit;
   private boolean             active;
   private String              description;
-  private AccountHolderEntity holder;
   private String              internalId;
-  private OrganizationEntity  provider;
-  private UserEntity          user;
-
+  
+  
   /**
    * Hibernate constructor
    */
@@ -76,15 +69,6 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
-  @ManyToOne(targetEntity = AccountHolderEntity.class, optional = false)
-  @JoinColumn(name = "holder_id", nullable = false)
-  public AccountHolderEntity getHolder()
-  {
-    return this.holder;
-  }
-
-
-  @Override
   @Column(name = "internal_id")
   public String getInternalId()
   {
@@ -103,24 +87,6 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
   public User getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  @ManyToOne(targetEntity = AccountProviderEntity.class, optional = false)
-  @JoinColumn(name = "provider_id", nullable = false)
-  public OrganizationEntity getProvider()
-  {
-    return this.provider;
-  }
-
-
-  @Override
-  @OneToOne
-  @JoinColumn(name = "user_id")
-  public UserEntity getUser()
-  {
-    return user;
   }
 
 
@@ -165,14 +131,6 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
 
 
   @Override
-  public void setHolder(
-    AccountHolder accountHolder)
-  {
-    this.holder = (AccountHolderEntity)accountHolder;
-  }
-
-
-  @Override
   public void setInternalId(
     String internalId)
   {
@@ -193,22 +151,6 @@ public abstract class AbstractOrganizationAccountEntity extends AbstractNamedLon
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Override
-  public void setProvider(
-    AccountProvider accountProvider)
-  {
-    this.provider = (OrganizationEntity)accountProvider;
-  }
-
-
-  @Override
-  public void setUser(
-    User user)
-  {
-    this.user = (UserEntity)user;
   }
 
 }

@@ -34,7 +34,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the organization members.
    */
-  Set<OrganizationMember> getMembers();
+  Set<OrganizationMember<?,?,?>> getMembers();
 
 
   /**
@@ -50,7 +50,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the organization roles.
    */
-  Set<OrganizationRole> getRoles();
+  Set<OrganizationRole<?,?>> getRoles();
 
 
   /**
@@ -84,7 +84,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param members the organization members to set
    */
   void setMembers(
-    Set<OrganizationMember> members);
+    Set<OrganizationMember<?,?,?>> members);
 
 
   /**
@@ -102,7 +102,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param roles the organization roles to set
    */
   void setRoles(
-    Set<OrganizationRole> roles);
+    Set<OrganizationRole<?,?>> roles);
 
 
   /**

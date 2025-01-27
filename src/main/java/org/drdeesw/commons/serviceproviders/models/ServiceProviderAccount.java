@@ -12,17 +12,17 @@ import org.drdeesw.commons.security.models.User;
 /**
  * Represents a service provider account. Contains account information and tokens.
  */
-public interface ServiceProviderAccount<H extends AccountHolder<?>, P extends ServiceProvider<?>, U extends User>
+public interface ServiceProviderAccount<H extends AccountHolder<?>, P extends ServiceProvider<?>, U extends User<?>>
     extends Account<H, P, U>
 {
-  ServiceProvider<Account<H, P, U>> getServiceProvider();
+  ServiceProvider<?> getServiceProvider();
 
   /**
    * Returns the token holder for the account.
    * 
    * @return the serviceProviderAccountTokenHolder
    */
-  ServiceProviderAccountTokenHolder getTokenHolder();
+  ServiceProviderAccountTokenHolder<?> getTokenHolder();
 
 
   /**
@@ -31,5 +31,5 @@ public interface ServiceProviderAccount<H extends AccountHolder<?>, P extends Se
    * @param tokenHolder the serviceProviderAccountTokenHolder
    */
   void setTokenHolder(
-    ServiceProviderAccountTokenHolder tokenHolder);
+    ServiceProviderAccountTokenHolder<?> tokenHolder);
 }

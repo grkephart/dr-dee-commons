@@ -4,8 +4,6 @@ package org.drdeesw.commons.security.models.entities;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
@@ -23,12 +21,10 @@ import org.drdeesw.commons.security.models.GroupAuthority;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<Long>
-    implements GroupAuthority
+public abstract class AbstractGroupAuthorityEntity<G extends Group>
+    extends AbstractUniqueEntity<Long> implements GroupAuthority<G>
 {
-  private String      authority;
-  private GroupEntity group;
-
+  private String authority;
   /**
    * Hibernate
    */
@@ -52,27 +48,10 @@ public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<
 
 
   @Override
-  @ManyToOne
-  @JoinColumn(name = "group_id")
-  public GroupEntity getGroup()
-  {
-    return this.group;
-  }
-
-
-  @Override
   public void setAuthority(
     String authority)
   {
     this.authority = authority;
-  }
-
-
-  @Override
-  public void setGroup(
-    Group systemGroup)
-  {
-    this.group = (GroupEntity)systemGroup;
   }
 
 }

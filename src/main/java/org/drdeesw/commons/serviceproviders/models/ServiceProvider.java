@@ -4,7 +4,6 @@
 package org.drdeesw.commons.serviceproviders.models;
 
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
@@ -14,7 +13,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface ServiceProvider<A extends Account<?,?,?>>
+public interface ServiceProvider<A extends ServiceProviderAccount<?,?,?>>
     extends NamedLongUniqueObject, AccountProvider<A>, Auditable, Describable
 {
   /**

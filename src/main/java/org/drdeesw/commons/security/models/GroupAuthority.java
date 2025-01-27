@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 /**
  * 
  */
-public interface GroupAuthority extends LongUniqueObject
+public interface GroupAuthority<G extends Group> extends LongUniqueObject
 {
   /**
    * Returns the authority granted to the group.
@@ -25,7 +25,7 @@ public interface GroupAuthority extends LongUniqueObject
    * 
    * @return the group
    */
-  Group getGroup();
+  G getGroup();
 
 
   /**
@@ -43,5 +43,5 @@ public interface GroupAuthority extends LongUniqueObject
    * @param group the group
    */
   void setGroup(
-    Group group);
+    G group);
 }
