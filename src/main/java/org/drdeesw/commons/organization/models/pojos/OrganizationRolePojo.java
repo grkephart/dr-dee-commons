@@ -72,7 +72,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
 
   @Override
-  public Organization getOrganization()
+  public Organization<?> getOrganization()
   {
     return organization;
   }
@@ -143,7 +143,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo implements
 
   @Override
   public void setOrganization(
-    Organization organization)
+    Organization<?> organization)
   {
     this.organization = (OrganizationPojo)organization;
   }

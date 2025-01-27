@@ -39,7 +39,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
 
 
   @Override
-  public ServiceProviderAccount getAccount()
+  public ServiceProviderAccount<?,?,?> getAccount()
   {
     return account;
   }
@@ -77,7 +77,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
 
   @Override
   public void setAccount(
-    ServiceProviderAccount account)
+    ServiceProviderAccount<?,?,?> account)
   {
     this.account = (ServiceProviderAccountPojo)account;
   }

@@ -31,7 +31,7 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * 
    * @return the organization associated with this role
    */
-  Organization getOrganization();
+  Organization<?> getOrganization();
 
 
   /**
@@ -49,5 +49,5 @@ public interface OrganizationRole extends NamedLongUniqueObject, Auditable, Enab
    * @param organization the new organization associated with this role
    */
   void setOrganization(
-    Organization organization);
+    Organization<?> organization);
 }

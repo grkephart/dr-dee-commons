@@ -6,10 +6,8 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.identity.models.Person;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.identity.models.pojos.PersonPojo;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,11 +41,11 @@ class OrganizationPojoTest
   {
     OrganizationPojo parent = new OrganizationPojo();
     OrganizationPojo org = new OrganizationPojo();
-    Set<Account> heldAccounts = new HashSet<Account>();
-    OrganizationAccount heldAccount1 = new OrganizationAccountPojo();
-    Set<Account> providedAccounts = new HashSet<Account>();
-    OrganizationAccount providedAccounts1 = new OrganizationAccountPojo();
-    Person person = new PersonPojo();
+    Set<AccountPojo> heldAccounts = new HashSet<AccountPojo>();
+    OrganizationAccountPojo heldAccount1 = new OrganizationAccountPojo();
+    Set<AccountPojo> providedAccounts = new HashSet<AccountPojo>();
+    OrganizationAccountPojo providedAccounts1 = new OrganizationAccountPojo();
+    PersonPojo  person = new PersonPojo();
     
     heldAccount1.setHolder(person);
     heldAccount1.setProvider(org);

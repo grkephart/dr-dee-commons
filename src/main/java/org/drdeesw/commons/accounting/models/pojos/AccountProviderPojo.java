@@ -6,7 +6,6 @@ package org.drdeesw.commons.accounting.models.pojos;
 
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 
@@ -16,10 +15,10 @@ import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
  */
 @SuppressWarnings("serial")
 public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
-    implements AccountProvider
+    implements AccountProvider<AccountPojo>
 {
   private String       description;
-  private Set<Account> providedAccounts;
+  private Set<AccountPojo> providedAccounts;
 
   @Override
   public String getDescription()
@@ -29,7 +28,7 @@ public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
 
 
   @Override
-  public Set<Account> getProvidedAccounts()
+  public Set<AccountPojo> getProvidedAccounts()
   {
     return this.providedAccounts;
   }
@@ -45,7 +44,7 @@ public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
 
   @Override
   public void setProvidedAccounts(
-    Set<Account> providedAccounts)
+    Set<AccountPojo> providedAccounts)
   {
     this.providedAccounts = providedAccounts;
   }

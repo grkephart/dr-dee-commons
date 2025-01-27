@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models;
 
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 
@@ -17,14 +18,15 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
  * The organization can provide accounts and hold accounts.
  * 
  */
-public interface Organization extends AccountProvider, AccountHolder
+public interface Organization<A extends Account<?, ?, ?>>
+    extends AccountProvider<A>, AccountHolder<A>
 {
   /**
    * Returns the children organizations.
    * 
    * @return the children organizations.
    */
-  Set<Organization> getChildren();
+  Set<Organization<?>> getChildren();
 
 
   /**
@@ -40,7 +42,7 @@ public interface Organization extends AccountProvider, AccountHolder
    * 
    * @return the parent
    */
-  Organization getParent();
+  Organization<?> getParent();
 
 
   /**
@@ -73,7 +75,7 @@ public interface Organization extends AccountProvider, AccountHolder
    * @param children the children organizations to set
    */
   void setChildren(
-    Set<Organization> children);
+    Set<Organization<?>> children);
 
 
   /**
@@ -91,7 +93,7 @@ public interface Organization extends AccountProvider, AccountHolder
    * @param parent the parent to set
    */
   void setParent(
-    Organization parent);
+    Organization<?> parent);
 
 
   /**

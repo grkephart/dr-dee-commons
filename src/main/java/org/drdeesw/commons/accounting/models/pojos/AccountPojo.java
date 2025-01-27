@@ -7,8 +7,6 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
@@ -18,25 +16,26 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
+public class AccountPojo extends AbstractNamedLongUniquePojo
+    implements Account<AccountHolderPojo, AccountProviderPojo, UserPojo>
 {
-  private AccountHolder   accountHolder;
-  private boolean         active;
-  private UserPojo        createdBy;
-  private Instant         creationDate;
-  private String          description;
-  private String          internalId;
-  private UserPojo        lastUpdatedBy;
-  private Instant         lastUpdatedDate;
-  private AccountProvider provider;
-  private UserPojo        user;
+  private AccountHolderPojo   accountHolder;
+  private boolean             active;
+  private UserPojo            createdBy;
+  private Instant             creationDate;
+  private String              description;
+  private String              internalId;
+  private UserPojo            lastUpdatedBy;
+  private Instant             lastUpdatedDate;
+  private AccountProviderPojo provider;
+  private UserPojo            user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(AccountProvider provider, String internalId)
+  public AccountPojo(AccountProviderPojo provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -71,7 +70,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
 
   @Override
-  public AccountHolder getHolder()
+  public AccountHolderPojo getHolder()
   {
     return accountHolder;
   }
@@ -99,14 +98,14 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
 
   @Override
-  public AccountProvider getProvider()
+  public AccountProviderPojo getProvider()
   {
     return provider;
   }
 
 
   @Override
-  public User getUser()
+  public UserPojo getUser()
   {
     return this.user;
   }
@@ -153,9 +152,9 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
   @Override
   public void setHolder(
-    AccountHolder accountHolder)
+    AccountHolderPojo accountHolder)
   {
-    this.accountHolder = (AccountHolder)accountHolder;
+    this.accountHolder = accountHolder;
   }
 
 
@@ -185,7 +184,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
   @Override
   public void setProvider(
-    AccountProvider provider)
+    AccountProviderPojo provider)
   {
     this.provider = provider;
   }
@@ -193,7 +192,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo implements Account
 
   @Override
   public void setUser(
-    User user)
+    UserPojo user)
   {
     this.user = (UserPojo)user;
   }

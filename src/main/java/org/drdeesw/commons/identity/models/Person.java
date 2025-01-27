@@ -3,6 +3,7 @@
  */
 package org.drdeesw.commons.identity.models;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
@@ -13,7 +14,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  * A user is a mechanism by which a person can interact with a system via an account.
  * Therefore, an account has a user, and a holder (person).
  */
-public interface Person extends NamedLongUniqueObject, AccountHolder
+public interface Person<A extends Account<?,?,?>> extends NamedLongUniqueObject, AccountHolder<A>
 {
 
 }

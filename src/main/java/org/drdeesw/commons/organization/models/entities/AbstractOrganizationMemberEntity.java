@@ -172,7 +172,7 @@ public abstract class AbstractOrganizationMemberEntity extends AbstractNamedLong
 
   @Override
   public void setOrganization(
-    Organization organization)
+    Organization<?> organization)
   {
     this.organization = (OrganizationEntity)organization;
   }

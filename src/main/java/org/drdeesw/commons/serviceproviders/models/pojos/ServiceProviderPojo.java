@@ -8,30 +8,28 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements ServiceProvider
+public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
+    implements ServiceProvider<ServiceProviderAccountPojo>
 {
-  private AuthenticationType          authenticationType;
-  private String                      clientRegistrationId;
-  private User                        createdBy;
-  private Instant                     creationDate;
-  private String                      description;
-  private boolean                     enabled;
-  private Instant                     lastUpdateDate;
-  private User                        lastUpdatedBy;
-  private Set<ServiceProviderAccount> providedAccounts;
+  private AuthenticationType              authenticationType;
+  private String                          clientRegistrationId;
+  private User                            createdBy;
+  private Instant                         creationDate;
+  private String                          description;
+  private boolean                         enabled;
+  private Instant                         lastUpdateDate;
+  private User                            lastUpdatedBy;
+  private Set<ServiceProviderAccountPojo> providedAccounts;
 
   @Override
   public AuthenticationType getAuthenticationType()
@@ -83,10 +81,10 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
 
 
   @Override
-  public Set<Account> getProvidedAccounts()
+  public Set<ServiceProviderAccountPojo> getProvidedAccounts()
   {
     return this.providedAccounts.stream()//
-        .map(account -> (Account)account)//
+        .map(account -> (ServiceProviderAccountPojo)account)//
         .collect(Collectors.toSet());
   }
 
@@ -164,46 +162,12 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo implements 
 
   @Override
   public void setProvidedAccounts(
-    Set<Account> providedAccounts)
+    Set<ServiceProviderAccountPojo> providedAccounts)
   {
-     this.providedAccounts = providedAccounts.stream()//
-        .map(account -> (ServiceProviderAccount)account)//
+    this.providedAccounts = providedAccounts.stream()//
+        .map(account -> (ServiceProviderAccountPojo)account)//
         .collect(Collectors.toSet());
-  
-  }
 
-
-  @Override
-  public Set<OrganizationAccount> getProvidedOrganizationAccounts()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public void setProvidedOrganizationAccounts(
-    Set<OrganizationAccount> accounts)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public void setProvidedServiceProviderAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    // TODO Auto-generated method stub
-    
   }
 
 }

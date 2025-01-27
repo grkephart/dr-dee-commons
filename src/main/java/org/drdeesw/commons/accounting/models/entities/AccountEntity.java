@@ -12,6 +12,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.security.models.entities.UserEntity;
+
 
 /**
  * 
@@ -21,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "accounts")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class AccountEntity extends AbstractAccountEntity
+public class AccountEntity extends AbstractAccountEntity<AccountHolderEntity, AccountProviderEntity, UserEntity>
 {
 
   @Override

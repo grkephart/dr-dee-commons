@@ -35,7 +35,7 @@ public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
    * 
    * @return the serviceProviderAccount
    */
-  ServiceProviderAccount getAccount();
+  ServiceProviderAccount<?,?,?> getAccount();
 
 
   /**
@@ -78,7 +78,7 @@ public interface ServiceProviderAccountTokenHolder extends LongUniqueObject
    * @param account the serviceProviderAccount
    */
   void setAccount(
-    ServiceProviderAccount account);
+    ServiceProviderAccount<?,?,?> account);
 
 
   /**

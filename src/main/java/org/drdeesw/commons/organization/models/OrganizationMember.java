@@ -22,7 +22,7 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * 
    * @return the organization
    */
-  public Organization getOrganization();
+  public Organization<?> getOrganization();
 
 
   /**
@@ -47,7 +47,7 @@ public interface OrganizationMember extends LongUniqueObject, Enableable, Audita
    * @param organization the organization to set
    */
   public void setOrganization(
-    Organization organization);
+    Organization<?> organization);
 
 
   /**

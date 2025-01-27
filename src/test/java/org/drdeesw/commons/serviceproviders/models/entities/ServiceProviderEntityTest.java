@@ -7,8 +7,6 @@ import java.time.Instant;
 import java.util.Set;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
@@ -62,9 +60,7 @@ class ServiceProviderEntityTest
     serviceProvider.setLastUpdatedBy(lastUpdatedBy);
     serviceProvider.setLastUpdateDate(lastUpdateDate);
     serviceProvider.setName(name);
-    //serviceProvider.setProvidedAccounts(null);
-    serviceProvider.setProvidedOrganizationAccounts(null);
-    serviceProvider.setProvidedServiceProviderAccounts(null);
+    serviceProvider.setProvidedAccounts(null);
 
     serviceProvider.getCreatedBy();
     serviceProvider.getCreationDate();
@@ -73,9 +69,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    //serviceProvider.getProvidedAccounts();
-    serviceProvider.getProvidedOrganizationAccounts();
-    serviceProvider.getProvidedServiceProviderAccounts();
+    serviceProvider.getProvidedAccounts();
   }
 
 
@@ -94,12 +88,8 @@ class ServiceProviderEntityTest
     Instant lastUpdateDate = Instant.now();
     ServiceProviderEntity serviceProvider = new ServiceProviderEntity(audit);
     String name = "tjttkyyryju6";
-    //AccountEntity providedAccount = new AccountEntity();
-    //Set<Account> providedAccounts = Set.of(providedAccount);
-    OrganizationAccountEntity providedOrganizationAccount = new OrganizationAccountEntity();
-    Set<OrganizationAccount> providedOrganizationAccounts = Set.of(providedOrganizationAccount);
-    ServiceProviderAccountEntity providedServiceProviderAccount = new ServiceProviderAccountEntity();
-    Set<ServiceProviderAccount> providedServiceProviderAccounts = Set.of(providedServiceProviderAccount);
+    ServiceProviderAccountEntity providedAccount = new ServiceProviderAccountEntity();
+    Set<ServiceProviderAccount> providedAccounts = Set.of(providedAccount);
 
     serviceProvider.setCreatedBy(createdBy);
     serviceProvider.setCreationDate(creationDate);
@@ -108,9 +98,7 @@ class ServiceProviderEntityTest
     serviceProvider.setLastUpdatedBy(lastUpdatedBy);
     serviceProvider.setLastUpdateDate(lastUpdateDate);
     serviceProvider.setName(name);
-    //serviceProvider.setProvidedAccounts(providedAccounts);
-    serviceProvider.setProvidedOrganizationAccounts(providedOrganizationAccounts);
-    serviceProvider.setProvidedServiceProviderAccounts(providedServiceProviderAccounts);
+    serviceProvider.setProvidedAccounts(providedAccounts);
 
     serviceProvider.getCreatedBy();
     serviceProvider.getCreationDate();
@@ -119,9 +107,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    //serviceProvider.getProvidedAccounts();
-    serviceProvider.getProvidedOrganizationAccounts();
-    serviceProvider.getProvidedServiceProviderAccounts();
+    serviceProvider.getProvidedAccounts();
   }
 
 }

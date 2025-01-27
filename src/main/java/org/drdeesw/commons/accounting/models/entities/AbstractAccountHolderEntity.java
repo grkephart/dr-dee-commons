@@ -5,9 +5,7 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -24,12 +22,8 @@ import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 
 
 /**
@@ -39,16 +33,14 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 @MappedSuperclass
 @DiscriminatorColumn(name = "holder_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqueEntity
-    implements AccountHolder
+public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
+    extends AbstractNamedLongUniqueEntity implements AccountHolder<A>
 {
   @Embedded
-  private EmbeddedAuditable                 audit;
-  private String                            description;
-  private boolean                           enabled;
-  private Set<AccountEntity>                heldAccounts;
-  private Set<OrganizationAccountEntity>    heldOrganizationAccounts    = new HashSet<>();
-  private Set<ServiceProviderAccountEntity> heldServiceProviderAccounts = new HashSet<>();
+  private EmbeddedAuditable audit;
+  private String            description;
+  private boolean           enabled;
+  private Set<A>            heldAccounts;
 
   public AbstractAccountHolderEntity()
   {
@@ -83,58 +75,11 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
   }
 
 
-  /**
-   * This exists solely to satisfy Hibernate's requirement for a concrete relationship mapping.
-   * The business logic does not use it.
-   * 
-   * @return the held accounts
-   */
+  @Override
   @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<AccountEntity> getHeldAccountsInternal()
+  public Set<A> getHeldAccounts()
   {
     return heldAccounts;
-  }
-
-
-  @Override
-  public Set<Account> getHeldAccounts()
-  {
-    return heldAccounts == null ? Set.of() : new HashSet<>(heldAccounts);
-  }
-
-
-  /**
-   * This exists solely to satisfy Hibernate's requirement for a concrete relationship mapping.
-   * The business logic does not use it.
-   * 
-   * @return the held accounts
-   */
-  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<OrganizationAccountEntity> getHeldOrganizationAccountsInternal()
-  {
-    return heldOrganizationAccounts;
-  }
-
-
-  @Override
-  public Set<OrganizationAccount> getHeldOrganizationAccounts()
-  {
-    return heldOrganizationAccounts == null ? Set.of() : new HashSet<>(heldOrganizationAccounts);
-  }
-
-
-  @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<ServiceProviderAccountEntity> getHeldServiceProviderAccountsInternal()
-  {
-    return heldServiceProviderAccounts;
-  }
-
-
-  @Override
-  public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
-  {
-    return heldServiceProviderAccounts == null ? Set.of()
-                                               : new HashSet<>(heldServiceProviderAccounts);
   }
 
 
@@ -194,31 +139,9 @@ public abstract class AbstractAccountHolderEntity extends AbstractNamedLongUniqu
 
   @Override
   public void setHeldAccounts(
-    Set<Account> heldAccounts)
+    Set<A> heldAccounts)
   {
-    // Convert Set<Account> to Set<AccountEntity>
-    this.heldAccounts = heldAccounts == null ? null
-                                             : heldAccounts.stream()
-                                                 .map(account -> (AccountEntity)account) // Ensure each item is cast to AccountEntity
-                                                 .collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public void setHeldOrganizationAccounts(
-    Set<OrganizationAccount> accounts)
-  {
-    this.heldOrganizationAccounts = accounts.stream()
-        .map(account -> (OrganizationAccountEntity)account).collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public void setHeldServiceProviderAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    this.heldServiceProviderAccounts = accounts.stream()
-        .map(account -> (ServiceProviderAccountEntity)account).collect(Collectors.toSet());
+    this.heldAccounts = heldAccounts;
   }
 
 

@@ -34,7 +34,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @MappedSuperclass
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntity implements Account
+public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User> extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
 {
   private boolean               active;
   @Embedded
@@ -67,12 +67,13 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   }
 
 
+  @SuppressWarnings("unchecked")
   @Override
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_holder_id", nullable = false)
-  public AccountHolderEntity getHolder()
+  public H getHolder()
   {
-    return holder;
+    return (H)holder;
   }
 
 
@@ -98,21 +99,23 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
   }
 
 
+  @SuppressWarnings("unchecked")
   @Override
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "account_provider_id", nullable = false)
-  public AccountProviderEntity getProvider()
+  public P getProvider()
   {
-    return provider;
+    return (P)provider;
   }
 
 
+  @SuppressWarnings("unchecked")
   @Override
   @OneToOne
   @JoinColumn(name = "user_id")
-  public UserEntity getUser()
+  public U getUser()
   {
-    return user;
+    return (U)user;
   }
 
 
@@ -158,7 +161,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
   @Override
   public void setHolder(
-    AccountHolder accountHolder)
+    H accountHolder)
   {
     this.holder = (AccountHolderEntity)accountHolder;
   }
@@ -190,7 +193,7 @@ public abstract class AbstractAccountEntity extends AbstractNamedLongUniqueEntit
 
   @Override
   public void setProvider(
-    AccountProvider accountProvider)
+    P accountProvider)
   {
     this.provider = (AccountProviderEntity)accountProvider;
   }

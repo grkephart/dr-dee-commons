@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Table(name = "account_holders")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class AccountHolderEntity extends AbstractAccountHolderEntity
+public class AccountHolderEntity extends AbstractAccountHolderEntity<AccountEntity>
 {
 
   @Override

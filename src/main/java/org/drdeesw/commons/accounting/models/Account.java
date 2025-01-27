@@ -12,7 +12,7 @@ import org.drdeesw.commons.security.models.User;
 
 /**
  * An Account is a structured record that represents the formal relationship 
- * between an {@link Account Holder} and an {@link Account Provider}, enabling the holder to 
+ * between an {@link AccountHolder} and an {@link AccountProvider}, enabling the holder to 
  * access specific services, resources, or privileges offered by the provider.
  * 
  * <p>Accounts may serve diverse purposes, such as:</p>
@@ -36,7 +36,7 @@ import org.drdeesw.commons.security.models.User;
  *   <li>A user, an authentication method which allows the holder to access online services provided by the account provider.</li>
  * </ul>
  */
-public interface Account extends NamedLongUniqueObject, Describable, Auditable
+public interface Account<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User> extends NamedLongUniqueObject, Describable, Auditable
 {
 
   /**
@@ -44,7 +44,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * 
    * @return the associated AccountHolder
    */
-  AccountHolder getHolder();
+  H getHolder();
 
 
   /**
@@ -61,7 +61,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * 
    * @return the accountProvider
    */
-  AccountProvider getProvider();
+  P getProvider();
 
 
   /**
@@ -69,7 +69,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * 
    * @return the user of the account
    */
-  User getUser();
+  U getUser();
 
 
   /**
@@ -95,7 +95,7 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * @param accountHolder
    */
   void setHolder(
-    AccountHolder accountHolder);
+    H accountHolder);
 
 
   /**
@@ -113,13 +113,13 @@ public interface Account extends NamedLongUniqueObject, Describable, Auditable
    * @param accountProvider the account provider to set
    */
   void setProvider(
-    AccountProvider accountProvider);
+    P accountProvider);
   
   /**
    * Sets the user of the account.
    * 
    * @param user the user to set
    */
-  void setUser(User user);
+  void setUser(U user);
   
 }

@@ -6,26 +6,22 @@ package org.drdeesw.commons.accounting.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements AccountHolder
+public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements AccountHolder<AccountPojo>
 {
   @ManyToOne
   @JoinColumn(name = "created_by", nullable = false)
@@ -41,10 +37,6 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   private boolean                     enabled;
 
   private Set<AccountPojo>            heldAccounts;
-
-  private Set<OrganizationAccount>    heldOrganizationAccounts;
-
-  private Set<ServiceProviderAccount> heldServiceProviderAccounts;
 
   @Column(name = "last_update_date", nullable = false)
   private Instant                     lastUpdateDate;
@@ -87,26 +79,11 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
 
 
   @Override
-  public Set<Account> getHeldAccounts()
+  public Set<AccountPojo> getHeldAccounts()
   {
-    return this.heldAccounts.stream()//
-        .map(account -> (Account)account)//
-        .collect(Collectors.toSet());
+    return this.heldAccounts;
   }
 
-
-  @Override
-  public Set<OrganizationAccount> getHeldOrganizationAccounts()
-  {
-    return this.heldOrganizationAccounts;
-  }
-
-
-  @Override
-  public Set<ServiceProviderAccount> getHeldServiceProviderAccounts()
-  {
-    return this.heldServiceProviderAccounts;
-  }
 
 
   @Override
@@ -164,28 +141,11 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
 
   @Override
   public void setHeldAccounts(
-    Set<Account> accounts)
+    Set<AccountPojo> accounts)
   {
-    this.heldAccounts = accounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
+    this.heldAccounts = accounts;
   }
 
-
-  @Override
-  public void setHeldOrganizationAccounts(
-    Set<OrganizationAccount> accounts)
-  {
-    this.heldOrganizationAccounts = accounts;
-  }
-
-
-  @Override
-  public void setHeldServiceProviderAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    this.heldServiceProviderAccounts = accounts;
-  }
 
 
   @Override

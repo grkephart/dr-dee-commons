@@ -181,7 +181,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
   @Override
   public void setOrganization(
-    Organization organization)
+    Organization<?> organization)
   {
     this.organization = (OrganizationEntity)organization;
   }

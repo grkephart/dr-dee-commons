@@ -60,7 +60,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public Organization getOrganization()
+  public Organization<?> getOrganization()
   {
     return this.organization;
   }
@@ -131,7 +131,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
   @Override
   public void setOrganization(
-    Organization organization)
+    Organization<?> organization)
   {
     this.organization = (OrganizationPojo)organization;
   }

@@ -5,31 +5,20 @@ package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -38,18 +27,15 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUniqueEntity
-    implements ServiceProvider
+public abstract class AbstractServiceProviderEntity<A extends Account<?, ?, ?>>
+    extends AbstractNamedLongUniqueEntity implements ServiceProvider<A>
 {
   @Embedded
-  private EmbeddedAuditable                 audit;
-  private AuthenticationType                authenticationType;
-  private String                            clientRegistrationId;
-  private String                            description;
-  private boolean                           enabled;
-  private Set<AccountEntity>                providedAccounts;
-  private Set<OrganizationAccountEntity>    providedOrganizationAccounts;
-  private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts;
+  private EmbeddedAuditable  audit;
+  private AuthenticationType authenticationType;
+  private String             clientRegistrationId;
+  private String             description;
+  private boolean            enabled;
 
   /**
    * Hibernate constructor
@@ -123,51 +109,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
   }
 
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<AccountEntity> getProvidedAccountsInternal()
-  {
-    return this.providedAccounts;
-  }
-
-
-  @Deprecated // Use typed methods instead
-  @Override
-  public Set<Account> getProvidedAccounts()
-  {
-    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
-  }
-
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<OrganizationAccountEntity> getProvidedOrganizationAccountsInternal()
-  {
-    return this.providedOrganizationAccounts;
-  }
-
-
-  @Override
-  public Set<OrganizationAccount> getProvidedOrganizationAccounts()
-  {
-    return providedOrganizationAccounts == null ? Set.of()
-                                                : new HashSet<>(providedOrganizationAccounts);
-  }
-
-
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<ServiceProviderAccountEntity> getProvidedServiceProviderAccountsInternal()
-  {
-    return this.providedServiceProviderAccounts;
-  }
-
-
-  @Override
-  public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
-  {
-    return providedServiceProviderAccounts == null ? Set.of()
-                                                   : new HashSet<>(providedServiceProviderAccounts);
-  }
-
-
   @Override
   @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
@@ -237,38 +178,6 @@ public abstract class AbstractServiceProviderEntity extends AbstractNamedLongUni
     User lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
-  }
-
-
-  @Deprecated // Use typed methods instead
-  @Override
-  public void setProvidedAccounts(
-    Set<Account> accounts)
-  {
-    this.providedAccounts = Optional.ofNullable(accounts)
-        .map(a -> a.stream().map(AccountEntity.class::cast).collect(Collectors.toSet()))
-        .orElse(null);
-  }
-
-
-  @Override
-  public void setProvidedOrganizationAccounts(
-    Set<OrganizationAccount> accounts)
-  {
-    this.providedOrganizationAccounts = Optional.ofNullable(accounts)
-        .map(a -> a.stream().map(OrganizationAccountEntity.class::cast).collect(Collectors.toSet()))
-        .orElse(null);
-  }
-
-
-  @Override
-  public void setProvidedServiceProviderAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    this.providedServiceProviderAccounts = Optional.ofNullable(accounts)
-        .map(
-          a -> a.stream().map(ServiceProviderAccountEntity.class::cast).collect(Collectors.toSet()))
-        .orElse(null);
   }
 
 }

@@ -5,9 +5,7 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -24,12 +22,8 @@ import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.entities.OrganizationAccountEntity;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
-import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 
 
 /**
@@ -39,16 +33,14 @@ import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccou
 @MappedSuperclass
 @DiscriminatorColumn(name = "provider_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUniqueEntity
-    implements AccountProvider
+public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
+    extends AbstractNamedLongUniqueEntity implements AccountProvider<A>
 {
   @Embedded
-  private EmbeddedAuditable                 audit;
-  private String                            description;
-  private boolean                           enabled;
-  private Set<AccountEntity>                providedAccounts;
-  private Set<OrganizationAccountEntity>    providedOrganizationAccounts    = new HashSet<>();
-  private Set<ServiceProviderAccountEntity> providedServiceProviderAccounts = new HashSet<>();
+  private EmbeddedAuditable audit;
+  private String            description;
+  private boolean           enabled;
+  private Set<A>            providedAccounts;
 
   @Override
   public User getCreatedBy()
@@ -87,46 +79,10 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
 
   @Override
-  public Set<Account> getProvidedAccounts()
-  {
-    return providedAccounts == null ? Set.of() : new HashSet<>(providedAccounts);
-  }
-
-
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<AccountEntity> getProvidedAccountsInternal()
+  public Set<A> getProvidedAccounts()
   {
     return providedAccounts;
-  }
-
-
-  @Override
-  public Set<OrganizationAccount> getProvidedOrganizationAccounts()
-  {
-    return providedOrganizationAccounts == null ? Set.of()
-                                                : new HashSet<>(providedOrganizationAccounts);
-  }
-
-
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<OrganizationAccountEntity> getProvidedOrganizationAccountsInternal()
-  {
-    return providedOrganizationAccounts;
-  }
-
-
-  @Override
-  public Set<ServiceProviderAccount> getProvidedServiceProviderAccounts()
-  {
-    return providedServiceProviderAccounts == null ? Set.of()
-                                                   : new HashSet<>(providedServiceProviderAccounts);
-  }
-
-
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<ServiceProviderAccountEntity> getProvidedServiceProviderAccountsInternal()
-  {
-    return providedServiceProviderAccounts;
   }
 
 
@@ -188,34 +144,9 @@ public abstract class AbstractAccountProviderEntity extends AbstractNamedLongUni
 
   @Override
   public void setProvidedAccounts(
-    Set<Account> accounts)
+    Set<A> accounts)
   {
-    if (accounts == null)
-    {
-      this.providedAccounts = null;
-    }
-    else
-    {
-      this.providedAccounts = accounts.stream().map(account -> (AccountEntity)account)
-          .collect(Collectors.toSet());
-    }
+    this.providedAccounts = accounts;
   }
 
-
-  @Override
-  public void setProvidedOrganizationAccounts(
-    Set<OrganizationAccount> accounts)
-  {
-    this.providedOrganizationAccounts = accounts.stream()
-        .map(account -> (OrganizationAccountEntity)account).collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public void setProvidedServiceProviderAccounts(
-    Set<ServiceProviderAccount> accounts)
-  {
-    this.providedServiceProviderAccounts = accounts.stream()
-        .map(account -> (ServiceProviderAccountEntity)account).collect(Collectors.toSet());
-  }
 }
