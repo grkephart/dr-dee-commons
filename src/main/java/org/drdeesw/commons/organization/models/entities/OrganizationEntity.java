@@ -5,9 +5,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -22,11 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationRole;
 
 
 /**
@@ -37,10 +32,11 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
 @Table(name = "organizations")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationAccountEntity>
+public class OrganizationEntity extends
+    AbstractOrganizationEntity<OrganizationAccountEntity, OrganizationMemberEntity, OrganizationRoleEntity>
 {
-  private Set<OrganizationEntity>        children;
-  private Set<AccountEntity>             heldAccounts     = new HashSet<>();
+  private Set<OrganizationEntity>        children         = new HashSet<>();
+  private Set<OrganizationAccountEntity> heldAccounts     = new HashSet<>();
   private Set<OrganizationMemberEntity>  members          = new HashSet<>();
   private OrganizationEntity             parent;
   private Set<OrganizationAccountEntity> providedAccounts = new HashSet<>();
@@ -74,9 +70,9 @@ public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationA
 
   @Override
   @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  public Set<AccountEntity> getHeldAccounts()
+  public Set<OrganizationAccountEntity> getHeldAccounts()
   {
-    return heldAccounts == null ? Set.of() : new HashSet<>(heldAccounts);
+    return heldAccounts;
   }
 
 
@@ -89,16 +85,10 @@ public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationA
 
 
   @Override
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   public Set<OrganizationMemberEntity> getMembers()
   {
     return members == null ? Set.of() : new HashSet<>(members);
-  }
-
-
-  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  public Set<OrganizationMemberEntity> getMembersInternal()
-  {
-    return members;
   }
 
 
@@ -113,21 +103,15 @@ public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationA
 
   @Override
   @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  public Set<AccountEntity> getProvidedAccounts()
+  public Set<OrganizationAccountEntity> getProvidedAccounts()
   {
-    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
+    return providedAccounts;
   }
 
 
   @Override
-  public Set<OrganizationRole> getRoles()
-  {
-    return roles == null ? Set.of() : new HashSet<>(this.roles);
-  }
-
-
   @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  public Set<OrganizationRoleEntity> getRolesInternal()
+  public Set<OrganizationRoleEntity> getRoles()
   {
     return roles;
   }
@@ -135,17 +119,15 @@ public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationA
 
   @Override
   public void setChildren(
-    Set<Organization<?>> children)
+    Set<Organization<?, ?, ?>> children)
   {
-    this.children = Optional.ofNullable(children)
-        .map(a -> a.stream().map(OrganizationEntity.class::cast).collect(Collectors.toSet()))
-        .orElse(null);
+     this.children = children;
   }
 
 
   @Override
   public void setHeldAccounts(
-    Set<AccountEntity> accounts)
+    Set<OrganizationAccountEntity> accounts)
   {
     this.heldAccounts = accounts;
   }
@@ -153,17 +135,15 @@ public class OrganizationEntity extends AbstractOrganizationEntity<OrganizationA
 
   @Override
   public void setMembers(
-    Set<OrganizationMember> members)
+    Set<OrganizationMemberEntity> members)
   {
-    this.members = Optional.ofNullable(members)
-        .map(a -> a.stream().map(OrganizationMemberEntity.class::cast).collect(Collectors.toSet()))
-        .orElse(null);
+    this.members = members;
   }
 
 
   @Override
   public void setParent(
-    OrganizationEntity parent)
+    Organization<?, ?, ?> parent)
   {
     this.parent = (OrganizationEntity)parent;
   }

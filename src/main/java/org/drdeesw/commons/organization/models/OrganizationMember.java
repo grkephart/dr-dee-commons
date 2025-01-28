@@ -15,7 +15,7 @@ import org.drdeesw.commons.security.models.User;
 /**
  * Defines a user's membership in an organization.
  */
-public interface OrganizationMember<R extends OrganizationMemberRole<?,?>, O extends Organization<?>, U extends User<?>> extends LongUniqueObject, Enableable, Auditable
+public interface OrganizationMember<R extends OrganizationMemberRole<?,?>, O extends Organization<?,?,?>, U extends User<?>> extends LongUniqueObject, Enableable, Auditable
 {
   /**
    * Returns the organization.

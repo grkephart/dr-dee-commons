@@ -7,10 +7,9 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
@@ -18,18 +17,18 @@ import org.drdeesw.commons.security.models.User;
  */
 @SuppressWarnings("serial")
 public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
-    implements OrganizationMemberRole
+    implements OrganizationMemberRole<OrganizationMemberPojo, OrganizationRolePojo>
 {
-  private User                   createdBy;
+  private UserPojo               createdBy;
   private Instant                creationDate;
   private boolean                enabled;
   private Instant                lastUpdateDate;
-  private User                   lastUpdatedBy;
+  private UserPojo               lastUpdatedBy;
   private OrganizationMemberPojo member;
   private OrganizationRolePojo   role;
 
   @Override
-  public User getCreatedBy()
+  public UserPojo getCreatedBy()
   {
     return createdBy;
   }
@@ -50,7 +49,7 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
 
   @Override
-  public User getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
@@ -64,7 +63,7 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
 
   @Override
-  public OrganizationRole getRole()
+  public OrganizationRolePojo getRole()
   {
     return this.role;
   }
@@ -79,9 +78,9 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
-    this.createdBy = createdBy;
+    this.createdBy = (UserPojo)createdBy;
   }
 
 
@@ -111,15 +110,15 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
-    this.lastUpdatedBy = lastUpdatedBy;
+     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
   }
 
 
   @Override
   public void setMember(
-    OrganizationMember member)
+    OrganizationMemberPojo member)
   {
     this.member = (OrganizationMemberPojo)member;
   }
@@ -127,7 +126,7 @@ public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
 
   @Override
   public void setRole(
-    OrganizationRole role)
+    OrganizationRolePojo role)
   {
     this.role = (OrganizationRolePojo)role;
   }

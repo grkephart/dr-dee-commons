@@ -4,7 +4,6 @@
 package org.drdeesw.commons.security.models.pojos;
 
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
@@ -17,7 +16,7 @@ import org.drdeesw.commons.security.models.User;
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractNamedLongUniquePojo implements User
+public class UserPojo extends AbstractNamedLongUniquePojo implements User<AccountPojo>
 {
   private AccountPojo account;
   private boolean     enabled;
@@ -49,7 +48,7 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
 
 
   @Override
-  public Account getAccount()
+  public AccountPojo getAccount()
   {
     return this.account;
   }
@@ -78,9 +77,9 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User
 
   @Override
   public void setAccount(
-    Account account)
+    AccountPojo account)
   {
-    this.account = (AccountPojo)account;
+    this.account = account;
   }
 
 

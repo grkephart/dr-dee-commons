@@ -27,7 +27,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationRoleEntity<O extends Organization<?>, MR extends OrganizationMemberRole<?, ?>>
+public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,?>, MR extends OrganizationMemberRole<?, ?>>
     extends AbstractNamedLongUniqueEntity implements OrganizationRole<O, MR>
 {
   @Embedded
@@ -44,7 +44,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?>, 
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -73,7 +73,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?>, 
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -89,7 +89,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?>, 
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -129,7 +129,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?>, 
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

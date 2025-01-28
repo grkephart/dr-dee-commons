@@ -30,7 +30,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @MappedSuperclass
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User>
+public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>>
     extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
 {
   private boolean           active;
@@ -40,7 +40,7 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
   private String            internalId;
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -77,7 +77,7 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -101,7 +101,7 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -141,7 +141,7 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

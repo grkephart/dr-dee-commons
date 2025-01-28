@@ -50,7 +50,7 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -79,7 +79,7 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -95,7 +95,7 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -135,7 +135,7 @@ public abstract class AbstractAccountHolderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

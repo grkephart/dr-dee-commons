@@ -7,7 +7,6 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -16,7 +15,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePojo
-    implements ServiceProviderAccountTokenHolder
+    implements ServiceProviderAccountTokenHolder<ServiceProviderAccountPojo>
 {
   private String                     accessToken;
   private Instant                    accessTokenExpiry;
@@ -39,7 +38,7 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
 
 
   @Override
-  public ServiceProviderAccount<?,?,?> getAccount()
+  public ServiceProviderAccountPojo getAccount()
   {
     return account;
   }
@@ -77,9 +76,9 @@ public class ServiceProviderAccountTokenHolderPojo extends AbstractLongUniquePoj
 
   @Override
   public void setAccount(
-    ServiceProviderAccount<?,?,?> account)
+    ServiceProviderAccountPojo account)
   {
-    this.account = (ServiceProviderAccountPojo)account;
+    this.account = account;
   }
 
 

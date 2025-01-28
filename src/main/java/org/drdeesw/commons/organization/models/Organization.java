@@ -18,7 +18,7 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
  * The organization can provide accounts and hold accounts.
  * 
  */
-public interface Organization<A extends Account<?, ?, ?>>
+public interface Organization<A extends Account<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?>>
     extends AccountProvider<A>, AccountHolder<A>
 {
   /**
@@ -26,7 +26,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the children organizations.
    */
-  Set<Organization<?>> getChildren();
+  Set<Organization<?,?,?>> getChildren();
 
 
   /**
@@ -34,7 +34,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the organization members.
    */
-  Set<OrganizationMember<?,?,?>> getMembers();
+  Set<M> getMembers();
 
 
   /**
@@ -42,7 +42,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the parent
    */
-  Organization<?> getParent();
+  Organization<?,?,?> getParent();
 
 
   /**
@@ -50,7 +50,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * 
    * @return the organization roles.
    */
-  Set<OrganizationRole<?,?>> getRoles();
+  Set<R> getRoles();
 
 
   /**
@@ -75,7 +75,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param children the children organizations to set
    */
   void setChildren(
-    Set<Organization<?>> children);
+    Set<Organization<?,?,?>> children);
 
 
   /**
@@ -84,7 +84,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param members the organization members to set
    */
   void setMembers(
-    Set<OrganizationMember<?,?,?>> members);
+    Set<M> members);
 
 
   /**
@@ -93,7 +93,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param parent the parent to set
    */
   void setParent(
-    Organization<?> parent);
+    Organization<?,?,?> parent);
 
 
   /**
@@ -102,7 +102,7 @@ public interface Organization<A extends Account<?, ?, ?>>
    * @param roles the organization roles to set
    */
   void setRoles(
-    Set<OrganizationRole<?,?>> roles);
+    Set<R> roles);
 
 
   /**

@@ -16,6 +16,8 @@ import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 import org.drdeesw.commons.security.models.User;
@@ -28,8 +30,8 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationEntity<A extends Account<?, ?, ?>>
-    extends AbstractNamedLongUniqueEntity implements Organization<A>
+public abstract class AbstractOrganizationEntity<A extends Account<?, ?, ?>, M extends OrganizationMember<?, ?, ?>, R extends OrganizationRole<?, ?>>
+    extends AbstractNamedLongUniqueEntity implements Organization<A, M, R>
 {
   @Embedded
   private EmbeddedAuditable  audit;

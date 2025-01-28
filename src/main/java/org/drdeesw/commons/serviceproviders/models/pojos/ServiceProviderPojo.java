@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 
@@ -23,12 +24,12 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 {
   private AuthenticationType              authenticationType;
   private String                          clientRegistrationId;
-  private User                            createdBy;
+  private UserPojo                            createdBy;
   private Instant                         creationDate;
   private String                          description;
   private boolean                         enabled;
   private Instant                         lastUpdateDate;
-  private User                            lastUpdatedBy;
+  private UserPojo                            lastUpdatedBy;
   private Set<ServiceProviderAccountPojo> providedAccounts;
 
   @Override
@@ -46,7 +47,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User getCreatedBy()
+  public UserPojo getCreatedBy()
   {
     return this.createdBy;
   }
@@ -74,7 +75,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
@@ -114,9 +115,9 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
-    this.createdBy = createdBy;
+    this.createdBy = (UserPojo)createdBy;
   }
 
 
@@ -154,9 +155,9 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdateId)
+    User<?> lastUpdateId)
   {
-    this.lastUpdatedBy = lastUpdateId;
+    this.lastUpdatedBy = (UserPojo)lastUpdateId;
   }
 
 

@@ -23,7 +23,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization<AccountPojo>
+public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Organization<OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
 {
   private Set<OrganizationPojo>           children;
   private UserPojo                        createdBy;
@@ -35,23 +35,21 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   private UserPojo                        lastUpdatedBy;
   private Set<OrganizationMemberPojo>     members;
   private OrganizationPojo                parent;
-  private Set<AccountPojo>                providedAccounts;
+  private Set<OrganizationAccountPojo>                providedAccounts;
   private Set<OrganizationRolePojo>       roles;
   private OrganizationStatus              status;
   private OrganizationType                type;
 
   @Override
-  public Set<Organization<?>> getChildren()
+  public Set<OrganizationPojo> getChildren()
   {
-    return this.children.stream()//
-        .map(account -> (Organization<AccountPojo>)account)//
-        .collect(Collectors.toSet());
+    return this.children;
 
   }
 
 
   @Override
-  public User getCreatedBy()
+  public UserPojo getCreatedBy()
   {
     return this.createdBy;
   }
@@ -74,9 +72,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
   @Override
   public Set<AccountPojo> getHeldAccounts()
   {
-    return this.heldAccounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
+    return this.heldAccounts;
   }
 
 
@@ -88,43 +84,37 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
 
   @Override
-  public User getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
 
 
   @Override
-  public Set<OrganizationMember> getMembers()
+  public Set<OrganizationMemberPojo> getMembers()
   {
-    return this.members.stream()//
-        .map(member -> (OrganizationMember)member)//
-        .collect(Collectors.toSet());
+    return this.members;
   }
 
 
   @Override
-  public Organization<?> getParent()
+  public OrganizationPojo getParent()
   {
     return parent;
   }
 
 
   @Override
-  public Set<AccountPojo> getProvidedAccounts()
+  public Set<OrganizationAccountPojo> getProvidedAccounts()
   {
-    return this.providedAccounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
+    return this.providedAccounts;
   }
 
 
   @Override
-  public Set<OrganizationRole> getRoles()
+  public Set<OrganizationRolePojo> getRoles()
   {
-    return this.roles.stream()//
-        .map(role -> (OrganizationRole)role)//
-        .collect(Collectors.toSet());
+    return this.role;
   }
 
 
@@ -151,19 +141,17 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
   @Override
   public void setChildren(
-    Set<Organization<?>> children)
+    Set<OrganizationPojo> children)
   {
-    this.children = children.stream()//
-        .map(account -> (OrganizationPojo)account)//
-        .collect(Collectors.toSet());
+    this.children = children;
   }
 
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    UserPojo createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -211,47 +199,41 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo implements Org
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdateId)
+    UserPojo lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdateId;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 
   @Override
   public void setMembers(
-    Set<OrganizationMember> members)
+    Set<OrganizationMemberPojo> members)
   {
-    this.members = members.stream()//
-        .map(member -> (OrganizationMemberPojo)member)//
-        .collect(Collectors.toSet());
+    this.members = members;
   }
 
 
   @Override
   public void setParent(
-    Organization<?> parent)
+    OrganizationPojo parent)
   {
-    this.parent = (OrganizationPojo)parent;
+    this.parent = parent;
   }
 
 
   @Override
   public void setProvidedAccounts(
-    Set<AccountPojo> accounts)
+    Set<OrganizationAccountPojo> accounts)
   {
-    this.providedAccounts = accounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
+    this.providedAccounts = accounts;
   }
 
 
   @Override
   public void setRoles(
-    Set<OrganizationRole> roles)
+    Set<OrganizationRolePojo> roles)
   {
-    this.roles = roles.stream()//
-        .map(role -> (OrganizationRolePojo)role)//
-        .collect(Collectors.toSet());
+    this.roles = roles;
   }
 
 

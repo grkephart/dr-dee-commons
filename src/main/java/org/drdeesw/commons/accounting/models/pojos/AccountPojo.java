@@ -49,9 +49,9 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
-    return (User)this.createdBy;
+    return (User<?>)this.createdBy;
   }
 
 
@@ -91,9 +91,9 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
-    return (User)this.lastUpdatedBy;
+    return (User<?>)this.lastUpdatedBy;
   }
 
 
@@ -128,7 +128,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.createdBy = (UserPojo)createdBy;
   }
@@ -176,7 +176,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
   }

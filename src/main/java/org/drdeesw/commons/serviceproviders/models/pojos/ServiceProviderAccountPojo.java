@@ -55,7 +55,7 @@ public class ServiceProviderAccountPojo extends AccountPojo
 
   @Override
   public void setTokenHolder(
-    ServiceProviderAccountTokenHolder tokenHolder)
+    ServiceProviderAccountTokenHolderPojo tokenHolder)
   {
     this.tokenHolder = (ServiceProviderAccountTokenHolderPojo)tokenHolder;
   }

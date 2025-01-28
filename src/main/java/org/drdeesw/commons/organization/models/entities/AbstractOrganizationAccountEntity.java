@@ -27,7 +27,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User> extends AbstractNamedLongUniqueEntity
+public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>> extends AbstractNamedLongUniqueEntity
     implements OrganizationAccount<H, P, U>
 {
   @Embedded
@@ -47,7 +47,7 @@ public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -84,7 +84,7 @@ public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -108,7 +108,7 @@ public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -148,7 +148,7 @@ public abstract class AbstractOrganizationAccountEntity<H extends AccountHolder<
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

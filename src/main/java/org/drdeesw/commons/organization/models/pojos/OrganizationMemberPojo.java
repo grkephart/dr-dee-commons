@@ -6,12 +6,9 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
@@ -20,19 +17,20 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationMemberPojo extends AbstractLongUniquePojo implements OrganizationMember
+public class OrganizationMemberPojo extends AbstractLongUniquePojo
+    implements OrganizationMember<OrganizationMemberRolePojo, OrganizationPojo, UserPojo>
 {
-  private User                            createdBy;
+  private UserPojo                        createdBy;
   private Instant                         creationDate;
   private boolean                         enabled;
   private Instant                         lastUpdateDate;
-  private User                            lastUpdatedBy;
+  private UserPojo                        lastUpdatedBy;
   private OrganizationPojo                organization;
   private Set<OrganizationMemberRolePojo> roles;
   private UserPojo                        user;
 
   @Override
-  public User getCreatedBy()
+  public UserPojo getCreatedBy()
   {
     return createdBy;
   }
@@ -53,32 +51,30 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
 
   @Override
-  public User getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
 
 
   @Override
-  public Organization<?> getOrganization()
+  public Set<OrganizationMemberRolePojo> getMemberRoles()
+  {
+    return this.roles;
+  }
+
+
+  @Override
+  public OrganizationPojo getOrganization()
   {
     return this.organization;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getMemberRoles()
+  public UserPojo getUser()
   {
-    return this.roles.stream()//
-        .map(member -> (OrganizationMemberRole)member)//
-        .collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public User getUser()
-  {
-    return (User)this.user;
+    return this.user;
   }
 
 
@@ -91,9 +87,9 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
-    this.createdBy = createdBy;
+    this.createdBy = (UserPojo)createdBy;
   }
 
 
@@ -123,35 +119,33 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo implements Or
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdateId)
+    User<?> lastUpdatedBy)
   {
-    this.lastUpdatedBy = lastUpdateId;
-  }
-
-
-  @Override
-  public void setOrganization(
-    Organization<?> organization)
-  {
-    this.organization = (OrganizationPojo)organization;
+     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
   }
 
 
   @Override
   public void setMemberRoles(
-    Set<OrganizationMemberRole> roles)
+    Set<OrganizationMemberRolePojo> roles)
   {
-    this.roles = roles.stream()//
-        .map(role -> (OrganizationMemberRolePojo)role)//
-        .collect(Collectors.toSet());
+    this.roles = roles;
+  }
+
+
+  @Override
+  public void setOrganization(
+    OrganizationPojo organization)
+  {
+    this.organization = organization;
   }
 
 
   @Override
   public void setUser(
-    User user)
+    UserPojo user)
   {
-    this.user = (UserPojo)user;
+    this.user = user;
   }
 
 }
