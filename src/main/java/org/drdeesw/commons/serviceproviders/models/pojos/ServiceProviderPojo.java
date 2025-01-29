@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.accounting.models.pojos.AccountProviderPojo;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
@@ -19,17 +19,17 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
+public class ServiceProviderPojo extends AccountProviderPojo
     implements ServiceProvider<ServiceProviderAccountPojo>
 {
   private AuthenticationType              authenticationType;
   private String                          clientRegistrationId;
-  private UserPojo                            createdBy;
+  private UserPojo                        createdBy;
   private Instant                         creationDate;
   private String                          description;
   private boolean                         enabled;
   private Instant                         lastUpdateDate;
-  private UserPojo                            lastUpdatedBy;
+  private UserPojo                        lastUpdatedBy;
   private Set<ServiceProviderAccountPojo> providedAccounts;
 
   @Override
@@ -82,7 +82,7 @@ public class ServiceProviderPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public Set<ServiceProviderAccountPojo> getProvidedAccounts()
+  public Set<? extends ServiceProviderAccountPojo> getProvidedAccounts()
   {
     return this.providedAccounts.stream()//
         .map(account -> (ServiceProviderAccountPojo)account)//

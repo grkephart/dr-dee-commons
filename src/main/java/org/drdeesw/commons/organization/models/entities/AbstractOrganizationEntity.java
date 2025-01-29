@@ -34,11 +34,11 @@ public abstract class AbstractOrganizationEntity<A extends Account<?, ?, ?>, M e
     extends AbstractNamedLongUniqueEntity implements Organization<A, M, R>
 {
   @Embedded
-  private EmbeddedAuditable  audit;
-  private String             description;
-  private boolean            enabled = true;
-  private OrganizationStatus status;
-  private OrganizationType   type;
+  private EmbeddedAuditable      audit;
+  private String                 description;
+  private boolean                enabled = true;
+  private OrganizationStatus     status;
+  private OrganizationTypeEntity type;
 
   /**
    * Hibernate constructor
@@ -178,7 +178,7 @@ public abstract class AbstractOrganizationEntity<A extends Account<?, ?, ?>, M e
   public void setType(
     OrganizationType type)
   {
-    this.type = type;
+    this.type = (OrganizationTypeEntity)type;
   }
 
 }

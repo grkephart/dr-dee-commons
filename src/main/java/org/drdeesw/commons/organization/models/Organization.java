@@ -26,7 +26,7 @@ public interface Organization<A extends Account<?, ?, ?>, M extends Organization
    * 
    * @return the children organizations.
    */
-  Set<Organization<?,?,?>> getChildren();
+  Set<? extends Organization<?,?,?>> getChildren();
 
 
   /**
@@ -75,7 +75,7 @@ public interface Organization<A extends Account<?, ?, ?>, M extends Organization
    * @param children the children organizations to set
    */
   void setChildren(
-    Set<Organization<?,?,?>> children);
+    Set<? extends Organization<?,?,?>> children);
 
 
   /**

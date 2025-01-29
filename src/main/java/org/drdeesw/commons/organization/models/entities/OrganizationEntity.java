@@ -6,6 +6,7 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -119,9 +120,12 @@ public class OrganizationEntity extends
 
   @Override
   public void setChildren(
-    Set<Organization<?, ?, ?>> children)
+    Set<? extends Organization<?, ?, ?>> children)
   {
-     this.children = children;
+    this.children = children//
+        .stream()//
+        .map(child -> (OrganizationEntity)child)//
+        .collect(Collectors.toSet());
   }
 
 
