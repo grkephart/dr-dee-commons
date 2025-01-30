@@ -16,26 +16,26 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountPojo extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolderPojo, AccountProviderPojo, UserPojo>
+public abstract class AccountPojo extends AbstractNamedLongUniquePojo
+    implements Account<AccountHolderPojo, AccountProviderPojo<?>, UserPojo>
 {
-  private AccountHolderPojo   accountHolder;
-  private boolean             active;
-  private UserPojo            createdBy;
-  private Instant             creationDate;
-  private String              description;
-  private String              internalId;
-  private UserPojo            lastUpdatedBy;
-  private Instant             lastUpdatedDate;
-  private AccountProviderPojo provider;
-  private UserPojo            user;
+  private AccountHolderPojo      accountHolder;
+  private boolean                active;
+  private UserPojo               createdBy;
+  private Instant                creationDate;
+  private String                 description;
+  private String                 internalId;
+  private UserPojo               lastUpdatedBy;
+  private Instant                lastUpdatedDate;
+  private AccountProviderPojo<?> provider;
+  private UserPojo               user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(AccountProviderPojo provider, String internalId)
+  public AccountPojo(AccountProviderPojo<?> provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -49,9 +49,9 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User<?> getCreatedBy()
+  public UserPojo getCreatedBy()
   {
-    return (User<?>)this.createdBy;
+    return this.createdBy;
   }
 
 
@@ -91,14 +91,14 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User<?> getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
-    return (User<?>)this.lastUpdatedBy;
+    return this.lastUpdatedBy;
   }
 
 
   @Override
-  public AccountProviderPojo getProvider()
+  public AccountProviderPojo<?> getProvider()
   {
     return provider;
   }
@@ -184,7 +184,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setProvider(
-    AccountProviderPojo provider)
+    AccountProviderPojo<?> provider)
   {
     this.provider = provider;
   }
@@ -194,7 +194,7 @@ public class AccountPojo extends AbstractNamedLongUniquePojo
   public void setUser(
     UserPojo user)
   {
-    this.user = (UserPojo)user;
+    this.user = user;
   }
 
 }

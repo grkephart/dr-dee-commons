@@ -37,6 +37,19 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
   private String            description;
   private boolean           enabled;
 
+  /**
+   * Hibernate
+   */
+  protected AbstractAccountProviderEntity()
+  {
+  }
+
+  protected AbstractAccountProviderEntity(EmbeddedAuditable audit)
+  {
+    this.audit = audit;
+  }
+
+
   @Override
   public User<?> getCreatedBy()
   {

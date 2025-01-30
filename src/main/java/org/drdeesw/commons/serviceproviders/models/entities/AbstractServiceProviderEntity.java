@@ -9,13 +9,12 @@ import java.time.Instant;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
@@ -28,14 +27,11 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAccount<?, ?, ?>>
-    extends AbstractNamedLongUniqueEntity implements ServiceProvider<A>
+    extends AbstractAccountProviderEntity<A>
+    /*AbstractNamedLongUniqueEntity*/ implements ServiceProvider<A>
 {
-  @Embedded
-  private EmbeddedAuditable  audit;
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;
-  private String             description;
-  private boolean            enabled;
 
   /**
    * Hibernate constructor
@@ -53,7 +49,7 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
    */
   protected AbstractServiceProviderEntity(EmbeddedAuditable audit)
   {
-    this.audit = audit;
+    super(audit);
   }
 
 
@@ -74,50 +70,6 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
 
 
   @Override
-  public User<?> getCreatedBy()
-  {
-    return this.audit.getCreatedBy();
-  }
-
-
-  @Override
-  public Instant getCreationDate()
-  {
-    return this.audit.getCreationDate();
-  }
-
-
-  @Override
-  @Column(name = "description", length = 255)
-  public String getDescription()
-  {
-    return description;
-  }
-
-
-  @Override
-  public Instant getLastUpdateDate()
-  {
-    return this.audit.getLastUpdateDate();
-  }
-
-
-  @Override
-  public User<?> getLastUpdatedBy()
-  {
-    return this.audit.getLastUpdatedBy();
-  }
-
-
-  @Override
-  @Column(name = "is_enabled", nullable = false)
-  public boolean isEnabled()
-  {
-    return this.enabled;
-  }
-
-
-  @Override
   public void setAuthenticationType(
     AuthenticationType authenticationType)
   {
@@ -134,34 +86,11 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
 
 
   @Override
-  public void setCreatedBy(
-    User<?> createdBy)
+  public void setLastUpdatedBy(
+    User<?> lastUpdateId)
   {
-    this.audit.setCreatedBy((UserEntity)createdBy);
-  }
-
-
-  @Override
-  public void setCreationDate(
-    Instant creationDate)
-  {
-    this.audit.setCreationDate(creationDate);
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
-  }
-
-
-  @Override
-  public void setEnabled(
-    boolean enabled)
-  {
-    this.enabled = enabled;
+    // TODO Auto-generated method stub
+    
   }
 
 
@@ -169,15 +98,75 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.audit.setLastUpdateDate(lastUpdateDate);
+    // TODO Auto-generated method stub
+    
   }
 
 
   @Override
-  public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+  public void setEnabled(
+    boolean enabled)
   {
-    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void setCreationDate(
+    Instant creationDate)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public void setCreatedBy(
+    User<?> createdBy)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+
+  @Override
+  public boolean isEnabled()
+  {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+
+  @Override
+  public UserPojo getLastUpdatedBy()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public Instant getLastUpdateDate()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public Instant getCreationDate()
+  {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+
+  @Override
+  public UserPojo getCreatedBy()
+  {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

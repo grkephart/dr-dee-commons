@@ -6,6 +6,8 @@ package org.drdeesw.commons.serviceproviders.services;
 import java.util.Optional;
 
 import org.drdeesw.commons.common.services.CrudService;
+import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
+import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 
 /**
@@ -29,7 +31,7 @@ public interface ServiceProviderService extends CrudService<ServiceProviderPojo,
    * @param clientRegistrationId the OAuth2 client registration ID
    * @return the service provider
    */
-  ServiceProviderPojo findOrCreate(
+  ServiceProvider<ServiceProviderAccountPojo> findOrCreate(
     String clientRegistrationId);
 
 }

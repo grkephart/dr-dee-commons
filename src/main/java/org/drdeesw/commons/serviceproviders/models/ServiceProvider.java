@@ -16,6 +16,8 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 public interface ServiceProvider<A extends ServiceProviderAccount<?,?,?>>
     extends NamedLongUniqueObject, AccountProvider<A>, Auditable, Describable
 {
+
+
   /**
    * Returns the authentication type of the service provider.
    * 

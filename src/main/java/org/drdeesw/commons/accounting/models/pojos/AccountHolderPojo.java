@@ -7,10 +7,6 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
@@ -21,29 +17,16 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements AccountHolder<AccountPojo>
+public abstract class AccountHolderPojo extends AbstractNamedLongUniquePojo
+    implements AccountHolder<AccountPojo>
 {
-  @ManyToOne
-  @JoinColumn(name = "created_by", nullable = false)
-  private UserEntity                  createdBy;
-
-  @Column(name = "creation_date", nullable = false)
-  private Instant                     creationDate;
-
-  @Column(name = "description", nullable = false)
-  private String                      description;
-
-  @Column(name = "is_enabled", nullable = false)
-  private boolean                     enabled;
-
-  private Set<AccountPojo>            heldAccounts;
-
-  @Column(name = "last_update_date", nullable = false)
-  private Instant                     lastUpdateDate;
-
-  @ManyToOne
-  @JoinColumn(name = "last_updated_by", nullable = false)
-  private UserEntity                  lastUpdatedBy;
+  private UserEntity       createdBy;
+  private Instant          creationDate;
+  private String           description;
+  private boolean          enabled;
+  private Set<AccountPojo> heldAccounts;
+  private Instant          lastUpdateDate;
+  private UserEntity       lastUpdatedBy;
 
   public AccountHolderPojo()
   {
@@ -85,7 +68,6 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-
   @Override
   public Instant getLastUpdateDate()
   {
@@ -109,7 +91,7 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.createdBy = (UserEntity)createdBy;
   }
@@ -147,7 +129,6 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
   }
 
 
-
   @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
@@ -158,7 +139,7 @@ public class AccountHolderPojo extends AbstractNamedLongUniquePojo implements Ac
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
   }

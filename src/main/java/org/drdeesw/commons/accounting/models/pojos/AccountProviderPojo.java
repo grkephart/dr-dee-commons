@@ -4,21 +4,44 @@
 package org.drdeesw.commons.accounting.models.pojos;
 
 
+import java.time.Instant;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
+import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
  * 
  */
 @SuppressWarnings("serial")
-public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
-    implements AccountProvider<AccountPojo>
+public class AccountProviderPojo<A extends Account<?, ?, ?>> extends AbstractNamedLongUniquePojo
+    implements AccountProvider<A>
 {
-  private String       description;
+  private UserPojo         createdBy;
+  private Instant          creationDate;
+  private String           description;
+  private boolean          enabled;
+  private Instant          lastUpdateDate;
+  private UserPojo         lastUpdatedBy;
   private Set<AccountPojo> providedAccounts;
+
+  @Override
+  public UserPojo getCreatedBy()
+  {
+    return this.createdBy;
+  }
+
+
+  @Override
+  public Instant getCreationDate()
+  {
+    return this.creationDate;
+  }
+
 
   @Override
   public String getDescription()
@@ -28,9 +51,46 @@ public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
 
 
   @Override
-  public Set<AccountPojo> getProvidedAccounts()
+  public Instant getLastUpdateDate()
   {
-    return this.providedAccounts;
+    return this.lastUpdateDate;
+  }
+
+
+  @Override
+  public UserPojo getLastUpdatedBy()
+  {
+    return this.lastUpdatedBy;
+  }
+
+
+  @Override
+  public Set<A> getProvidedAccounts()
+  {
+    return (Set<A>)this.providedAccounts;
+  }
+
+
+  @Override
+  public boolean isEnabled()
+  {
+    return this.enabled;
+  }
+
+
+  @Override
+  public void setCreatedBy(
+    User<?> createdBy)
+  {
+    this.createdBy = (UserPojo)createdBy;
+  }
+
+
+  @Override
+  public void setCreationDate(
+    Instant creationDate)
+  {
+    this.creationDate = creationDate;
   }
 
 
@@ -43,10 +103,34 @@ public abstract class AccountProviderPojo extends AbstractNamedLongUniqueEntity
 
 
   @Override
-  public void setProvidedAccounts(
-    Set<AccountPojo> providedAccounts)
+  public void setEnabled(
+    boolean enabled)
   {
-    this.providedAccounts = providedAccounts;
+    this.enabled = enabled;
+  }
+
+
+  @Override
+  public void setLastUpdateDate(
+    Instant lastUpdateDate)
+  {
+    this.lastUpdateDate = lastUpdateDate;
+  }
+
+
+  @Override
+  public void setLastUpdatedBy(
+    User<?> lastUpdatedBy)
+  {
+    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+  }
+
+
+  @Override
+  public void setProvidedAccounts(
+    Set<A> providedAccounts)
+  {
+    this.providedAccounts = (Set<AccountPojo>)providedAccounts;
   }
 
 }

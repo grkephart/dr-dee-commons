@@ -6,7 +6,9 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
+import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderEntity;
+import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 import org.drdeesw.commons.serviceproviders.repositories.ServiceProviderRepository;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderService;
@@ -43,7 +45,7 @@ public class ServiceProviderServiceImpl
 
 
   @Override
-  public ServiceProviderPojo findOrCreate(
+  public ServiceProvider<ServiceProviderAccountPojo> findOrCreate(
     String clientRegistrationId)
   {
     Optional<ServiceProviderEntity> serviceProviderOpt = this.serviceProviderRepository

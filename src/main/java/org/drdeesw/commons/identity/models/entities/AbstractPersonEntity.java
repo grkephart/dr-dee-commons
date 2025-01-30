@@ -13,8 +13,8 @@ import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
-import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.entities.UserEntity;
@@ -27,7 +27,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractPersonEntity<A extends Account<?, ?, ?>>
-    extends AbstractNamedLongUniqueEntity implements Person<A>
+    extends AbstractAccountHolderEntity<A> /* AbstractNamedLongUniqueEntity */ implements Person<A>
 {
   @Embedded
   private EmbeddedAuditable  audit;
@@ -44,7 +44,7 @@ public abstract class AbstractPersonEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getCreatedBy()
+  public User<?> getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -73,7 +73,7 @@ public abstract class AbstractPersonEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User getLastUpdatedBy()
+  public User<?> getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -89,7 +89,7 @@ public abstract class AbstractPersonEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.audit.setCreatedBy((UserEntity)createdBy);
   }
@@ -130,7 +130,7 @@ public abstract class AbstractPersonEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
   }

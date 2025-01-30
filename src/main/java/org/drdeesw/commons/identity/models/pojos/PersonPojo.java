@@ -37,7 +37,8 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the createdBy
    */
-  public User getCreatedBy()
+  @Override
+  public UserPojo getCreatedBy()
   {
     return createdBy;
   }
@@ -46,6 +47,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the creationDate
    */
+  @Override
   public Instant getCreationDate()
   {
     return creationDate;
@@ -55,6 +57,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the description
    */
+  @Override
   public String getDescription()
   {
     return description;
@@ -71,6 +74,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the lastUpdateDate
    */
+  @Override
   public Instant getLastUpdateDate()
   {
     return lastUpdateDate;
@@ -80,7 +84,8 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the lastUpdatedBy
    */
-  public User getLastUpdatedBy()
+  @Override
+  public UserPojo getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
@@ -89,6 +94,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @return the enabled
    */
+  @Override
   public boolean isEnabled()
   {
     return enabled;
@@ -98,8 +104,9 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param createdBy the createdBy to set
    */
+  @Override
   public void setCreatedBy(
-    User createdBy)
+    User<?> createdBy)
   {
     this.createdBy = (UserPojo)createdBy;
   }
@@ -108,6 +115,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param creationDate the creationDate to set
    */
+  @Override
   public void setCreationDate(
     Instant creationDate)
   {
@@ -118,6 +126,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param description the description to set
    */
+  @Override
   public void setDescription(
     String description)
   {
@@ -128,6 +137,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param enabled the enabled to set
    */
+  @Override
   public void setEnabled(
     boolean enabled)
   {
@@ -148,6 +158,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param lastUpdateDate the lastUpdateDate to set
    */
+  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -158,8 +169,9 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
   /**
    * @param lastUpdatedBy the lastUpdatedBy to set
    */
+  @Override
   public void setLastUpdatedBy(
-    User lastUpdatedBy)
+    User<?> lastUpdatedBy)
   {
     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
   }
