@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
@@ -71,7 +72,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public Set<AccountPojo> getHeldAccounts()
+  public Set<? extends Account<?,?,?>> getHeldAccounts()
   {
     return this.heldAccounts;
   }
@@ -142,9 +143,17 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setChildren(
-    Set<OrganizationPojo> children)
+    Set<? extends Organization<?,?,?>> children)
   {
-    this.children = children;
+    if (children == null)
+    {
+      this.children = null;
+      return;
+    }
+    
+    this.children = children.stream()//
+        .map(org -> (OrganizationPojo)org)//
+        .collect(Collectors.toSet());
   }
 
 
@@ -216,9 +225,9 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setParent(
-    OrganizationPojo parent)
+    Organization<?,?,?> parent)
   {
-    this.parent = parent;
+    this.parent = (OrganizationPojo)parent;
   }
 
 
