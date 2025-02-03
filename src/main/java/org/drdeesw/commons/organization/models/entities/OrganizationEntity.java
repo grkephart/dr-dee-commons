@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.organization.models.Organization;
 
@@ -34,10 +35,10 @@ import org.drdeesw.commons.organization.models.Organization;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationEntity extends
-    AbstractOrganizationEntity<OrganizationAccountEntity, OrganizationMemberEntity, OrganizationRoleEntity>
+    AbstractOrganizationEntity<OrganizationEntity, AccountEntity, OrganizationAccountEntity, OrganizationMemberEntity, OrganizationRoleEntity>
 {
   private Set<OrganizationEntity>        children         = new HashSet<>();
-  private Set<OrganizationAccountEntity> heldAccounts     = new HashSet<>();
+  private Set<AccountEntity>             heldAccounts     = new HashSet<>();
   private Set<OrganizationMemberEntity>  members          = new HashSet<>();
   private OrganizationEntity             parent;
   private Set<OrganizationAccountEntity> providedAccounts = new HashSet<>();
@@ -71,7 +72,7 @@ public class OrganizationEntity extends
 
   @Override
   @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  public Set<OrganizationAccountEntity> getHeldAccounts()
+  public Set<AccountEntity> getHeldAccounts()
   {
     return heldAccounts;
   }
@@ -120,7 +121,7 @@ public class OrganizationEntity extends
 
   @Override
   public void setChildren(
-    Set<? extends Organization<?, ?, ?>> children)
+    Set<OrganizationEntity> children)
   {
     this.children = children//
         .stream()//
@@ -131,7 +132,7 @@ public class OrganizationEntity extends
 
   @Override
   public void setHeldAccounts(
-    Set<OrganizationAccountEntity> accounts)
+    Set<AccountEntity> accounts)
   {
     this.heldAccounts = accounts;
   }
@@ -147,7 +148,7 @@ public class OrganizationEntity extends
 
   @Override
   public void setParent(
-    Organization<?, ?, ?> parent)
+    OrganizationEntity parent)
   {
     this.parent = (OrganizationEntity)parent;
   }

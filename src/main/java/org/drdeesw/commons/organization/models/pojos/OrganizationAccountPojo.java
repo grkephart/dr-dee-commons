@@ -6,7 +6,6 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
-import org.drdeesw.commons.accounting.models.pojos.AccountProviderPojo;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
@@ -16,7 +15,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationAccountPojo extends AccountPojo
-    implements OrganizationAccount<AccountHolderPojo, AccountProviderPojo, UserPojo>
+    implements OrganizationAccount<AccountHolderPojo,  OrganizatioAccountProviderPojo, UserPojo>
 {
   public OrganizationAccountPojo()
   {

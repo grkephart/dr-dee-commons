@@ -52,7 +52,7 @@ class OrganizationEntityTest
     EmbeddedAuditable audit = new EmbeddedAuditable();
     OrganizationEntity parent = new OrganizationEntity();
     OrganizationEntity organization = new OrganizationEntity(audit);
-    Set<Organization<?>> children = Set.of(organization);
+    Set<Organization<?,?,?>> children = Set.of(organization);
     UserEntity createdBy = new UserEntity();
     Instant creationDate = Instant.now();
     String description = "toy7 o56ybo7yo  hkghgy";
@@ -111,17 +111,17 @@ class OrganizationEntityTest
     UserEntity lastUpdatedBy = new UserEntity();
     Instant lastUpdateDate = Instant.now();
     OrganizationMemberEntity member = new OrganizationMemberEntity();
-    Set<OrganizationMember> members = Set.of(member);
+    Set<OrganizationMemberEntity> members = Set.of(member);
     OrganizationEntity parent = new OrganizationEntity();
     OrganizationEntity organization = new OrganizationEntity(audit);
-    Set<Organization<?>> children = Set.of(organization);
+    Set<OrganizationEntity> children = Set.of(organization);
     String name = "tjttkyyryju6";
-    AccountEntity heldAccount = new AccountEntity();
-    Set<AccountEntity> heldAccounts = Set.of(heldAccount);
+    OrganizationAccountEntity heldAccount = new OrganizationAccountEntity();
+    Set<OrganizationAccountEntity> heldAccounts = Set.of(heldAccount);
     AccountEntity providedAccount = new AccountEntity();
     Set<AccountEntity> providedAccounts = Set.of(providedAccount);
     OrganizationRoleEntity role = new OrganizationRoleEntity();
-    Set<OrganizationRole> roles = Set.of(role);
+    Set<OrganizationRoleEntity> roles = Set.of(role);
     OrganizationStatus status = OrganizationStatus.ACTIVE;
     OrganizationTypeEntity type = new OrganizationTypeEntity();
 

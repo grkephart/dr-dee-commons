@@ -15,7 +15,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 /**
  * 
  */
-public interface OrganizationRole<O extends Organization<?,?,?>, MR extends OrganizationMemberRole<?, ?>>
+public interface OrganizationRole<O extends Organization<?,?,?,?,?>, MR extends OrganizationMemberRole<?, ?>>
     extends NamedLongUniqueObject, Auditable, Enableable, Describable
 {
 

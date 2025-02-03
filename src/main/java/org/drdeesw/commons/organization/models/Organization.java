@@ -17,16 +17,21 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
  * The organization can have members and roles. 
  * The organization can provide accounts and hold accounts.
  * 
+ * @param <PC> the parent or children organization type
+ * @param <HA> the held account type
+ * @param <PA> the provided account type
+ * @param <M> the organization member type
+ * @param <R> the organization role type
  */
-public interface Organization<A extends Account<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?>>
-    extends AccountProvider<A>, AccountHolder<A>
+public interface Organization<PC extends Organization<?,?,?,?,?>, HA extends Account<?, ?, ?>, PA extends OrganizationAccount<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?>>
+    extends AccountProvider<PA>, AccountHolder<HA>
 {
   /**
    * Returns the children organizations.
    * 
    * @return the children organizations.
    */
-  Set<? extends Organization<?,?,?>> getChildren();
+  Set<PC> getChildren();
 
 
   /**
@@ -42,7 +47,7 @@ public interface Organization<A extends Account<?, ?, ?>, M extends Organization
    * 
    * @return the parent
    */
-  Organization<?,?,?> getParent();
+  PC getParent();
 
 
   /**
@@ -74,8 +79,7 @@ public interface Organization<A extends Account<?, ?, ?>, M extends Organization
    * 
    * @param children the children organizations to set
    */
-  void setChildren(
-    Set<? extends Organization<?,?,?>> children);
+  void setChildren(PC children);
 
 
   /**
@@ -92,8 +96,7 @@ public interface Organization<A extends Account<?, ?, ?>, M extends Organization
    * 
    * @param parent the parent to set
    */
-  void setParent(
-    Organization<?,?,?> parent);
+  void setParent(PC parent);
 
 
   /**

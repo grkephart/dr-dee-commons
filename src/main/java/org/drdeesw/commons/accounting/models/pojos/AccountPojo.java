@@ -17,7 +17,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AccountPojo extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolderPojo, AccountProviderPojo<?>, UserPojo>
+    implements Account<AccountHolderPojo, AccountProviderPojo, UserPojo>
 {
   private AccountHolderPojo      accountHolder;
   private boolean                active;
@@ -27,7 +27,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
   private String                 internalId;
   private UserPojo               lastUpdatedBy;
   private Instant                lastUpdatedDate;
-  private AccountProviderPojo<?> provider;
+  private AccountProviderPojo provider;
   private UserPojo               user;
 
   public AccountPojo()
@@ -35,7 +35,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
   }
 
 
-  public AccountPojo(AccountProviderPojo<?> provider, String internalId)
+  public AccountPojo(AccountProviderPojo provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -98,7 +98,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public AccountProviderPojo<?> getProvider()
+  public AccountProviderPojo getProvider()
   {
     return provider;
   }
@@ -184,7 +184,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setProvider(
-    AccountProviderPojo<?> provider)
+    AccountProviderPojo provider)
   {
     this.provider = provider;
   }

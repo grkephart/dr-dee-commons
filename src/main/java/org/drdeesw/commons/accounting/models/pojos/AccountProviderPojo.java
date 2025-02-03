@@ -7,7 +7,6 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
@@ -18,8 +17,8 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountProviderPojo<A extends Account<?, ?, ?>> extends AbstractNamedLongUniquePojo
-    implements AccountProvider<A>
+public class AccountProviderPojo extends AbstractNamedLongUniquePojo
+    implements AccountProvider<AccountPojo>
 {
   private UserPojo         createdBy;
   private Instant          creationDate;

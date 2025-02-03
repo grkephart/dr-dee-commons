@@ -25,7 +25,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationPojo extends AbstractNamedLongUniquePojo
-    implements Organization<OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
+    implements Organization<OrganizationPojo, AccountPojo, OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
 {
   private Set<OrganizationPojo>        children;
   private UserPojo                     createdBy;
@@ -72,7 +72,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public Set<? extends Account<?,?,?>> getHeldAccounts()
+  public Set<AccountPojo> getHeldAccounts()
   {
     return this.heldAccounts;
   }
@@ -143,7 +143,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setChildren(
-    Set<? extends Organization<?,?,?>> children)
+    Set<OrganizationPojo> children)
   {
     if (children == null)
     {
@@ -225,7 +225,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setParent(
-    Organization<?,?,?> parent)
+    OrganizationPojo parent)
   {
     this.parent = (OrganizationPojo)parent;
   }
