@@ -8,12 +8,8 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
-import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
 import org.drdeesw.commons.security.models.User;
@@ -24,7 +20,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationPojo extends AbstractNamedLongUniquePojo
+public class OrganizationPojo extends AccountPojo
     implements Organization<OrganizationPojo, AccountPojo, OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
 {
   private Set<OrganizationPojo>        children;
@@ -86,7 +82,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public User<?> getLastUpdatedBy()
+  public UserPojo getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
@@ -139,6 +135,7 @@ public class OrganizationPojo extends AbstractNamedLongUniquePojo
   {
     return this.enabled;
   }
+
 
 
   @Override

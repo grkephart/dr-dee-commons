@@ -79,7 +79,7 @@ public interface Organization<PC extends Organization<?,?,?,?,?>, HA extends Acc
    * 
    * @param children the children organizations to set
    */
-  void setChildren(PC children);
+  void setChildren(Set<PC> children);
 
 
   /**

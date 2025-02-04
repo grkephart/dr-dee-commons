@@ -17,25 +17,25 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AccountPojo extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolderPojo, AccountProviderPojo, UserPojo>
+    implements Account<AccountHolderPojo<AccountPojo>, AccountProviderPojo<AccountPojo>, UserPojo>
 {
-  private AccountHolderPojo      accountHolder;
-  private boolean                active;
-  private UserPojo               createdBy;
-  private Instant                creationDate;
-  private String                 description;
-  private String                 internalId;
-  private UserPojo               lastUpdatedBy;
-  private Instant                lastUpdatedDate;
-  private AccountProviderPojo provider;
-  private UserPojo               user;
+  private AccountHolderPojo<AccountPojo>                accountHolder;
+  private boolean                          active;
+  private UserPojo                         createdBy;
+  private Instant                          creationDate;
+  private String                           description;
+  private String                           internalId;
+  private UserPojo                         lastUpdatedBy;
+  private Instant                          lastUpdatedDate;
+  private AccountProviderPojo<AccountPojo> provider;
+  private UserPojo                         user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(AccountProviderPojo provider, String internalId)
+  public AccountPojo(AccountProviderPojo<AccountPojo> provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -70,7 +70,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public AccountHolderPojo getHolder()
+  public AccountHolderPojo<AccountPojo> getHolder()
   {
     return accountHolder;
   }
@@ -98,7 +98,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public AccountProviderPojo getProvider()
+  public AccountProviderPojo<AccountPojo> getProvider()
   {
     return provider;
   }
@@ -152,7 +152,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setHolder(
-    AccountHolderPojo accountHolder)
+    AccountHolderPojo<AccountPojo> accountHolder)
   {
     this.accountHolder = accountHolder;
   }
@@ -184,7 +184,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setProvider(
-    AccountProviderPojo provider)
+    AccountProviderPojo<AccountPojo> provider)
   {
     this.provider = provider;
   }

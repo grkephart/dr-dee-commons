@@ -15,7 +15,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationAccountPojo extends AccountPojo
-    implements OrganizationAccount<AccountHolderPojo,  OrganizatioAccountProviderPojo, UserPojo>
+    implements OrganizationAccount<AccountHolderPojo,  OrganizationAccountProviderPojo, UserPojo>
 {
   public OrganizationAccountPojo()
   {

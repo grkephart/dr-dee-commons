@@ -17,7 +17,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 public class ServiceProviderAccountPojo extends AccountPojo
-    implements ServiceProviderAccount<AccountHolderPojo, ServiceProviderPojo, UserPojo>
+    implements ServiceProviderAccount<AccountHolderPojo<AccountPojo>, ServiceProviderPojo, UserPojo>
 {
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 

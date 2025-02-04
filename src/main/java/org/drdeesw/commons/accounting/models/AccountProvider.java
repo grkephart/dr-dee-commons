@@ -23,7 +23,7 @@ public interface AccountProvider<A extends Account<?, ?, ?>>
    * 
    * @return the accounts provided by the AccountProvider
    */
-  Set<? extends A> getProvidedAccounts();
+  Set<A> getProvidedAccounts();
 
 
   /**

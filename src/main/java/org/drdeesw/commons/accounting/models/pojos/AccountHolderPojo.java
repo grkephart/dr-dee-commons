@@ -17,16 +17,16 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  * 
  */
 @SuppressWarnings("serial")
-public abstract class AccountHolderPojo extends AbstractNamedLongUniquePojo
-    implements AccountHolder<AccountPojo>
+public abstract class AccountHolderPojo<A extends AccountPojo> extends AbstractNamedLongUniquePojo
+    implements AccountHolder<A>
 {
-  private UserEntity       createdBy;
-  private Instant          creationDate;
-  private String           description;
-  private boolean          enabled;
-  private Set<AccountPojo> heldAccounts;
-  private Instant          lastUpdateDate;
-  private UserEntity       lastUpdatedBy;
+  private UserEntity createdBy;
+  private Instant    creationDate;
+  private String     description;
+  private boolean    enabled;
+  private Set<A>     heldAccounts;
+  private Instant    lastUpdateDate;
+  private UserEntity lastUpdatedBy;
 
   public AccountHolderPojo()
   {
@@ -62,7 +62,7 @@ public abstract class AccountHolderPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public Set<AccountPojo> getHeldAccounts()
+  public Set<A> getHeldAccounts()
   {
     return this.heldAccounts;
   }
@@ -123,7 +123,7 @@ public abstract class AccountHolderPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setHeldAccounts(
-    Set<AccountPojo> accounts)
+    Set<A> accounts)
   {
     this.heldAccounts = accounts;
   }

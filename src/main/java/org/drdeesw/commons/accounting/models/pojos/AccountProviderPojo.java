@@ -17,16 +17,16 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountProviderPojo extends AbstractNamedLongUniquePojo
-    implements AccountProvider<AccountPojo>
+public class AccountProviderPojo<A extends AccountPojo> extends AbstractNamedLongUniquePojo
+    implements AccountProvider<A>
 {
-  private UserPojo         createdBy;
-  private Instant          creationDate;
-  private String           description;
-  private boolean          enabled;
-  private Instant          lastUpdateDate;
-  private UserPojo         lastUpdatedBy;
-  private Set<AccountPojo> providedAccounts;
+  private UserPojo createdBy;
+  private Instant  creationDate;
+  private String   description;
+  private boolean  enabled;
+  private Instant  lastUpdateDate;
+  private UserPojo lastUpdatedBy;
+  private Set<A>   providedAccounts;
 
   @Override
   public UserPojo getCreatedBy()
@@ -129,7 +129,7 @@ public class AccountProviderPojo extends AbstractNamedLongUniquePojo
   public void setProvidedAccounts(
     Set<A> providedAccounts)
   {
-    this.providedAccounts = (Set<AccountPojo>)providedAccounts;
+    this.providedAccounts = (Set<A>)providedAccounts;
   }
 
 }
