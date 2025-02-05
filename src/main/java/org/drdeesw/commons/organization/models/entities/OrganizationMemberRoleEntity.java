@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.security.models.entities.UserEntity;
+
 
 /**
  * 
@@ -23,7 +25,7 @@ import javax.persistence.Table;
 @Table(name = "organization_member_roles")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class OrganizationMemberRoleEntity extends AbstractOrganizationMemberRoleEntity<OrganizationMemberEntity, OrganizationRoleEntity>
+public class OrganizationMemberRoleEntity extends AbstractOrganizationMemberRoleEntity<OrganizationMemberEntity, OrganizationRoleEntity, UserEntity>
 {
 
   private OrganizationMemberEntity member;

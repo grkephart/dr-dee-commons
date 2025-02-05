@@ -6,11 +6,12 @@ package org.drdeesw.commons.organization.models;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.security.models.User;
 
 /**
  * Defines a user's membership in an organization role.
  */
-public interface OrganizationMemberRole<M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?>> extends LongUniqueObject, Enableable, Auditable
+public interface OrganizationMemberRole<M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?,U>, U extends User<?>> extends LongUniqueObject, Enableable, Auditable<U>
 {
   /**
    * Returns the organization member.

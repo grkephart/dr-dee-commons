@@ -12,7 +12,10 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
@@ -20,7 +23,6 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -33,16 +35,19 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>>
     extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
 {
-  private boolean           active;
+  private boolean              active;
   @Embedded
-  private EmbeddedAuditable audit;
-  private String            description;
-  private String            internalId;
+  private EmbeddedAuditable<U> audit;
+  private String               description;
+  private H                    holder;
+  private String               internalId;
+  private P                    provider;
+  private U                    user;
 
   @Override
-  public User<?> getCreatedBy()
+  public U getCreatedBy()
   {
-    return this.audit.getCreatedBy();
+    return (U)this.audit.getCreatedBy();
   }
 
 
@@ -62,6 +67,15 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "holder_id", nullable = false)
+  public H getHolder()
+  {
+    return this.holder;
+  }
+
+
+  @Override
   @Column(name = "internal_id")
   public String getInternalId()
   {
@@ -77,9 +91,27 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
 
   @Override
-  public User<?> getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "provider_id", nullable = false)
+  public P getProvider()
+  {
+    return this.provider;
+  }
+
+
+  @Override
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  public U getUser()
+  {
+    return user;
   }
 
 
@@ -101,9 +133,9 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.audit.setCreatedBy((UserEntity)createdBy);
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -120,6 +152,14 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
     String description)
   {
     this.description = description;
+  }
+
+
+  @Override
+  public void setHolder(
+    H holder)
+  {
+    this.holder = holder;
   }
 
 
@@ -141,8 +181,24 @@ public abstract class AbstractAccountEntity<H extends AccountHolder<?>, P extend
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  public void setProvider(
+    P provider)
+  {
+    this.provider = provider;
+  }
+
+
+  @Override
+  public void setUser(
+    U user)
+  {
+    this.user = user;
   }
 }

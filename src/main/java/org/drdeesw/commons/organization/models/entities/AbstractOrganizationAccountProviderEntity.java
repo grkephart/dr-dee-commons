@@ -6,13 +6,14 @@ import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
+import org.drdeesw.commons.security.models.User;
 
 
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountProviderEntity<A extends OrganizationAccountEntity>
-    extends AbstractAccountProviderEntity<A>
+public abstract class AbstractOrganizationAccountProviderEntity<A extends OrganizationAccountEntity, U extends User<?>>
+    extends AbstractAccountProviderEntity<A,U>
 {
 
 }

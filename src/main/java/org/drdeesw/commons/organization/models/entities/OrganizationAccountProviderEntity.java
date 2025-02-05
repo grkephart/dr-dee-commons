@@ -17,6 +17,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.security.models.entities.UserEntity;
+
 
 /**
  * 
@@ -27,7 +29,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationAccountProviderEntity
-    extends AbstractOrganizationAccountProviderEntity<OrganizationAccountEntity>
+    extends AbstractOrganizationAccountProviderEntity<OrganizationAccountEntity, UserEntity>
 {
 
   private Set<OrganizationAccountEntity> providedAccounts;

@@ -10,6 +10,7 @@ import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
@@ -18,7 +19,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  *  Organization
  *  Integrating system
  */
-public interface AccountHolder<A extends Account<?,?,?>> extends NamedLongUniqueObject, Auditable, Describable, Enableable
+public interface AccountHolder<A extends Account<?,?,?>, U extends User<?>> extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
 {
   /**
    * Returns the accounts held by the AccountHolder.

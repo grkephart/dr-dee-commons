@@ -11,7 +11,7 @@ import org.drdeesw.commons.security.models.User;
 /**
  * Represents a organization account. Contains account information and tokens.
  */
-public interface OrganizationAccount<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>> extends Account<H,P,U>
+public interface OrganizationAccount<H extends AccountHolder<?,U>, P extends AccountProvider<?,U>, U extends User<?>> extends Account<H,P,U>
 {
 
 }

@@ -8,13 +8,14 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
  * 
  */
-public interface ServiceProvider<A extends ServiceProviderAccount<?,?,?>>
-    extends NamedLongUniqueObject, AccountProvider<A>, Auditable, Describable
+public interface ServiceProvider<A extends ServiceProviderAccount<?,?,?>, U extends User<?>>
+    extends NamedLongUniqueObject, AccountProvider<A, U>, Auditable<U>, Describable
 {
 
 

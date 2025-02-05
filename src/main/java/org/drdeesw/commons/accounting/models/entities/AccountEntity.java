@@ -8,11 +8,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,28 +34,10 @@ public class AccountEntity
   private UserEntity            user;
 
   @Override
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_holder_id", nullable = false)
-  public AccountHolderEntity getHolder()
-  {
-    return holder;
-  }
-
-
-  @Override
   @Column(name = "account_id")
   public Long getId()
   {
     return super.getId();
-  }
-
-
-  @Override
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "account_provider_id", nullable = false)
-  public AccountProviderEntity getProvider()
-  {
-    return provider;
   }
 
 
@@ -67,14 +47,6 @@ public class AccountEntity
   public UserEntity getUser()
   {
     return user;
-  }
-
-
-  @Override
-  public void setHolder(
-    AccountHolderEntity accountHolder)
-  {
-    this.holder = accountHolder;
   }
 
 

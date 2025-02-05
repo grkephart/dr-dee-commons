@@ -9,6 +9,8 @@ import java.time.Instant;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
@@ -22,13 +24,14 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderAccountTokenHolderEntity<A extends ServiceProviderAccount<?,?,?>>
+public abstract class AbstractServiceProviderAccountTokenHolderEntity<A extends ServiceProviderAccount<?, ?, ?>>
     extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder<A>
 {
-  private String                       accessToken;
-  private Instant                      accessTokenExpiry;
-  private String                       refreshToken;
-  private Instant                      refreshTokenExpiry;
+  private String  accessToken;
+  private Instant accessTokenExpiry;
+  private A       account;
+  private String  refreshToken;
+  private Instant refreshTokenExpiry;
 
   /**
    * 
@@ -52,6 +55,15 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<A extends 
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "account_id", nullable = false)
+  public A getAccount()
+  {
+    return account;
   }
 
 
@@ -84,6 +96,14 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<A extends 
     Instant accessTokenExpiry)
   {
     this.accessTokenExpiry = accessTokenExpiry;
+  }
+
+
+  @Override
+  public void setAccount(
+    A account)
+  {
+    this.account = account;
   }
 
 

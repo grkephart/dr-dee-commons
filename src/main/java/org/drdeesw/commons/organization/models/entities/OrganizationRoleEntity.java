@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.security.models.entities.UserEntity;
+
 
 /**
  * 
@@ -29,7 +31,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationRoleEntity
-    extends AbstractOrganizationRoleEntity<OrganizationEntity, OrganizationMemberRoleEntity>
+    extends AbstractOrganizationRoleEntity<OrganizationEntity, OrganizationMemberRoleEntity, UserEntity>
 {
   private Set<OrganizationMemberRoleEntity> memberRoles;
   private OrganizationEntity                organization;

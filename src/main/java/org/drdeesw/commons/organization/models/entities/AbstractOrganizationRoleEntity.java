@@ -18,7 +18,6 @@ import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -27,13 +26,13 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,?,?,?>, MR extends OrganizationMemberRole<?, ?>>
-    extends AbstractNamedLongUniqueEntity implements OrganizationRole<O, MR>
+public abstract class AbstractOrganizationRoleEntity<O extends Organization<?, ?, ?, ?, ?, U>, MR extends OrganizationMemberRole<?, ?, U>, U extends User<?>>
+    extends AbstractNamedLongUniqueEntity implements OrganizationRole<O, MR, U>
 {
   @Embedded
-  private EmbeddedAuditable audit;
-  private String            description;
-  private boolean           enabled = true;
+  private EmbeddedAuditable<U> audit;
+  private String               description;
+  private boolean              enabled = true;
   /**
    * 
    */
@@ -44,7 +43,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,
 
 
   @Override
-  public User<?> getCreatedBy()
+  public U getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -73,7 +72,7 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,
 
 
   @Override
-  public User<?> getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -89,9 +88,9 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.audit.setCreatedBy((UserEntity)createdBy);
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -129,8 +128,8 @@ public abstract class AbstractOrganizationRoleEntity<O extends Organization<?,?,
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 }

@@ -36,7 +36,7 @@ import org.drdeesw.commons.security.models.User;
  *   <li>A user, an authentication method which allows the holder to access online services provided by the account provider.</li>
  * </ul>
  */
-public interface Account<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>> extends NamedLongUniqueObject, Describable, Auditable
+public interface Account<H extends AccountHolder<?>, P extends AccountProvider<?>, U extends User<?>> extends NamedLongUniqueObject, Describable, Auditable<U>
 {
 
   /**

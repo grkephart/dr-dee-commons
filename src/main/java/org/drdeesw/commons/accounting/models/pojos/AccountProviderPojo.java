@@ -17,8 +17,8 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountProviderPojo<A extends AccountPojo> extends AbstractNamedLongUniquePojo
-    implements AccountProvider<A>
+public class AccountProviderPojo<A extends AccountPojo, U extends UserPojo> extends AbstractNamedLongUniquePojo
+    implements AccountProvider<A, U>
 {
   private UserPojo createdBy;
   private Instant  creationDate;

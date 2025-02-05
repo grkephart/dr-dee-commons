@@ -13,14 +13,14 @@ import org.drdeesw.commons.security.models.User;
  * 
  * 
  */
-public interface Auditable
+public interface Auditable<U extends User<?>>
 {
   /**
    * Returns the user who created the object.
    * 
    * @return the user who created the object
    */
-  User<?> getCreatedBy();
+  U getCreatedBy();
 
 
   /**
@@ -44,7 +44,7 @@ public interface Auditable
    * 
    * @return the user who last updated the object
    */
-  User<?> getLastUpdatedBy();
+  U getLastUpdatedBy();
 
 
   /**
@@ -53,7 +53,7 @@ public interface Auditable
    * @param createdBy the user who created the object
    */
   void setCreatedBy(
-    User<?> createdBy);
+    U createdBy);
 
 
   /**
@@ -80,5 +80,5 @@ public interface Auditable
    * @param lastUpdatedBy the user who last updated the object
    */
   void setLastUpdatedBy(
-    User<?> lastUpdatedBy);
+    U lastUpdatedBy);
 }

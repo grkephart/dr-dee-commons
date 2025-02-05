@@ -47,8 +47,8 @@ class ServiceProviderPojoTest
     ServiceProviderAccount providedAccount = new ServiceProviderAccountPojo();
     Person person = new PersonPojo();
     
-    providedAccount.setHolder(person);
-    providedAccount.setProvider(serviceProvider);
+    providedAccount.setHolder(person, providedAccount);
+    providedAccount.setProvider(serviceProvider, providedAccount);
     
     providedAccounts.add(providedAccount);
     

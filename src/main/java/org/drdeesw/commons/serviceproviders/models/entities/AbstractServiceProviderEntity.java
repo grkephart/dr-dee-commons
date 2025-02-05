@@ -4,8 +4,6 @@
 package org.drdeesw.commons.serviceproviders.models.entities;
 
 
-import java.time.Instant;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -14,7 +12,6 @@ import javax.persistence.MappedSuperclass;
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
@@ -26,9 +23,8 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAccount<?, ?, ?>>
-    extends AbstractAccountProviderEntity<A>
-    /*AbstractNamedLongUniqueEntity*/ implements ServiceProvider<A>
+public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAccount<?, ?, ?>, U extends User<?>>
+    extends AbstractAccountProviderEntity<A, U> implements ServiceProvider<A, U>
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;
@@ -47,7 +43,7 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
    * 
    * @param audit
    */
-  protected AbstractServiceProviderEntity(EmbeddedAuditable audit)
+  protected AbstractServiceProviderEntity(EmbeddedAuditable<U> audit)
   {
     super(audit);
   }
@@ -82,91 +78,6 @@ public abstract class AbstractServiceProviderEntity<A extends ServiceProviderAcc
     String clientRegistrationId)
   {
     this.clientRegistrationId = clientRegistrationId;
-  }
-
-
-  @Override
-  public void setLastUpdatedBy(
-    User<?> lastUpdateId)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public void setLastUpdateDate(
-    Instant lastUpdateDate)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public void setEnabled(
-    boolean enabled)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public void setCreationDate(
-    Instant creationDate)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public void setCreatedBy(
-    User<?> createdBy)
-  {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public boolean isEnabled()
-  {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-
-  @Override
-  public UserPojo getLastUpdatedBy()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public Instant getLastUpdateDate()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public Instant getCreationDate()
-  {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public UserPojo getCreatedBy()
-  {
-    // TODO Auto-generated method stub
-    return null;
   }
 
 }

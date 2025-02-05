@@ -11,23 +11,23 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.drdeesw.commons.security.models.entities.UserEntity;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
  * 
  */
 @Embeddable
-public class EmbeddedAuditable
+public class EmbeddedAuditable<U extends User<?>>
 {
-  private UserEntity createdBy;
-  private Instant    creationDate;
-  private Instant    lastUpdateDate;
-  private UserEntity lastUpdatedBy;
+  private U       createdBy;
+  private Instant creationDate;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
 
   @ManyToOne
   @JoinColumn(name = "created_by_id", nullable = false, updatable = false)
-  public UserEntity getCreatedBy()
+  public U getCreatedBy()
   {
     return createdBy;
   }
@@ -49,16 +49,16 @@ public class EmbeddedAuditable
 
   @ManyToOne
   @JoinColumn(name = "last_updated_by_id")
-  public UserEntity getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
 
 
   public void setCreatedBy(
-    UserEntity createdBy)
+    U createdBy)
   {
-    this.createdBy = (UserEntity)createdBy;
+    this.createdBy = (U)createdBy;
   }
 
 
@@ -77,8 +77,8 @@ public class EmbeddedAuditable
 
 
   public void setLastUpdatedBy(
-    UserEntity lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserEntity)lastUpdatedBy;
+    this.lastUpdatedBy = (U)lastUpdatedBy;
   }
 }

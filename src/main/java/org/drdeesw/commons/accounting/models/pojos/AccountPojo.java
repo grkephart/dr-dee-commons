@@ -17,7 +17,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AccountPojo extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolderPojo<AccountPojo>, AccountProviderPojo<AccountPojo>, UserPojo>
+    implements Account<AccountHolderPojo<AccountPojo, UserPojo>, AccountProviderPojo<AccountPojo>, UserPojo>
 {
   private AccountHolderPojo<AccountPojo>                accountHolder;
   private boolean                          active;

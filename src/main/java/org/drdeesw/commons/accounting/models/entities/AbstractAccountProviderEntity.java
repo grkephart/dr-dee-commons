@@ -5,21 +5,25 @@ package org.drdeesw.commons.accounting.models.entities;
 
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
+import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -29,13 +33,14 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @MappedSuperclass
 @DiscriminatorColumn(name = "provider_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
-    extends AbstractNamedLongUniqueEntity implements AccountProvider<A>
+public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>, U extends User<?>>
+    extends AbstractNamedLongUniqueEntity implements AccountProvider<A, U>
 {
   @Embedded
-  private EmbeddedAuditable audit;
-  private String            description;
-  private boolean           enabled;
+  private EmbeddedAuditable<U> audit;
+  private String               description;
+  private boolean              enabled;
+  private Set<A>               providedAccounts;
 
   /**
    * Hibernate
@@ -44,14 +49,15 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
   {
   }
 
-  protected AbstractAccountProviderEntity(EmbeddedAuditable audit)
+
+  protected AbstractAccountProviderEntity(EmbeddedAuditable<U> audit)
   {
     this.audit = audit;
   }
 
 
   @Override
-  public User<?> getCreatedBy()
+  public U getCreatedBy()
   {
     return this.audit.getCreatedBy();
   }
@@ -80,7 +86,7 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
 
 
   @Override
-  public User<?> getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
   }
@@ -96,9 +102,9 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.audit.setCreatedBy((UserEntity)createdBy);
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -136,9 +142,25 @@ public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>>
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.audit.setLastUpdatedBy((UserEntity)lastUpdatedBy);
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<A> getProvidedAccounts()
+  {
+    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
+  }
+
+
+  @Override
+  public void setProvidedAccounts(
+    Set<A> accounts)
+  {
+    this.providedAccounts = accounts;
   }
 
 }

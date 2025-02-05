@@ -10,13 +10,14 @@ import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
  * 
  */
-public interface OrganizationRole<O extends Organization<?,?,?,?,?>, MR extends OrganizationMemberRole<?, ?>>
-    extends NamedLongUniqueObject, Auditable, Enableable, Describable
+public interface OrganizationRole<O extends Organization<?,?,?,?,?,U>, MR extends OrganizationMemberRole<?, ?,U>, U extends User<?>>
+    extends NamedLongUniqueObject, Auditable<U>, Enableable, Describable
 {
 
   /**

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.entities.AccountEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
-import org.drdeesw.commons.organization.models.Organization;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -35,7 +35,7 @@ import org.drdeesw.commons.organization.models.Organization;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationEntity extends
-    AbstractOrganizationEntity<OrganizationEntity, AccountEntity, OrganizationAccountEntity, OrganizationMemberEntity, OrganizationRoleEntity>
+    AbstractOrganizationEntity<OrganizationEntity, AccountEntity, OrganizationAccountEntity, OrganizationMemberEntity, OrganizationRoleEntity, UserEntity>
 {
   private Set<OrganizationEntity>        children         = new HashSet<>();
   private Set<AccountEntity>             heldAccounts     = new HashSet<>();

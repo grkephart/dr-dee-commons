@@ -60,7 +60,7 @@ class ServiceProviderEntityTest
     serviceProvider.setLastUpdatedBy(lastUpdatedBy);
     serviceProvider.setLastUpdateDate(lastUpdateDate);
     serviceProvider.setName(name);
-    serviceProvider.setProvidedAccounts(null);
+    serviceProvider.setProvidedAccounts(null, serviceProvider);
 
     serviceProvider.getCreatedBy();
     serviceProvider.getCreationDate();
@@ -69,7 +69,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    serviceProvider.getProvidedAccounts();
+    serviceProvider.getProvidedAccounts(serviceProvider);
   }
 
 
@@ -107,7 +107,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    serviceProvider.getProvidedAccounts();
+    serviceProvider.getProvidedAccounts(serviceProvider);
   }
 
 }

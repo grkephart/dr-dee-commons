@@ -9,6 +9,7 @@ import java.util.Set;
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.AccountProvider;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
@@ -23,8 +24,8 @@ import org.drdeesw.commons.accounting.models.AccountProvider;
  * @param <M> the organization member type
  * @param <R> the organization role type
  */
-public interface Organization<PC extends Organization<?,?,?,?,?>, HA extends Account<?, ?, ?>, PA extends OrganizationAccount<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?>>
-    extends AccountProvider<PA>, AccountHolder<HA>
+public interface Organization<PC extends Organization<?,?,?,?,?,U>, HA extends Account<?, ?, ?>, PA extends OrganizationAccount<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?,U>, U extends User<?>>
+    extends AccountProvider<PA,U>, AccountHolder<HA,U>
 {
   /**
    * Returns the children organizations.

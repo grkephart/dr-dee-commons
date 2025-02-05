@@ -10,8 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -26,8 +24,6 @@ import javax.persistence.Table;
 public class ServiceProviderAccountTokenHolderEntity
     extends AbstractServiceProviderAccountTokenHolderEntity<ServiceProviderAccountEntity>
 {
-  private ServiceProviderAccountEntity account;
-
   public ServiceProviderAccountTokenHolderEntity()
   {
     super();
@@ -38,20 +34,5 @@ public class ServiceProviderAccountTokenHolderEntity
   public Long getId()
   {
     return super.getId();
-  }
-
-  @Override
-  @ManyToOne
-  @JoinColumn(name = "account_id", nullable = false)
-  public ServiceProviderAccountEntity getAccount()
-  {
-    return account;
-  }
-
-  @Override
-  public void setAccount(
-    ServiceProviderAccountEntity account)
-  {
-    this.account = account;
   }
 }
