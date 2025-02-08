@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -17,19 +16,19 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountProviderPojo<A extends AccountPojo, U extends UserPojo> extends AbstractNamedLongUniquePojo
+public class AccountProviderPojo<A extends AccountPojo<U>, U extends UserPojo> extends AbstractNamedLongUniquePojo
     implements AccountProvider<A, U>
 {
-  private UserPojo createdBy;
+  private U createdBy;
   private Instant  creationDate;
   private String   description;
   private boolean  enabled;
   private Instant  lastUpdateDate;
-  private UserPojo lastUpdatedBy;
+  private U lastUpdatedBy;
   private Set<A>   providedAccounts;
 
   @Override
-  public UserPojo getCreatedBy()
+  public U getCreatedBy()
   {
     return this.createdBy;
   }
@@ -57,7 +56,7 @@ public class AccountProviderPojo<A extends AccountPojo, U extends UserPojo> exte
 
 
   @Override
-  public UserPojo getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
@@ -79,9 +78,9 @@ public class AccountProviderPojo<A extends AccountPojo, U extends UserPojo> exte
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -119,9 +118,9 @@ public class AccountProviderPojo<A extends AccountPojo, U extends UserPojo> exte
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 

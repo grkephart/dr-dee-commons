@@ -7,6 +7,8 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
@@ -16,26 +18,26 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public abstract class AccountPojo extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolderPojo<AccountPojo, UserPojo>, AccountProviderPojo<AccountPojo>, UserPojo>
+public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUniquePojo
+    implements Account<AccountHolder<?, U>, AccountProvider<?, U>, U>
 {
-  private AccountHolderPojo<AccountPojo>                accountHolder;
-  private boolean                          active;
-  private UserPojo                         createdBy;
-  private Instant                          creationDate;
-  private String                           description;
-  private String                           internalId;
-  private UserPojo                         lastUpdatedBy;
-  private Instant                          lastUpdatedDate;
-  private AccountProviderPojo<AccountPojo> provider;
-  private UserPojo                         user;
+  private AccountHolderPojo<AccountPojo<U>, U>   accountHolder;
+  private boolean                                active;
+  private UserPojo                               createdBy;
+  private Instant                                creationDate;
+  private String                                 description;
+  private String                                 internalId;
+  private UserPojo                               lastUpdatedBy;
+  private Instant                                lastUpdatedDate;
+  private AccountProviderPojo<AccountPojo<U>, U> provider;
+  private UserPojo                               user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(AccountProviderPojo<AccountPojo> provider, String internalId)
+  public AccountPojo(AccountProviderPojo<AccountPojo<U>, UserPojo> provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -70,7 +72,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public AccountHolderPojo<AccountPojo> getHolder()
+  public AccountHolderPojo<AccountPojo<U>, UserPojo> getHolder()
   {
     return accountHolder;
   }
@@ -98,7 +100,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public AccountProviderPojo<AccountPojo> getProvider()
+  public AccountProviderPojo<AccountPojo<U>, UserPojo> getProvider()
   {
     return provider;
   }
@@ -128,9 +130,9 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    UserPojo createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -152,7 +154,7 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setHolder(
-    AccountHolderPojo<AccountPojo> accountHolder)
+    AccountHolderPojo<AccountPojo<U>, UserPojo> accountHolder)
   {
     this.accountHolder = accountHolder;
   }
@@ -176,15 +178,15 @@ public abstract class AccountPojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    UserPojo lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 
   @Override
   public void setProvider(
-    AccountProviderPojo<AccountPojo> provider)
+    AccountProviderPojo<AccountPojo<U>, UserPojo> provider)
   {
     this.provider = provider;
   }

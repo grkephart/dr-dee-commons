@@ -17,7 +17,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationMemberRolePojo extends AbstractLongUniquePojo
-    implements OrganizationMemberRole<OrganizationMemberPojo, OrganizationRolePojo>
+    implements OrganizationMemberRole<OrganizationMemberPojo, OrganizationRolePojo, UserPojo>
 {
   private UserPojo               createdBy;
   private Instant                creationDate;

@@ -5,6 +5,7 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import org.drdeesw.commons.accounting.models.pojos.AccountProviderPojo;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 
@@ -13,8 +14,8 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderPojo extends AccountProviderPojo<ServiceProviderAccountPojo>
-    implements ServiceProvider<ServiceProviderAccountPojo>
+public class ServiceProviderPojo extends AccountProviderPojo<ServiceProviderAccountPojo, UserPojo >
+    implements ServiceProvider<ServiceProviderAccountPojo, UserPojo>
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;

@@ -16,16 +16,16 @@ import org.drdeesw.commons.security.models.User;
  * 
  */
 @SuppressWarnings("serial")
-public abstract class AccountHolderPojo<A extends AccountPojo, U extends User<?>> extends AbstractNamedLongUniquePojo
-    implements AccountHolder<A, U>
+public abstract class AccountHolderPojo<A extends AccountPojo<U>, U extends User<?>>
+    extends AbstractNamedLongUniquePojo implements AccountHolder<A, U>
 {
-  private U createdBy;
-  private Instant    creationDate;
-  private String     description;
-  private boolean    enabled;
-  private Set<A>     heldAccounts;
-  private Instant    lastUpdateDate;
-  private U lastUpdatedBy;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private boolean enabled;
+  private Set<A>  heldAccounts;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
 
   public AccountHolderPojo()
   {

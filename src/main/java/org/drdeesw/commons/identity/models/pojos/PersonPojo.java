@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.identity.models.Person;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -24,7 +23,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "persons")
-public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<AccountPojo>
+public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<AccountPojo, UserPojo>
 {
   private UserPojo         createdBy;
   private Instant          creationDate;
@@ -106,9 +105,9 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
    */
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    UserPojo createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -171,9 +170,9 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
    */
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    UserPojo lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 }
