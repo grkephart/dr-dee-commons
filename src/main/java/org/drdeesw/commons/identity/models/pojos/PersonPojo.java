@@ -11,9 +11,8 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
-import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -23,22 +22,23 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "persons")
-public class PersonPojo extends AbstractNamedLongUniquePojo
-    implements Person<UserPojo<?>, AccountPojo<UserPojo<?>, ?, ?>>
+public class PersonPojo<//
+    U extends UserPojo<?>> //
+    extends AccountHolderPojo<U>
 {
-  private UserPojo<?>      createdBy;
+  private U                createdBy;
   private Instant          creationDate;
   private String           description;
   private boolean          enabled;
   private Set<AccountPojo> heldAccounts;
   private Instant          lastUpdateDate;
-  private UserPojo<?>      lastUpdatedBy;
+  private U                lastUpdatedBy;
 
   /**
    * @return the createdBy
    */
   @Override
-  public UserPojo<?> getCreatedBy()
+  public U getCreatedBy()
   {
     return createdBy;
   }
@@ -85,7 +85,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo
    * @return the lastUpdatedBy
    */
   @Override
-  public UserPojo<?> getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
@@ -106,7 +106,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo
    */
   @Override
   public void setCreatedBy(
-    UserPojo<?> createdBy)
+    U createdBy)
   {
     this.createdBy = createdBy;
   }
@@ -171,7 +171,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo
    */
   @Override
   public void setLastUpdatedBy(
-    UserPojo<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
     this.lastUpdatedBy = lastUpdatedBy;
   }

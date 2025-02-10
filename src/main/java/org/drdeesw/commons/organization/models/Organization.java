@@ -28,7 +28,7 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface Organization<//
     U extends User<?>, //
-    PC extends Organization<U, ?, HA, PA, M, R>, // ✅ Flexible, prevents excessive recursion
+    PC extends Organization<U, ?, HA, PA, M, R>, // Flexible, prevents excessive recursion
     HA extends Account<U, ?, ?>, //
     PA extends OrganizationAccount<U, ?, ?>, //
     M extends OrganizationMember<U, ?, ?>, //

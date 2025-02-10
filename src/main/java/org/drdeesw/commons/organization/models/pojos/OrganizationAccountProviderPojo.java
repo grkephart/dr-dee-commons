@@ -16,7 +16,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 @SuppressWarnings("serial")
 public class OrganizationAccountProviderPojo<//
     U extends UserPojo<?>, //
-    A extends OrganizationAccountPojo<U, AccountHolderPojo<U>, OrganizationAccountProviderPojo<U, A>>> //
+    A extends OrganizationAccountPojo<U, AccountHolderPojo<U>, OrganizationAccountProviderPojo<U, ?>>> //
     extends AccountProviderPojo<U, A>
 {
 

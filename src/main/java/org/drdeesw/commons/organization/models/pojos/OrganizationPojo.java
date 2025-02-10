@@ -7,6 +7,7 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
+import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
@@ -21,9 +22,9 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 @SuppressWarnings("serial")
 public class OrganizationPojo<//
     U extends UserPojo<?>, //
-    PC extends OrganizationPojo<U, PC, HA, PA, M, R>, //
+    PC extends OrganizationPojo<U, ?, HA, PA, M, R>, //
     HA extends AccountPojo<U, ?, ?>, //
-    PA extends OrganizationAccountPojo<U, OrganizationPojo<U, ?, ?, ?, ?, ?>, ?>, //
+    PA extends OrganizationAccountPojo<U, AccountHolderPojo<U>, OrganizationAccountProviderPojo<U, ?>>, //
     M extends OrganizationMemberPojo<U, ?, ?>, //
     R extends OrganizationRolePojo<U, ?, ?>> //
     extends AbstractNamedLongUniquePojo implements Organization<U, PC, HA, PA, M, R>
@@ -68,6 +69,15 @@ public class OrganizationPojo<//
   public String getDescription()
   {
     return description;
+  }
+
+
+  /**
+   * @return the heldAccounts
+   */
+  public Set<HA> getHeldAccounts()
+  {
+    return heldAccounts;
   }
 
 
@@ -171,6 +181,16 @@ public class OrganizationPojo<//
     boolean enabled)
   {
     this.enabled = enabled;
+  }
+
+
+  /**
+   * @param heldAccounts the heldAccounts to set
+   */
+  public void setHeldAccounts(
+    Set<HA> heldAccounts)
+  {
+    this.heldAccounts = heldAccounts;
   }
 
 
