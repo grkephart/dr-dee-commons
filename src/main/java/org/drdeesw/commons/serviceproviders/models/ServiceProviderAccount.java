@@ -12,8 +12,11 @@ import org.drdeesw.commons.security.models.User;
 /**
  * Represents a service provider account. Contains account information and tokens.
  */
-public interface ServiceProviderAccount<H extends AccountHolder<?,U>, P extends ServiceProvider<?,U>, U extends User<?>>
-    extends Account<H, P, U>
+public interface ServiceProviderAccount<//
+    U extends User<?>, //
+    H extends AccountHolder<U, ?>, //
+    P extends ServiceProvider<U, ?>> //
+    extends Account<U, H, P>
 {
   /**
    * Returns the token holder for the account.

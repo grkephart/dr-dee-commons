@@ -26,12 +26,15 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationMemberRoleEntity<M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?,U>, U extends User<?>> extends AbstractNamedLongUniqueEntity
-    implements OrganizationMemberRole<M, R,U>
+public abstract class AbstractOrganizationMemberRoleEntity<//
+    U extends User<?>,//
+    M extends OrganizationMember<U, ?, ?>, //
+    R extends OrganizationRole<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements OrganizationMemberRole<U, M, R>
 {
   @Embedded
-  private EmbeddedAuditable<U>        audit;
-  private boolean                  enabled = true;
+  private EmbeddedAuditable<U> audit;
+  private boolean              enabled = true;
   /**
    * 
    */

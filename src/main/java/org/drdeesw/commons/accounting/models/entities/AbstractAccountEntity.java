@@ -32,8 +32,11 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountEntity<H extends AccountHolder<?, U>, P extends AccountProvider<?, U>, U extends User<?>>
-    extends AbstractNamedLongUniqueEntity implements Account<H, P, U>
+public abstract class AbstractAccountEntity<//
+    U extends User<?>, //
+    H extends AccountHolder<U, ?>, //
+    P extends AccountProvider<U, ?>> //
+    extends AbstractNamedLongUniqueEntity implements Account<U, H, P>
 {
   private boolean              active;
   @Embedded

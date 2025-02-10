@@ -12,8 +12,10 @@ import org.drdeesw.commons.security.models.User;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountHolderEntity<A extends OrganizationAccountEntity, U extends User<?>>
-    extends AbstractAccountHolderEntity<A,U>
+public abstract class AbstractOrganizationAccountHolderEntity<//
+    U extends User<?>, //
+    A extends OrganizationAccountEntity> //
+    extends AbstractAccountHolderEntity<U, A>
 {
 
 }

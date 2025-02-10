@@ -7,9 +7,9 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.drdeesw.commons.common.services.impl.AbstractJpaCrudServiceImpl;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
+import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 import org.drdeesw.commons.serviceproviders.repositories.ServiceProviderAccountRepository;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderAccountService;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderService;
@@ -45,7 +45,7 @@ public class ServiceProviderAccountServiceImpl extends
 
   @Override
   public Optional<ServiceProviderAccountPojo> find(
-    ServiceProvider<ServiceProviderAccountPojo> serviceProvider,
+    ServiceProviderPojo serviceProvider,
     String internalId)
   {
     return null;

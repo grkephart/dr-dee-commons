@@ -7,7 +7,6 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
@@ -16,8 +15,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountPojo extends AccountPojo
-    implements ServiceProviderAccount<AccountHolderPojo<AccountPojo, UserPojo>, ServiceProviderPojo, UserPojo>
+public class ServiceProviderAccountPojo
+    extends AccountPojo<UserPojo<?>, AccountHolderPojo<UserPojo<?>>, ServiceProviderPojo>
+    implements ServiceProviderAccount<UserPojo<?>, AccountHolderPojo<UserPojo<?>>, ServiceProviderPojo>
 {
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 
@@ -38,12 +38,11 @@ public class ServiceProviderAccountPojo extends AccountPojo
     super(serviceProvider, internalId);
   }
 
-
-  @Override
-  public ServiceProviderPojo getServiceProvider()
-  {
-    return (ServiceProviderPojo)super.getProvider();
-  }
+  //  @Override
+  //  public ServiceProviderPojo getServiceProvider()
+  //  {
+  //    return (ServiceProviderPojo)super.getProvider();
+  //  }
 
 
   @Override

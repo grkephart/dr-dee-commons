@@ -28,7 +28,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Table(name = "account_providers")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class AccountProviderEntity extends AbstractAccountProviderEntity<AccountEntity,UserEntity>
+public class AccountProviderEntity extends AbstractAccountProviderEntity<UserEntity, AccountEntity>
 {
   private Set<AccountEntity> providedAccounts;
 

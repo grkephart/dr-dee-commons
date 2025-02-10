@@ -36,7 +36,11 @@ import org.drdeesw.commons.security.models.User;
  *   <li>A user, an authentication method which allows the holder to access online services provided by the account provider.</li>
  * </ul>
  */
-public interface Account<H extends AccountHolder<?,U>, P extends AccountProvider<?,U>, U extends User<?>> extends NamedLongUniqueObject, Describable, Auditable<U>
+public interface Account<//
+    U extends User<?>, //
+    H extends AccountHolder<U, ?>, //
+    P extends AccountProvider<U, ?>> //
+    extends NamedLongUniqueObject, Describable, Auditable<U>
 {
 
   /**
@@ -106,7 +110,8 @@ public interface Account<H extends AccountHolder<?,U>, P extends AccountProvider
    */
   void setInternalId(
     String internalId);
-  
+
+
   /**
    * Sets the account provider.
    * 
@@ -114,12 +119,14 @@ public interface Account<H extends AccountHolder<?,U>, P extends AccountProvider
    */
   void setProvider(
     P accountProvider);
-  
+
+
   /**
    * Sets the user of the account.
    * 
    * @param user the user to set
    */
-  void setUser(U user);
-  
+  void setUser(
+    U user);
+
 }

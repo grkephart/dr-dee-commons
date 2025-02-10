@@ -6,48 +6,52 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
+import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
- * 
+ * ChatGPT's version as of 2025-02-09 9:25 PM PST
  */
 @SuppressWarnings("serial")
-public class OrganizationPojo extends AccountPojo
-    implements Organization<OrganizationPojo, AccountPojo, OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
+public class OrganizationPojo<//
+    U extends UserPojo<?>, //
+    PC extends OrganizationPojo<U, PC, HA, PA, M, R>, //
+    HA extends AccountPojo<U, ?, ?>, //
+    PA extends OrganizationAccountPojo<U, OrganizationPojo<U, ?, ?, ?, ?, ?>, ?>, //
+    M extends OrganizationMemberPojo<U, ?, ?>, //
+    R extends OrganizationRolePojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements Organization<U, PC, HA, PA, M, R>
 {
-  private Set<OrganizationPojo>        children;
-  private UserPojo                     createdBy;
-  private Instant                      creationDate;
-  private String                       description;
-  private boolean                      enabled;
-  private Set<AccountPojo>             heldAccounts;
-  private Instant                      lastUpdateDate;
-  private UserPojo                     lastUpdatedBy;
-  private Set<OrganizationMemberPojo>  members;
-  private OrganizationPojo             parent;
-  private Set<OrganizationAccountPojo> providedAccounts;
-  private Set<OrganizationRolePojo>    roles;
-  private OrganizationStatus           status;
-  private OrganizationType             type;
+  private Set<PC>            children;
+  private U                  createdBy;
+  private Instant            creationDate;
+  private String             description;
+  private boolean            enabled;
+  private Set<HA>            heldAccounts;
+  private Instant            lastUpdateDate;
+  private U                  lastUpdatedBy;
+  private Set<M>             members;
+  private PC                 parent;
+  private Set<PA>            providedAccounts;
+  private Set<R>             roles;
+  private OrganizationStatus status;
+  private OrganizationType   type;
 
   @Override
-  public Set<OrganizationPojo> getChildren()
+  public Set<PC> getChildren()
   {
     return this.children;
-
   }
 
 
   @Override
-  public UserPojo getCreatedBy()
+  public U getCreatedBy()
   {
     return this.createdBy;
   }
@@ -68,13 +72,6 @@ public class OrganizationPojo extends AccountPojo
 
 
   @Override
-  public Set<AccountPojo> getHeldAccounts()
-  {
-    return this.heldAccounts;
-  }
-
-
-  @Override
   public Instant getLastUpdateDate()
   {
     return this.lastUpdateDate;
@@ -82,35 +79,35 @@ public class OrganizationPojo extends AccountPojo
 
 
   @Override
-  public UserPojo getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
 
 
   @Override
-  public Set<OrganizationMemberPojo> getMembers()
+  public Set<M> getMembers()
   {
     return this.members;
   }
 
 
   @Override
-  public OrganizationPojo getParent()
+  public PC getParent()
   {
     return parent;
   }
 
 
   @Override
-  public Set<OrganizationAccountPojo> getProvidedAccounts()
+  public Set<PA> getProvidedAccounts()
   {
     return this.providedAccounts;
   }
 
 
   @Override
-  public Set<OrganizationRolePojo> getRoles()
+  public Set<R> getRoles()
   {
     return this.roles;
   }
@@ -137,28 +134,19 @@ public class OrganizationPojo extends AccountPojo
   }
 
 
-
   @Override
   public void setChildren(
-    Set<OrganizationPojo> children)
+    Set<PC> children)
   {
-    if (children == null)
-    {
-      this.children = null;
-      return;
-    }
-    
-    this.children = children.stream()//
-        .map(org -> (OrganizationPojo)org)//
-        .collect(Collectors.toSet());
+    this.children = children;
   }
 
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -187,16 +175,6 @@ public class OrganizationPojo extends AccountPojo
 
 
   @Override
-  public void setHeldAccounts(
-    Set<AccountPojo> accounts)
-  {
-    this.heldAccounts = accounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
-  }
-
-
-  @Override
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
@@ -206,15 +184,15 @@ public class OrganizationPojo extends AccountPojo
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-    this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 
   @Override
   public void setMembers(
-    Set<OrganizationMemberPojo> members)
+    Set<M> members)
   {
     this.members = members;
   }
@@ -222,15 +200,15 @@ public class OrganizationPojo extends AccountPojo
 
   @Override
   public void setParent(
-    OrganizationPojo parent)
+    PC parent)
   {
-    this.parent = (OrganizationPojo)parent;
+    this.parent = parent;
   }
 
 
   @Override
   public void setProvidedAccounts(
-    Set<OrganizationAccountPojo> accounts)
+    Set<PA> accounts)
   {
     this.providedAccounts = accounts;
   }
@@ -238,7 +216,7 @@ public class OrganizationPojo extends AccountPojo
 
   @Override
   public void setRoles(
-    Set<OrganizationRolePojo> roles)
+    Set<R> roles)
   {
     this.roles = roles;
   }

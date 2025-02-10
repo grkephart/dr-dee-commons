@@ -14,18 +14,24 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 /**
  * 
+ * Note that the definition of AccountProviderPojo and AccountHolderPojo are 
+ * different because an Account Holder holds any type of account, while an 
+ * Account Provider provides specific types of accounts.
+ * 
  */
 @SuppressWarnings("serial")
-public class AccountProviderPojo<A extends AccountPojo<U>, U extends UserPojo> extends AbstractNamedLongUniquePojo
-    implements AccountProvider<A, U>
+public abstract class AccountProviderPojo<//
+    U extends UserPojo<?>, //
+    A extends AccountPojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements AccountProvider<U, A>
 {
-  private U createdBy;
-  private Instant  creationDate;
-  private String   description;
-  private boolean  enabled;
-  private Instant  lastUpdateDate;
-  private U lastUpdatedBy;
-  private Set<A>   providedAccounts;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private boolean enabled;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
+  private Set<A>  providedAccounts;
 
   @Override
   public U getCreatedBy()

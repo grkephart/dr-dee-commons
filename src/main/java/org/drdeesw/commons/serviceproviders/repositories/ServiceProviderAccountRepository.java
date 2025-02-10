@@ -7,9 +7,8 @@ package org.drdeesw.commons.serviceproviders.repositories;
 import java.util.Optional;
 
 import org.drdeesw.commons.common.repositories.QueryRepository;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderAccountEntity;
-import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
+import org.drdeesw.commons.serviceproviders.models.entities.ServiceProviderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -27,7 +26,7 @@ public interface ServiceProviderAccountRepository
    * @return the service provider account
    */
   Optional<ServiceProviderAccountEntity> findByServiceProviderAndInternalId(
-    ServiceProvider<ServiceProviderAccountPojo> serviceProvider,
+    ServiceProviderEntity serviceProvider,
     String internalId);
 
   /**

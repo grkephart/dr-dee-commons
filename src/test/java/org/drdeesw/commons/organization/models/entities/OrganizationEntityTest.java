@@ -49,10 +49,10 @@ class OrganizationEntityTest
   @Test
   void testConstructionWithNullSets()
   {
-    EmbeddedAuditable audit = new EmbeddedAuditable();
+    EmbeddedAuditable<UserEntity> audit = new EmbeddedAuditable<UserEntity>();
     OrganizationEntity parent = new OrganizationEntity();
     OrganizationEntity organization = new OrganizationEntity(audit);
-    Set<Organization<?,?,?>> children = Set.of(organization);
+    Set<OrganizationEntity> children = Set.of(organization);
     UserEntity createdBy = new UserEntity();
     Instant creationDate = Instant.now();
     String description = "toy7 o56ybo7yo  hkghgy";
@@ -103,7 +103,7 @@ class OrganizationEntityTest
   @Test
   void testConstructionWithBasicSets()
   {
-    EmbeddedAuditable audit = new EmbeddedAuditable();
+    EmbeddedAuditable<UserEntity> audit = new EmbeddedAuditable<UserEntity>();
     UserEntity createdBy = new UserEntity();
     Instant creationDate = Instant.now();
     String description = "toy7 o56ybo7yo  hkghgy";
@@ -116,10 +116,10 @@ class OrganizationEntityTest
     OrganizationEntity organization = new OrganizationEntity(audit);
     Set<OrganizationEntity> children = Set.of(organization);
     String name = "tjttkyyryju6";
-    OrganizationAccountEntity heldAccount = new OrganizationAccountEntity();
-    Set<OrganizationAccountEntity> heldAccounts = Set.of(heldAccount);
-    AccountEntity providedAccount = new AccountEntity();
-    Set<AccountEntity> providedAccounts = Set.of(providedAccount);
+    AccountEntity heldAccount = new OrganizationAccountEntity();
+    Set<AccountEntity> heldAccounts = Set.of(heldAccount);
+    OrganizationAccountEntity providedAccount = new OrganizationAccountEntity();
+    Set<OrganizationAccountEntity> providedAccounts = Set.of(providedAccount);
     OrganizationRoleEntity role = new OrganizationRoleEntity();
     Set<OrganizationRoleEntity> roles = Set.of(role);
     OrganizationStatus status = OrganizationStatus.ACTIVE;

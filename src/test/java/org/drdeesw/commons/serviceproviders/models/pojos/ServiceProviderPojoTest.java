@@ -7,10 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.identity.models.pojos.PersonPojo;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,13 +41,13 @@ class ServiceProviderPojoTest
   @Test
   void testConstruction()
   {
-    ServiceProvider<ServiceProviderAccountPojo> serviceProvider = new ServiceProviderPojo();
-    Set<Account> providedAccounts = new HashSet<Account>();
-    ServiceProviderAccount providedAccount = new ServiceProviderAccountPojo();
-    Person person = new PersonPojo();
+    ServiceProviderPojo serviceProvider = new ServiceProviderPojo();
+    Set<AccountPojo> providedAccounts = new HashSet<AccountPojo>();
+    ServiceProviderAccountPojo providedAccount = new ServiceProviderAccountPojo();
+    PersonPojo person = new PersonPojo();
     
-    providedAccount.setHolder(person, providedAccount);
-    providedAccount.setProvider(serviceProvider, providedAccount);
+    providedAccount.setHolder(person);
+    providedAccount.setProvider(serviceProvider);
     
     providedAccounts.add(providedAccount);
     

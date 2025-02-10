@@ -25,7 +25,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class ServiceProviderEntity
-    extends AbstractServiceProviderEntity<ServiceProviderAccountEntity, UserEntity>
+    extends AbstractServiceProviderEntity<UserEntity, ServiceProviderAccountEntity>
 {
   /**
    * Hibernate

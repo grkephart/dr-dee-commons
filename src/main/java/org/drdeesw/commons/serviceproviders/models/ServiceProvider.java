@@ -14,10 +14,11 @@ import org.drdeesw.commons.security.models.User;
 /**
  * 
  */
-public interface ServiceProvider<A extends ServiceProviderAccount<?,?,?>, U extends User<?>>
-    extends NamedLongUniqueObject, AccountProvider<A, U>, Auditable<U>, Describable
+public interface ServiceProvider<//
+    U extends User<?>, //
+    A extends ServiceProviderAccount<U, ?, ?>>
+    extends NamedLongUniqueObject, AccountProvider<U, A>, Auditable<U>, Describable
 {
-
 
   /**
    * Returns the authentication type of the service provider.

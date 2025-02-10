@@ -3,15 +3,16 @@
  */
 package org.drdeesw.commons.serviceproviders.models.entities;
 
+
 import java.time.Instant;
 import java.util.Set;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.security.models.entities.UserEntity;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 /**
  * 
@@ -43,7 +44,7 @@ class ServiceProviderEntityTest
   @Test
   void testConstructionWithNullSets()
   {
-    EmbeddedAuditable audit = new EmbeddedAuditable();
+    EmbeddedAuditable<UserEntity> audit = new EmbeddedAuditable<UserEntity>();
     ServiceProviderEntity serviceProvider = new ServiceProviderEntity(audit);
     UserEntity createdBy = new UserEntity();
     Instant creationDate = Instant.now();
@@ -60,7 +61,7 @@ class ServiceProviderEntityTest
     serviceProvider.setLastUpdatedBy(lastUpdatedBy);
     serviceProvider.setLastUpdateDate(lastUpdateDate);
     serviceProvider.setName(name);
-    serviceProvider.setProvidedAccounts(null, serviceProvider);
+    serviceProvider.setProvidedAccounts(null);
 
     serviceProvider.getCreatedBy();
     serviceProvider.getCreationDate();
@@ -69,7 +70,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    serviceProvider.getProvidedAccounts(serviceProvider);
+    serviceProvider.getProvidedAccounts();
   }
 
 
@@ -79,7 +80,7 @@ class ServiceProviderEntityTest
   @Test
   void testConstructionWithBasicSets()
   {
-    EmbeddedAuditable audit = new EmbeddedAuditable();
+    EmbeddedAuditable<UserEntity> audit = new EmbeddedAuditable<UserEntity>();
     UserEntity createdBy = new UserEntity();
     Instant creationDate = Instant.now();
     String description = "toy7 o56ybo7yo  hkghgy";
@@ -89,7 +90,7 @@ class ServiceProviderEntityTest
     ServiceProviderEntity serviceProvider = new ServiceProviderEntity(audit);
     String name = "tjttkyyryju6";
     ServiceProviderAccountEntity providedAccount = new ServiceProviderAccountEntity();
-    Set<ServiceProviderAccount> providedAccounts = Set.of(providedAccount);
+    Set<ServiceProviderAccountEntity> providedAccounts = Set.of(providedAccount);
 
     serviceProvider.setCreatedBy(createdBy);
     serviceProvider.setCreationDate(creationDate);
@@ -107,7 +108,7 @@ class ServiceProviderEntityTest
     serviceProvider.getLastUpdateDate();
     serviceProvider.getLastUpdatedBy();
     serviceProvider.getName();
-    serviceProvider.getProvidedAccounts(serviceProvider);
+    serviceProvider.getProvidedAccounts();
   }
 
 }

@@ -7,10 +7,7 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -18,26 +15,33 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUniquePojo
-    implements Account<AccountHolder<?, U>, AccountProvider<?, U>, U>
+public abstract class AccountPojo<U extends UserPojo<?>, H extends AccountHolderPojo<U>, P extends AccountProviderPojo<U, ?>>
+    extends AbstractNamedLongUniquePojo implements Account<U, H, P>
 {
-  private AccountHolderPojo<AccountPojo<U>, U>   accountHolder;
-  private boolean                                active;
-  private UserPojo                               createdBy;
-  private Instant                                creationDate;
-  private String                                 description;
-  private String                                 internalId;
-  private UserPojo                               lastUpdatedBy;
-  private Instant                                lastUpdatedDate;
-  private AccountProviderPojo<AccountPojo<U>, U> provider;
-  private UserPojo                               user;
+  private boolean active;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private H       holder;
+  private String  internalId;
+  private U       lastUpdatedBy;
+  private Instant lastUpdatedDate;
+  private P       provider;
+  private U       user;
 
   public AccountPojo()
   {
   }
 
 
-  public AccountPojo(AccountProviderPojo<AccountPojo<U>, UserPojo> provider, String internalId)
+  public AccountPojo(H holder, String internalId)
+  {
+    this.holder = holder;
+    this.internalId = internalId;
+  }
+
+
+  public AccountPojo(P provider, String internalId)
   {
     this.provider = provider;
     this.internalId = internalId;
@@ -51,7 +55,7 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
 
   @Override
-  public UserPojo getCreatedBy()
+  public U getCreatedBy()
   {
     return this.createdBy;
   }
@@ -72,9 +76,9 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
 
   @Override
-  public AccountHolderPojo<AccountPojo<U>, UserPojo> getHolder()
+  public H getHolder()
   {
-    return accountHolder;
+    return holder;
   }
 
 
@@ -93,21 +97,21 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
 
   @Override
-  public UserPojo getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
 
 
   @Override
-  public AccountProviderPojo<AccountPojo<U>, UserPojo> getProvider()
+  public P getProvider()
   {
     return provider;
   }
 
 
   @Override
-  public UserPojo getUser()
+  public U getUser()
   {
     return this.user;
   }
@@ -130,7 +134,7 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
   @Override
   public void setCreatedBy(
-    UserPojo createdBy)
+    U createdBy)
   {
     this.createdBy = createdBy;
   }
@@ -154,9 +158,9 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
   @Override
   public void setHolder(
-    AccountHolderPojo<AccountPojo<U>, UserPojo> accountHolder)
+    H accountHolder)
   {
-    this.accountHolder = accountHolder;
+    this.holder = accountHolder;
   }
 
 
@@ -178,7 +182,7 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
   @Override
   public void setLastUpdatedBy(
-    UserPojo lastUpdatedBy)
+    U lastUpdatedBy)
   {
     this.lastUpdatedBy = lastUpdatedBy;
   }
@@ -186,7 +190,7 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
   @Override
   public void setProvider(
-    AccountProviderPojo<AccountPojo<U>, UserPojo> provider)
+    P provider)
   {
     this.provider = provider;
   }
@@ -194,7 +198,7 @@ public abstract class AccountPojo<U extends User<?>> extends AbstractNamedLongUn
 
   @Override
   public void setUser(
-    UserPojo user)
+    U user)
   {
     this.user = user;
   }

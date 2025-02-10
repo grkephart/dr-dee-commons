@@ -24,7 +24,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Table(name = "persons")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class PersonEntity extends AbstractPersonEntity<AccountEntity, UserEntity>
+public class PersonEntity extends AbstractPersonEntity<UserEntity, AccountEntity>
 {
   @Override
   @Column(name = "person_id")

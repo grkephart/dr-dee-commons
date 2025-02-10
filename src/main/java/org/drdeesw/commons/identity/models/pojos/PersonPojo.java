@@ -23,21 +23,22 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "persons")
-public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<AccountPojo, UserPojo>
+public class PersonPojo extends AbstractNamedLongUniquePojo
+    implements Person<UserPojo<?>, AccountPojo<UserPojo<?>, ?, ?>>
 {
-  private UserPojo         createdBy;
+  private UserPojo<?>      createdBy;
   private Instant          creationDate;
   private String           description;
   private boolean          enabled;
   private Set<AccountPojo> heldAccounts;
   private Instant          lastUpdateDate;
-  private UserPojo         lastUpdatedBy;
+  private UserPojo<?>      lastUpdatedBy;
 
   /**
    * @return the createdBy
    */
   @Override
-  public UserPojo getCreatedBy()
+  public UserPojo<?> getCreatedBy()
   {
     return createdBy;
   }
@@ -84,7 +85,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
    * @return the lastUpdatedBy
    */
   @Override
-  public UserPojo getLastUpdatedBy()
+  public UserPojo<?> getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
@@ -105,7 +106,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
    */
   @Override
   public void setCreatedBy(
-    UserPojo createdBy)
+    UserPojo<?> createdBy)
   {
     this.createdBy = createdBy;
   }
@@ -170,7 +171,7 @@ public class PersonPojo extends AbstractNamedLongUniquePojo implements Person<Ac
    */
   @Override
   public void setLastUpdatedBy(
-    UserPojo lastUpdatedBy)
+    UserPojo<?> lastUpdatedBy)
   {
     this.lastUpdatedBy = lastUpdatedBy;
   }

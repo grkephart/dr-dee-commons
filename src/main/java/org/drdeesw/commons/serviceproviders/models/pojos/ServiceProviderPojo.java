@@ -14,8 +14,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderPojo extends AccountProviderPojo<ServiceProviderAccountPojo, UserPojo >
-    implements ServiceProvider<ServiceProviderAccountPojo, UserPojo>
+public class ServiceProviderPojo
+    extends AccountProviderPojo<UserPojo<?>, ServiceProviderAccountPojo>
+    implements ServiceProvider<UserPojo<?>, ServiceProviderAccountPojo>
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;

@@ -21,8 +21,11 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderAccountEntity<H extends AccountHolder<?, U>, P extends ServiceProvider<?,U>, U extends User<?>>
-    extends AbstractAccountEntity<H, P, U> implements ServiceProviderAccount<H, P, U>
+public abstract class AbstractServiceProviderAccountEntity<//
+    U extends User<?>, //
+    H extends AccountHolder<U, ?>, //
+    P extends ServiceProvider<U, ?>> //
+    extends AbstractAccountEntity<U, H, P> implements ServiceProviderAccount<U, H, P>
 {
 
   /**

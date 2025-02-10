@@ -8,8 +8,6 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderAccountPojo;
 import org.drdeesw.commons.serviceproviders.models.pojos.ServiceProviderPojo;
 import org.drdeesw.commons.serviceproviders.services.ServiceProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,7 @@ public class ServiceProviderController extends AbstractCrudController<ServicePro
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    ServiceProvider<ServiceProviderAccountPojo> serviceProvider,
+    ServiceProviderPojo serviceProvider,
     BindingResult bindingResult) throws Exception
   {
     return super.create(serviceProvider, bindingResult);

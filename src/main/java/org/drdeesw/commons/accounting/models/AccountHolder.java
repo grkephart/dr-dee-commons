@@ -19,7 +19,10 @@ import org.drdeesw.commons.security.models.User;
  *  Organization
  *  Integrating system
  */
-public interface AccountHolder<A extends Account<?,?,?>, U extends User<?>> extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
+public interface AccountHolder<//
+    U extends User<?>, //
+    A extends Account<U, ?, ?>> //
+    extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
 {
   /**
    * Returns the accounts held by the AccountHolder.

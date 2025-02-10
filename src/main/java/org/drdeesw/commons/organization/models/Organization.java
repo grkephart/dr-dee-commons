@@ -13,10 +13,12 @@ import org.drdeesw.commons.security.models.User;
 
 
 /**
+ * ChatGPT's version as of 2025-02-09 9:41 PM PST
+ * 
  * An organization is a group of people with a common purpose or goal. 
  * The organization can have a parent organization and children organizations. 
  * The organization can have members and roles. 
- * The organization can provide accounts and hold accounts.
+ * The organization can provide organization accounts and hold any accounts.
  * 
  * @param <PC> the parent or children organization type
  * @param <HA> the held account type
@@ -24,8 +26,15 @@ import org.drdeesw.commons.security.models.User;
  * @param <M> the organization member type
  * @param <R> the organization role type
  */
-public interface Organization<PC extends Organization<?,?,?,?,?,U>, HA extends Account<?, ?, ?>, PA extends OrganizationAccount<?, ?, ?>, M extends OrganizationMember<?,?,?>, R extends OrganizationRole<?,?,U>, U extends User<?>>
-    extends AccountProvider<PA,U>, AccountHolder<HA,U>
+public interface Organization<//
+    U extends User<?>, //
+    PC extends Organization<U, ?, HA, PA, M, R>, // ✅ Flexible, prevents excessive recursion
+    HA extends Account<U, ?, ?>, //
+    PA extends OrganizationAccount<U, ?, ?>, //
+    M extends OrganizationMember<U, ?, ?>, //
+    R extends OrganizationRole<U, ?, ?>//
+> //
+    extends AccountProvider<U, PA>, AccountHolder<U, HA>
 {
   /**
    * Returns the children organizations.
@@ -80,7 +89,8 @@ public interface Organization<PC extends Organization<?,?,?,?,?,U>, HA extends A
    * 
    * @param children the children organizations to set
    */
-  void setChildren(Set<PC> children);
+  void setChildren(
+    Set<PC> children);
 
 
   /**
@@ -97,7 +107,8 @@ public interface Organization<PC extends Organization<?,?,?,?,?,U>, HA extends A
    * 
    * @param parent the parent to set
    */
-  void setParent(PC parent);
+  void setParent(
+    PC parent);
 
 
   /**

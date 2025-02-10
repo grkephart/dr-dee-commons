@@ -29,7 +29,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationAccountHolderEntity
-    extends AbstractOrganizationAccountHolderEntity<OrganizationAccountEntity, UserEntity>
+    extends AbstractOrganizationAccountHolderEntity<UserEntity, OrganizationAccountEntity>
 {
 
   private Set<OrganizationAccountEntity> heldAccounts;

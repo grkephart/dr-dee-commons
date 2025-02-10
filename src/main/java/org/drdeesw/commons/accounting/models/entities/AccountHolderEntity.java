@@ -28,7 +28,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Table(name = "account_holders")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class AccountHolderEntity extends AbstractAccountHolderEntity<AccountEntity, UserEntity>
+public class AccountHolderEntity extends AbstractAccountHolderEntity<UserEntity, AccountEntity>
 {
   private Set<AccountEntity> heldAccounts;
 

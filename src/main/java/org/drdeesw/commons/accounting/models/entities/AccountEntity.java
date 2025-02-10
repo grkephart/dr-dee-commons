@@ -26,12 +26,20 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class AccountEntity
-    extends AbstractAccountEntity<AccountHolderEntity, AccountProviderEntity, UserEntity>
+    extends AbstractAccountEntity<UserEntity, AccountHolderEntity, AccountProviderEntity>
 {
-
   private AccountHolderEntity   holder;
   private AccountProviderEntity provider;
   private UserEntity            user;
+
+  /**
+   * @return the holder
+   */
+  public AccountHolderEntity getHolder()
+  {
+    return holder;
+  }
+
 
   @Override
   @Column(name = "account_id")
@@ -41,12 +49,31 @@ public class AccountEntity
   }
 
 
+  /**
+   * @return the provider
+   */
+  public AccountProviderEntity getProvider()
+  {
+    return provider;
+  }
+
+
   @Override
   @OneToOne
   @JoinColumn(name = "user_id")
   public UserEntity getUser()
   {
     return user;
+  }
+
+
+  /**
+   * @param holder the holder to set
+   */
+  public void setHolder(
+    AccountHolderEntity holder)
+  {
+    this.holder = holder;
   }
 
 

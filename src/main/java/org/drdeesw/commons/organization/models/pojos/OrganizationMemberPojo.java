@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -17,20 +16,23 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class OrganizationMemberPojo extends AbstractLongUniquePojo
-    implements OrganizationMember<OrganizationMemberRolePojo, OrganizationPojo, UserPojo>
+public class OrganizationMemberPojo<//
+    U extends UserPojo<?>, //
+    R extends OrganizationMemberRolePojo<U, ?, ?>, //
+    O extends OrganizationPojo<U, ?, ?, ?, ?, ?>> //
+    extends AbstractLongUniquePojo implements OrganizationMember<U, R, O>
 {
-  private UserPojo                        createdBy;
-  private Instant                         creationDate;
-  private boolean                         enabled;
-  private Instant                         lastUpdateDate;
-  private UserPojo                        lastUpdatedBy;
-  private OrganizationPojo                organization;
-  private Set<OrganizationMemberRolePojo> roles;
-  private UserPojo                        user;
+  private U       createdBy;
+  private Instant creationDate;
+  private boolean enabled;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
+  private O       organization;
+  private Set<R>  roles;
+  private U       user;
 
   @Override
-  public UserPojo getCreatedBy()
+  public U getCreatedBy()
   {
     return createdBy;
   }
@@ -51,28 +53,28 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo
 
 
   @Override
-  public UserPojo getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return lastUpdatedBy;
   }
 
 
   @Override
-  public Set<OrganizationMemberRolePojo> getMemberRoles()
+  public Set<R> getMemberRoles()
   {
     return this.roles;
   }
 
 
   @Override
-  public OrganizationPojo getOrganization()
+  public O getOrganization()
   {
     return this.organization;
   }
 
 
   @Override
-  public UserPojo getUser()
+  public U getUser()
   {
     return this.user;
   }
@@ -87,9 +89,9 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -119,15 +121,15 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 
   @Override
   public void setMemberRoles(
-    Set<OrganizationMemberRolePojo> roles)
+    Set<R> roles)
   {
     this.roles = roles;
   }
@@ -135,7 +137,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo
 
   @Override
   public void setOrganization(
-    OrganizationPojo organization)
+    O organization)
   {
     this.organization = organization;
   }
@@ -143,7 +145,7 @@ public class OrganizationMemberPojo extends AbstractLongUniquePojo
 
   @Override
   public void setUser(
-    UserPojo user)
+    U user)
   {
     this.user = user;
   }

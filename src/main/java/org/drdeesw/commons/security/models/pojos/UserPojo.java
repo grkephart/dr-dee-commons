@@ -16,11 +16,12 @@ import org.drdeesw.commons.security.models.User;
  *
  */
 @SuppressWarnings("serial")
-public class UserPojo extends AbstractNamedLongUniquePojo implements User<AccountPojo>
+public class UserPojo<A extends AccountPojo<?, ?, ?>> extends AbstractNamedLongUniquePojo
+    implements User<A>
 {
-  private AccountPojo account;
-  private boolean     enabled;
-  private String      username;
+  private A       account;
+  private boolean enabled;
+  private String  username;
 
   /**
    * Hibernate
@@ -48,7 +49,7 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User<Accoun
 
 
   @Override
-  public AccountPojo getAccount()
+  public A getAccount()
   {
     return this.account;
   }
@@ -77,7 +78,7 @@ public class UserPojo extends AbstractNamedLongUniquePojo implements User<Accoun
 
   @Override
   public void setAccount(
-    AccountPojo account)
+    A account)
   {
     this.account = account;
   }

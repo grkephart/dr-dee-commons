@@ -9,28 +9,30 @@ import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.OrganizationRole;
-import org.drdeesw.commons.security.models.User;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
- * 
+ * ChatGPT's version as of 2025-02-09 9:20 PM PST
  */
 @SuppressWarnings("serial")
-public class OrganizationRolePojo extends AbstractNamedLongUniquePojo
-    implements OrganizationRole<OrganizationPojo, OrganizationMemberRolePojo>
+public class OrganizationRolePojo<//
+    U extends UserPojo<?>, //
+    O extends OrganizationPojo<U, ?, ?, ?, ?, ?>, //
+    M extends OrganizationMemberRolePojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements OrganizationRole<U, O, M>
 {
-  private UserPojo                        createdBy;
-  private Instant                         creationDate;
-  private String                          description;
-  private boolean                         enabled;
-  private Instant                         lastUpdateDate;
-  private UserPojo                        lastUpdatedBy;
-  private Set<OrganizationMemberRolePojo> members;
-  private OrganizationPojo                organization;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private boolean enabled;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
+  private Set<M>  members;
+  private O       organization;
 
   @Override
-  public UserPojo getCreatedBy()
+  public U getCreatedBy()
   {
     return this.createdBy;
   }
@@ -58,23 +60,23 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo
 
 
   @Override
-  public UserPojo getLastUpdatedBy()
+  public U getLastUpdatedBy()
   {
     return this.lastUpdatedBy;
   }
 
 
   @Override
-  public Set<OrganizationMemberRolePojo> getMemberRoles()
+  public Set<M> getMemberRoles()
   {
-    return members;
+    return this.members;
   }
 
 
   @Override
-  public OrganizationPojo getOrganization()
+  public O getOrganization()
   {
-    return organization;
+    return this.organization;
   }
 
 
@@ -87,9 +89,9 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setCreatedBy(
-    User<?> createdBy)
+    U createdBy)
   {
-    this.createdBy = (UserPojo)createdBy;
+    this.createdBy = createdBy;
   }
 
 
@@ -127,15 +129,15 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setLastUpdatedBy(
-    User<?> lastUpdatedBy)
+    U lastUpdatedBy)
   {
-     this.lastUpdatedBy = (UserPojo)lastUpdatedBy;
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
 
   @Override
   public void setMemberRoles(
-    Set<OrganizationMemberRolePojo> members)
+    Set<M> members)
   {
     this.members = members;
   }
@@ -143,7 +145,7 @@ public class OrganizationRolePojo extends AbstractNamedLongUniquePojo
 
   @Override
   public void setOrganization(
-    OrganizationPojo organization)
+    O organization)
   {
     this.organization = organization;
   }

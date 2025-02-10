@@ -16,7 +16,9 @@ import org.drdeesw.commons.security.models.User;
 /**
  * 
  */
-public interface AccountProvider<A extends Account<?, ?, ?>, U extends User<?>>
+public interface AccountProvider<//
+    U extends User<?>, //
+    A extends Account<U, ?, ?>> //
     extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
 {
   /**

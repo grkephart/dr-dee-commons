@@ -22,7 +22,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class OrganizationAccountEntity
-    extends AbstractOrganizationAccountEntity<AccountHolderEntity, OrganizationEntity, UserEntity>
+    extends AbstractOrganizationAccountEntity<UserEntity, AccountHolderEntity, OrganizationEntity>
 {
   @Override
   @Column(name = "organization_account_id")

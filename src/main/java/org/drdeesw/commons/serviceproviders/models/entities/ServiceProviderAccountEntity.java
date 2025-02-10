@@ -28,7 +28,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class ServiceProviderAccountEntity extends
-    AbstractServiceProviderAccountEntity<AccountHolderEntity, ServiceProviderEntity, UserEntity>
+    AbstractServiceProviderAccountEntity<UserEntity, AccountHolderEntity, ServiceProviderEntity>
 {
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
 

@@ -33,8 +33,10 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @DiscriminatorColumn(name = "provider_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public abstract class AbstractAccountProviderEntity<A extends Account<?, ?, ?>, U extends User<?>>
-    extends AbstractNamedLongUniqueEntity implements AccountProvider<A, U>
+public abstract class AbstractAccountProviderEntity<//
+    U extends User<?>, //
+    A extends Account<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements AccountProvider<U, A>
 {
   @Embedded
   private EmbeddedAuditable<U> audit;

@@ -25,7 +25,8 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Table(name = "organization_member_roles")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class OrganizationMemberRoleEntity extends AbstractOrganizationMemberRoleEntity<OrganizationMemberEntity, OrganizationRoleEntity, UserEntity>
+public class OrganizationMemberRoleEntity extends
+    AbstractOrganizationMemberRoleEntity<UserEntity, OrganizationMemberEntity, OrganizationRoleEntity>
 {
 
   private OrganizationMemberEntity member;
