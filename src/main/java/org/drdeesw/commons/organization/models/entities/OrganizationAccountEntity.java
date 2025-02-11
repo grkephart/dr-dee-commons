@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 
@@ -23,6 +24,7 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Access(AccessType.PROPERTY)
 public class OrganizationAccountEntity
     extends AbstractOrganizationAccountEntity<UserEntity, AccountHolderEntity, OrganizationEntity>
+    implements Account<UserEntity, AccountHolderEntity, OrganizationEntity> // Explicitly implement Account<U, ?, ?>
 {
   @Override
   @Column(name = "organization_account_id")

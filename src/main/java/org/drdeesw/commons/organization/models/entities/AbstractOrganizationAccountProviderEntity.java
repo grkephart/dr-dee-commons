@@ -6,7 +6,6 @@ import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
-import org.drdeesw.commons.organization.models.pojos.OrganizationAccountPojo;
 import org.drdeesw.commons.security.models.User;
 
 
@@ -15,7 +14,7 @@ import org.drdeesw.commons.security.models.User;
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationAccountProviderEntity<//
     U extends User<?>, //
-    A extends  OrganizationAccountPojo<U, ? extends AbstractOrganizationAccountHolderEntity<U>, ? extends AbstractOrganizationAccountProviderEntity<U>>>
+    A extends OrganizationAccountEntity>
     extends AbstractAccountProviderEntity<U, A>
 {
 

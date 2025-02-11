@@ -5,14 +5,11 @@ package org.drdeesw.commons.identity.models.pojos;
 
 
 import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
-import org.drdeesw.commons.accounting.models.pojos.AccountPojo;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -26,13 +23,12 @@ public class PersonPojo<//
     U extends UserPojo<?>> //
     extends AccountHolderPojo<U>
 {
-  private U                createdBy;
-  private Instant          creationDate;
-  private String           description;
-  private boolean          enabled;
-  private Set<AccountPojo> heldAccounts;
-  private Instant          lastUpdateDate;
-  private U                lastUpdatedBy;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private boolean enabled;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
 
   /**
    * @return the createdBy
@@ -61,13 +57,6 @@ public class PersonPojo<//
   public String getDescription()
   {
     return description;
-  }
-
-
-  @Override
-  public Set<AccountPojo> getHeldAccounts()
-  {
-    return this.heldAccounts;
   }
 
 
@@ -142,16 +131,6 @@ public class PersonPojo<//
     boolean enabled)
   {
     this.enabled = enabled;
-  }
-
-
-  @Override
-  public void setHeldAccounts(
-    Set<AccountPojo> accounts)
-  {
-    this.heldAccounts = accounts.stream()//
-        .map(account -> (AccountPojo)account)//
-        .collect(Collectors.toSet());
   }
 
 
