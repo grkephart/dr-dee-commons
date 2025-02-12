@@ -32,8 +32,7 @@ public interface Organization<//
     HA extends Account<U, ?, ?>, //
     PA extends OrganizationAccount<U, ?, ?>, //
     M extends OrganizationMember<U, ?, ?>, //
-    R extends OrganizationRole<U, ?, ?>//
-> //
+    R extends OrganizationRole<U, ?, ?>> //
     extends AccountProvider<U, PA>, AccountHolder<U, HA>
 {
   /**

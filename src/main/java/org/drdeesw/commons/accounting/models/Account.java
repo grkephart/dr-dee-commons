@@ -6,6 +6,7 @@ package org.drdeesw.commons.accounting.models;
 
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
+import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 import org.drdeesw.commons.security.models.User;
 
@@ -40,7 +41,7 @@ public interface Account<//
     U extends User<?>, //
     H extends AccountHolder<U, ?>, //
     P extends AccountProvider<U, ?>> //
-    extends NamedLongUniqueObject, Describable, Auditable<U>
+    extends NamedLongUniqueObject, Describable, Auditable<U>, Enableable
 {
 
   /**
@@ -63,7 +64,7 @@ public interface Account<//
   /**
    * Returns the account provider.
    * 
-   * @return the accountProvider
+   * @return the provider
    */
   P getProvider();
 
@@ -96,7 +97,7 @@ public interface Account<//
   /**
    * Sets the holder of the account.
    * 
-   * @param accountHolder
+   * @param holder
    */
   void setHolder(
     H accountHolder);
@@ -115,7 +116,7 @@ public interface Account<//
   /**
    * Sets the account provider.
    * 
-   * @param accountProvider the account provider to set
+   * @param provider the account provider to set
    */
   void setProvider(
     P accountProvider);
