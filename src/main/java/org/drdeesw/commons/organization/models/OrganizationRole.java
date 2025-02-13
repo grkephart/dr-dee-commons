@@ -40,9 +40,9 @@ public interface OrganizationRole<//
 
 
   /**
-   * Sets the organization member roles.
+   * Sets the organization member memberRoles.
    * 
-   * @param memberRoles the member roles to set
+   * @param memberRoles the member memberRoles to set
    */
   public void setMemberRoles(
     Set<MR> memberRoles);

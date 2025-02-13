@@ -9,7 +9,7 @@ import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 /**
@@ -18,7 +18,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationPojo<//
-    U extends UserPojo<?>, //
+    U extends AbstractUserPojo<?>, //
     PC extends AbstractOrganizationPojo<U, ?, ?, ?, ?, ?>, //
     HA extends AbstractAccountPojo<U, ?, ?>, //
     PA extends AbstractOrganizationAccountPojo<U, ?, ?>, //

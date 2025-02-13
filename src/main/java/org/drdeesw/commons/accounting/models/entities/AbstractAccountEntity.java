@@ -18,11 +18,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -33,15 +31,16 @@ import org.drdeesw.commons.security.models.User;
 @DiscriminatorColumn(name = "account_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
 public abstract class AbstractAccountEntity<//
-    U extends User<?>, //
-    H extends AccountHolder<U, ?>, //
-    P extends AccountProvider<U, ?>> //
+    U extends AbstractUserEntity<?>, //
+    H extends AbstractAccountHolderEntity<U, ?>, //
+    P extends AbstractAccountProviderEntity<U, ?>> //
     extends AbstractNamedLongUniqueEntity implements Account<U, H, P>
 {
   private boolean              active;
   @Embedded
   private EmbeddedAuditable<U> audit;
   private String               description;
+  private boolean              enabled;
   private H                    holder;
   private String               internalId;
   private P                    provider;
@@ -126,6 +125,16 @@ public abstract class AbstractAccountEntity<//
   }
 
 
+  /**
+   * @return the enabled
+   */
+  @Column(name = "is_enabled", nullable = false)
+  public boolean isEnabled()
+  {
+    return enabled;
+  }
+
+
   @Override
   public void setActive(
     boolean active)
@@ -155,6 +164,16 @@ public abstract class AbstractAccountEntity<//
     String description)
   {
     this.description = description;
+  }
+
+
+  /**
+   * @param enabled the enabled to set
+   */
+  public void setEnabled(
+    boolean enabled)
+  {
+    this.enabled = enabled;
   }
 
 

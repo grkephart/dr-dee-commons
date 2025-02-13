@@ -19,11 +19,10 @@ import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -34,15 +33,15 @@ import org.drdeesw.commons.security.models.User;
 @DiscriminatorColumn(name = "holder_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
 public abstract class AbstractAccountHolderEntity<//
-    U extends User<?>, //
-    A extends Account<U, ?, ?>> //
-    extends AbstractNamedLongUniqueEntity implements AccountHolder<U, A>
+    U extends AbstractUserEntity<?>, //
+    HA extends AbstractAccountEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements AccountHolder<U, HA>
 {
   @Embedded
   private EmbeddedAuditable<U> audit;
   private String               description;
   private boolean              enabled;
-  private Set<A>               heldAccounts = new HashSet<>();
+  private Set<HA>               heldAccounts = new HashSet<>();
 
   public AbstractAccountHolderEntity()
   {
@@ -79,7 +78,7 @@ public abstract class AbstractAccountHolderEntity<//
 
   @Override
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "holder", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<A> getHeldAccounts()
+  public Set<HA> getHeldAccounts()
   {
     return this.heldAccounts;
   }
@@ -141,7 +140,7 @@ public abstract class AbstractAccountHolderEntity<//
 
   @Override
   public void setHeldAccounts(
-    Set<A> accounts)
+    Set<HA> accounts)
   {
     this.heldAccounts = accounts;
   }

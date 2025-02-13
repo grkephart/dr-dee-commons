@@ -6,14 +6,14 @@ import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.OrganizationRole;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationRolePojo<//
-    U extends UserPojo<?>, //
-    O extends AbstractOrganizationPojo<U, ?, ?, ?, ?>, //
-    M extends AbstractOrganizationMemberRolePojo<U, ? extends AbstractOrganizationMemberPojo<U, M, AbstractOrganizationRolePojo<U, O, M>>, AbstractOrganizationRolePojo<U, O, M>>> //
+    U extends AbstractUserPojo<?>, //
+    O extends AbstractOrganizationPojo<U, ?, ?, ?, ?, ?>, // Parent Organization
+    M extends AbstractOrganizationMemberRolePojo<U, ?, ?>> // Member Roles
     extends AbstractNamedLongUniquePojo implements OrganizationRole<U, O, M>
 {
   protected U       createdBy;

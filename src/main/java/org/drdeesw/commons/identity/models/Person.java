@@ -19,8 +19,8 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface Person<//
     U extends User<?>, //
-    A extends Account<U, ?, ?>> //
-    extends NamedLongUniqueObject, AccountHolder<U, A>
+    HA extends Account<U, ?, ?>> //
+    extends NamedLongUniqueObject, AccountHolder<U, HA>
 {
 
 }

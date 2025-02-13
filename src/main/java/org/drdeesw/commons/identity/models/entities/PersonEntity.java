@@ -26,6 +26,16 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
 @Access(AccessType.PROPERTY)
 public class PersonEntity extends AbstractPersonEntity<UserEntity, AccountEntity>
 {
+
+  /**
+   * Hibernate constructor
+   */
+  public PersonEntity()
+  {
+
+  }
+
+
   @Override
   @Column(name = "person_id")
   public Long getId()

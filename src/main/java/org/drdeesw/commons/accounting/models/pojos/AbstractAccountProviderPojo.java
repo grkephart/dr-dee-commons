@@ -6,20 +6,20 @@ import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractAccountProviderPojo<//
-    U extends UserPojo<?>, //
-    A extends AbstractAccountPojo<U, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements AccountProvider<U, A>
+    U extends AbstractUserPojo<?>, //
+    PA extends AbstractAccountPojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements AccountProvider<U, PA>
 {
   protected U       createdBy;
   protected Instant creationDate;
   protected String  description;
   protected boolean enabled;
-  protected Set<A>  providedAccounts;
+  protected Set<PA> providedAccounts;
   protected Instant lastUpdateDate;
   protected U       lastUpdatedBy;
 
@@ -57,7 +57,7 @@ public abstract class AbstractAccountProviderPojo<//
 
 
   @Override
-  public Set<A> getProvidedAccounts()
+  public Set<PA> getProvidedAccounts()
   {
     return this.providedAccounts;
   }
@@ -118,7 +118,7 @@ public abstract class AbstractAccountProviderPojo<//
 
   @Override
   public void setProvidedAccounts(
-    Set<A> accounts)
+    Set<PA> accounts)
   {
     this.providedAccounts = accounts;
   }

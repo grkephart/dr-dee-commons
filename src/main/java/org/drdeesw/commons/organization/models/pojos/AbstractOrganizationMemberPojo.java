@@ -6,15 +6,15 @@ import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationMemberPojo<//
-    U extends UserPojo<?>, //
-    R extends AbstractOrganizationMemberRolePojo<U, ? extends AbstractOrganizationMemberPojo<U, R, O>, ? extends AbstractOrganizationRolePojo<U, O, ?>>, //
-    O extends AbstractOrganizationPojo<U, ?, ?, ?, ?, R>> //
-    extends AbstractLongUniquePojo implements OrganizationMember<R, O, U>
+    U extends AbstractUserPojo<?>, //
+    O extends AbstractOrganizationPojo<U, ?, ?, ?, ?, ?>, //
+    MR extends AbstractOrganizationMemberRolePojo<U, ?, ?>> //
+    extends AbstractLongUniquePojo implements OrganizationMember<U, O, MR>
 {
   protected U       createdBy;
   protected Instant creationDate;
@@ -22,7 +22,7 @@ public abstract class AbstractOrganizationMemberPojo<//
   protected Instant lastUpdateDate;
   protected U       lastUpdatedBy;
   protected O       organization;
-  protected Set<R>  roles;
+  protected Set<MR>  memberRoles;
   protected U       user;
 
   protected AbstractOrganizationMemberPojo()
@@ -59,9 +59,9 @@ public abstract class AbstractOrganizationMemberPojo<//
 
 
   @Override
-  public Set<R> getMemberRoles()
+  public Set<MR> getMemberRoles()
   {
-    return this.roles;
+    return this.memberRoles;
   }
 
 
@@ -128,9 +128,9 @@ public abstract class AbstractOrganizationMemberPojo<//
 
   @Override
   public void setMemberRoles(
-    Set<R> roles)
+    Set<MR> memberRoles)
   {
-    this.roles = roles;
+    this.memberRoles = memberRoles;
   }
 
 

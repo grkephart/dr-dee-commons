@@ -13,7 +13,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationPojo extends
-    AbstractOrganizationPojo<UserPojo<?>, OrganizationPojo, AccountPojo, OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
+    AbstractOrganizationPojo<UserPojo, OrganizationPojo, AccountPojo, OrganizationAccountPojo, OrganizationMemberPojo, OrganizationRolePojo>
 {
   public OrganizationPojo()
   {

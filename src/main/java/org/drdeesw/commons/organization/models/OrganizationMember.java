@@ -17,8 +17,8 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface OrganizationMember<//
     U extends User<?>, //
-    R extends OrganizationMemberRole<U, ?, ?>, //
-    O extends Organization<U, ?, ?, ?, ?, ?>> extends LongUniqueObject, Enableable, Auditable<U>
+    O extends Organization<U, ?, ?, ?, ?, ?>, //
+    MR extends OrganizationMemberRole<U, ?, ?>> extends LongUniqueObject, Enableable, Auditable<U>
 {
   /**
    * Returns the organization.
@@ -29,11 +29,11 @@ public interface OrganizationMember<//
 
 
   /**
-   * Returns the organization roles for this member.
+   * Returns the organization memberRoles for this member.
    * 
-   * @return the organization roles for this member.
+   * @return the organization memberRoles for this member.
    */
-  public Set<R> getMemberRoles();
+  public Set<MR> getMemberRoles();
 
 
   /**
@@ -59,7 +59,7 @@ public interface OrganizationMember<//
    * @param memberRoles the memberRoles to set
    */
   public void setMemberRoles(
-    Set<R> memberRoles);
+    Set<MR> memberRoles);
 
 
   /**

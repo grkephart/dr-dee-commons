@@ -17,7 +17,7 @@ import org.drdeesw.commons.security.models.User;
  * 
  * An organization is a group of people with a common purpose or goal. 
  * The organization can have a parent organization and children organizations. 
- * The organization can have members and roles. 
+ * The organization can have members and memberRoles. 
  * The organization can provide organization accounts and hold any accounts.
  * 
  * @param <PC> the parent or children organization type
@@ -60,9 +60,9 @@ public interface Organization<//
 
 
   /**
-   * Returns the organization roles.
+   * Returns the organization memberRoles.
    * 
-   * @return the organization roles.
+   * @return the organization memberRoles.
    */
   Set<R> getRoles();
 
@@ -111,9 +111,9 @@ public interface Organization<//
 
 
   /**
-   * Sets the organization roles.
+   * Sets the organization memberRoles.
    * 
-   * @param roles the organization roles to set
+   * @param memberRoles the organization memberRoles to set
    */
   void setRoles(
     Set<R> roles);

@@ -5,12 +5,12 @@ import java.time.Instant;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractAccountPojo<//
-    U extends UserPojo<?>, //
+    U extends AbstractUserPojo<?>, //
     H extends AbstractAccountHolderPojo<U, ?>, //
     P extends AbstractAccountProviderPojo<U, ?>> //
     extends AbstractNamedLongUniquePojo implements Account<U, H, P>

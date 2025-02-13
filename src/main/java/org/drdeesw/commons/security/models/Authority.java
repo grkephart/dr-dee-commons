@@ -8,7 +8,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
- * Represents the permissions or roles granted to a user, defining what actions or resources a user can access.
+ * Represents the permissions or memberRoles granted to a user, defining what actions or resources a user can access.
  */
 public interface Authority extends LongUniqueObject
 {

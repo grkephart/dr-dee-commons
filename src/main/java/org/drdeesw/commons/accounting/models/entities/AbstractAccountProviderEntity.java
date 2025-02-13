@@ -19,11 +19,10 @@ import javax.persistence.FetchType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -34,15 +33,15 @@ import org.drdeesw.commons.security.models.User;
 @DiscriminatorColumn(name = "provider_type", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
 public abstract class AbstractAccountProviderEntity<//
-    U extends User<?>, //
-    A extends Account<U, ?, ?>> //
-    extends AbstractNamedLongUniqueEntity implements AccountProvider<U, A>
+    U extends AbstractUserEntity<?>, //
+    PA extends AbstractAccountEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements AccountProvider<U, PA>
 {
   @Embedded
   private EmbeddedAuditable<U> audit;
   private String               description;
   private boolean              enabled;
-  private Set<A>               providedAccounts;
+  private Set<PA>              providedAccounts;
 
   /**
    * Hibernate
@@ -91,6 +90,14 @@ public abstract class AbstractAccountProviderEntity<//
   public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
+  }
+
+
+  @Override
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<PA> getProvidedAccounts()
+  {
+    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
   }
 
 
@@ -151,16 +158,8 @@ public abstract class AbstractAccountProviderEntity<//
 
 
   @Override
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
-  public Set<A> getProvidedAccounts()
-  {
-    return providedAccounts == null ? Set.of() : new HashSet<>(this.providedAccounts);
-  }
-
-
-  @Override
   public void setProvidedAccounts(
-    Set<A> accounts)
+    Set<PA> accounts)
   {
     this.providedAccounts = accounts;
   }

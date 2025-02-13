@@ -14,7 +14,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  * 
  */
 @SuppressWarnings("serial")
-public class AccountHolderPojo extends AbstractAccountHolderPojo<UserPojo<?>, AccountPojo>
+public class AccountHolderPojo extends AbstractAccountHolderPojo<UserPojo, AccountPojo>
 {
   public AccountHolderPojo()
   {

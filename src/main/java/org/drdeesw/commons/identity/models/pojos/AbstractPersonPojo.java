@@ -1,35 +1,35 @@
-package org.drdeesw.commons.accounting.models.pojos;
+package org.drdeesw.commons.identity.models.pojos;
 
 
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
 @SuppressWarnings("serial")
-public abstract class AbstractAccountHolderPojo<//
+public abstract class AbstractPersonPojo<//
     U extends AbstractUserPojo<?>, //
-    HA extends AbstractAccountPojo<U, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements AccountHolder<U, HA>
+    HA extends AbstractAccountPojo<U, ?, ?>> // Matches held accounts type
+    extends AbstractNamedLongUniquePojo implements Person<U, HA>
 {
   protected U       createdBy;
   protected Instant creationDate;
-  protected String  description;
+  private String    description;
   protected boolean enabled;
-  protected Set<HA>  heldAccounts;
+  protected Set<HA> heldAccounts;
   protected Instant lastUpdateDate;
   protected U       lastUpdatedBy;
 
-  protected AbstractAccountHolderPojo()
+  protected AbstractPersonPojo()
   {
-    super();
   }
 
 
-  protected AbstractAccountHolderPojo(Long id)
+  protected AbstractPersonPojo(Long id)
   {
     super(id);
   }
@@ -49,17 +49,21 @@ public abstract class AbstractAccountHolderPojo<//
   }
 
 
-  @Override
+  /**
+   * @return the description
+   */
   public String getDescription()
   {
     return description;
   }
 
 
-  @Override
+  /**
+   * @return the heldAccounts
+   */
   public Set<HA> getHeldAccounts()
   {
-    return this.heldAccounts;
+    return heldAccounts;
   }
 
 
@@ -80,7 +84,7 @@ public abstract class AbstractAccountHolderPojo<//
   @Override
   public boolean isEnabled()
   {
-    return enabled;
+    return this.enabled;
   }
 
 
@@ -100,7 +104,9 @@ public abstract class AbstractAccountHolderPojo<//
   }
 
 
-  @Override
+  /**
+   * @param description the description to set
+   */
   public void setDescription(
     String description)
   {
@@ -116,11 +122,13 @@ public abstract class AbstractAccountHolderPojo<//
   }
 
 
-  @Override
+  /**
+   * @param heldAccounts the heldAccounts to set
+   */
   public void setHeldAccounts(
-    Set<HA> accounts)
+    Set<HA> heldAccounts)
   {
-    this.heldAccounts = accounts;
+    this.heldAccounts = heldAccounts;
   }
 
 
