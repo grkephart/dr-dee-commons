@@ -9,8 +9,10 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationAccountProviderPojo<//
     U extends AbstractUserPojo<?>, //
-    A extends OrganizationAccount<U, ? extends AbstractOrganizationAccountHolderPojo<U,?>, ? extends AbstractOrganizationAccountProviderPojo<U, ?>>> //
-    extends AbstractAccountProviderPojo<U, A>
+    H extends AbstractOrganizationAccountHolderPojo<U,?>,//
+    P extends AbstractOrganizationAccountProviderPojo<U, ?, ?, ?>,//
+    PA extends OrganizationAccount<U, H, P>> //
+    extends AbstractAccountProviderPojo<U, PA>
 {
   protected AbstractOrganizationAccountProviderPojo()
   {

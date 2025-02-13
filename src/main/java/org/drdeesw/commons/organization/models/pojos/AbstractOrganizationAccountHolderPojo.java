@@ -10,7 +10,7 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 public abstract class AbstractOrganizationAccountHolderPojo<//
     U extends AbstractUserPojo<?>, //
     HA extends AbstractOrganizationAccountPojo<U, ?, ?>> //
-    extends AbstractAccountHolderPojo<U, HA> implements OrganizationAccountHolder<U>
+    extends AbstractAccountHolderPojo<U, HA> implements OrganizationAccountHolder<U, HA>
 {
   protected AbstractOrganizationAccountHolderPojo()
   {

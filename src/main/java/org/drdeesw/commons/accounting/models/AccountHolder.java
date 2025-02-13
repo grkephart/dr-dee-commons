@@ -21,7 +21,7 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface AccountHolder<//
     U extends User<?>, //
-    A extends Account<U, ?, ?>> //
+    HA extends Account<U, ?, ?>> //
     extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
 {
   /**
@@ -29,7 +29,7 @@ public interface AccountHolder<//
    * 
    * @return the accounts held by the AccountHolder
    */
-  Set<A> getHeldAccounts();
+  Set<HA> getHeldAccounts();
 
 
   /**
@@ -38,6 +38,6 @@ public interface AccountHolder<//
    * @param accounts the accounts held by the AccountHolder
    */
   void setHeldAccounts(
-    Set<A> accounts);
+    Set<HA> accounts);
 
 }
