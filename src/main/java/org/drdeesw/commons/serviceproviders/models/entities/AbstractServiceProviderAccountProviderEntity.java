@@ -1,4 +1,4 @@
-package org.drdeesw.commons.organization.models.entities;
+package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import java.util.Set;
@@ -11,17 +11,17 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
-import org.drdeesw.commons.organization.models.OrganizationAccountProvider;
 import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountProvider;
 
 
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationAccountProviderEntity<//
+public abstract class AbstractServiceProviderAccountProviderEntity<//
     U extends AbstractUserEntity<?>, //
-    A extends AbstractOrganizationAccountEntity<U, ?, ?>>
-    extends AbstractAccountProviderEntity<U, A> implements OrganizationAccountProvider<U, A>
+    A extends AbstractServiceProviderAccountEntity<U, ?, ?>>
+    extends AbstractAccountProviderEntity<U, A> implements ServiceProviderAccountProvider<U, A>
 {
   private Set<A> providedAccounts;
 

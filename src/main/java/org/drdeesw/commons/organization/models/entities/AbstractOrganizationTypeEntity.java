@@ -18,8 +18,8 @@ import org.drdeesw.commons.organization.models.OrganizationType;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public abstract class AbstractOrganizationTypeEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationType
+public abstract class AbstractOrganizationTypeEntity//
+    extends AbstractNamedLongUniqueEntity implements OrganizationType
 {
   /**
    * 

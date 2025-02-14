@@ -19,8 +19,8 @@ public class OrganizationAccountPojo extends
   }
 
 
-  public OrganizationAccountPojo(OrganizationPojo organization, String internalId)
+  public OrganizationAccountPojo(OrganizationAccountHolderPojo holder, String internalId)
   {
-    super(organization, internalId);
+    super(holder, internalId);
   }
 }

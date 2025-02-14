@@ -12,7 +12,9 @@ import org.drdeesw.commons.security.models.User;
 /**
  * Represents an account provided by an organization. Contains account information.
  * 
- * Gary's version as of 2025-02-09 10:23 PM PST
+ * @param <U> The type of user that owns the account.
+ * @param <H> The type of account holder that owns the account.
+ * @param <P> The type of organization account provider that provides the account.
  */
 public interface OrganizationAccount<//
     U extends User<?>, //

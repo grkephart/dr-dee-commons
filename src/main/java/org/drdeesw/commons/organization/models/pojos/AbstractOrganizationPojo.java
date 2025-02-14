@@ -19,7 +19,7 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationPojo<//
     U extends AbstractUserPojo<?>, //
-    PC extends AbstractOrganizationPojo<U, ?, ?, ?, ?, ?>, //
+    PC extends AbstractOrganizationPojo<U, PC, HA, PA, M, R>, //
     HA extends AbstractAccountPojo<U, ?, ?>, //
     PA extends AbstractOrganizationAccountPojo<U, ?, ?>, //
     M extends AbstractOrganizationMemberPojo<U, ?, ?>, //
@@ -71,6 +71,15 @@ public abstract class AbstractOrganizationPojo<//
   public String getDescription()
   {
     return description;
+  }
+
+
+  /**
+   * @return the heldAccounts
+   */
+  public Set<HA> getHeldAccounts()
+  {
+    return heldAccounts;
   }
 
 
@@ -174,6 +183,16 @@ public abstract class AbstractOrganizationPojo<//
     boolean enabled)
   {
     this.enabled = enabled;
+  }
+
+
+  /**
+   * @param heldAccounts the heldAccounts to set
+   */
+  public void setHeldAccounts(
+    Set<HA> heldAccounts)
+  {
+    this.heldAccounts = heldAccounts;
   }
 
 

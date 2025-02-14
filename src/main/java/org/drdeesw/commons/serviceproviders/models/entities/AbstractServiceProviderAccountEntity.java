@@ -8,10 +8,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
-import org.drdeesw.commons.security.models.User;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
@@ -22,9 +21,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderAccountEntity<//
-    U extends User<?>, //
-    H extends AccountHolder<U, ?>, //
-    P extends ServiceProvider<U, ?>> //
+    U extends AbstractUserEntity<?>, //
+    H extends AbstractAccountHolderEntity<U, ?>, //
+    P extends AbstractServiceProviderEntity<U, ?>> //
     extends AbstractAccountEntity<U, H, P> implements ServiceProviderAccount<U, H, P>
 {
 

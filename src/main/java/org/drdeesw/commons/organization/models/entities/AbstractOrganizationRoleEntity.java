@@ -5,19 +5,23 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -27,15 +31,18 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationRoleEntity<//
-    U extends User<?>, //
-    O extends Organization<U, ?, ?, ?, ?, ?>, //
-    MR extends OrganizationMemberRole<U, ?, ?>> //
+    U extends AbstractUserEntity<?>, //
+    O extends AbstractOrganizationEntity<U, ?, ?, ?, ?, ?>, //
+    MR extends AbstractOrganizationMemberRoleEntity<U, ?, ?>> //
     extends AbstractNamedLongUniqueEntity implements OrganizationRole<U, O, MR>
 {
   @Embedded
   private EmbeddedAuditable<U> audit;
   private String               description;
   private boolean              enabled = true;
+  private Set<MR>              memberRoles;
+  private O                    organization;
+
   /**
    * 
    */
@@ -78,6 +85,23 @@ public abstract class AbstractOrganizationRoleEntity<//
   public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
+  }
+
+
+  @Override
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<MR> getMemberRoles()
+  {
+    return memberRoles;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "organization_id")
+  public O getOrganization()
+  {
+    return organization;
   }
 
 
@@ -134,5 +158,21 @@ public abstract class AbstractOrganizationRoleEntity<//
     U lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  public void setMemberRoles(
+    Set<MR> memberRoles)
+  {
+    this.memberRoles = memberRoles;
+  }
+
+
+  @Override
+  public void setOrganization(
+    O organization)
+  {
+    this.organization = organization;
   }
 }

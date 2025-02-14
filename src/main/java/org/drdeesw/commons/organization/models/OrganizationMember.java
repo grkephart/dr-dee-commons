@@ -18,7 +18,8 @@ import org.drdeesw.commons.security.models.User;
 public interface OrganizationMember<//
     U extends User<?>, //
     O extends Organization<U, ?, ?, ?, ?, ?>, //
-    MR extends OrganizationMemberRole<U, ?, ?>> extends LongUniqueObject, Enableable, Auditable<U>
+    MR extends OrganizationMemberRole<U, ?, ?>> //
+    extends LongUniqueObject, Enableable, Auditable<U>
 {
   /**
    * Returns the organization.

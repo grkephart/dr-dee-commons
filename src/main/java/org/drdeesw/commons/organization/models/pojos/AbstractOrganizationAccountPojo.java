@@ -6,12 +6,17 @@ import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
 
+/**
+ * @param <U>
+ * @param <H>
+ * @param <P>
+ */
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationAccountPojo<//
-U extends AbstractUserPojo<?>, //
-H extends AbstractOrganizationAccountHolderPojo<U,?>, //
-P extends AbstractOrganizationAccountProviderPojo<U,?>> //
-extends AbstractAccountPojo<U, H, P> implements OrganizationAccount<U, H, P>
+    U extends AbstractUserPojo<?>, //
+    H extends AbstractOrganizationAccountHolderPojo<U, ?>, //
+    P extends AbstractOrganizationAccountProviderPojo<U, ?, ?, ?>> //
+    extends AbstractAccountPojo<U, H, P> implements OrganizationAccount<U, H, P>
 {
   protected AbstractOrganizationAccountPojo()
   {

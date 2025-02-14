@@ -1,26 +1,30 @@
-/**
- * 
- */
 package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
-import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
+import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
 /**
- * 
+ * @param <U>
+ * @param <H>
+ * @param <P>
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountPojo extends
-    AbstractServiceProviderAccountPojo<UserPojo, ServiceProviderAccountHolderPojo, ServiceProviderAccountProviderPojo>
+public abstract class AbstractServiceProviderAccountPojo<//
+    U extends AbstractUserPojo<?>, //
+    H extends AbstractServiceProviderAccountHolderPojo<U, ?>, //
+    P extends AbstractServiceProviderAccountProviderPojo<U, ?, ?, ?>> //
+    extends AbstractAccountPojo<U, H, P> implements ServiceProviderAccount<U, H, P>
 {
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 
   /**
    * 
    */
-  public ServiceProviderAccountPojo()
+  protected AbstractServiceProviderAccountPojo()
   {
   }
 
@@ -29,9 +33,9 @@ public class ServiceProviderAccountPojo extends
    * @param serviceProvider the service provider
    * @param internalId the internal id
    */
-  public ServiceProviderAccountPojo(ServiceProviderAccountHolderPojo holder, String internalId)
+  protected AbstractServiceProviderAccountPojo(H serviceProvider, String internalId)
   {
-    super(holder, internalId);
+    super(serviceProvider, internalId);
   }
 
   //  @Override

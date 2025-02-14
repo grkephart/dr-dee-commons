@@ -1,19 +1,12 @@
 /**
  * 
  */
-package org.drdeesw.commons.serviceproviders.models.entities;
+package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import java.time.Instant;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -21,29 +14,17 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-@MappedSuperclass
-@Access(AccessType.PROPERTY)
-public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
-    A extends AbstractServiceProviderAccountEntity<?, ?, ?>> //
-    extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder<A>
+public class AbstractServiceProviderAccountTokenHolderPojo//
+    extends AbstractLongUniquePojo
+    implements ServiceProviderAccountTokenHolder<ServiceProviderAccountPojo>
 {
-  private String  accessToken;
-  private Instant accessTokenExpiry;
-  private A       account;
-  private String  refreshToken;
-  private Instant refreshTokenExpiry;
-
-  /**
-   * 
-   */
-  protected AbstractServiceProviderAccountTokenHolderEntity()
-  {
-
-  }
-
+  private String                     accessToken;
+  private Instant                    accessTokenExpiry;
+  private ServiceProviderAccountPojo account;
+  private String                     refreshToken;
+  private Instant                    refreshTokenExpiry;
 
   @Override
-  @Column(name = "access_token")
   public String getAccessToken()
   {
     return accessToken;
@@ -51,7 +32,6 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
 
 
   @Override
-  @Column(name = "access_token_expiry")
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
@@ -59,16 +39,13 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
 
 
   @Override
-  @ManyToOne
-  @JoinColumn(name = "account_id", nullable = false)
-  public A getAccount()
+  public ServiceProviderAccountPojo getAccount()
   {
     return account;
   }
 
 
   @Override
-  @Column(name = "refresh_token")
   public String getRefreshToken()
   {
     return refreshToken;
@@ -76,7 +53,6 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
 
 
   @Override
-  @Column(name = "refresh_token_expiry")
   public Instant getRefreshTokenExpiry()
   {
     return refreshTokenExpiry;
@@ -101,7 +77,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
 
   @Override
   public void setAccount(
-    A account)
+    ServiceProviderAccountPojo account)
   {
     this.account = account;
   }

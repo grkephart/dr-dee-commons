@@ -5,7 +5,6 @@ package org.drdeesw.commons.serviceproviders.models;
 
 
 import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.security.models.User;
 
 
@@ -14,8 +13,8 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface ServiceProviderAccount<//
     U extends User<?>, //
-    H extends AccountHolder<U, ?>, //
-    P extends ServiceProvider<U, ?>> //
+    H extends ServiceProviderAccountHolder<U, ?>, //
+    P extends ServiceProviderAccountProvider<U, ?>> //
     extends Account<U, H, P>
 {
   /**

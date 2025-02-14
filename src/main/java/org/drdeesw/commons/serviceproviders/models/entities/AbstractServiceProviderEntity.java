@@ -11,10 +11,9 @@ import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountProviderEntity;
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
 import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 
 
 /**
@@ -24,8 +23,8 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractServiceProviderEntity<//
-    U extends User<?>, //
-    A extends ServiceProviderAccount<U, ?, ?>> //
+    U extends AbstractUserEntity<?>, //
+    A extends AbstractServiceProviderAccountEntity<U, ?, ?>> //
     extends AbstractAccountProviderEntity<U, A> implements ServiceProvider<U, A>
 {
   private AuthenticationType authenticationType;

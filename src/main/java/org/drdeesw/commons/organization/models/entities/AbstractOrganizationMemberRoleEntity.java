@@ -10,14 +10,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationMember;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.organization.models.OrganizationRole;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -27,14 +27,17 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationMemberRoleEntity<//
-    U extends User<?>,//
-    M extends OrganizationMember<U, ?, ?>, //
-    R extends OrganizationRole<U, ?, ?>> //
+    U extends AbstractUserEntity<?>, //
+    M extends AbstractOrganizationMemberEntity<U, ?, ?>, //
+    R extends AbstractOrganizationRoleEntity<U, ?, ?>> //
     extends AbstractNamedLongUniqueEntity implements OrganizationMemberRole<U, M, R>
 {
   @Embedded
   private EmbeddedAuditable<U> audit;
   private boolean              enabled = true;
+  private M                    member;
+  private R                    role;
+
   /**
    * 
    */
@@ -69,6 +72,24 @@ public abstract class AbstractOrganizationMemberRoleEntity<//
   public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "member_id")
+  public M getMember()
+  {
+    return this.member;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  public R getRole()
+  {
+    return this.role;
   }
 
 
@@ -117,6 +138,22 @@ public abstract class AbstractOrganizationMemberRoleEntity<//
     U lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  public void setMember(
+    M member)
+  {
+    this.member = member;
+  }
+
+
+  @Override
+  public void setRole(
+    R role)
+  {
+    this.role = role;
   }
 
 }

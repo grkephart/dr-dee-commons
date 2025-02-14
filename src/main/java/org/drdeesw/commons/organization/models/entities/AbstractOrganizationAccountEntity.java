@@ -8,11 +8,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
+import org.springframework.security.access.method.P;
 
 
 /**
@@ -22,11 +22,10 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationAccountEntity<//
-    U extends User<?>, //
-    H extends AccountHolder<U, ?>, //
-    P extends AccountProvider<U, ?>>
-    extends AbstractAccountEntity<U, H, P> /*AbstractNamedLongUniqueEntity*/
-    implements OrganizationAccount<U, H, P>
+    U extends AbstractUserEntity<?>, //
+    H extends AbstractAccountHolderEntity<U, ?>, //
+    P extends AbstractOrganizationAccountProviderEntity<U, ?>> //
+    extends AbstractAccountEntity<U, H, P> implements OrganizationAccount<U, H, P>
 {
 
   /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.organization.models.entities;
+package org.drdeesw.commons.serviceproviders.models.entities;
 
 
 import javax.persistence.Access;
@@ -20,19 +20,26 @@ import org.drdeesw.commons.security.models.entities.UserEntity;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "organization_member_roles")
+@Table(name = "service_provider_account_providers")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public class OrganizationMemberRoleEntity extends
-    AbstractOrganizationMemberRoleEntity<UserEntity, OrganizationMemberEntity, OrganizationRoleEntity>
+public class ServiceProviderAccountProviderEntity
+    extends AbstractServiceProviderAccountProviderEntity<UserEntity, ServiceProviderAccountEntity>
 {
+  /**
+   * Hibernate constructor
+   */
+  public ServiceProviderAccountProviderEntity()
+  {
+
+  }
+
 
   @Override
-  @Column(name = "organization_role_member_id")
+  @Column(name = "account_provider_id")
   public Long getId()
   {
     return super.getId();
   }
-
 
 }

@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.accounting.models.AccountProvider;
 import org.drdeesw.commons.security.models.User;
 
 
@@ -21,8 +20,8 @@ import org.drdeesw.commons.security.models.User;
  * The organization can provide organization accounts and hold any accounts.
  * 
  * @param <PC> the parent or children organization type
- * @param <HA> the held account type
- * @param <PA> the provided account type
+ * @param <HA> the held account type. Is an organization account or a service provider account.
+ * @param <PA> the provided account type. Is an organization account.
  * @param <M> the organization member type
  * @param <R> the organization role type
  */
@@ -33,7 +32,7 @@ public interface Organization<//
     PA extends OrganizationAccount<U, ?, ?>, //
     M extends OrganizationMember<U, ?, ?>, //
     R extends OrganizationRole<U, ?, ?>> //
-    extends AccountProvider<U, PA>, AccountHolder<U, HA>
+    extends OrganizationAccountProvider<U, PA>, AccountHolder<U, HA>
 {
   /**
    * Returns the children organizations.

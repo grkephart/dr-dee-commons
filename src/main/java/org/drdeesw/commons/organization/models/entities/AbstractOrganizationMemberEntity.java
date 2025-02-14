@@ -5,19 +5,23 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -27,14 +31,18 @@ import org.drdeesw.commons.security.models.User;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationMemberEntity<//
-    U extends User<?>, //
-    R extends OrganizationMemberRole<U, ?, ?>, //
-    O extends Organization<U, ?, ?, ?, ?, ?>> //
-    extends AbstractNamedLongUniqueEntity implements OrganizationMember<U, R, O>
+    U extends AbstractUserEntity<?>, //
+    O extends AbstractOrganizationEntity<U, ?, ?, ?, ?, ?>, //
+    MR extends AbstractOrganizationMemberRoleEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements OrganizationMember<U, O, MR>
 {
   @Embedded
-  private EmbeddedAuditable<U> audit;
-  private boolean              enabled;
+  private EmbeddedAuditable<U>              audit;
+  private boolean                           enabled;
+  private Set<MR> memberRoles;
+  private O                                 organization;
+  private U                                 user;
+
   /**
    * 
    */
@@ -69,6 +77,32 @@ public abstract class AbstractOrganizationMemberEntity<//
   public U getLastUpdatedBy()
   {
     return this.audit.getLastUpdatedBy();
+  }
+
+
+  @Override
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<MR> getMemberRoles()
+  {
+    return memberRoles;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "organization_id", nullable = false)
+  public O getOrganization()
+  {
+    return this.organization;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  public U getUser()
+  {
+    return this.user;
   }
 
 
@@ -117,6 +151,30 @@ public abstract class AbstractOrganizationMemberEntity<//
     U lastUpdatedBy)
   {
     this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  public void setMemberRoles(
+    Set<MR> roles)
+  {
+    this.memberRoles = roles;
+  }
+
+
+  @Override
+  public void setOrganization(
+    O organization)
+  {
+    this.organization = organization;
+  }
+
+
+  @Override
+  public void setUser(
+    U user)
+  {
+    this.user = user;
   }
 
 }
