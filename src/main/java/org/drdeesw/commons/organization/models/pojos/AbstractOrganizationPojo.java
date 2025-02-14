@@ -4,7 +4,7 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
@@ -20,7 +20,7 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 public abstract class AbstractOrganizationPojo<//
     U extends AbstractUserPojo<?>, //
     PC extends AbstractOrganizationPojo<U, PC, HA, PA, M, R>, //
-    HA extends AbstractAccountPojo<U, ?, ?>, //
+    HA extends Account<U, ?, ?>, //
     PA extends AbstractOrganizationAccountPojo<U, ?, ?>, //
     M extends AbstractOrganizationMemberPojo<U, ?, ?>, //
     R extends AbstractOrganizationRolePojo<U, ?, ?>> //

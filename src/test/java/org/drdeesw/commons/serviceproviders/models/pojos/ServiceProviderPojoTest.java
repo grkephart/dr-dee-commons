@@ -42,7 +42,7 @@ class ServiceProviderPojoTest
   void testConstruction()
   {
     ServiceProviderPojo serviceProvider = new ServiceProviderPojo();
-    Set<AccountPojo> providedAccounts = new HashSet<AccountPojo>();
+    Set<ServiceProviderAccountPojo> providedAccounts = new HashSet<ServiceProviderAccountPojo>();
     ServiceProviderAccountPojo providedAccount = new ServiceProviderAccountPojo();
     PersonPojo person = new PersonPojo();
     

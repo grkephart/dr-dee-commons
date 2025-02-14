@@ -4,6 +4,7 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 
@@ -18,7 +19,7 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 @SuppressWarnings("serial")
 public abstract class AbstractAccountPojo<//
     U extends AbstractUserPojo<?>, //
-    H extends AbstractAccountHolderPojo<U, ?>, //
+    H extends AccountHolder<U, ?>, //
     P extends AbstractAccountProviderPojo<U, ?>> //
     extends AbstractNamedLongUniquePojo implements Account<U, H, P>
 {

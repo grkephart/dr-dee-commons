@@ -116,8 +116,8 @@ class OrganizationEntityTest
     OrganizationEntity organization = new OrganizationEntity(audit);
     Set<OrganizationEntity> children = Set.of(organization);
     String name = "tjttkyyryju6";
-    AccountEntity heldAccount = new OrganizationAccountEntity();
-    Set<AccountEntity> heldAccounts = Set.of(heldAccount);
+    OrganizationAccountEntity heldAccount = new OrganizationAccountEntity();
+    Set<OrganizationAccountEntity> heldAccounts = Set.of(heldAccount);
     OrganizationAccountEntity providedAccount = new OrganizationAccountEntity();
     Set<OrganizationAccountEntity> providedAccounts = Set.of(providedAccount);
     OrganizationRoleEntity role = new OrganizationRoleEntity();

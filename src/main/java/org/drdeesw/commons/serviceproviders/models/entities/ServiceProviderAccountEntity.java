@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.drdeesw.commons.accounting.models.entities.AccountHolderEntity;
 import org.drdeesw.commons.security.models.entities.UserEntity;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
@@ -28,7 +27,7 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
 public class ServiceProviderAccountEntity extends
-    AbstractServiceProviderAccountEntity<UserEntity, AccountHolderEntity, ServiceProviderEntity>
+    AbstractServiceProviderAccountEntity<UserEntity, ServiceProviderAccountHolderEntity, ServiceProviderAccountProviderEntity>
 {
   private ServiceProviderAccountTokenHolderEntity tokenHolder;
 

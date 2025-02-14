@@ -4,7 +4,7 @@ package org.drdeesw.commons.identity.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
+import org.drdeesw.commons.accounting.models.Account;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
@@ -13,7 +13,7 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
 @SuppressWarnings("serial")
 public abstract class AbstractPersonPojo<//
     U extends AbstractUserPojo<?>, //
-    HA extends AbstractAccountPojo<U, ?, ?>> // Matches held accounts type
+    HA extends Account<U, ?, ?>> // Matches held accounts type
     extends AbstractNamedLongUniquePojo implements Person<U, HA>
 {
   protected U       createdBy;

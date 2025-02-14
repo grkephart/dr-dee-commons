@@ -43,7 +43,7 @@ class OrganizationPojoTest
     OrganizationPojo org = new OrganizationPojo();
     Set<AccountPojo> heldAccounts = new HashSet<AccountPojo>();
     OrganizationAccountPojo heldAccount1 = new OrganizationAccountPojo();
-    Set<AccountPojo> providedAccounts = new HashSet<AccountPojo>();
+    Set<OrganizationAccountPojo> providedAccounts = new HashSet<OrganizationAccountPojo>();
     OrganizationAccountPojo providedAccounts1 = new OrganizationAccountPojo();
     PersonPojo  person = new PersonPojo();
     
