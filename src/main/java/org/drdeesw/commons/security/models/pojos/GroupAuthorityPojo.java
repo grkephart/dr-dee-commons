@@ -2,7 +2,6 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedUniquePojo;
-import org.drdeesw.commons.security.models.Group;
 import org.drdeesw.commons.security.models.GroupAuthority;
 
 
@@ -13,11 +12,11 @@ import org.drdeesw.commons.security.models.GroupAuthority;
  *
  */
 @SuppressWarnings("serial")
-public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long>
-    implements GroupAuthority
+public class GroupAuthorityPojo<G extends BaseGroupPojo> extends AbstractNamedUniquePojo<Long>
+    implements GroupAuthority<G>
 {
-  private String          authority;
-  private GroupPojo group;
+  private String authority;
+  private G      group;
 
   /**
    * Hibernate
@@ -41,7 +40,7 @@ public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long>
 
 
   @Override
-  public Group getGroup()
+  public G getGroup()
   {
     return this.group;
   }
@@ -57,9 +56,9 @@ public class GroupAuthorityPojo extends AbstractNamedUniquePojo<Long>
 
   @Override
   public void setGroup(
-    Group group)
+    G group)
   {
-    this.group = (GroupPojo)group;
+    this.group = group;
   }
 
 }

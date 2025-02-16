@@ -9,9 +9,8 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 /**
  * Note that the definition of AccountProviderPojo and AccountHolderPojo are 
- * different because an Account Holder holds any type of account, while an 
- * Account Provider provides specific types of accounts.
- * 
+ * different because an AccountHolder holds any type of account, while an 
+ * AccountProvider provides specific types of accounts.
  */
 @SuppressWarnings("serial")
 public class AccountHolderPojo extends AbstractAccountHolderPojo<UserPojo, AccountPojo>

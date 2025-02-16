@@ -12,7 +12,7 @@ import org.drdeesw.commons.security.models.User;
 
 
 /**
- * An Account is a structured record that represents the formal relationship 
+ * An BaseAccountPojo is a structured record that represents the formal relationship 
  * between an {@link AccountHolder} and an {@link AccountProvider}, enabling the holder to 
  * access specific services, resources, or privileges offered by the provider.
  * 

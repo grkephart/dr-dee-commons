@@ -3,7 +3,7 @@ package org.drdeesw.commons.organization.models.pojos;
 
 import org.drdeesw.commons.accounting.models.pojos.AbstractAccountProviderPojo;
 import org.drdeesw.commons.organization.models.OrganizationAccountProvider;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
 /**
@@ -16,11 +16,11 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationAccountProviderPojo<//
-    U extends AbstractUserPojo<?>, //
-    H extends AbstractOrganizationAccountHolderPojo<U,?>,//
-    P extends AbstractOrganizationAccountProviderPojo<U, ?, ?, ?>,//
-    PA extends AbstractOrganizationAccountPojo<U, H, P>> //
-    extends AbstractAccountProviderPojo<U, PA> implements OrganizationAccountProvider<U, PA>
+    U extends BaseUserPojo<?>, //
+    H extends BaseOrganizationAccountHolderPojo<U, ?>, //
+    P extends BaseOrganizationAccountProviderPojo<U, ?>, //
+    PA extends BaseOrganizationAccountPojo<U, H, P>> //
+    extends AbstractAccountProviderPojo<U, PA> implements BaseOrganizationAccountProviderPojo<U, PA>
 {
   protected AbstractOrganizationAccountProviderPojo()
   {

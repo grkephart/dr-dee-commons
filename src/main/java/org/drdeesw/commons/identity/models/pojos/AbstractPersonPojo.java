@@ -4,25 +4,25 @@ package org.drdeesw.commons.identity.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.BaseAccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.identity.models.Person;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractPersonPojo<//
-    U extends AbstractUserPojo<?>, //
-    HA extends Account<U, ?, ?>> // Matches held accounts type
+    U extends BaseUserPojo<?>, //
+    HA extends BaseAccountPojo<U, ?, ?>> // Matches held accounts type
     extends AbstractNamedLongUniquePojo implements Person<U, HA>
 {
-  protected U       createdBy;
-  protected Instant creationDate;
+  private U       createdBy;
+  private Instant creationDate;
   private String    description;
-  protected boolean enabled;
-  protected Set<HA> heldAccounts;
-  protected Instant lastUpdateDate;
-  protected U       lastUpdatedBy;
+  private boolean enabled;
+  private Set<HA> heldAccounts;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
 
   protected AbstractPersonPojo()
   {

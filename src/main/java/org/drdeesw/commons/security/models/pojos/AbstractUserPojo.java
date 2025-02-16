@@ -4,15 +4,14 @@
 package org.drdeesw.commons.security.models.pojos;
 
 
-import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
+import org.drdeesw.commons.accounting.models.pojos.BaseAccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.User;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractUserPojo<//
-    A extends AbstractAccountPojo<?, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements User<A>
+    A extends BaseAccountPojo<?, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseUserPojo<A>
 {
   protected A       account;
   protected boolean enabled;

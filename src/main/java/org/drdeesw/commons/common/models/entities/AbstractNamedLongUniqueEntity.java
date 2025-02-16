@@ -13,7 +13,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  */
 @MappedSuperclass
 public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Long>
-    implements NamedLongUniqueObject
+    implements NamedLongUniqueEntity
 {
   private static final long serialVersionUID = 6902141588206147324L;
 

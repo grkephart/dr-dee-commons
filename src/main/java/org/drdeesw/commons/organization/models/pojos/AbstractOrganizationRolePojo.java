@@ -5,25 +5,24 @@ import java.time.Instant;
 import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.OrganizationRole;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationRolePojo<//
-    U extends AbstractUserPojo<?>, //
-    O extends AbstractOrganizationPojo<U, ?, ?, ?, ?, ?>, // Parent Organization
-    M extends AbstractOrganizationMemberRolePojo<U, ?, ?>> // Member Roles
-    extends AbstractNamedLongUniquePojo implements OrganizationRole<U, O, M>
+    U extends BaseUserPojo<?>, //
+    O extends BaseOrganizationPojo<U, ?, ?, ?, ?, ?>, // Parent Organization
+    M extends BaseOrganizationMemberRolePojo<U, ?, ?>> // Member Roles
+    extends AbstractNamedLongUniquePojo implements BaseOrganizationRolePojo<U, O, M>
 {
-  protected U       createdBy;
-  protected Instant creationDate;
-  protected String  description;
-  protected boolean enabled;
-  protected Instant lastUpdateDate;
-  protected U       lastUpdatedBy;
-  protected Set<M>  members;
-  protected O       organization;
+  private U       createdBy;
+  private Instant creationDate;
+  private String  description;
+  private boolean enabled;
+  private Instant lastUpdateDate;
+  private U       lastUpdatedBy;
+  private Set<M>  members;
+  private O       organization;
 
   protected AbstractOrganizationRolePojo()
   {

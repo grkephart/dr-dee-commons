@@ -3,10 +3,9 @@ package org.drdeesw.commons.accounting.models.pojos;
 
 import java.time.Instant;
 
-import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
+import org.springframework.security.access.method.P;
 
 
 /**
@@ -18,10 +17,10 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAccountPojo<//
-    U extends AbstractUserPojo<?>, //
-    H extends AccountHolder<U, ?>, //
-    P extends AbstractAccountProviderPojo<U, ?>> //
-    extends AbstractNamedLongUniquePojo implements Account<U, H, P>
+    U extends BaseUserPojo<?>, //
+    H extends BaseAccountHolderPojo<U, ?>, //
+    P extends BaseAccountProviderPojo<U, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, P>
 {
   private boolean active;
   private U       createdBy;

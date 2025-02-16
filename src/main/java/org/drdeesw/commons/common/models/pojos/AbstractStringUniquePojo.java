@@ -12,7 +12,7 @@ import org.drdeesw.commons.common.models.StringUniqueObject;
  *
  */
 public abstract class AbstractStringUniquePojo extends AbstractUniquePojo<String>
-    implements StringUniqueObject
+    implements StringUniquePojo
 {
   private static final long serialVersionUID = -9190810275366831598L;
 

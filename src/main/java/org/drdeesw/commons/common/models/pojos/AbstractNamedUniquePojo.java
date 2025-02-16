@@ -13,7 +13,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  * @param <ID> the ID class
  */
 public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
-    AbstractUniquePojo<ID> implements Comparable<Named>, NamedUniqueObject<ID>
+    AbstractUniquePojo<ID> implements Comparable<Named>, NamedUniquePojo<ID>
 {
   private static final long serialVersionUID = -6603247573392458671L;
   private String            name;

@@ -4,12 +4,11 @@ package org.drdeesw.commons.organization.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.pojos.BaseAccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.organization.models.Organization;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
 /**
@@ -18,28 +17,28 @@ import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractOrganizationPojo<//
-    U extends AbstractUserPojo<?>, //
-    PC extends AbstractOrganizationPojo<U, PC, HA, PA, M, R>, //
-    HA extends Account<U, ?, ?>, //
-    PA extends AbstractOrganizationAccountPojo<U, ?, ?>, //
-    M extends AbstractOrganizationMemberPojo<U, ?, ?>, //
-    R extends AbstractOrganizationRolePojo<U, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements Organization<U, PC, HA, PA, M, R>
+    U extends BaseUserPojo<?>, //
+    PC extends BaseOrganizationPojo<U, PC, HA, PA, M, R>, //
+    HA extends BaseAccountPojo<U, ?, ?>, //
+    PA extends BaseOrganizationAccountPojo<U, ?, ?>, //
+    M extends BaseOrganizationMemberPojo<U, ?, ?>, //
+    R extends BaseOrganizationRolePojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseOrganizationPojo<U, PC, HA, PA, M, R>
 {
-  protected Set<PC>            children;
-  protected U                  createdBy;
-  protected Instant            creationDate;
-  protected String             description;
-  protected boolean            enabled;
-  protected Set<HA>            heldAccounts;
-  protected Instant            lastUpdateDate;
-  protected U                  lastUpdatedBy;
-  protected Set<M>             members;
-  protected PC                 parent;
-  protected Set<PA>            providedAccounts;
-  protected Set<R>             roles;
-  protected OrganizationStatus status;
-  protected OrganizationType   type;
+  private Set<PC>            children;
+  private U                  createdBy;
+  private Instant            creationDate;
+  private String             description;
+  private boolean            enabled;
+  private Set<HA>            heldAccounts;
+  private Instant            lastUpdateDate;
+  private U                  lastUpdatedBy;
+  private Set<M>             members;
+  private PC                 parent;
+  private Set<PA>            providedAccounts;
+  private Set<R>             roles;
+  private OrganizationStatus status;
+  private OrganizationType   type;
 
   protected AbstractOrganizationPojo()
   {

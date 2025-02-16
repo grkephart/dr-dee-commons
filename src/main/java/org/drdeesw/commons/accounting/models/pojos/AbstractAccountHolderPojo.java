@@ -4,17 +4,15 @@ package org.drdeesw.commons.accounting.models.pojos;
 import java.time.Instant;
 import java.util.Set;
 
-import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
 @SuppressWarnings("serial")
 public abstract class AbstractAccountHolderPojo<//
-    U extends AbstractUserPojo<?>, //
-    HA extends Account<U, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements AccountHolder<U, HA>
+    U extends BaseUserPojo<?>, //
+    HA extends BaseAccountPojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseAccountHolderPojo<U, HA>
 {
   protected U       createdBy;
   protected Instant creationDate;

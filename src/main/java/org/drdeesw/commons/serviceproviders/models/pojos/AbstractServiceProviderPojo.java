@@ -24,13 +24,13 @@ public class AbstractServiceProviderPojo<//
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;
-  protected U                createdBy;
-  protected Instant          creationDate;
-  protected String           description;
-  protected boolean          enabled;
-  protected Instant          lastUpdateDate;
-  protected U                lastUpdatedBy;
-  protected Set<PA>          providedAccounts;
+  private U                createdBy;
+  private Instant          creationDate;
+  private String           description;
+  private boolean          enabled;
+  private Instant          lastUpdateDate;
+  private U                lastUpdatedBy;
+  private Set<PA>          providedAccounts;
 
   @Override
   public AuthenticationType getAuthenticationType()

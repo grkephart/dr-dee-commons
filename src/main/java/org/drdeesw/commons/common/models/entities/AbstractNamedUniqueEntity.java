@@ -21,7 +21,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
 @MappedSuperclass
 @Access(value = AccessType.PROPERTY)
 public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
-    AbstractUniqueEntity<ID> implements Comparable<Named>, NamedUniqueObject<ID>, UniqueEntity<ID>
+    AbstractUniqueEntity<ID> implements Comparable<Named>, NamedUniqueEntity<ID>, UniqueEntity<ID>
 {
   private String            name;
 

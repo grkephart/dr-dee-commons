@@ -12,7 +12,7 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  *
  */
 public class AbstractNamedLongUniquePojo extends AbstractNamedUniquePojo<Long>
-    implements NamedLongUniqueObject
+    implements NamedLongUniquePojo<Long>
 {
   private static final long serialVersionUID = 6902141588206147324L;
 

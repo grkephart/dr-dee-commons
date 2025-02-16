@@ -16,10 +16,11 @@ import org.drdeesw.commons.security.models.GroupMember;
  *
  */
 @SuppressWarnings("serial")
-public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMember
+public class GroupMemberPojo<G extends Group> extends AbstractLongUniquePojo
+    implements GroupMember<G>
 {
-  private Group group;
-  private String      username;
+  private G      group;
+  private String username;
 
   /**
    * Hibernate
@@ -32,7 +33,7 @@ public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMemb
   /**
    * @return the group
    */
-  public Group getGroup()
+  public G getGroup()
   {
     return group;
   }
@@ -51,7 +52,7 @@ public class GroupMemberPojo extends AbstractLongUniquePojo implements GroupMemb
    * @param group the group to set
    */
   public void setGroup(
-    Group group)
+    G group)
   {
     this.group = group;
   }
