@@ -60,32 +60,18 @@ public class OrganizationPojoTest
     Set<AccountPojo> heldAccounts = new HashSet<AccountPojo>();
     OrganizationAccountPojo heldAccount1 = new OrganizationAccountPojo();
     Set<OrganizationAccountPojo> providedAccounts = new HashSet<OrganizationAccountPojo>();
-    OrganizationAccountPojo providedAccounts1 = new OrganizationAccountPojo();
+    OrganizationAccountPojo providedAccount1 = new OrganizationAccountPojo();
     PersonPojo  person = new PersonPojo();
-    
-    /* 
-heldAccount1.setHolder(person) is implemented in AbstractAccountPojo<U,H,P>.setHolder(H accountHolder). Compilation error: The method setHolder(H) in the type AbstractAccountPojo<U,H,P> is not applicable for the arguments (PersonPojo)
-where H extends AbstractAccountHolderPojo<U, ?> and U extends AbstractUserPojo<?>
-AbstractAccountHolderPojo<U extends AbstractUserPojo<?>,HA extends AbstractAccountPojo<U, ?, ?>> extends AbstractNamedLongUniquePojo implements AccountHolder<U, HA>
-AbstractAccountPojo<U extends AbstractUserPojo<?>, H extends AbstractAccountHolderPojo<U, ?>, P extends AbstractAccountProviderPojo<U, ?>> extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, P>
-AccountHolder<U extends User<?>, HA extends BaseAccountPojo<U, ?, ?>> extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
-
-PersonPojo extends AbstractPersonPojo<UserPojo, AccountPojo>
-AbstractPersonPojo<U extends AbstractUserPojo<?>, HA extends AbstractAccountPojo<U, ?, ?>>, extends AbstractNamedLongUniquePojo implements Person<U, HA>
-Person<U extends User<?>,HA extends BaseAccountPojo<U, ?, ?>> extends NamedLongUniqueObject, AccountHolder<U, HA>
-
-So PersonPojo is an AccountHolder but why is it not being accepted as an AccountHolder in the context of AbstractAccountPojo<U,H,P>.setHolder(H accountHolder) ?
-     */    
     
     heldAccount1.setHolder(person);
     heldAccount1.setProvider(org);
     
     heldAccounts.add(heldAccount1);
     
-    providedAccounts1.setHolder(person);
-    providedAccounts1.setProvider(org);
+    providedAccount1.setHolder(person);
+    providedAccount1.setProvider(org);
     
-    providedAccounts.add(providedAccounts1);
+    providedAccounts.add(providedAccount1);
     
     org.setParent(parent);
     org.setHeldAccounts(heldAccounts);

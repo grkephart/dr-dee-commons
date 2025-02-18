@@ -5,6 +5,7 @@ package org.drdeesw.commons.organization.models;
 
 
 import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
 import org.drdeesw.commons.security.models.User;
 
 
@@ -17,7 +18,7 @@ import org.drdeesw.commons.security.models.User;
  */
 public interface OrganizationAccount<//
     U extends User<?>, //
-    H extends OrganizationAccountHolder<U, ?>, //
+    H extends AccountHolder<U, ?>, //
     P extends OrganizationAccountProvider<U, ?>> //
     extends Account<U, H, P>
 {

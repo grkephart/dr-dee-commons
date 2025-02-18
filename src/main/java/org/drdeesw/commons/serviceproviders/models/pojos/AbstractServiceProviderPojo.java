@@ -8,9 +8,8 @@ import java.time.Instant;
 import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 import org.drdeesw.commons.serviceproviders.models.AuthenticationType;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
 
 
 /**
@@ -18,9 +17,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
  */
 @SuppressWarnings("serial")
 public class AbstractServiceProviderPojo<//
-    U extends AbstractUserPojo<?>, //
-    PA extends AbstractServiceProviderAccountPojo<U, ?, ?>> //
-    extends AbstractNamedLongUniquePojo implements ServiceProvider<U, PA>
+    U extends BaseUserPojo<?>, //
+    PA extends BaseServiceProviderAccountPojo<U, ?, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseServiceProviderPojo<U, PA>
 {
   private AuthenticationType authenticationType;
   private String             clientRegistrationId;

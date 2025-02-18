@@ -2,7 +2,6 @@ package org.drdeesw.commons.organization.models.pojos;
 
 
 import org.drdeesw.commons.accounting.models.pojos.AbstractAccountProviderPojo;
-import org.drdeesw.commons.organization.models.OrganizationAccountProvider;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 

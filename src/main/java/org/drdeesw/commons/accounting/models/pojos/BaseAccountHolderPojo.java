@@ -5,6 +5,7 @@ package org.drdeesw.commons.accounting.models.pojos;
 
 
 import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.common.models.pojos.NamedLongUniquePojo;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
@@ -13,7 +14,7 @@ import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
  */
 public interface BaseAccountHolderPojo<//
     U extends BaseUserPojo<?>, //
-    HA extends BaseAccountPojo<U, ?, ?>> extends AccountHolder<U, HA>
+    HA extends BaseAccountPojo<U, ?, ?>> extends AccountHolder<U, HA>, NamedLongUniquePojo
 {
 
 }

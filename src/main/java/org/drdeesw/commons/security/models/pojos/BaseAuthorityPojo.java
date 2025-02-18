@@ -11,7 +11,7 @@ import org.drdeesw.commons.security.models.Group;
 /**
  * 
  */
-public interface BaseGroupPojo extends Group, NamedLongUniquePojo
+public interface BaseAuthorityPojo extends Group, NamedLongUniquePojo
 {
 
 }

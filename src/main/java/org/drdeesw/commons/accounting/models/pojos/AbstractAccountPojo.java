@@ -19,8 +19,8 @@ import org.springframework.security.access.method.P;
 public abstract class AbstractAccountPojo<//
     U extends BaseUserPojo<?>, //
     H extends BaseAccountHolderPojo<U, ?>, //
-    P extends BaseAccountProviderPojo<U, ?>> //
-    extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, P>
+    AP extends BaseAccountProviderPojo<U, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, AP>
 {
   private boolean active;
   private U       createdBy;
@@ -31,7 +31,7 @@ public abstract class AbstractAccountPojo<//
   private String  internalId;
   private Instant lastUpdateDate;
   private U       lastUpdatedBy;
-  private P       provider;
+  private AP       provider;
   private U       user;
 
   protected AbstractAccountPojo()
@@ -97,7 +97,7 @@ public abstract class AbstractAccountPojo<//
 
 
   @Override
-  public P getProvider()
+  public AP getProvider()
   {
     return provider;
   }
@@ -200,7 +200,7 @@ public abstract class AbstractAccountPojo<//
 
   @Override
   public void setProvider(
-    P accountProvider)
+    AP accountProvider)
   {
     this.provider = accountProvider;
   }

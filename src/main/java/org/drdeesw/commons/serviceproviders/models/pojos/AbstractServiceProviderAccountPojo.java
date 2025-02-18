@@ -2,8 +2,7 @@ package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
 import org.drdeesw.commons.accounting.models.pojos.AbstractAccountPojo;
-import org.drdeesw.commons.security.models.pojos.AbstractUserPojo;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -14,10 +13,10 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 public abstract class AbstractServiceProviderAccountPojo<//
-    U extends AbstractUserPojo<?>, //
-    H extends AbstractServiceProviderAccountHolderPojo<U, ?>, //
-    P extends AbstractServiceProviderAccountProviderPojo<U, ?, ?, ?>> //
-    extends AbstractAccountPojo<U, H, P> implements ServiceProviderAccount<U, H, P>
+    U extends BaseUserPojo<?>, //
+    H extends BaseServiceProviderAccountHolderPojo<U, ?>, //
+    P extends BaseServiceProviderAccountProviderPojo<U, ?>> //
+    extends AbstractAccountPojo<U, H, P> implements BaseServiceProviderAccountPojo<U, H, P>
 {
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 

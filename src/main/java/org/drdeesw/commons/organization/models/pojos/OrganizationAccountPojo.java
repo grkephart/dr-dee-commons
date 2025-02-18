@@ -4,6 +4,7 @@
 package org.drdeesw.commons.organization.models.pojos;
 
 
+import org.drdeesw.commons.accounting.models.pojos.AccountHolderPojo;
 import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
@@ -12,14 +13,14 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
  */
 @SuppressWarnings("serial")
 public class OrganizationAccountPojo extends
-    AbstractOrganizationAccountPojo<UserPojo, OrganizationAccountHolderPojo, OrganizationAccountProviderPojo>
+    AbstractOrganizationAccountPojo<UserPojo, AccountHolderPojo, OrganizationAccountProviderPojo>
 {
   public OrganizationAccountPojo()
   {
   }
 
 
-  public OrganizationAccountPojo(OrganizationAccountHolderPojo holder, String internalId)
+  public OrganizationAccountPojo(AccountHolderPojo holder, String internalId)
   {
     super(holder, internalId);
   }

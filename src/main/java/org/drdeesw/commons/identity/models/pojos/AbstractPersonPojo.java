@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.drdeesw.commons.accounting.models.pojos.BaseAccountPojo;
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
-import org.drdeesw.commons.identity.models.Person;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
@@ -14,7 +13,7 @@ import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 public abstract class AbstractPersonPojo<//
     U extends BaseUserPojo<?>, //
     HA extends BaseAccountPojo<U, ?, ?>> // Matches held accounts type
-    extends AbstractNamedLongUniquePojo implements Person<U, HA>
+    extends AbstractNamedLongUniquePojo implements BasePersonPojo<U, HA>
 {
   private U       createdBy;
   private Instant creationDate;

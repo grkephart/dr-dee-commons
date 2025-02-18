@@ -5,8 +5,6 @@ package org.drdeesw.commons.security.models.pojos;
 
 
 import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.security.models.Group;
-import org.drdeesw.commons.security.models.GroupMember;
 
 
 /**
@@ -16,10 +14,10 @@ import org.drdeesw.commons.security.models.GroupMember;
  *
  */
 @SuppressWarnings("serial")
-public class GroupMemberPojo<G extends Group> extends AbstractLongUniquePojo
-    implements GroupMember<G>
+public class GroupMemberPojo extends AbstractLongUniquePojo
+    implements BaseGroupMemberPojo<GroupPojo>
 {
-  private G      group;
+  private GroupPojo      group;
   private String username;
 
   /**
@@ -33,7 +31,7 @@ public class GroupMemberPojo<G extends Group> extends AbstractLongUniquePojo
   /**
    * @return the group
    */
-  public G getGroup()
+  public GroupPojo getGroup()
   {
     return group;
   }
@@ -52,7 +50,7 @@ public class GroupMemberPojo<G extends Group> extends AbstractLongUniquePojo
    * @param group the group to set
    */
   public void setGroup(
-    G group)
+    GroupPojo group)
   {
     this.group = group;
   }
