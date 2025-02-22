@@ -5,15 +5,14 @@ import java.time.Instant;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
-import org.springframework.security.access.method.P;
 
 
 /**
  * The abstract POJO class for an account.
  * 
- * @param <U>
- * @param <H>
- * @param <P>
+ * @param <U> the type of user
+ * @param <H> the type of account holder
+ * @param <P> the type of account provider
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAccountPojo<//

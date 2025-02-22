@@ -18,6 +18,9 @@ import org.drdeesw.commons.security.models.User;
  *  Person
  *  Organization
  *  Integrating system
+ *  
+ * @param <U> the type of user
+ * @param <HA> the type of account held by the AccountHolder
  */
 public interface AccountHolder<//
     U extends User<?>, //

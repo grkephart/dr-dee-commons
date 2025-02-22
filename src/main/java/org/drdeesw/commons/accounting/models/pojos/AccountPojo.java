@@ -8,7 +8,7 @@ import org.drdeesw.commons.security.models.pojos.UserPojo;
 
 
 /**
- * 
+ * A concrete implementation of the {@link AbstractAccountPojo} class.
  */
 @SuppressWarnings("serial")
 public class AccountPojo

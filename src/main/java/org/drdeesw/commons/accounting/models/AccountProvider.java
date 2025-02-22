@@ -14,7 +14,10 @@ import org.drdeesw.commons.security.models.User;
 
 
 /**
- * 
+ * Represents any entity that can provide accounts, such as: Organization, ServiceProvider, etc.
+ *
+ * @param <U> the type of user that can audit the AccountProvider
+ * @param <A> the type of account that the AccountProvider can provide
  */
 public interface AccountProvider<//
     U extends User<?>, //

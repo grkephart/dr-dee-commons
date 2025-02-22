@@ -7,7 +7,6 @@ package org.drdeesw.commons.organization.models.entities;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -188,10 +187,7 @@ public abstract class AbstractOrganizationEntity<//
   public void setChildren(
     Set<PC> children)
   {
-    this.children = children//
-        .stream()//
-        .map(child -> (PC)child)//
-        .collect(Collectors.toSet());
+    this.children = new HashSet<>(children);
   }
 
 

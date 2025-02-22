@@ -8,6 +8,12 @@ import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
+/**
+ * Abstract base class for account holder POJOs.
+ * 
+ * @param <U> the type of the user
+ * @param <HA> the type of the account
+ */
 @SuppressWarnings("serial")
 public abstract class AbstractAccountHolderPojo<//
     U extends BaseUserPojo<?>, //

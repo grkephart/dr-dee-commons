@@ -41,7 +41,7 @@ public abstract class AbstractAccountProviderEntity<//
   private EmbeddedAuditable<U> audit;
   private String               description;
   private boolean              enabled;
-  private Set<PA>              providedAccounts;
+  private Set<PA>              providedAccounts = new HashSet<>();
 
   /**
    * Hibernate
