@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.accountingn.models.pojos;
+package org.drdeesw.commons.accounting.models.pojos;
 
 import java.util.HashSet;
 import java.util.Set;
