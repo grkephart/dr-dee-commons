@@ -18,9 +18,11 @@ public interface BaseAccountProviderPojo<//
     U extends BaseUserPojo<?>, //
     PA extends BaseAccountPojo<U, ?, ?>> extends AccountProvider<U, PA>, NamedLongUniquePojo
 {
-  Set<PA> getProvidedAccountsPojo();
+  @Override
+  Set<PA> getProvidedAccounts();
 
 
-  void setProvidedAccountsPojo(
+  @Override
+  void setProvidedAccounts(
     Set<PA> accounts);
 }

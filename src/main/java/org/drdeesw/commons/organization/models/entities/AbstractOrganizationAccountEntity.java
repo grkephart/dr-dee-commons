@@ -9,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountHolderEntity;
 import org.drdeesw.commons.organization.models.OrganizationAccount;
 import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
@@ -21,7 +22,7 @@ import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 @Access(AccessType.PROPERTY)
 public abstract class AbstractOrganizationAccountEntity<//
     U extends AbstractUserEntity<?>, //
-    H extends AbstractOrganizationAccountHolderEntity<U, ?>, //
+    H extends AbstractAccountHolderEntity<U, ?>, //
     P extends AbstractOrganizationAccountProviderEntity<U, ?>> //
     extends AbstractAccountEntity<U, H, P> implements OrganizationAccount<U, H, P>
 {

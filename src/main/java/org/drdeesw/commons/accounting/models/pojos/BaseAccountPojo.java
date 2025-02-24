@@ -18,16 +18,20 @@ public interface BaseAccountPojo<//
     P extends BaseAccountProviderPojo<U, ?>> //
     extends Account<U, H, P>, NamedLongUniquePojo
 {
-  H getHolderPojo();
+  @Override
+  H getHolder();
 
 
-  void setHolderPojo(
+  @Override
+  void setHolder(
     H holder);
 
 
-  P getProviderPojo();
+  @Override
+  P getProvider();
 
 
-  void setProviderPojo(
+  @Override
+  void setProvider(
     P provider);
 }

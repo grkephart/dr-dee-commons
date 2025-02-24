@@ -18,9 +18,11 @@ public interface BaseAccountHolderPojo<//
     U extends BaseUserPojo<?>, //
     HA extends BaseAccountPojo<U, ?, ?>> extends AccountHolder<U, HA>, NamedLongUniquePojo
 {
-  Set<HA> getHeldAccountsPojo();
+  @Override
+  Set<HA> getHeldAccounts();
 
 
-  void setHeldAccountsPojo(
+  @Override
+  void setHeldAccounts(
     Set<HA> accounts);
 }

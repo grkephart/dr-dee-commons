@@ -18,8 +18,8 @@ import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 public abstract class AbstractAccountPojo<//
     U extends BaseUserPojo<?>, //
     H extends BaseAccountHolderPojo<U, ?>, //
-    AP extends BaseAccountProviderPojo<U, ?>> //
-    extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, AP>
+    P extends BaseAccountProviderPojo<U, ?>> //
+    extends AbstractNamedLongUniquePojo implements BaseAccountPojo<U, H, P>
 {
   private boolean active;
   private U       createdBy;
@@ -30,7 +30,7 @@ public abstract class AbstractAccountPojo<//
   private String  internalId;
   private Instant lastUpdateDate;
   private U       lastUpdatedBy;
-  private AP       provider;
+  private P       provider;
   private U       user;
 
   protected AbstractAccountPojo()
@@ -96,7 +96,7 @@ public abstract class AbstractAccountPojo<//
 
 
   @Override
-  public AP getProvider()
+  public P getProvider()
   {
     return provider;
   }
@@ -199,7 +199,7 @@ public abstract class AbstractAccountPojo<//
 
   @Override
   public void setProvider(
-    AP accountProvider)
+    P accountProvider)
   {
     this.provider = accountProvider;
   }

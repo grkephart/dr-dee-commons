@@ -16,7 +16,8 @@ import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
  */
 public interface BasePersonPojo<//
     U extends BaseUserPojo<?>, //
-    HA extends BaseAccountPojo<U, ?, ?>> extends Person<U, HA>, NamedLongUniquePojo, BaseAccountHolderPojo<U, HA>
+    HA extends BaseAccountPojo<U, ?, ?>> //
+    extends Person<U, HA>, NamedLongUniquePojo, BaseAccountHolderPojo<U, HA>
 {
 
 }
