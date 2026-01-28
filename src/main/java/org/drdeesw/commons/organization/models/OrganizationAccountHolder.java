@@ -10,7 +10,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
 /**
  * Represents the account holder of an organization account.
  */
-public interface OrganizationAccountHolder<O extends Organization<?, ?, ?>, A extends OrganizationAccount<?, ?>>
+public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
     extends UniqueObject<Long>
 {
   enum AccountHolderType

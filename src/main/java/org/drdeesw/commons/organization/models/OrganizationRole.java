@@ -10,12 +10,16 @@ import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.security.models.Role;
 
 
 /**
- * 
+ * Defines roles in an organization. For example, a political campaign could
+ * have Chair, Treasurer, Field Director, etc, as roles, while a company could
+ * have CEO, CFO, CTO, etc.
  */
-public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends OrganizationMemberRole<?,?>> extends NamedLongUniqueObject, Auditable, Enableable, Describable
+public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends OrganizationMemberRole<?, ?>>
+    extends NamedLongUniqueObject, Auditable, Enableable, Describable
 {
 
   /**
@@ -25,7 +29,6 @@ public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends Org
    */
   public Set<M> getMembers();
 
-
   /**
    * Returns the organization associated with this role.
    * 
@@ -33,14 +36,18 @@ public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends Org
    */
   O getOrganization();
 
+  /**
+   * @return
+   */
+  Role getRole();
+
 
   /**
    * Sets the organization members for this role.
    * 
    * @param members the organization members to set
    */
-  public void setMembers(
-    Set<M> members);
+  public void setMembers(Set<M> members);
 
 
   /**
@@ -48,6 +55,11 @@ public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends Org
    * 
    * @param organization the new organization associated with this role
    */
-  void setOrganization(
-    O organization);
+  void setOrganization(O organization);
+
+
+  /**
+   * @param role
+   */
+  void setRole(Role role);
 }

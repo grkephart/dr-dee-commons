@@ -3,17 +3,11 @@
  */
 package org.drdeesw.commons.serviceproviders.models;
 
-
-import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationRole;
-
-
 /**
  * 
  */
 public interface ServiceProvider
-    extends Organization<ServiceProviderAccount, OrganizationMember<?, ?>, OrganizationRole<?, ?>>
+    //extends Organization<ServiceProviderAccount, OrganizationMember<?, ?>, OrganizationRole<?, ?>>
 {
   /**
    * Returns the authentication type of the service provider.
