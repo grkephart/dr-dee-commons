@@ -3,13 +3,13 @@
  */
 package org.drdeesw.commons.security.models;
 
-import org.drdeesw.commons.common.models.NamedObject;
+import org.drdeesw.commons.common.models.Named;
 
 /**
  * This is a generic role concept that could apply across organizations, users,
  * etc.
  */
-public interface Role extends NamedObject
+public interface Role extends Named
 {
   /**
    * @return
