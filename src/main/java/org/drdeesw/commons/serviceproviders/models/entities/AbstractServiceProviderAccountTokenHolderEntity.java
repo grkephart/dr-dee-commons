@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -23,21 +22,16 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AbstractServiceProviderAccountTokenHolderEntity
-    extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder
+@Access(AccessType.PROPERTY)
+public abstract class AbstractServiceProviderAccountTokenHolderEntity<//
+    A extends AbstractServiceProviderAccountEntity<?, ?, ?>> //
+    extends AbstractLongUniqueEntity implements ServiceProviderAccountTokenHolder<A>
 {
-  @Column(name = "access_token")
-  private String                       accessToken;
-  @Column(name = "access_token_expiry")
-  private Instant                      accessTokenExpiry;
-  @ManyToOne
-  @JoinColumn(name = "account_id")
-  private ServiceProviderAccountEntity account;
-  @Column(name = "refresh_token")
-  private String                       refreshToken;
-  @Column(name = "refresh_token_expiry")
-  private Instant                      refreshTokenExpiry;
+  private String  accessToken;
+  private Instant accessTokenExpiry;
+  private A       account;
+  private String  refreshToken;
+  private Instant refreshTokenExpiry;
 
   /**
    * 
@@ -49,6 +43,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "access_token")
   public String getAccessToken()
   {
     return accessToken;
@@ -56,6 +51,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "access_token_expiry")
   public Instant getAccessTokenExpiry()
   {
     return accessTokenExpiry;
@@ -63,13 +59,16 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
-  public ServiceProviderAccount getAccount()
+  @ManyToOne
+  @JoinColumn(name = "account_id", nullable = false)
+  public A getAccount()
   {
     return account;
   }
 
 
   @Override
+  @Column(name = "refresh_token")
   public String getRefreshToken()
   {
     return refreshToken;
@@ -77,6 +76,7 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
 
   @Override
+  @Column(name = "refresh_token_expiry")
   public Instant getRefreshTokenExpiry()
   {
     return refreshTokenExpiry;
@@ -101,9 +101,9 @@ public abstract class AbstractServiceProviderAccountTokenHolderEntity
 
   @Override
   public void setAccount(
-    ServiceProviderAccount account)
+    A account)
   {
-    this.account = (ServiceProviderAccountEntity)account;
+    this.account = account;
   }
 
 

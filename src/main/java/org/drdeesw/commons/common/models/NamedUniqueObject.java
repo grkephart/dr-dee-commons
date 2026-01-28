@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author gary_kephart
  *
  */
-public interface NamedUniqueObject<ID extends Serializable> extends NamedObject, UniqueObject<ID>
+public interface NamedUniqueObject<ID extends Serializable> extends Named, UniqueObject<ID>
 {
 
 }

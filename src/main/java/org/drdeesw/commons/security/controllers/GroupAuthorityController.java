@@ -9,8 +9,8 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.pojos.SystemGroupAuthorityPojo;
-import org.drdeesw.commons.security.services.SystemGroupAuthorityService;
+import org.drdeesw.commons.security.models.pojos.GroupAuthorityPojo;
+import org.drdeesw.commons.security.services.GroupAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class GroupAuthorityController extends AbstractCrudController<SystemGroupAuthorityPojo, Long>
+public class GroupAuthorityController extends AbstractCrudController<GroupAuthorityPojo, Long>
 {
   private static final String         MAPPING_PREFIX = "/security/groupauthorities";
   @Autowired
-  private SystemGroupAuthorityService service;
+  private GroupAuthorityService service;
 
   /**
    * Creates a new groupAuthority.
@@ -45,7 +45,7 @@ public class GroupAuthorityController extends AbstractCrudController<SystemGroup
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    SystemGroupAuthorityPojo groupAuthority,
+    GroupAuthorityPojo groupAuthority,
     BindingResult bindingResult) throws Exception
   {
     return super.create(groupAuthority, bindingResult);
@@ -71,7 +71,7 @@ public class GroupAuthorityController extends AbstractCrudController<SystemGroup
    * @throws Exception
    */
   @GetMapping("/dt" + MAPPING_PREFIX)
-  public QueryResults<SystemGroupAuthorityPojo> findByQuery(
+  public QueryResults<GroupAuthorityPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -87,7 +87,7 @@ public class GroupAuthorityController extends AbstractCrudController<SystemGroup
    * @return the groupAuthority with the given id
    */
   @GetMapping(value = MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<SystemGroupAuthorityPojo> get(
+  public ResponseEntity<GroupAuthorityPojo> get(
     @PathVariable
     Long id)
   {

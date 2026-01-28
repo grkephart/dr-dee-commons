@@ -9,13 +9,17 @@ import java.util.Set;
 import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.LongUniqueObject;
-import org.drdeesw.commons.security.models.SystemUser;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
  * Defines a user's membership in an organization.
  */
-public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends OrganizationMemberRole<?,?>> extends LongUniqueObject, Enableable, Auditable
+public interface OrganizationMember<//
+    U extends User<?>, //
+    O extends Organization<U, ?, ?, ?, ?, ?>, //
+    MR extends OrganizationMemberRole<U, ?, ?>> //
+    extends LongUniqueObject, Enableable, Auditable<U>
 {
   /**
    * Returns the organization.
@@ -26,11 +30,11 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
 
 
   /**
-   * Returns the organization roles for this member.
+   * Returns the organization memberRoles for this member.
    * 
-   * @return the organization roles for this member.
+   * @return the organization memberRoles for this member.
    */
-  public Set<R> getRoles();
+  public Set<MR> getMemberRoles();
 
 
   /**
@@ -38,7 +42,7 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
    * 
    * @return the system user
    */
-  public SystemUser getSystemUser();
+  public U getUser();
 
 
   /**
@@ -51,12 +55,12 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
 
 
   /**
-   * Sets the organization roles for this member.
+   * Sets the memberRoles for this member.
    * 
-   * @param roles the organization roles to set
+   * @param memberRoles the memberRoles to set
    */
-  public void setRoles(
-    Set<R> roles);
+  public void setMemberRoles(
+    Set<MR> memberRoles);
 
 
   /**
@@ -64,6 +68,6 @@ public interface OrganizationMember<O extends Organization<?, ?, ?>, R extends O
    * 
    * @param systemUser the systemUser to set
    */
-  public void setSystemUser(
-    SystemUser systemUser);
+  public void setUser(
+    U systemUser);
 }

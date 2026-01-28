@@ -15,7 +15,7 @@ import org.drdeesw.commons.common.models.StringUniqueObject;
  */
 @MappedSuperclass
 public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<String>
-    implements StringUniqueObject
+    implements StringUniqueEntity
 {
   private static final long serialVersionUID = -9190810275366831598L;
 

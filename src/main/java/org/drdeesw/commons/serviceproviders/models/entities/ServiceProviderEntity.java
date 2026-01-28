@@ -4,10 +4,16 @@
 package org.drdeesw.commons.serviceproviders.models.entities;
 
 
-import javax.persistence.AttributeOverride;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
+import org.drdeesw.commons.security.models.entities.UserEntity;
 
 
 /**
@@ -16,12 +22,35 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "service_providers")
-@AttributeOverride(name = "id", column = @Column(name = "service_provider_id"))
-public class ServiceProviderEntity extends AbstractServiceProviderEntity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Access(AccessType.PROPERTY)
+public class ServiceProviderEntity
+    extends AbstractServiceProviderEntity<UserEntity, ServiceProviderAccountEntity>
 {
-  
+  /**
+   * Hibernate
+   */
   public ServiceProviderEntity()
   {
-    super();
   }
+
+
+  /**
+   * Unit testing.
+   * 
+   * @param audit 
+   */
+  public ServiceProviderEntity(EmbeddedAuditable<UserEntity> audit)
+  {
+    super(audit);
+  }
+
+
+  @Override
+  @Column(name = "service_provider_id")
+  public Long getId()
+  {
+    return super.getId();
+  }
+
 }

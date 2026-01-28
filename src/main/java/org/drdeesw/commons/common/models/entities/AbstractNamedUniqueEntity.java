@@ -8,7 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.common.models.NamedObject;
+import org.drdeesw.commons.common.models.Named;
 import org.drdeesw.commons.common.models.NamedUniqueObject;
 
 
@@ -19,11 +19,10 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(value = AccessType.FIELD)
+@Access(value = AccessType.PROPERTY)
 public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
-    AbstractUniqueEntity<ID> implements Comparable<NamedObject>, NamedUniqueObject<ID>, UniqueEntity<ID>
+    AbstractUniqueEntity<ID> implements Comparable<Named>, NamedUniqueEntity<ID>, UniqueEntity<ID>
 {
-  @Column(name="name")
   private String            name;
 
 
@@ -79,9 +78,9 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
    */
   @Override
   public int compareTo(
-    NamedObject o)
+    Named o)
   {
-    NamedObject that = (NamedObject)o;
+    Named that = (Named)o;
 
     if (this.getName() == null && that.getName() == null)
       return 0;
@@ -123,9 +122,10 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
 
 
   /**
-   * Subclasses should specify the Column annotation.
+   * Subclasses can specify the Column annotation.
    */
   @Override
+  @Column(name="name")
   public String getName()
   {
     return this.name;
@@ -150,7 +150,7 @@ public abstract class AbstractNamedUniqueEntity<ID extends Serializable> extends
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <NO extends NamedObject> NO setName(
+  public <NO extends Named> NO setName(
     String name)
   {
     this.name = name;

@@ -6,21 +6,22 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationMemberRole;
 import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -28,27 +29,19 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUniqueEntity
-    implements OrganizationRole
+@Access(AccessType.PROPERTY)
+public abstract class AbstractOrganizationRoleEntity<//
+    U extends AbstractUserEntity<?>, //
+    O extends AbstractOrganizationEntity<U, ?, ?, ?, ?, ?>, //
+    MR extends AbstractOrganizationMemberRoleEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements OrganizationRole<U, O, MR>
 {
-  @Column(name = "created_by_id")
-  private Long                              createdById;
-  @Column(name = "creation_date")
-  private Instant                           creationDate;
-  @Column(name = "description")
-  private String                            description;
-  @Column(name = "enabled")
-  private boolean                           enabled;
-  @Column(name = "last_update_date")
-  private Instant                           lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                              lastUpdateId;
-  @ManyToOne
-  @JoinColumn(name = "organization_id")
-  private OrganizationEntity                organization;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-  private Set<OrganizationMemberRoleEntity> members;
+  @Embedded
+  private EmbeddedAuditable<U> audit;
+  private String               description;
+  private boolean              enabled = true;
+  private Set<MR>              memberRoles;
+  private O                    organization;
 
   /**
    * 
@@ -60,68 +53,71 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
 
 
   @Override
-  public Long getCreatedById()
+  public U getCreatedBy()
   {
-    return createdById;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return creationDate;
+    return this.audit.getCreationDate();
   }
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
-    return description;
+    return this.description;
   }
 
 
   @Override
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public U getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return this.audit.getLastUpdatedBy();
   }
 
 
   @Override
-  public Organization getOrganization()
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<MR> getMemberRoles()
+  {
+    return memberRoles;
+  }
+
+
+  @Override
+  @ManyToOne
+  @JoinColumn(name = "organization_id")
+  public O getOrganization()
   {
     return organization;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getMembers()
-  {
-    return this.members.stream()//
-        .map(member -> (OrganizationMemberRole)member)//
-        .collect(Collectors.toSet());
-  }
-
-
-  @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
-    return enabled;
+    return this.enabled;
   }
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    U createdBy)
   {
-    this.createdById = createdById;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -129,7 +125,7 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -153,32 +149,30 @@ public abstract class AbstractOrganizationRoleEntity extends AbstractNamedLongUn
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    U lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
+  }
+
+
+  @Override
+  public void setMemberRoles(
+    Set<MR> memberRoles)
+  {
+    this.memberRoles = memberRoles;
   }
 
 
   @Override
   public void setOrganization(
-    Organization organization)
+    O organization)
   {
-    this.organization = (OrganizationEntity)organization;
-  }
-
-
-  @Override
-  public void setMembers(
-    Set<OrganizationMemberRole> members)
-  {
-    this.members = members.stream()//
-        .map(member -> (OrganizationMemberRoleEntity)member)//
-        .collect(Collectors.toSet());
+    this.organization = organization;
   }
 }

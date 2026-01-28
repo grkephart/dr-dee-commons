@@ -13,14 +13,14 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
  */
 @MappedSuperclass
 public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Long>
-    implements NamedLongUniqueObject
+    implements NamedLongUniqueEntity
 {
   private static final long serialVersionUID = 6902141588206147324L;
 
   /**
    * 
    */
-  public AbstractNamedLongUniqueEntity()
+  protected AbstractNamedLongUniqueEntity()
   {
     super();
   }
@@ -29,7 +29,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
   /**
    * @param that the object to copy
    */
-  public AbstractNamedLongUniqueEntity(NamedLongUniqueObject that)
+  protected AbstractNamedLongUniqueEntity(NamedLongUniqueObject that)
   {
     super(that);
   }
@@ -39,7 +39,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
    * @param id the id
    * @param name the name
    */
-  public AbstractNamedLongUniqueEntity(Long id, String name)
+  protected AbstractNamedLongUniqueEntity(Long id, String name)
   {
     super(id, name);
   }
@@ -48,7 +48,7 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
   /**
    * @param id the id
    */
-  public AbstractNamedLongUniqueEntity(Long id)
+  protected AbstractNamedLongUniqueEntity(Long id)
   {
     super(id);
   }
@@ -57,29 +57,10 @@ public class AbstractNamedLongUniqueEntity extends AbstractNamedUniqueEntity<Lon
   /**
    * @param name the name
    */
-  public AbstractNamedLongUniqueEntity(String name)
+  protected AbstractNamedLongUniqueEntity(String name)
   {
     super(name);
   }
 
 
-  /**
-   *
-   */
-  @Override
-  public Long getId()
-  {
-    return super.getId();
-  }
-
-
-  /**
-   *
-   */
-  @Override
-  public void setId(
-    Long id)
-  {
-    super.setId(id);
-  }
 }

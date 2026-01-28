@@ -3,7 +3,7 @@ package org.drdeesw.commons.common.models.pojos;
 
 import java.io.Serializable;
 
-import org.drdeesw.commons.common.models.NamedObject;
+import org.drdeesw.commons.common.models.Named;
 import org.drdeesw.commons.common.models.NamedUniqueObject;
 
 
@@ -13,7 +13,7 @@ import org.drdeesw.commons.common.models.NamedUniqueObject;
  * @param <ID> the ID class
  */
 public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
-    AbstractUniquePojo<ID> implements Comparable<NamedObject>, NamedUniqueObject<ID>
+    AbstractUniquePojo<ID> implements Comparable<Named>, NamedUniquePojo<ID>
 {
   private static final long serialVersionUID = -6603247573392458671L;
   private String            name;
@@ -82,9 +82,9 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
    */
   @Override
   public int compareTo(
-    NamedObject o)
+    Named o)
   {
-    NamedObject that = (NamedObject)o;
+    Named that = (Named)o;
 
     if (this.getName() == null && that.getName() == null)
       return 0;
@@ -153,7 +153,7 @@ public abstract class AbstractNamedUniquePojo<ID extends Serializable> extends
    */
   @SuppressWarnings("unchecked")
   @Override
-  public <NO extends NamedObject> NO setName(
+  public <NO extends Named> NO setName(
     String name)
   {
     this.name = name;

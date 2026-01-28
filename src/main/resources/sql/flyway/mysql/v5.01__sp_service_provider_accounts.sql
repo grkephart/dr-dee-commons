@@ -18,8 +18,13 @@ BEGIN
       service_provider_account_id BIGINT       UNSIGNED NOT NULL AUTO_INCREMENT,
       service_provider_id         BIGINT       UNSIGNED NOT NULL,
       name                        VARCHAR(255) NOT NULL,
-      token_holder_id             BIGINT       NULL,
+      description                 VARCHAR(255) NULL,
+      token_holder_id             BIGINT       UNSIGNED NULL,
       account_holder_id           BIGINT       UNSIGNED NOT NULL,
+      is_active                   TINYINT(1),
+      internal_id                 VARCHAR(255) NOT NULL,
+      account_provider_id         BIGINT       UNSIGNED NOT NULL,
+      user_id                     BIGINT       UNSIGNED NOT NULL,
       
       PRIMARY KEY           (service_provider_account_id),
       UNIQUE  KEY sp_id_uq  (service_provider_account_id)

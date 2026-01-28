@@ -9,8 +9,8 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.pojos.SystemUserPojo;
-import org.drdeesw.commons.security.services.SystemUserService;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
+import org.drdeesw.commons.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class UserController extends AbstractCrudController<SystemUserPojo, Long>
+public class UserController extends AbstractCrudController<UserPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/users";
   @Autowired
-  private SystemUserService service;
+  private UserService service;
 
   /**
    * Creates a new user.
@@ -45,7 +45,7 @@ public class UserController extends AbstractCrudController<SystemUserPojo, Long>
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    SystemUserPojo user,
+    UserPojo user,
     BindingResult bindingResult) throws Exception
   {
     return super.create(user, bindingResult);
@@ -71,7 +71,7 @@ public class UserController extends AbstractCrudController<SystemUserPojo, Long>
    * @throws Exception
    */
   @GetMapping("/dt" + MAPPING_PREFIX)
-  public QueryResults<SystemUserPojo> findByQuery(
+  public QueryResults<UserPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -87,7 +87,7 @@ public class UserController extends AbstractCrudController<SystemUserPojo, Long>
    * @return the user with the given id
    */
   @GetMapping(value = MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<SystemUserPojo> get(
+  public ResponseEntity<UserPojo> get(
     @PathVariable
     Long id)
   {

@@ -4,9 +4,7 @@
 package org.drdeesw.commons.serviceproviders.models.pojos;
 
 
-import org.drdeesw.commons.common.models.pojos.AbstractLongUniquePojo;
-import org.drdeesw.commons.serviceproviders.models.ServiceProvider;
-import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccount;
+import org.drdeesw.commons.security.models.pojos.UserPojo;
 import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHolder;
 
 
@@ -14,13 +12,9 @@ import org.drdeesw.commons.serviceproviders.models.ServiceProviderAccountTokenHo
  * 
  */
 @SuppressWarnings("serial")
-public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
-    implements ServiceProviderAccount
+public class ServiceProviderAccountPojo extends
+    AbstractServiceProviderAccountPojo<UserPojo, ServiceProviderAccountHolderPojo, ServiceProviderAccountProviderPojo>
 {
-  private Long          accountHolderId;
-  private String                                description;
-  private String                                internalId;
-  private ServiceProviderPojo                   serviceProvider;
   private ServiceProviderAccountTokenHolderPojo tokenHolder;
 
   /**
@@ -30,43 +24,21 @@ public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
   {
   }
 
+
   /**
    * @param serviceProvider the service provider
    * @param internalId the internal id
    */
-  public ServiceProviderAccountPojo(ServiceProviderPojo serviceProvider, String internalId)
+  public ServiceProviderAccountPojo(ServiceProviderAccountHolderPojo holder, String internalId)
   {
-    this.serviceProvider = serviceProvider;
-    this.internalId = internalId;
+    super(holder, internalId);
   }
 
-
-  @Override
-  public Long getAccountHolderId()
-  {
-    return accountHolderId;
-  }
-
-
-  @Override
-  public String getDescription()
-  {
-    return description;
-  }
-
-
-  @Override
-  public String getInternalId()
-  {
-    return internalId;
-  }
-
-
-  @Override
-  public ServiceProvider getServiceProvider()
-  {
-    return serviceProvider;
-  }
+  //  @Override
+  //  public ServiceProviderPojo getServiceProvider()
+  //  {
+  //    return (ServiceProviderPojo)super.getProvider();
+  //  }
 
 
   @Override
@@ -77,40 +49,8 @@ public class ServiceProviderAccountPojo extends AbstractLongUniquePojo
 
 
   @Override
-  public void setAccountHolderId(
-    Long accountHolderId)
-  {
-    this.accountHolderId = accountHolderId;
-  }
-
-
-  @Override
-  public void setDescription(
-    String description)
-  {
-    this.description = description;
-  }
-
-
-  @Override
-  public void setInternalId(
-    String internalId)
-  {
-    this.internalId = internalId;
-  }
-
-
-  @Override
-  public void setServiceProvider(
-    ServiceProvider serviceProvider)
-  {
-    this.serviceProvider = (ServiceProviderPojo)serviceProvider;
-  }
-
-
-  @Override
   public void setTokenHolder(
-    ServiceProviderAccountTokenHolder tokenHolder)
+    ServiceProviderAccountTokenHolder<?> tokenHolder)
   {
     this.tokenHolder = (ServiceProviderAccountTokenHolderPojo)tokenHolder;
   }

@@ -1,56 +1,345 @@
+Design and Implementation Rules
+
+
+Section 1: Package Structure and Naming Conventions
+
+Rule 1:
+Classes and interfaces should be in separate packages based on the module they belong to. For example, all classes and interfaces related to the organization module should be in the organization package.
+The base package should be org.drdeesw.commons.
+
+
+Section 2: Models and Entity Design
+
+Rule 2:
+
+For the following models, create:
+* An interface: Naming convention: {Model}.
+* An abstract entity:
+  * Use the @MappedSuperclass annotation.
+  * Contain all properties, annotated appropriately (@Column, @OneToMany, etc.), and implement the interface.
+  * Naming convention: Abstract{Model}Entity.
+* A concrete entity:
+  * Extend the abstract entity.
+  * Use @Entity and @Table annotations.
+  * Naming convention: {Model}Entity.
+  * Determine the best Hibernate inheritance mapping strategy for the concrete entity based on the model requirements.
+  
+Rule 3:
+
+In JPA entity classes, all entity relationships (e.g., @OneToMany, @ManyToOne, @OneToOne, @ManyToMany) must reference concrete, mapped entity classes, not interfaces or generic parameters.
+* Avoid: Using generics directly in entity relationship fields.
+* Abstract Classes: May define generics in method signatures to support flexibility.
+* Concrete Classes: Must resolve generics to specific entity types and ensure proper mapping of relationships.
+* These rules apply specifically to entity fields using JPA annotations.
+Example for OrganizationEntity:
+
+private Set<OrganizationAccountEntity> accounts;  // Correct
+
+private Set<OrganizationAccount> accounts;       // Incorrect
+private Set<A> accounts;                         // Incorrect
+
+Rule 4:
+
+Entity relationships in interfaces should reference interfaces or specific types where generics are not used. 
+Avoid defining generics in interfaces.
+
+
+Section 2: Generics and Type Safety
+
+Rule 5:
+
+Remove generics from interfaces to simplify design.
+* Relationships in interfaces should use well-defined interface types (e.g., OrganizationAccount).
+* Type handling and conversions should occur in abstract or concrete classes, using explicit casts or helper methods where necessary.
+
+Rule 6:
+
+Minimize the use of raw types and unchecked casts to ensure type safety and maintain clean code.
+
+
+Section 3: Simplifying Redundancies
+
+Rule 7:
+The ServiceProvider class does not need getAccounts() and setAccounts() methods, as these are defined in the Organization class.
+
+Rule 8:
+
+The ServiceProviderAccount class does not need getServiceProvider() and setServiceProvider() methods, 
+as these are in the OrganizationAccount class as getOrganization() and setOrganization().
+These methods should only exist if they delegate directly to the corresponding methods in OrganizationAccount.
+
+Section 4: Best Practices and Interface Design
+
+Rule 9:
+Follow industry standards and best practices. If a conflict arises between these standards and the rules outlined here, highlight it for resolution.
+
+Rule 10:
+
+Create interfaces only when there is a clear need for polymorphism, abstraction, or separation of concerns.
+* Avoid introducing unnecessary complexity into interfaces, such as generic parameters, unless there is a compelling reason.
+
+Rule 11: Use Lazy @OneToMany Relationships
+
+Default all @OneToMany relationships to lazy-loading.
+Use these relationships primarily to define mappings between entities rather than directly traversing them.
+When accessing the "many" side, write explicit queries to retrieve the data as needed.
+Explicit queries should be written in the service layer to fetch related entities on the 'many' side as needed
+
+Rule 12: Propagate Generics in Abstract Classes
+
+When an interface defines generic parameters, any abstract class implementing the interface must:
+* Declare and Propagate:
+  Declare and propagate the same generic parameters to maintain consistency with the interface contract.
+* Abstract Class Implementation:
+  Use the generic parameters in properties and methods where applicable to ensure alignment with the interface.
+* Concrete Class Binding:
+  Explicitly bind the generic parameters in concrete classes to avoid type mismatches.
+Purpose: This ensures type safety, prevents runtime errors, and maintains clarity in the class hierarchy.
+
+Rule 13: Concrete Types for Persistent Relationships
+
+JPA-mapped fields must always use concrete entity types. 
+Avoid using generics (T, A, ?) in JPA entity fields, especially in relationships such as @OneToMany, @ManyToOne, @OneToOne, or @ManyToMany.
+
+
+Model Definitions:
+
+Note: all entity classes are JPA entity classes.
+
+Common Module:
+
+Auditable - a role interface that contains the following properties:
+- CreatedBy is the user who created the record
+- CreationDate
+- LastUpdateDate
+- LastUpdatedBy is the user who last updated the record
+
+Describable - a role interface that contains the following properties:
+- description, which is a string
+
+Enableable - a role interface that contains the following properties:
+- enabled, which is a boolean
+
+Named - a role interface that contains the following properties:
+- name, which is a string
+
+
 Organization Module:
 
-Organization
-* Can have a parent organization
-* Can be an account holder
-* Has a type, which there can be an unlimited set of values
-* Has a status, which is an enum
-* Has accounts
-* Has members
-* Has roles
+Account, is an auditable, describable, enableable entity
+- Issued by an Account Provider, such as a bank or other Organization
+- Has an internal ID which is unique across an Account Provider. It could be an account number or a username or email or GUID. It is not guaranteed to be unique across all Account Providers and in fact probably isn't.
+- Has an Account Holder
 
-Organization Account
-* Belongs to an organization
-* Has an internal ID
-* Has a holder, which can be an organization (or subclass) or a person (or a subclass)
+Account Provider, which is named and describable
+- Provides Accounts to its Account Holders
+- Provided accounts should be managed through `getProvidedAccounts()` and `setProvidedAccounts()`.
 
-Organization Account Holder
-* Is a person or an organization
+Account Holder
+- Is a Person, Organization, Service Provider or integrating system (or a subclass of any of those)
+- Holds accounts from various account providers.
+- Held accounts should be managed through `getHeldAccounts()` and `setHeldAccounts()`.
+
+Organization, which is named and describable
+- Can act as both an `AccountProvider` and an `AccountHolder`.
+    - **Accounts Provided**: Organization Accounts (or subclasses) issued by the organization as an account provider (e.g., organization memberships, service provider accounts).
+    - **Accounts Held**: Organization Accounts (or subclasses) held by the organization as an account holder (e.g., bank accounts or subscriptions held with another organization).
+- Use `getProvidedAccounts()` and `setProvidedAccounts()` for managing accounts the organization provides.
+- Use `getHeldAccounts()` and `setHeldAccounts()` for managing accounts the organization holds.
+- Can have a parent organization
+- Can have child organizations, none of which can be the parent or other ancestor Organization
+- Has a type, which there can be an unlimited set of values (not an enum)
+- Has a status, which is an enum
+- Has members
+- Has roles
+
+Organization Account - is an Account and is auditable and enableable
+- The Account Provider is an Organization (or a subclass)
+
+Organization Account Holder - an Account Holder for an Account Provider that is an organization or a subclass
+- Belongs to an Organization Account
 
 Organization Member
-* Belongs to an organization
-* Has member roles
-* Can be an organization (or subclass) or a person (or a subclass)
+- Belongs to an Organization and not shared with other Organizations
+- Has member roles
+- Has a user
 
-Organization Role
-* Belongs to an organization
-* Has member roles
+Organization Role - is named and describable
+- Belongs to an Organization and not shared with other Organizations
+- Has member roles
 
 Organization Member Role
-* Has a member
-* Has a role
+- Has a member
+- Has a role
+
+Organization Type - is named and describable
+
 
 Service Provider Module:
 
-Service Provider - not necessarily an organization, but will be considered as one for simplicity
-* Has an AuthenticationType enum
-* Has a ClientRegistrationId
+Service Provider - close but not quite an organization. It's the same in that they manage provided and held accounts. It is named and describable
+- Has an AuthenticationType enum, which includes, but is not limited to, NONE, API_KEY BASIC_AUTH, OAUTH1, OAUTH2, JWT, SAML, OPENID_CONNECT, DIGITAL_SIGNATURE, LDAP, SESSION
+- Has a ClientRegistrationId
+- Can act as both an `AccountProvider` and an `AccountHolder`.
+    - **Accounts Provided**: Service Provider Accounts (or subclasses) issued by the Service Provider as an account provider
+    - **Accounts Held**: Organization Accounts (or subclasses) held by the Service Provider as an account holder (e.g., bank accounts or subscriptions held with another organization).
+- Use `getProvidedAccounts()` and `setProvidedAccounts()` for managing accounts the Service Provider provides.
+- Use `getHeldAccounts()` and `setHeldAccounts()` for managing accounts the Service Provider holds.
 
-Service Provider Account - is an organization account
-* Belongs to a service provider
-* Has a token holder
+Service Provider Account - is not an Organization Account. That would add too much complexity. It is an Account and is auditable and enableable.
+- The Account Provider is a Service Provider (or a subclass)
+- Has a Token Holder
 
-* Service Provider Account Token Holder
-* Belongs to a service provider account
-* Has an accessToken
-* Has an AccessTokenExpiry
-* Has a RefreshToken
-* Has a RefreshTokenExpiry
+Service Provider Account Holder is an Organization Account Holder
+- Belongs to a Service Provider Account
 
-For these models, there should be 
-* an interface
-* an abstract entity which uses MappedSuperclass annotation and contains all the properties and implements the interface. Naming convention is AbstractModelEntity
-* a concrete entity which extends the abstract entity and has the Entity and Table annotations. Naming convention is ModelEntity
+Service Provider Account Token Holder
+- Belongs to a Service Provider Account
+- Has an accessToken
+- Has an AccessTokenExpiry
+- Has a RefreshToken
+- Has a RefreshTokenExpiry
 
-Also, class-level generics should be used as much as possible to ensure consistency across related entities, allowing for flexibility when adding specific implementations.
 
+Security Module:
+
+Authority - represents the permissions or roles granted to a user, defining what actions or resources a user can access.
+- Structured to work with JdbcUserDetailsManager.
+- Has a username, which links to a User
+- Has an authority (role) name
+- Has a user
+- Has group authorities
+
+Group,
+- Structured to work with JdbcUserDetailsManager.
+- Is named
+- Has group members
+- Has group authorities
+- Is enableable
+
+Group Authority
+- Structured to work with JdbcUserDetailsManager.
+- Has an authority (role) name, which links to an Authority
+- Has an Authority
+- Has a Group
+
+Group Member
+- Structured to work with JdbcUserDetailsManager.
+- Has a Group
+- Has a username, which links to a User
+- Has a User
+
+User - It is not a person. A user is simply an authentication method for an account holder to access their account in an organization.
+- Structured to work with JdbcUserDetailsManager.
+- Has a username
+- Is enableable
+- Has group members
+- Has authorities
+
+
+Identity Module:
+
+Person - is a real life entity, which is auditable. It is not a user.
+- Has a name (first, middle, last)
+- Has a birth date
+- Can be an account holder, therefore can have accounts.
+- Can have contact information sets
+
+Person Contact Information
+- Belongs to a person
+- Has a type. Ex: home, work, other.
+- Has an email address
+- Has a street address
+- Has a phone number
+
+Layer 1 - Basic Interfaces:
+Account - extends NamedLongUniqueObject, has "AccountHolder getHolder()" and "setHolder(AccountHolder)" and "AccountProvider getProvider()" and "setProvider(AccountProvider)"
+AccountProvider - extends NamedLongUniqueObject, has "Set<Account> getProvidedAccounts()" and "setProvidedAccounts(Set<Account>)"
+AccountHolder - extends NamedLongUniqueObject, has "getHeldAccounts(Set<Account>)" and "setHeldAccounts(Set<Account>)"
+
+Layer 2 - Specific Interfaces:
+Organization - extends AccountHolder,AccountProvider
+ServiceProvider - extends AccountProvider
+Person - extends AccountHolder
+
+Layer 3 - Abstract JPA Entities (MappedSuperclasses):
+AbstractNamedLongUniqueEntity - implements NamedLongUniqueObject
+AbstractAccountEntity - extends AbstractNamedLongUniqueEntity implements Account
+AbstractAccountHolderEntity - extends AbstractNamedLongUniqueEntity implements AccountHolder
+AbstractAccountProviderEntity - extends AbstractNamedLongUniqueEntity implements AccountProvider
+
+Layer 4 - Concrete JPA Entities:
+AccountEntity - extends AbstractAccountEntity, has "AccountProviderEntity provider" and "AccountHolderEntity holder"
+AccountProviderEntity - extends AbstractAccountProviderEntity, has "Set<AccountEntity> providedAccounts"
+AccountHolderEntity - extends AbstractAccountHolderEntity, has "Set<AccountEntity> heldAccounts"
+
+Layer 4 - More Abstract JPA Entities (MappedSuperclasses):
+AbstractOrganizationEntity - extends AccountProviderEntity AND AccountHolderEntity implements Organization (needs to extend AccountProviderEntity AND AccountHolderEntity because AccountEntity has a reference to AccountProvider AND AccountHolder) (wrong because Java forbids multiple inheritance of classes)
+AbstractServiceProviderEntity - extends AccountProviderEntity, AbstractAccountHolderEntity implements ServiceProvider (needs to extend AccountProviderEntity because AccountEntity has a reference to AccountProvider)
+AbstractPersonEntity - extends AccountHolderEntity implements Person (needs to extend AccountHolderEntity because AccountEntity has a reference to AccountHolder)
+
+Layer 5 - More Concrete JPA Entities:
+OrganizationEntity - extends AbstractOrganizationEntity
+ServiceProviderEntity - extends AbstractServiceProviderEntity
+PersonEntity - extends AbstractPersonEntity
+
+
+Current situation:
+
+- AccountEntity, a JPA entity, extends AbstractAccountEntity. It has its own table, "accounts".
+- AbstractAccountEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements Account. 
+  It has a ManyToOne relationship to an AccountProviderEntity, column "provider_id", (it can't be AbstractAccountProviderEntity or AccountProvider due to JPA restrictions)
+  It has a ManyToOne relationship to an AccountHolderEntity, column "holder_id", (it can't be AbstractAccountHolderEntity or AccountHolder due to JPA restrictions)
+- Account, an interface, has a reference to AccountProvider AND AccountHolder via getter and setter methods
+
+- AccountProviderEntity, a JPA entity, extends AbstractAccountProviderEntity. It has its own table, "account_providers".
+- AbstractAccountProviderEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements AccountProvider
+  It has a OneToMany relationship to AccountEntity, mapped by "provider" (it can't be AbstractAccountEntity or Account due to JPA restrictions)
+- AccountProvider, an interface, has a reference to Set<Account> via getter and setter methods
+
+- AccountHolderEntity, a JPA entity, extends AbstractAccountHolderEntity. It has its own table, "account_holders".
+- AbstractAccountHolderEntity, an abstract JPA entity, extends AbstractNamedLongUniqueEntity and implements AccountHolder
+  It has a OneToMany relationship to AccountEntity, mapped by "holder" (it can't be AbstractAccountEntity or Account due to JPA restrictions)
+- AccountHolder, an interface, has a reference to Set<Account> via getter and setter methods
+
+- OrganizationEntity, a JPA entity, extends AbstractOrganizationEntity. It has its own table, "organizations".
+- AbstractOrganizationEntity, an abstract JPA entity, should but cannot extend both AccountProviderEntity AND AccountHolderEntity and implements Organization
+- Organization, an interface, has a reference to AccountProvider AND AccountHolder via getter and setter methods
+
+- ServiceProviderEntity, a JPA entity, extends AbstractServiceProviderEntity. It has its own table, "service_providers".
+- AbstractServiceProviderEntity, an abstract JPA entity, extends AbstractAccountProviderEntity and implements ServiceProvider
+- ServiceProvider, an interface, has a reference to AccountProvider via getter and setter methods
+
+- PersonEntity, a JPA entity, extends AbstractPersonEntity. It has its own table, "persons".
+- AbstractPersonEntity, an abstract JPA entity, extends AbstractAccountHolderEntity and implements Person
+- Person, an interface, has a reference to AccountHolder via getter and setter methods
+
+Goal:
+Make it all compilable. The current situation is not compilable because of the mentioned restrictions.
+Make the following test pass as-is:
+
+  @Test
+  void testConstruction()
+  {
+    OrganizationEntity parent = new OrganizationEntity();
+    OrganizationEntity org = new OrganizationEntity();
+    Set<Account> heldAccounts = new HashSet<Account>();
+    OrganizationAccount heldAccount1 = new OrganizationAccountEntity();
+    Set<Account> providedAccounts = new HashSet<Account>();
+    OrganizationAccount providedAccounts1 = new OrganizationAccountEntity();
+    PersonEntity person = new PersonEntity();
+    
+    heldAccount1.setHolder(person);
+    heldAccount1.setProvider(org);
+    
+    heldAccounts.add(heldAccount1);
+    
+    providedAccounts1.setHolder(person);
+    providedAccounts1.setProvider(org);
+    
+    providedAccounts.add(providedAccounts1);
+    
+    org.setParent(parent);
+    org.setHeldAccounts(heldAccounts);
+    org.setProvidedAccounts(providedAccounts);
+  }

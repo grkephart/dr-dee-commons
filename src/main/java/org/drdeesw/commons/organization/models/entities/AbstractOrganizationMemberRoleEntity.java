@@ -9,14 +9,15 @@ import java.time.Instant;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.organization.models.OrganizationMember;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.organization.models.OrganizationRole;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -24,26 +25,18 @@ import org.drdeesw.commons.organization.models.OrganizationRole;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongUniqueEntity
-    implements OrganizationMemberRole
+@Access(AccessType.PROPERTY)
+public abstract class AbstractOrganizationMemberRoleEntity<//
+    U extends AbstractUserEntity<?>, //
+    M extends AbstractOrganizationMemberEntity<U, ?, ?>, //
+    R extends AbstractOrganizationRoleEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements OrganizationMemberRole<U, M, R>
 {
-  @Column(name = "created_by_id", nullable = false)
-  private Long                     createdById;
-  @Column(name = "creation_date", nullable = false)
-  private Instant                  creationDate;
-  @Column(name = "enabled")
-  private boolean                  enabled;
-  @Column(name = "last_update_date")
-  private Instant                  lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                     lastUpdateId;
-  @ManyToOne
-  @JoinColumn(name = "role_id")
-  private OrganizationRoleEntity   role;
-  @ManyToOne
-  @JoinColumn(name = "member_id")
-  private OrganizationMemberEntity member;
+  @Embedded
+  private EmbeddedAuditable<U> audit;
+  private boolean              enabled = true;
+  private M                    member;
+  private R                    role;
 
   /**
    * 
@@ -55,48 +48,53 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public Long getCreatedById()
+  public U getCreatedBy()
   {
-    return createdById;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return creationDate;
+    return this.audit.getCreationDate();
   }
 
 
   @Override
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public U getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return this.audit.getLastUpdatedBy();
   }
 
 
   @Override
-  public OrganizationRole getRole()
-  {
-    return this.role;
-  }
-
-
-  @Override
-  public OrganizationMember getMember()
+  @ManyToOne
+  @JoinColumn(name = "member_id")
+  public M getMember()
   {
     return this.member;
   }
 
 
   @Override
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  public R getRole()
+  {
+    return this.role;
+  }
+
+
+  @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;
@@ -104,10 +102,10 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    U createdBy)
   {
-    this.createdById = createdById;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -115,7 +113,7 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -131,31 +129,31 @@ public abstract class AbstractOrganizationMemberRoleEntity extends AbstractLongU
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    U lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
-  }
-
-
-  @Override
-  public void setRole(
-    OrganizationRole role)
-  {
-    this.role = (OrganizationRoleEntity)role;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 
   @Override
   public void setMember(
-    OrganizationMember member)
+    M member)
   {
-    this.member = (OrganizationMemberEntity)member;
+    this.member = member;
+  }
+
+
+  @Override
+  public void setRole(
+    R role)
+  {
+    this.role = role;
   }
 
 }

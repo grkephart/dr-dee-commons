@@ -12,7 +12,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
  *
  */
 public abstract class AbstractLongUniquePojo extends AbstractUniquePojo<Long>
-    implements LongUniqueObject
+    implements LongUniquePojo
 {
   private static final long serialVersionUID = -9190810275366831598L;
 

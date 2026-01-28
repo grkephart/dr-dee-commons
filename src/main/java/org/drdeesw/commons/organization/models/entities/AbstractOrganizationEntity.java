@@ -5,25 +5,27 @@ package org.drdeesw.commons.organization.models.entities;
 
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
+import org.drdeesw.commons.accounting.models.entities.AbstractAccountEntity;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
 import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
-import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationRole;
 import org.drdeesw.commons.organization.models.OrganizationStatus;
 import org.drdeesw.commons.organization.models.OrganizationType;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -31,158 +33,169 @@ import org.drdeesw.commons.organization.models.OrganizationType;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AbstractOrganizationEntity<A extends OrganizationAccountEntity<?>> extends AbstractNamedLongUniqueEntity
-    implements Organization<A>
+@Access(AccessType.PROPERTY)
+public abstract class AbstractOrganizationEntity<//
+    U extends AbstractUserEntity<?>, //
+    PC extends AbstractOrganizationEntity<U, PC, HA, PA, M, R>, //
+    HA extends AbstractAccountEntity<U, ?, ?>, //
+    PA extends AbstractOrganizationAccountEntity<U, ?, ?>, //
+    M extends AbstractOrganizationMemberEntity<U, ?, ?>, //
+    R extends AbstractOrganizationRoleEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements Organization<U, PC, HA, PA, M, R>
 {
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationAccount<?>> accounts;
-  @Column(name = "created_by_id", nullable = false)
-  private Long                           createdById;
-  @Column(name = "creation_date", nullable = false)
-  private Instant                        creationDate;
-  @Column(name = "description")
-  private String                         description;
-  @Column(name = "last_update_date")
-  private Instant                        lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                           lastUpdateId;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationMemberEntity>  members;
-  @Column(name = "parent_id")
-  private AbstractOrganizationEntity<?>             parent;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-  private Set<OrganizationRoleEntity>    roles;
-  @Column(name = "status")
-  private OrganizationStatus             status;
-  @ManyToOne
-  @JoinColumn(name = "type_id")
-  private OrganizationTypeEntity         type;
+  @Embedded
+  private EmbeddedAuditable<U>   audit;
+  private Set<PC>                children         = new HashSet<>();
+  private String                 description;
+  private boolean                enabled          = true;
+  private Set<HA>                heldAccounts     = new HashSet<>();
+  private Set<M>                 members          = new HashSet<>();
+  private PC                     parent;
+  private Set<PA>                providedAccounts = new HashSet<>();
+  private Set<R>                 roles            = new HashSet<>();
+  private OrganizationStatus     status;
+  private OrganizationTypeEntity type;
 
   /**
-   * 
+   * Hibernate constructor
    */
   protected AbstractOrganizationEntity()
   {
-    super();
+
+  }
+
+
+  /**
+   * Unit test constructor
+   */
+  protected AbstractOrganizationEntity(EmbeddedAuditable<U> audit)
+  {
+    this.audit = audit;
   }
 
 
   @Override
-  public AccountHolderType getAccountHolderType()
+  @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<PC> getChildren()
   {
-    return AccountHolderType.ORGANIZATION;
+    return children;
   }
 
 
   @Override
-  public Set<A> getAccounts()
+  public U getCreatedBy()
   {
-    return this.accounts.stream()//
-        .map(account -> (A)account)//
-        .collect(Collectors.toSet());
-  }
-
-
-  @Override
-  public Long getCreatedById()
-  {
-    return this.createdById;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return this.creationDate;
+    return this.audit.getCreationDate();
   }
 
 
   @Override
+  @Column(name = "description", length = 255)
   public String getDescription()
   {
-    return description;
+    return this.description;
+  }
+
+
+  @Override
+  @OneToMany(mappedBy = "holder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<HA> getHeldAccounts()
+  {
+    return heldAccounts;
   }
 
 
   @Override
   public Instant getLastUpdateDate()
   {
-    return this.lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public U getLastUpdatedBy()
   {
-    return this.lastUpdateId;
+    return this.audit.getLastUpdatedBy();
   }
 
 
   @Override
-  public Set<OrganizationMember> getMembers()
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<M> getMembers()
   {
-    return this.members.stream()//
-        .map(member -> (OrganizationMember)member)//
-        .collect(Collectors.toSet());
+    return members == null ? Set.of() : new HashSet<>(members);
   }
 
 
-  /**
-   * @return the parent
-   */
   @Override
-  public Organization<?> getParent()
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "parent_organization_id")
+  public PC getParent()
   {
-    return parent;
+    return this.parent;
   }
 
 
   @Override
-  public Set<OrganizationRole> getRoles()
+  @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<PA> getProvidedAccounts()
   {
-    return this.roles.stream()//
-        .map(member -> (OrganizationRole)member)//
-        .collect(Collectors.toSet());
+    return providedAccounts;
   }
 
 
-  /**
-   * @return the status
-   */
   @Override
+  @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  public Set<R> getRoles()
+  {
+    return roles;
+  }
+
+
+  @Override
+  @Column(name = "status")
   public OrganizationStatus getStatus()
   {
-    return status;
+    return this.status;
   }
 
 
-  /**
-   * @return the type
-   */
   @Override
+  @Column(name = "type")
   public OrganizationType getType()
   {
-    return type;
+    return this.type;
   }
 
 
   @Override
-  public void setAccounts(
-    Set<OrganizationAccount<?>> accounts)
+  @Column(name = "is_enabled", nullable = false)
+  public boolean isEnabled()
   {
-    this.accounts = accounts.stream()//
-    .map(account -> (OrganizationAccount<?>)account)//
-    .collect(Collectors.toSet());
-
+    return this.enabled;
   }
-  
+
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setChildren(
+    Set<PC> children)
   {
-    this.createdById = createdById;
+    this.children = new HashSet<>(children);
+  }
+
+
+  @Override
+  public void setCreatedBy(
+    U createdBy)
+  {
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -190,7 +203,7 @@ public abstract class AbstractOrganizationEntity<A extends OrganizationAccountEn
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -203,55 +216,69 @@ public abstract class AbstractOrganizationEntity<A extends OrganizationAccountEn
 
 
   @Override
-  public void setLastUpdateDate(
-    Instant lastUpdateDate)
+  public void setEnabled(
+    boolean enabled)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.enabled = enabled;
   }
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setHeldAccounts(
+    Set<HA> accounts)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.heldAccounts = accounts;
+  }
+
+
+  @Override
+  public void setLastUpdateDate(
+    Instant lastUpdateDate)
+  {
+    this.audit.setLastUpdateDate(lastUpdateDate);
+  }
+
+
+  @Override
+  public void setLastUpdatedBy(
+    U lastUpdatedBy)
+  {
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 
   @Override
   public void setMembers(
-    Set<OrganizationMember> members)
+    Set<M> members)
   {
-    this.members = members.stream()//
-        .map(member -> (OrganizationMemberEntity)member)//
-        .collect(Collectors.toSet());
+    this.members = members;
   }
 
 
-  /**
-   * @param parent the parent to set
-   */
   @Override
   public void setParent(
-    Organization<?> parent)
+    PC parent)
   {
-    this.parent = (AbstractOrganizationEntity<?>)parent;
+    this.parent = (PC)parent;
+  }
+
+
+  @Override
+  public void setProvidedAccounts(
+    Set<PA> accounts)
+  {
+    this.providedAccounts = accounts;
   }
 
 
   @Override
   public void setRoles(
-    Set<OrganizationRole> roles)
+    Set<R> roles)
   {
-    this.roles = roles.stream()//
-        .map(member -> (OrganizationRoleEntity)member)//
-        .collect(Collectors.toSet());
+    this.roles = roles;
   }
 
 
-  /**
-   * @param status the status to set
-   */
   @Override
   public void setStatus(
     OrganizationStatus status)
@@ -260,9 +287,6 @@ public abstract class AbstractOrganizationEntity<A extends OrganizationAccountEn
   }
 
 
-  /**
-   * @param type the type to set
-   */
   @Override
   public void setType(
     OrganizationType type)

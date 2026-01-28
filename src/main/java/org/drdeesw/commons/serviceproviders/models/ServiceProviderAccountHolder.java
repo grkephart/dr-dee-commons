@@ -1,26 +1,20 @@
-/**
- * 
- */
 package org.drdeesw.commons.serviceproviders.models;
 
-import org.drdeesw.commons.organization.models.OrganizationAccountHolder;
-import org.drdeesw.commons.organization.models.OrganizationMember;
+
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.security.models.User;
+
 
 /**
- * Represents the account holder of a service provider account.
+ * A holder of service provider accounts.
+ * 
+ * @param <U>
+ * @param <HA>
  */
-public interface ServiceProviderAccountHolder extends OrganizationAccountHolder<ServiceProvider, ServiceProviderAccount>
+public interface ServiceProviderAccountHolder<//
+    U extends User<?>, //
+    HA extends ServiceProviderAccount<U, ?, ?>> //
+    extends AccountHolder<U, HA>
 {
-  enum AccountHolderType {
-    ORGANIZATION, USER
-  };
-
-  /**
-   * Returns the account type. Example: ORGANIZATION, USER
-   * 
-   * @return the account holder type
-   */
-  AccountHolderType getAccountHolderType();
-
 
 }

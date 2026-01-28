@@ -47,7 +47,7 @@ public class JdbcOAuth2UserService implements OAuth2UserService<OAuth2UserReques
       this.userDetailsManager.createUser(user);
     }
 
-    // Optionally, update roles or authorities based on OAuth2 attributes
+    // Optionally, update memberRoles or authorities based on OAuth2 attributes
     Collection<? extends GrantedAuthority> authorities = oAuth2User.getAuthorities();
 
     return new DefaultOAuth2User(authorities, oAuth2User.getAttributes(), "name");

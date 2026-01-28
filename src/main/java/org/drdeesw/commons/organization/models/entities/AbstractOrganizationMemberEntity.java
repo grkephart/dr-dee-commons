@@ -6,24 +6,22 @@ package org.drdeesw.commons.organization.models.entities;
 
 import java.time.Instant;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
-import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
-import org.drdeesw.commons.organization.models.Organization;
-import org.drdeesw.commons.organization.models.OrganizationAccount;
+import org.drdeesw.commons.common.models.EmbeddedAuditable;
+import org.drdeesw.commons.common.models.entities.AbstractNamedLongUniqueEntity;
 import org.drdeesw.commons.organization.models.OrganizationMember;
-import org.drdeesw.commons.organization.models.OrganizationMemberRole;
-import org.drdeesw.commons.security.models.SystemUser;
-import org.drdeesw.commons.security.models.entities.SystemUserEntity;
+import org.drdeesw.commons.security.models.entities.AbstractUserEntity;
 
 
 /**
@@ -31,28 +29,19 @@ import org.drdeesw.commons.security.models.entities.SystemUserEntity;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.FIELD)
-public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganizationEntity<?>> extends AbstractLongUniqueEntity
-    implements OrganizationMember
+@Access(AccessType.PROPERTY)
+public abstract class AbstractOrganizationMemberEntity<//
+    U extends AbstractUserEntity<?>, //
+    O extends AbstractOrganizationEntity<U, ?, ?, ?, ?, ?>, //
+    MR extends AbstractOrganizationMemberRoleEntity<U, ?, ?>> //
+    extends AbstractNamedLongUniqueEntity implements OrganizationMember<U, O, MR>
 {
-  @Column(name = "created_by_id", nullable = false)
-  private Long                              createdById;
-  @Column(name = "creation_date", nullable = false)
-  private Instant                           creationDate;
-  @Column(name = "enabled")
+  @Embedded
+  private EmbeddedAuditable<U>              audit;
   private boolean                           enabled;
-  @Column(name = "last_update_date")
-  private Instant                           lastUpdateDate;
-  @Column(name = "last_update_id")
-  private Long                              lastUpdateId;
-  @ManyToOne
-  @JoinColumn(name = "organization_id")
-  private O                organization;
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-  private Set<OrganizationMemberRoleEntity> roles;
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private SystemUserEntity                  systemUser;
+  private Set<MR> memberRoles;
+  private O                                 organization;
+  private U                                 user;
 
   /**
    * 
@@ -64,57 +53,61 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public Long getCreatedById()
+  public U getCreatedBy()
   {
-    return createdById;
+    return this.audit.getCreatedBy();
   }
 
 
   @Override
   public Instant getCreationDate()
   {
-    return creationDate;
+    return this.audit.getCreationDate();
   }
 
 
   @Override
   public Instant getLastUpdateDate()
   {
-    return lastUpdateDate;
+    return this.audit.getLastUpdateDate();
   }
 
 
   @Override
-  public Long getLastUpdateId()
+  public U getLastUpdatedBy()
   {
-    return lastUpdateId;
+    return this.audit.getLastUpdatedBy();
   }
 
 
   @Override
-  public <A extends OrganizationAccount> Organization<A> getOrganization()
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  public Set<MR> getMemberRoles()
   {
-    return (Organization<A>) this.organization;
+    return memberRoles;
   }
 
 
   @Override
-  public Set<OrganizationMemberRole> getRoles()
+  @ManyToOne
+  @JoinColumn(name = "organization_id", nullable = false)
+  public O getOrganization()
   {
-    return this.roles.stream()//
-        .map(member -> (OrganizationMemberRole)member)//
-        .collect(Collectors.toSet());
+    return this.organization;
   }
 
 
   @Override
-  public SystemUser getSystemUser()
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  public U getUser()
   {
-    return this.systemUser;
+    return this.user;
   }
 
 
   @Override
+  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;
@@ -122,10 +115,10 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
 
 
   @Override
-  public void setCreatedById(
-    Long createdById)
+  public void setCreatedBy(
+    U createdBy)
   {
-    this.createdById = createdById;
+    this.audit.setCreatedBy(createdBy);
   }
 
 
@@ -133,7 +126,7 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   public void setCreationDate(
     Instant creationDate)
   {
-    this.creationDate = creationDate;
+    this.audit.setCreationDate(creationDate);
   }
 
 
@@ -149,41 +142,39 @@ public abstract class AbstractOrganizationMemberEntity<O extends AbstractOrganiz
   public void setLastUpdateDate(
     Instant lastUpdateDate)
   {
-    this.lastUpdateDate = lastUpdateDate;
+    this.audit.setLastUpdateDate(lastUpdateDate);
   }
 
 
   @Override
-  public void setLastUpdateId(
-    Long lastUpdateId)
+  public void setLastUpdatedBy(
+    U lastUpdatedBy)
   {
-    this.lastUpdateId = lastUpdateId;
+    this.audit.setLastUpdatedBy(lastUpdatedBy);
   }
 
 
   @Override
-  public <A extends OrganizationAccount> void setOrganization(
-    Organization<A> organization)
+  public void setMemberRoles(
+    Set<MR> roles)
   {
-    this.organization = (O)organization;
+    this.memberRoles = roles;
   }
 
 
   @Override
-  public void setRoles(
-    Set<OrganizationMemberRole> roles)
+  public void setOrganization(
+    O organization)
   {
-    this.roles = roles.stream()//
-        .map(role -> (OrganizationMemberRoleEntity)role)//
-        .collect(Collectors.toSet());
+    this.organization = organization;
   }
 
 
   @Override
-  public void setSystemUser(
-    SystemUser systemUser)
+  public void setUser(
+    U user)
   {
-    this.systemUser = (SystemUserEntity)systemUser;
+    this.user = user;
   }
 
 }

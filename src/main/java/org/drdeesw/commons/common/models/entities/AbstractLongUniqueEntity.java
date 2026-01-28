@@ -15,7 +15,7 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
  */
 @MappedSuperclass
 public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long>
-    implements LongUniqueObject
+    implements LongUniqueEntity
 {
   private static final long serialVersionUID = -9190810275366831598L;
 

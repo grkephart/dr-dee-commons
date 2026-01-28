@@ -6,45 +6,59 @@ package org.drdeesw.commons.common.models;
 
 import java.time.Instant;
 
+import org.drdeesw.commons.security.models.User;
+
 
 /**
  * 
  * 
  */
-public interface Auditable
+public interface Auditable<U extends User<?>>
 {
   /**
-   * @return the ID of the user who created the object
+   * Returns the user who created the object.
+   * 
+   * @return the user who created the object
    */
-  Long getCreatedById();
+  U getCreatedBy();
 
 
   /**
+   * Returns the creation date of the object.
+   * 
    * @return the creation date of the object
    */
   Instant getCreationDate();
 
 
   /**
+   * Returns the last update date of the object.
+   * 
    * @return the last update date of the object
    */
   Instant getLastUpdateDate();
 
 
   /**
-   * @return the ID of the user who last updated the object
+   * Returns the user who last updated the object.
+   * 
+   * @return the user who last updated the object
    */
-  Long getLastUpdateId();
+  U getLastUpdatedBy();
 
 
   /**
-   * @param createdById the ID of the user who created the object
+   * Sets the user who created the object.
+   * 
+   * @param createdBy the user who created the object
    */
-  void setCreatedById(
-    Long createdById);
+  void setCreatedBy(
+    U createdBy);
 
 
   /**
+   * Sets the creation date of the object.
+   * 
    * @param creationDate the creation date of the object
    */
   void setCreationDate(
@@ -52,6 +66,8 @@ public interface Auditable
 
 
   /**
+   * Sets the last update date of the object.
+   * 
    * @param lastUpdateDate the last update date of the object
    */
   void setLastUpdateDate(
@@ -59,8 +75,10 @@ public interface Auditable
 
 
   /**
-   * @param lastUpdateId the ID of the user who last updated the object
+   * Sets the user who last updated the object.
+   * 
+   * @param lastUpdatedBy the user who last updated the object
    */
-  void setLastUpdateId(
-    Long lastUpdateId);
+  void setLastUpdatedBy(
+    U lastUpdatedBy);
 }

@@ -9,8 +9,8 @@ import javax.validation.Valid;
 
 import org.drdeesw.commons.common.controllers.AbstractCrudController;
 import org.drdeesw.commons.common.queries.QueryResults;
-import org.drdeesw.commons.security.models.pojos.SystemAuthorityPojo;
-import org.drdeesw.commons.security.services.SystemAuthorityService;
+import org.drdeesw.commons.security.models.pojos.AuthorityPojo;
+import org.drdeesw.commons.security.services.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Validated
-public class AuthorityController extends AbstractCrudController<SystemAuthorityPojo, Long>
+public class AuthorityController extends AbstractCrudController<AuthorityPojo, Long>
 {
   private static final String MAPPING_PREFIX        = "/security/authorities";
   @Autowired
-  private SystemAuthorityService service;
+  private AuthorityService service;
 
   /**
    * Creates a new authority.
@@ -45,7 +45,7 @@ public class AuthorityController extends AbstractCrudController<SystemAuthorityP
   @PostMapping(value = MAPPING_PREFIX, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ResponseEntity<?> create(
     @Valid
-    SystemAuthorityPojo authority,
+    AuthorityPojo authority,
     BindingResult bindingResult) throws Exception
   {
     return super.create(authority, bindingResult);
@@ -71,7 +71,7 @@ public class AuthorityController extends AbstractCrudController<SystemAuthorityP
    * @throws Exception
    */
   @GetMapping("/dt" + MAPPING_PREFIX)
-  public QueryResults<SystemAuthorityPojo> findByQuery(
+  public QueryResults<AuthorityPojo> findByQuery(
     @RequestParam
     MultiValueMap<String, String> allRequestParams,
     OAuth2AuthenticationToken authentication) throws Exception
@@ -87,7 +87,7 @@ public class AuthorityController extends AbstractCrudController<SystemAuthorityP
    * @return the authority with the given id
    */
   @GetMapping(value = MAPPING_PREFIX + "/{id}")
-  public ResponseEntity<SystemAuthorityPojo> get(
+  public ResponseEntity<AuthorityPojo> get(
     @PathVariable
     Long id)
   {

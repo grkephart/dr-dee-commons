@@ -4,66 +4,23 @@
 package org.drdeesw.commons.organization.models;
 
 
-import org.drdeesw.commons.common.models.Describable;
-import org.drdeesw.commons.common.models.LongUniqueObject;
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
- * Represents a organization account. Contains account information and tokens.
+ * Represents an account provided by an organization. Contains account information.
+ * 
+ * @param <U> The type of user that owns the account.
+ * @param <H> The type of account holder that owns the account.
+ * @param <P> The type of organization account provider that provides the account.
  */
-public interface OrganizationAccount<O extends Organization<?, ?, ?>, H extends OrganizationAccountHolder<?, ?>> extends LongUniqueObject, Describable
+public interface OrganizationAccount<//
+    U extends User<?>, //
+    H extends AccountHolder<U, ?>, //
+    P extends OrganizationAccountProvider<U, ?>> //
+    extends Account<U, H, P>
 {
-  /**
-   * Returns the accountHolder, either an organization or a user.
-   * 
-   * @return the accountHolder
-   */
-  H getAccountHolder();
-
-
-  /**
-   * Returns the organization's internal ID of the account.
-   * It could be an account number or a username or email or GUID.
-   * 
-   * @return  the organization's internal ID of the account
-   */
-  String getInternalId();
-
-
-  /**
-   * Returns the organization.
-   * 
-   * @return the organization
-   */
-  O getOrganization();
-
-
-
-  /**
-   * Sets the accountHolder.
-   * 
-   * @param accountHolder  the accountHolder to set
-   */
-  void setAccountHolder(
-    H accountHolder);
-
-
-  /**
-   * Sets the organization's internal ID of the account.
-   * It could be an account number or a username or email or GUID.
-   * 
-   * @param internalId the organization's internal ID of the account to set
-   */
-  void setInternalId(
-    String internalId);
-
-
-  /**
-   * Sets the organization.
-   * 
-   * @param organization the organization to set
-   */
-  void setOrganization(
-    O organization);
 
 }

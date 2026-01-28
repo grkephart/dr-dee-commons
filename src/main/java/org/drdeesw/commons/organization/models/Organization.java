@@ -6,24 +6,45 @@ package org.drdeesw.commons.organization.models;
 
 import java.util.Set;
 
-import org.drdeesw.commons.common.models.Auditable;
-import org.drdeesw.commons.common.models.Describable;
-import org.drdeesw.commons.common.models.NamedLongUniqueObject;
+import org.drdeesw.commons.accounting.models.Account;
+import org.drdeesw.commons.accounting.models.AccountHolder;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
+ * ChatGPT's version as of 2025-02-09 9:41 PM PST
  * 
+ * An organization is a group of people with a common purpose or goal. 
+ * The organization can have a parent organization and children organizations. 
+ * The organization can have members and memberRoles. 
+ * The organization can provide organization accounts and hold any accounts.
+ * 
+ * @param <PC> the parent or children organization type
+ * @param <HA> the held account type. Is an organization account or a service provider account.
+ * @param <PA> the provided account type. Is an organization account.
+ * @param <M> the organization member type
+ * @param <R> the organization role type
  */
+<<<<<<< HEAD
 public interface Organization<A extends OrganizationAccount<?, ?>, M extends OrganizationMember<?, ?, ?>, R extends OrganizationRole<?>>
     extends NamedLongUniqueObject, OrganizationAccountHolder<A>, Auditable, Describable
+=======
+public interface Organization<//
+    U extends User<?>, //
+    PC extends Organization<U, ?, HA, PA, M, R>, // Flexible, prevents excessive recursion
+    HA extends Account<U, ?, ?>, //
+    PA extends OrganizationAccount<U, ?, ?>, //
+    M extends OrganizationMember<U, ?, ?>, //
+    R extends OrganizationRole<U, ?, ?>> //
+    extends OrganizationAccountProvider<U, PA>, AccountHolder<U, HA>
+>>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 {
-
   /**
-   * Returns the accounts.
+   * Returns the children organizations.
    * 
-   * @return the accounts
+   * @return the children organizations.
    */
-  Set<A> getAccounts();
+  Set<PC> getChildren();
 
 
   /**
@@ -31,7 +52,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, M extends Org
    * 
    * @return the organization members.
    */
-  public Set<M> getMembers();
+  Set<M> getMembers();
 
 
   /**
@@ -39,15 +60,15 @@ public interface Organization<A extends OrganizationAccount<?, ?>, M extends Org
    * 
    * @return the parent
    */
-  Organization<?,?,?> getParent();
+  PC getParent();
 
 
   /**
-   * Returns the organization roles.
+   * Returns the organization memberRoles.
    * 
-   * @return the organization roles.
+   * @return the organization memberRoles.
    */
-  public Set<R> getRoles();
+  Set<R> getRoles();
 
 
   /**
@@ -67,12 +88,12 @@ public interface Organization<A extends OrganizationAccount<?, ?>, M extends Org
 
 
   /**
-   * Sets the accounts.
+   * Sets the children organizations.
    * 
-   * @param accounts the accounts to set
+   * @param children the children organizations to set
    */
-  void setAccounts(
-    Set<A> accounts);
+  void setChildren(
+    Set<PC> children);
 
 
   /**
@@ -80,7 +101,7 @@ public interface Organization<A extends OrganizationAccount<?, ?>, M extends Org
    * 
    * @param members the organization members to set
    */
-  public void setMembers(
+  void setMembers(
     Set<M> members);
 
 
@@ -90,15 +111,15 @@ public interface Organization<A extends OrganizationAccount<?, ?>, M extends Org
    * @param parent the parent to set
    */
   void setParent(
-    Organization<?,?,?> parent);
+    PC parent);
 
 
   /**
-   * Sets the organization roles.
+   * Sets the organization memberRoles.
    * 
-   * @param roles the organization roles to set
+   * @param memberRoles the organization memberRoles to set
    */
-  public void setRoles(
+  void setRoles(
     Set<R> roles);
 
 
