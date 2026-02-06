@@ -1,0 +1,1 @@
+package org.drdeesw.commons.role.pojos;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.drdeesw.commons.security.models;
+package org.drdeesw.commons.role;
 
 /**
  * 

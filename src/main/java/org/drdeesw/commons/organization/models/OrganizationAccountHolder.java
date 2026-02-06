@@ -11,15 +11,10 @@ import org.drdeesw.commons.security.models.User;
  * @param <U>
  * @param <HA>
  */
-<<<<<<< HEAD
-public interface OrganizationAccountHolder<A extends OrganizationAccount<?, ?>>
-    extends UniqueObject<Long>
-=======
 public interface OrganizationAccountHolder<//
     U extends User<?>, //
     HA extends OrganizationAccount<U, ?, ?>> //
     extends AccountHolder<U, HA>
->>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 {
 
 }

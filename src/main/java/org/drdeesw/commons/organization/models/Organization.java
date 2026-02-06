@@ -25,10 +25,6 @@ import org.drdeesw.commons.security.models.User;
  * @param <M> the organization member type
  * @param <R> the organization role type
  */
-<<<<<<< HEAD
-public interface Organization<A extends OrganizationAccount<?, ?>, M extends OrganizationMember<?, ?, ?>, R extends OrganizationRole<?>>
-    extends NamedLongUniqueObject, OrganizationAccountHolder<A>, Auditable, Describable
-=======
 public interface Organization<//
     U extends User<?>, //
     PC extends Organization<U, ?, HA, PA, M, R>, // Flexible, prevents excessive recursion
@@ -37,7 +33,6 @@ public interface Organization<//
     M extends OrganizationMember<U, ?, ?>, //
     R extends OrganizationRole<U, ?, ?>> //
     extends OrganizationAccountProvider<U, PA>, AccountHolder<U, HA>
->>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 {
   /**
    * Returns the children organizations.

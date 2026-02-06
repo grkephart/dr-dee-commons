@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Set;
 
 import org.drdeesw.commons.common.models.pojos.AbstractNamedLongUniquePojo;
+import org.drdeesw.commons.security.models.Role;
 import org.drdeesw.commons.security.models.pojos.BaseUserPojo;
 
 
@@ -23,6 +24,7 @@ public abstract class AbstractOrganizationRolePojo<//
   private U       lastUpdatedBy;
   private Set<M>  members;
   private O       organization;
+  private Role role;
 
   protected AbstractOrganizationRolePojo()
   {
@@ -75,6 +77,13 @@ public abstract class AbstractOrganizationRolePojo<//
   public O getOrganization()
   {
     return this.organization;
+  }
+
+
+  @Override
+  public Role getRole()
+  {
+    return this.role;
   }
 
 
@@ -146,5 +155,12 @@ public abstract class AbstractOrganizationRolePojo<//
     O organization)
   {
     this.organization = organization;
+  }
+
+
+  @Override
+  public void setRole(Role role)
+  {
+    this.role = role;
   }
 }

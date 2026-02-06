@@ -10,11 +10,8 @@ import org.drdeesw.commons.common.models.Auditable;
 import org.drdeesw.commons.common.models.Describable;
 import org.drdeesw.commons.common.models.Enableable;
 import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-<<<<<<< HEAD
 import org.drdeesw.commons.security.models.Role;
-=======
 import org.drdeesw.commons.security.models.User;
->>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 
 
 /**
@@ -22,16 +19,11 @@ import org.drdeesw.commons.security.models.User;
  * have Chair, Treasurer, Field Director, etc, as roles, while a company could
  * have CEO, CFO, CTO, etc.
  */
-<<<<<<< HEAD
-public interface OrganizationRole<O extends Organization<?, ?, ?>, M extends OrganizationMemberRole<?, ?>>
-    extends NamedLongUniqueObject, Auditable, Enableable, Describable
-=======
 public interface OrganizationRole<//
     U extends User<?>, //
     O extends Organization<U, ?, ?, ?, ?, ?>, //
     MR extends OrganizationMemberRole<U, ?, ?>>
     extends NamedLongUniqueObject, Auditable<U>, Enableable, Describable
->>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 {
 
   /**
@@ -59,12 +51,8 @@ public interface OrganizationRole<//
    * 
    * @param memberRoles the member memberRoles to set
    */
-<<<<<<< HEAD
-  public void setMembers(Set<M> members);
-=======
   public void setMemberRoles(
     Set<MR> memberRoles);
->>>>>>> branch 'master' of https://github.com/grkephart/dr-dee-commons.git
 
 
   /**
