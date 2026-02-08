@@ -6,39 +6,38 @@ package org.drdeesw.commons.security.models;
 import org.drdeesw.commons.common.models.LongUniqueObject;
 
 /**
+ * Represents the membership relationship between a User and a Group.
+ *
+ * A GroupMember indicates that a specific User belongs to a specific Group.
+ * Membership itself conveys no permissions unless the Group is associated
+ * with Authorities.
+ *
+ * In the JDBC schema, this maps to the {@code group_members} table.
+ *
+ * Examples:
+ * <ul>
+ *   <li>User 'alice' is a member of Group 'Accounting'</li>
+ *   <li>User 'bob' is a member of Group 'IT'</li>
+ * </ul>
+ * 
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gkephart
  *
  */
-public interface GroupMember<G extends Group> extends LongUniqueObject
+public interface GroupMember extends LongUniqueObject
 {
 
 
   /**
    * @return the system group
    */
-  public G getGroup();
+  Group getGroup();
 
 
   /**
-   * @return the username
+   * @return the user
    */
-  public String getUsername();
-
-
-  /**
-   * @param group the group to set
-   */
-  public void setGroup(
-    G group);
-
-
-
-  /**
-   * @param username the username to set
-   */
-  public void setUsername(
-    String username);
+  User<?> getUser();
 
 }

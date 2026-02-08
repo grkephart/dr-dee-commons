@@ -8,16 +8,31 @@ import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
+ * Represents the association between a Group and an Authority.
+ *
+ * A GroupAuthority defines which permissions are granted to all members
+ * of a Group. Users inherit these Authorities transitively through
+ * Group membership.
+ *
+ * In Spring Security's JDBC schema, this maps to the {@code group_authorities} table.
+ *
+ * Examples:
+ * <ul>
+ *   <li>Group 'Accounting' -> Authority 'READ_REPORTS'</li>
+ *   <li>Group 'IT' -> Authority 'ADMIN'</li>
+ * </ul>
+ * 
+ * Structured to work with JdbcUserDetailsManager.
  * 
  */
-public interface GroupAuthority<G extends Group> extends LongUniqueObject
+public interface GroupAuthority extends LongUniqueObject
 {
   /**
    * Returns the authority granted to the group.
    * 
    * @return authority the authority granted to the group.
    */
-  String getAuthority();
+  Authority getAuthority();
 
 
   /**
@@ -25,23 +40,6 @@ public interface GroupAuthority<G extends Group> extends LongUniqueObject
    * 
    * @return the group
    */
-  G getGroup();
+  Group getGroup();
 
-
-  /**
-   * Setss the authority granted to the group.
-   * 
-   * @param authority the authority granted to the group.
-   */
-  void setAuthority(
-    String authority);
-
-
-  /**
-   * Sets the group.
-   * 
-   * @param group the group
-   */
-  void setGroup(
-    G group);
 }

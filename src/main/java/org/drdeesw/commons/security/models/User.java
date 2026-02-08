@@ -9,20 +9,48 @@ import org.drdeesw.commons.common.models.NamedLongUniqueObject;
 
 
 /**
- * Represents an entity interacting with your system.
- * It allows an entity to access a service through its account.
- * A user must have an account, but an account may not have a user.
- * Includes authentication and authorization attributes (e.g., username, password, memberRoles). 
- * May integrate with external systems via OAuth2 or other APIs.
+ * Represents an authenticated principal in the system.
+ *
+ * A User is an individual identity that can authenticate (username/password)
+ * and be granted permissions either directly (via Authorities) or indirectly
+ * through Group membership.
+ *
+ * In Spring Security's JDBC model, a User maps to the {@code users} table and
+ * is the root security subject evaluated during authentication.
+ *
+ * Users typically represent people or system accounts, not roles or
+ * permissions.
+ *
+ * Examples:
+ * <ul>
+ * <li>alice</li>
+ * <li>bob</li>
+ * <li>system_batch_job</li>
+ * </ul>
+ *
+ * It allows an entity to access a service through its account. A user must have
+ * an account, but an account may not have a user. “Includes authentication
+ * attributes (e.g., username, password) and participates in authorization via
+ * Authorities and Group membership.” May integrate with external systems via
+ * OAuth2 or other APIs.
+ * 
  * Structured to work with JdbcUserDetailsManager.
  * 
  * @author gary_kephart
  *
  */
-public interface User<A extends Account<?,?,?>> extends NamedLongUniqueObject
+public interface User<A extends Account<?, ?, ?>> extends NamedLongUniqueObject
 {
 
-  /** Returns the account associated with the user.
+  /**
+   * Associates the user with an account. This is a deliberate domain operation,
+   * not a casual mutation.
+   */
+  void changeAccount(A account);
+
+
+  /**
+   * Returns the account associated with the user.
    * 
    * @return the account associated with the user
    */
@@ -34,7 +62,7 @@ public interface User<A extends Account<?,?,?>> extends NamedLongUniqueObject
    * 
    * @return the username of the user
    */
-  public String getUsername();
+  String getUsername();
 
 
   /**
@@ -42,33 +70,13 @@ public interface User<A extends Account<?,?,?>> extends NamedLongUniqueObject
    * 
    * @return true if the user is enabled, or false if the user is disabled
    */
-  public boolean isEnabled();
-
-
-  /**
-   * Sets the account associated with the user.
-   * 
-   * @param account the account to set
-   */
-  void setAccount(
-    A account);
-
+  boolean isEnabled();
 
   /**
    * Sets the enabled status of the user.
    * 
    * @param enabled the enabled to set
    */
-  public void setEnabled(
-    boolean enabled);
-
-
-  /**
-   * Sets the username of the user.
-   * 
-   * @param username the username to set
-   */
-  public void setUsername(
-    String username);
+  void setEnabled(boolean enabled);
 
 }
