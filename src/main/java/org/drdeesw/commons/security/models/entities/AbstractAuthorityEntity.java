@@ -1,8 +1,7 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -19,11 +18,11 @@ import org.drdeesw.commons.security.models.Authority;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.PROPERTY)
+@AttributeOverride(name="id", column=@Column(name="authority_id", nullable = false))
 public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long> implements Authority
 {
+  @Column(name = "authority")
   private String authority;
-  private String username;
 
   /**
    * Hibernate
@@ -40,34 +39,18 @@ public abstract class AbstractAuthorityEntity extends AbstractUniqueEntity<Long>
 
 
   @Override
-  @Column(name = "authority")
   public String getAuthority()
   {
     return this.authority;
   }
 
 
-  @Override
-  @Column(name = "username")
-  public String getUsername()
-  {
-    return this.username;
-  }
 
-
-  @Override
   public void setAuthority(
-    String authority)
+      String authority)
   {
     this.authority = authority;
   }
 
-
-  @Override
-  public void setUsername(
-    String username)
-  {
-    this.username = username;
-  }
 
 }

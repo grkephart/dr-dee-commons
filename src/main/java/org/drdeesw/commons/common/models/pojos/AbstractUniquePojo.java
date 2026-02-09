@@ -6,7 +6,7 @@ package org.drdeesw.commons.common.models.pojos;
 
 import java.io.Serializable;
 
-import org.drdeesw.commons.common.models.UniqueObject;
+import org.drdeesw.commons.common.models.MutableUniqueObject;
 
 
 /**
@@ -15,7 +15,7 @@ import org.drdeesw.commons.common.models.UniqueObject;
  * @author gary_kephart
  *
  */
-public abstract class AbstractUniquePojo<ID extends Serializable> implements UniquePojo<ID>
+public abstract class AbstractUniquePojo<ID extends Serializable> implements MutableUniqueObject<ID>
 {
   private static final long serialVersionUID = 3882181757154157592L;
   private ID                id;
@@ -28,16 +28,6 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
   }
 
 
-  /**
-   * Constructs an object with the given id.
-   * 
-   * @param id the ID of the object to construct
-   */
-  protected AbstractUniquePojo(ID id)
-  {
-    this.id = id;
-  }
-
 
   /**
    * Constructs a copy of the given object.
@@ -49,15 +39,6 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
     this.id = that.getId();
   }
 
-
-
-  /**
-   * @param that the object to copy
-   */
-  public AbstractUniquePojo(UniqueObject<ID> that)
-  {
-    this.id = that.getId();
-  }
 
 
   /**
@@ -158,13 +139,4 @@ public abstract class AbstractUniquePojo<ID extends Serializable> implements Uni
     return "{class:" + this.getClass().getSimpleName() + ",id:" + this.id + "}";
   }
 
-
-  /**
-   * @param that the object to copy
-   */
-  public void update(
-    AbstractUniquePojo<ID> that)
-  {
-    this.id = that.id;
-  }
 }

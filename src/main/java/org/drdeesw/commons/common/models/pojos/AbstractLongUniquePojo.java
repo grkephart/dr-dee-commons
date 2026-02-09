@@ -3,10 +3,6 @@
  */
 package org.drdeesw.commons.common.models.pojos;
 
-
-import org.drdeesw.commons.common.models.LongUniqueObject;
-
-
 /**
  * @author gary_kephart
  *
@@ -25,31 +21,5 @@ public abstract class AbstractLongUniquePojo extends AbstractUniquePojo<Long>
   }
 
 
-  /**
-   * @param that the object to copy
-   */
-  protected AbstractLongUniquePojo(LongUniqueObject that)
-  {
-    super(that);
-  }
-
-
-  /**
-   * @param id the id
-   */
-  protected AbstractLongUniquePojo(Long id)
-  {
-    super(id);
-  }
-
-
-  /**
-   * @param that the object to copy
-   */
-  public void update(
-    AbstractLongUniquePojo that)
-  {
-    super.update(that);
-  }
 
 }

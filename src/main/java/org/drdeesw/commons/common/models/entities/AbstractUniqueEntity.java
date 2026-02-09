@@ -26,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.PROPERTY) // Use getter/setter for access
+@Access(AccessType.FIELD)
 public abstract class AbstractUniqueEntity<ID extends Serializable> implements UniqueEntity<ID>
 {
   private ID id;
@@ -39,16 +39,6 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
   }
 
 
-  /**
-   * Constructs an object with the given id.
-   * 
-   * @param id the ID of the object to construct
-   */
-  protected AbstractUniqueEntity(ID id)
-  {
-    this.id = id;
-  }
-
 
   /**
    * Constructs a copy of the given object.
@@ -57,7 +47,7 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
    */
   protected AbstractUniqueEntity(UniqueObject<ID> that)
   {
-    this.id = that.getId();
+    // intentionally does NOT copy id
   }
 
 
@@ -68,53 +58,35 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
   @SuppressWarnings("unchecked")
   protected <T extends AbstractUniqueEntity<ID>> T cast()
   {
-    return (T)this;
+    return (T) this;
   }
 
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(
-    Object obj)
+  public boolean equals(Object obj)
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    
     @SuppressWarnings("unchecked")
-    AbstractUniqueEntity<ID> other = (AbstractUniqueEntity<ID>)obj;
-    if (this.id == null)
-    {
-      if (other.id != null)
-        return false;
-    }
-    else if (!id.equals(other.id))
-      return false;
-    return true;
+    AbstractUniqueEntity<ID> other = (AbstractUniqueEntity<ID>) obj;
+    
+    // transient entities are never equal
+    if (this.id == null || other.id == null) return false;
+
+    return this.id.equals(other.id);
   }
 
 
   /**
-   * @param value1 the first value to compare
-   * @param value2 the second value to compare
-   * @return true if the values are equal, false otherwise
-   */
-  public boolean equalsWithNullCheck(
-    Object value1,
-    Object value2)
-  {
-    return (value1 == null && value2 == null)
-           || (value1 != null && value2 != null && value1.equals(value2));
-  }
-
-
-  /**
-   * Returns the ID of the object.
-   * Subclasses need to specify the Column annotation in their getId() method.
+   * Returns the ID of the object. Subclasses need to specify the Column
+   * annotation in their getId() method.
    * 
    * @return the unique id of the object.
    */
@@ -129,48 +101,26 @@ public abstract class AbstractUniqueEntity<ID extends Serializable> implements U
   }
 
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-
-    result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-
-    return result;
+    return getClass().hashCode();
   }
 
 
-  /* (non-Javadoc)
-   * @see com.dr_dee_sw.commons.dto.UniqueObject#setId(java.io.Serializable)
-   */
-  @Override
-  public void setId(
-    ID id)
-  {
-    this.id = id;
-  }
-
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override
   public String toString()
   {
     return "{class:" + this.getClass().getSimpleName() + ",id:" + this.id + "}";
-  }
-
-
-  /**
-   * @param that the object
-   */
-  public void update(
-    AbstractUniqueEntity<ID> that)
-  {
-    this.id = that.id;
   }
 }

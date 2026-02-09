@@ -1,30 +1,37 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractUniqueEntity;
-import org.drdeesw.commons.security.models.Group;
+import org.drdeesw.commons.security.models.Authority;
 import org.drdeesw.commons.security.models.GroupAuthority;
 
 
 /**
- * Structured to work with JdbcUserDetailsManager.
- * This is an abstract class so that subclasses can define the schema and table names.
+ * Structured to work with JdbcUserDetailsManager. This is an abstract class so
+ * that subclasses can define the schema and table names.
  * 
  * @author gary_kephart
  *
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.PROPERTY)
-public abstract class AbstractGroupAuthorityEntity<G extends Group>
-    extends AbstractUniqueEntity<Long> implements GroupAuthority<G>
+@AttributeOverride(name="id", column=@Column(name="group_authority_id"))
+public abstract class AbstractGroupAuthorityEntity extends AbstractUniqueEntity<Long> implements GroupAuthority
 {
-  private String authority;
+  @ManyToOne
+  @JoinColumn(name = "authority_id")
+  private Authority authority;
+  
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  private GroupEntity group;
+
   /**
    * Hibernate
    */
@@ -38,18 +45,29 @@ public abstract class AbstractGroupAuthorityEntity<G extends Group>
     super(id);
   }
 
+  @Override
+  public GroupEntity getGroup()
+  {
+    return this.group;
+  }
+
+
+
+  public void setGroup(
+    GroupEntity group)
+  {
+    this.group = group;
+  }
+
 
   @Override
-  @Column(name = "authority")
-  public String getAuthority()
+  public Authority getAuthority()
   {
     return this.authority;
   }
 
 
-  @Override
-  public void setAuthority(
-    String authority)
+  public void setAuthority(Authority authority)
   {
     this.authority = authority;
   }

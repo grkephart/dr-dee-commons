@@ -37,22 +37,4 @@ public abstract class AbstractStringUniqueEntity extends AbstractUniqueEntity<St
   }
 
 
-  /**
-   * @param id The unique identifier
-   */
-  protected AbstractStringUniqueEntity(String id)
-  {
-    super(id);
-  }
-
-
-  /**
-   * @param that The object to copy
-   */
-  public void update(
-    AbstractStringUniqueEntity that)
-  {
-    super.update(that);
-  }
-
 }

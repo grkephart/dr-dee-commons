@@ -1,8 +1,6 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -19,10 +17,9 @@ import org.drdeesw.commons.security.models.Group;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.PROPERTY)
 public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long> implements Group
 {
-
+  @Column(name = "is_enabled", nullable = false)
   private boolean enabled;
 
   /**
@@ -40,7 +37,6 @@ public abstract class AbstractGroupEntity extends AbstractNamedUniqueEntity<Long
 
 
   @Override
-  @Column(name = "is_enabled", nullable = false)
   public boolean isEnabled()
   {
     return this.enabled;

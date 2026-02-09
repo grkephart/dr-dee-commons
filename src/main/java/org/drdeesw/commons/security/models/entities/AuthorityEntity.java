@@ -1,9 +1,6 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -20,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "authorities")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Access(AccessType.PROPERTY)
 public class AuthorityEntity extends AbstractAuthorityEntity
 {
 
@@ -36,13 +32,6 @@ public class AuthorityEntity extends AbstractAuthorityEntity
   public AuthorityEntity(Long id)
   {
     super(id);
-  }
-
-  @Override
-  @Column(name="authority_id")
-  public Long getId()
-  {
-    return super.getId();
   }
 
 }

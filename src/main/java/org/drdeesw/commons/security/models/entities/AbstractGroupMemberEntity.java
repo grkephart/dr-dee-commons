@@ -4,29 +4,34 @@
 package org.drdeesw.commons.security.models.entities;
 
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import org.drdeesw.commons.common.models.entities.AbstractLongUniqueEntity;
+import org.drdeesw.commons.security.models.Group;
 import org.drdeesw.commons.security.models.GroupMember;
+import org.drdeesw.commons.security.models.User;
 
 
 /**
- * Structured to work with JdbcUserDetailsManager.
- * This is an abstract class so that subclasses can define the schema and table names.
+ * Structured to work with JdbcUserDetailsManager. This is an abstract class so
+ * that subclasses can define the schema and table names.
  * 
  * @author gkephart
  *
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Access(AccessType.PROPERTY)
-public abstract class AbstractGroupMemberEntity<G extends GroupEntity> extends AbstractLongUniqueEntity
-    implements GroupMember<G>
+public abstract class AbstractGroupMemberEntity extends AbstractLongUniqueEntity
+    implements GroupMember
 {
-  private String username;
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  private Group   group;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User<?> user;
 
   /**
    * Hibernate
@@ -43,22 +48,39 @@ public abstract class AbstractGroupMemberEntity<G extends GroupEntity> extends A
 
 
   /**
+   * @return the group
+   */
+  public Group getGroup()
+  {
+    return group;
+  }
+
+
+  /**
    * @return the username
    */
-  @Column(name = "username")
-  public String getUsername()
+  @Override
+  public User<?> getUser()
   {
-    return username;
+    return user;
+  }
+
+
+  /**
+   * @param group the group to set
+   */
+  public void setGroup(Group group)
+  {
+    this.group = group;
   }
 
 
   /**
    * @param username the username to set
    */
-  public void setUsername(
-    String username)
+  public void setUser(User<?> user)
   {
-    this.username = username;
+    this.user = user;
   }
 
 }

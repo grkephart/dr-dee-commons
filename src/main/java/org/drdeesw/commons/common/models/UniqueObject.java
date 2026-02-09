@@ -15,5 +15,5 @@ public interface UniqueObject<ID extends Serializable> extends DataTransferObjec
 {
   ID getId();
   
-  void setId(ID id);
+  //void setId(ID id);  // see: MutableUniqueObject
 }

@@ -37,22 +37,4 @@ public abstract class AbstractLongUniqueEntity extends AbstractUniqueEntity<Long
   }
 
 
-  /**
-   * @param id the ID of the entity
-   */
-  protected AbstractLongUniqueEntity(Long id)
-  {
-    super(id);
-  }
-
-
-  /**
-   * @param that the entity to copy
-   */
-  public void update(
-    AbstractLongUniqueEntity that)
-  {
-    super.update(that);
-  }
-
 }
