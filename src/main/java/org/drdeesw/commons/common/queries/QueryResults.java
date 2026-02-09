@@ -6,6 +6,7 @@ package org.drdeesw.commons.common.queries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -255,7 +256,7 @@ public class QueryResults<T> implements Iterable<T>
   @Override
   public Iterator<T> iterator()
   {
-    return this.records == null ? null : this.records.iterator();
+    return records == null ? Collections.emptyIterator() : records.iterator();
   }
 
 

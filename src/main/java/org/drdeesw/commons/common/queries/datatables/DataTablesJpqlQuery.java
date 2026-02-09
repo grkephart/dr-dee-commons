@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import org.drdeesw.commons.common.queries.Condition;
 import org.drdeesw.commons.common.queries.JpqlQuery;
@@ -21,6 +22,9 @@ import org.springframework.util.MultiValueMap;
  */
 public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
 {
+  private static final Pattern JPQL_FIELD_PATTERN =
+      Pattern.compile("^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$");
+
   private Integer draw;
 
   /**
@@ -111,6 +115,12 @@ public class DataTablesJpqlQuery<T> extends JpqlQuery<T>
           if (trimmedValue != null && trimmedValue.length() > 0)
           {
             String columnName = columnData[x];
+            
+            if (columnName == null || !JPQL_FIELD_PATTERN.matcher(columnName).matches())
+            {
+              throw new IllegalArgumentException(
+                  "Invalid query field name: '" + columnName + "'");
+            }
 
             if (Boolean.TRUE.equals(searchRegex))
               columnSearchConditions.add(Condition.ilike(columnName, trimmedValue));
