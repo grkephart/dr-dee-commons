@@ -3,41 +3,41 @@
  */
 package org.drdeesw.commons.accounting.models;
 
-
-import java.util.Set;
-
-import org.drdeesw.commons.common.models.Auditable;
-import org.drdeesw.commons.common.models.Describable;
-import org.drdeesw.commons.common.models.Enableable;
-import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-import org.drdeesw.commons.security.models.User;
-
-
 /**
- * Represents any entity that can provide accounts, such as: Organization, ServiceProvider, etc.
+ * Represents an authority that governs the existence and semantics of accounts.
+ * <p>
+ * An AccountProvider defines <em>how</em> accounts are identified, authenticated,
+ * and managed, but does not own or contain accounts itself.
+ * </p>
  *
- * @param <U> the type of user that can audit the AccountProvider
- * @param <A> the type of account that the AccountProvider can provide
+ * <p>
+ * This is a <strong>role</strong>, not a real-world entity.
+ * The role may be fulfilled by an Organization, a ServiceProvider role,
+ * or an external system, but AccountProvider itself is not a subject and
+ * does not represent ownership.
+ * </p>
+ *
+ * <p>
+ * Accounts reference their provider; providers do not aggregate accounts.
+ * This keeps account lifecycle ownership with the Account aggregate.
+ * </p>
+ *
+ * <p>
+ * Examples of AccountProviders include:
+ * <ul>
+ *   <li>Spotify account authority</li>
+ *   <li>YouTube account authority</li>
+ *   <li>MailChimp account authority</li>
+ *   <li>An internal billing or identity system</li>
+ * </ul>
+ * </p>
+ *
+ * <p>
+ * Ownership of an account is always represented by a Subject
+ * (such as a Person, User, or Organization), never by an AccountProvider.
+ * </p>
  */
-public interface AccountProvider<//
-    U extends User<?>, //
-    A extends Account<U, ?, ?>> //
-    extends NamedLongUniqueObject, Auditable<U>, Describable, Enableable
+public interface AccountProvider
 {
-  /**
-   * Returns the accounts provided by the AccountProvider.
-   * 
-   * @return the accounts provided by the AccountProvider
-   */
-  Set<A> getProvidedAccounts();
-
-
-  /**
-   * Sets the accounts provided by the AccountProvider.
-   * 
-   * @param providedAccounts the accounts provided by the AccountProvider.
-   */
-  void setProvidedAccounts(
-    Set<A> providedAccounts);
 
 }
