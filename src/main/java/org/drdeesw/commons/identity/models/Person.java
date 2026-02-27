@@ -4,23 +4,27 @@
 package org.drdeesw.commons.identity.models;
 
 
-import org.drdeesw.commons.accounting.models.Account;
-import org.drdeesw.commons.accounting.models.AccountHolder;
-import org.drdeesw.commons.common.models.NamedLongUniqueObject;
-import org.drdeesw.commons.security.models.User;
+import org.drdeesw.commons.common.models.Auditable;
+import org.drdeesw.commons.common.models.Enableable;
+import org.drdeesw.commons.common.models.LongUniqueObject;
 
 
 /**
- * A real-world individual (e.g., John Doe).
- * A person can hold multiple accounts (be an account holder). 
- * A person is not a user, though.
- * A user is a mechanism by which a person can interact with a system via an account.
- * Therefore, an account has a user, and a holder (person).
+ * Represents a natural person within the system.
+ *
+ * <p>
+ * A Person is a core identity entity and is intentionally context-neutral.
+ * It may participate in various relationships (e.g., voter registration,
+ * account ownership, organization membership), but it does not encode
+ * those relationships directly.
+ * </p>
+ *
+ * <p>
+ * A Person has a structured {@link PersonalName}, rather than a single
+ * string name, to support legal names, formatted display, and sorting.
+ * </p>
  */
-public interface Person<//
-    U extends User<?>, //
-    HA extends Account<U, ?, ?>> //
-    extends NamedLongUniqueObject, AccountHolder<U, HA>
+public interface Person extends LongUniqueObject, Auditable, Enableable
 {
 
 }

@@ -6,19 +6,21 @@ package org.drdeesw.commons.common.models;
 
 import java.time.Instant;
 
+import org.drdeesw.commons.security.models.User;
+
 
 /**
  * 
  * 
  */
-public interface Auditable<A extends Actor>
+public interface Auditable
 {
   /**
    * Returns the user who created the object.
    * 
    * @return the user who created the object
    */
-  A getCreatedBy();
+  User<?> getCreatedBy();
 
 
   /**
@@ -42,7 +44,7 @@ public interface Auditable<A extends Actor>
    * 
    * @return the user who last updated the object
    */
-  A getLastUpdatedBy();
+  User<?> getLastUpdatedBy();
 
 
   /**
@@ -50,8 +52,7 @@ public interface Auditable<A extends Actor>
    * 
    * @param createdBy the user who created the object
    */
-  void setCreatedBy(
-    A createdBy);
+  void setCreatedBy(User<?> createdBy);
 
 
   /**
@@ -59,8 +60,7 @@ public interface Auditable<A extends Actor>
    * 
    * @param creationDate the creation date of the object
    */
-  void setCreationDate(
-    Instant creationDate);
+  void setCreationDate(Instant creationDate);
 
 
   /**
@@ -68,8 +68,7 @@ public interface Auditable<A extends Actor>
    * 
    * @param lastUpdateDate the last update date of the object
    */
-  void setLastUpdateDate(
-    Instant lastUpdateDate);
+  void setLastUpdateDate(Instant lastUpdateDate);
 
 
   /**
@@ -77,6 +76,5 @@ public interface Auditable<A extends Actor>
    * 
    * @param lastUpdatedBy the user who last updated the object
    */
-  void setLastUpdatedBy(
-    A lastUpdatedBy);
+  void setLastUpdatedBy(User<?> lastUpdatedBy);
 }
